@@ -1,0 +1,387 @@
+{
+  "header": {
+    "firstName": "Abhimanyu",
+    "lastName": "Lakhotia",
+    "preferredName": "Manyu",
+    "phoneNumber": "+1(337)322-4192",
+    "email": "LakeMonYew@gmail.com",
+    "portfolio": "https://portfolio.majorziploc.com",
+    "linkedIn": "https://www.linkedin.com/in/majorziploc/",
+    "github": "https://github.com/MajorZiploc",
+    "codeWars": "https://www.codewars.com/users/Major_Ziploc"
+  },
+  "summary": {
+    "description": "Software Developer with 3+ years of work experience in developing web applications, documenting, stand alone applications, cicd, and databases; along with personal experience in scripting, web scraping, data analytics, and data cleaning.",
+    "roles": [
+      "Backend Developer",
+      "Scripter",
+      "Frontend Developer",
+      "Quality Engineer",
+      "Sys Admin",
+      "Web Scraper",
+      "Mentor"
+    ]
+  },
+  "technicalSkills": {
+    "sectionHeader": "Technical Skills",
+    "items": [
+      {
+        "title": "Frontend",
+        "tools": [{ "tool": "React" }, { "tool": "asp.net mvc" }, { "tool": "winforms" }]
+      },
+      {
+        "title": "Backend",
+        "tools": [{ "tool": "F# Giraffe" }, { "tool": "google app suite scripts" }]
+      },
+      {
+        "title": "Testing",
+        "tools": [
+          { "tool": "cypress.io" },
+          { "tool": "pester" },
+          { "tool": "bats" },
+          { "tool": "tape" },
+          { "tool": "expecto" }
+        ]
+      },
+      {
+        "title": "Headless",
+        "tools": [{ "tool": "pandas" }, { "tool": "webscraper.io" }, { "tool": "tampermonkey" }]
+      },
+      {
+        "title": "Languages",
+        "tools": [
+          { "tool": "F#" },
+          { "tool": "bash" },
+          { "tool": "typescript" },
+          { "tool": "javascript" },
+          { "tool": "python" },
+          { "tool": "sql" },
+          { "tool": "powershell" },
+          { "tool": "C#" },
+          { "tool": "rust" },
+          { "tool": "mongodb" }
+        ]
+      },
+      {
+        "title": "DevOps",
+        "tools": [
+          { "tool": "Octopus Deploy" },
+          { "tool": "Teamcity" },
+          { "tool": "docker" },
+          { "tool": "ansible" },
+          { "tool": "github actions" },
+          { "tool": "vmware" }
+        ]
+      },
+      {
+        "title": "Tooling",
+        "tools": [
+          {
+            "tool": "neovim"
+          },
+          {
+            "tool": "vscode"
+          },
+          {
+            "tool": "zsh"
+          },
+          {
+            "tool": "tmux"
+          },
+          {
+            "tool": "visual studio"
+          }
+        ]
+      },
+      {
+        "title": "Operating Systems",
+        "tools": [
+          {
+            "tool": "mac"
+          },
+          {
+            "tool": "ubuntu"
+          },
+          {
+            "tool": "wsl ubuntu"
+          },
+          {
+            "tool": "windows"
+          }
+        ]
+      }
+    ]
+  },
+  "workExperience": {
+    "sectionHeader": "Experience",
+    "jobs": [
+      {
+        "title": "Software Developer -> Technical Lead",
+        "timeDedicated": "Full time",
+        "teamSize": "4-10",
+        "workDateRanges": [
+          {
+            "beginDate": "03/01/2020",
+            "endDate": "Present"
+          }
+        ],
+        "company": "Acadian Ambulance",
+        "location": "Lafayette, LA",
+        "points": [
+          { "text": "Introduced automated UI and API testing using Cypress.io" },
+          {
+            "text": "Heavy improvements to powershell, google app suite scripts (with npm clasp) and documentation practices"
+          },
+          {
+            "text": "Created interface for interacting/managing over 100 projects using just command runner, bash, and webscraper.io"
+          },
+          {
+            "text": "Utilize tools like: F#, C#, react, wsl, mssql, just, vim, bash, Octopus Deploy, Teamcity, SSIS, and SSRS"
+          }
+        ]
+      },
+      {
+        "title": "Freelance Software Developer",
+        "timeDedicated": "Part time",
+        "teamSize": "3-6",
+        "workDateRanges": [
+          {
+            "beginDate": "06/01/2021",
+            "endDate": "08/01/2021"
+          }
+        ],
+        "company": "Cythereal",
+        "location": "Lafayette, LA",
+        "points": [
+          {
+            "text": "Introduced documentation of projects, cicd pipelines, and other processes to remove knowledge silos"
+          },
+          {
+            "text": "Utilized tools like: python, django, docker, mongodb, react, nodejs, vim, bash, azure, ansible, terraform, packer, and just"
+          }
+        ]
+      },
+      {
+        "title": "Quality Engineer/Consultant",
+        "timeDedicated": "Full time",
+        "teamSize": "20-25",
+        "workDateRanges": [
+          {
+            "beginDate": "02/01/2019",
+            "endDate": "02/01/2020"
+          }
+        ],
+        "company": "CGI",
+        "location": "Lafayette, LA",
+        "points": [
+          {
+            "text": "Wrote automated UI and API test suites a health insurance website"
+          },
+          { "text": "Utilized tools like: typescript, protractor, postgresql, mongodb, docker, vscode, and bash" }
+        ]
+      },
+      {
+        "title": "Undergraduate Programming Languages Research Assistant",
+        "timeDedicated": "Part time",
+        "workDateRanges": [
+          {
+            "beginDate": "05/01/2018",
+            "endDate": "12/01/2018"
+          }
+        ],
+        "company": "University Of Louisiana",
+        "location": "Lafayette, LA"
+      },
+      {
+        "title": "Software Developer Intern",
+        "timeDedicated": "Part time",
+        "teamSize": "4-6",
+        "workDateRanges": [
+          {
+            "beginDate": "01/01/2017",
+            "endDate": "04/01/2018"
+          }
+        ],
+        "company": "Wetlands Research Center",
+        "location": "Lafayette, LA",
+        "points": [
+          { "text": "Developed a website using asp.net mvc for network monitoring" },
+          {
+            "text": "Developed a stand alone executable project using java swing for analyzing water levels from large NetCDF files"
+          }
+        ]
+      },
+      {
+        "title": "Sales Associate",
+        "timeDedicated": "Part time",
+        "teamSize": "4-8",
+        "workDateRanges": [
+          {
+            "beginDate": "07/01/2011",
+            "endDate": "12/01/2017"
+          },
+          {
+            "beginDate": "03/01/2020",
+            "endDate": "Present"
+          }
+        ],
+        "company": "C & M Music Center",
+        "location": "Lafayette, LA",
+        "points": [
+          {
+            "text": "Write MSAccess 95 sql queries to fill in missing gaps of POS software. Ex: Analyze customer purchases"
+          },
+          { "text": "Write webscraper.io/pandas scripts to scrape/analyze/manage our online Reverb.com item listings" },
+          { "text": "Write powershell and google app suite scripts for various miscellaneous tasks" }
+        ]
+      }
+    ]
+  },
+  "openSourceProjects": {
+    "sectionHeader": "Open Source Projects",
+    "items": [
+      {
+        "title": "json-test-utility",
+        "description": "A wrapper over lodash to help test api's and much more",
+        "mainLanguage": "typescript",
+        "availableOn": "npm",
+        "link": "https://www.npmjs.com/package/json-test-utility",
+        "codeLink": "https://github.com/MajorZiploc/json-test-utility",
+        "notableTooling": [
+          {
+            "tool": "appveyor"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "powershell_scaffolder",
+        "description": "A module to create new powershell modules",
+
+        "mainLanguage": "powershell",
+        "availableOn": "psgallery",
+        "link": "https://www.powershellgallery.com/packages/powershell_scaffolder",
+        "codeLink": "https://github.com/MajorZiploc/powershell_scaffolder",
+        "notableTooling": [
+          {
+            "tool": "github actions"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "FSharpPlus",
+        "description": "Added Nullable module and operators that operator under context",
+        "mainLanguage": "F#",
+        "availableOn": "nuget",
+        "link": "https://fsprojects.github.io/FSharpPlus/",
+        "codeLink": "https://github.com/fsprojects/FSharpPlus",
+        "notableTooling": [],
+        "roles": [{ "role": "minor contributor" }]
+      },
+      {
+        "title": "Acadian.FSharp",
+        "description": "Added various helpers for Result, Option, Async and other utility functions",
+        "mainLanguage": "F#",
+        "availableOn": "nuget",
+        "link": "https://www.nuget.org/packages/Acadian.FSharp/",
+        "codeLink": "https://github.com/Acadian-Ambulance/Acadian.FSharp",
+        "notableTooling": [{ "tool": "fake (fsharp make file)" }],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "Acadian.Dapper.Fs",
+        "description": "A F# wrapper for C#'s Dapper to convert Nullable data to the Option type",
+        "mainLanguage": "F#",
+        "availableOn": "nuget",
+        "link": "https://www.nuget.org/packages/Acadian.Dapper.Fs/",
+        "codeLink": "https://github.com/Acadian-Ambulance/Acadian.Dapper.Fs",
+        "notableTooling": [{ "tool": "fake (fsharp make file)" }],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "Acadian.Json.Fs",
+        "description": "A F# wrapper for dealing with null and option conversions related to json and F# models",
+        "mainLanguage": "F#",
+        "availableOn": "nuget",
+        "link": "https://www.nuget.org/packages/Acadian.Json.Fs/",
+        "codeLink": "https://github.com/Acadian-Ambulance/Acadian.Json.Fs",
+        "notableTooling": [{ "tool": "fake (fsharp make file)" }],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "home-settings",
+        "description": "A cross platform developer machine harness for vim, nvim, zsh, bash, vscode, and tmux",
+        "mainLanguage": "shell",
+        "codeLink": "https://github.com/MajorZiploc/home-settings",
+        "notableTooling": [
+          {
+            "tool": "docker"
+          },
+          {
+            "tool": "bats"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "web_scraper_io_scripts",
+        "description": "A web scrapping harness that makes use of webscraper.io",
+        "mainLanguage": "javascript",
+        "codeLink": "https://github.com/MajorZiploc/web_scraper_io_scripts",
+        "notableTooling": [
+          {
+            "tool": "docker"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "google.app.suite.scripts",
+        "description": "A way to manage multiple google scripts with standard coding tools",
+        "mainLanguage": "javascript",
+        "codeLink": "https://github.com/MajorZiploc/google.app.suite.scripts",
+        "notableTooling": [
+          {
+            "tool": "clasp"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      },
+      {
+        "title": "pandas_data_analytics",
+        "description": "An area for exploratory data science; to clean, analyze, and visualize data.",
+        "mainLanguage": "python",
+        "codeLink": "https://github.com/MajorZiploc/pandas_data_analytics",
+        "notableTooling": [
+          {
+            "tool": "docker"
+          },
+          {
+            "tool": "pandas"
+          }
+        ],
+        "roles": [{ "role": "owner" }, { "role": "major contributor" }]
+      }
+    ]
+  },
+  "education": {
+    "sectionHeader": "Education",
+    "degrees": [
+      {
+        "level": "Bachelors",
+        "concentration": "Economics with Computer Science and Mathematics",
+        "university": "University of Louisiana at Lafayette ",
+        "beginDate": "2016",
+        "endDate": "2018"
+      },
+      {
+        "level": "Associates",
+        "concentration": "General Studies Business",
+        "university": "South Louisiana Community College",
+        "beginDate": "2013",
+        "endDate": "2015"
+      }
+    ]
+  }
+}
