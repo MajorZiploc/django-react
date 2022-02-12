@@ -2,12 +2,6 @@ import axios from 'axios';
 
 class Data {
   constructor() {
-    this.resumeData = fetch(`${process.env.PUBLIC_URL}/resume_data.json`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    }).then(r => r.json());
 
     //curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
 
