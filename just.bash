@@ -37,6 +37,10 @@ function just_run {
   concurrently ". \"$JUST_PROJECT_ROOT/just.bash\"; just_run_server;" ". \"$JUST_PROJECT_ROOT/just.bash\"; just_run_client;";
 }
 
+function just_test {
+  just_test_server
+}
+
 function just_demo {
   just_install;
   just_first_time_initialize_server;

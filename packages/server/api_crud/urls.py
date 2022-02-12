@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-# urls
+app_name = 'api_crud'
 urlpatterns = [
     path('api/v1/movies/', include('movies.urls')),
     path('api/v1/auth/', include('authentication.urls')),
