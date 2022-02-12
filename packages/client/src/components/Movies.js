@@ -193,7 +193,7 @@ function Movies2() {
     if (!valid) {
       openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
-    return false;
+    return valid;
   }
 
   async function handleDeleteMovie() {
@@ -205,7 +205,6 @@ function Movies2() {
   }
 
   async function handleMovieAction(action, alertMsgLabel = undefined) {
-    console.log(alertMsgLabel);
     if (!enteredMovie) {
       openAlert({ display: true, message: 'No movie found', severity: 'error' });
       closeModal();
