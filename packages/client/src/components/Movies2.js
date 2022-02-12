@@ -257,6 +257,22 @@ function Movies2() {
             value={enteredMovie?.title}
             onChange={e => setEnteredMovie({ ...enteredMovie, title: e.target.value.trim() })}
           />
+          <TextField
+            className={classes.genre}
+            label='Genre'
+            variant='outlined'
+            size='small'
+            value={enteredMovie?.genre}
+            onChange={e => setEnteredMovie({ ...enteredMovie, genre: e.target.value.trim() })}
+          />
+          <TextField
+            className={classes.textField}
+            label='Year'
+            variant='outlined'
+            size='small'
+            value={enteredMovie?.year}
+            onChange={e => setEnteredMovie({ ...enteredMovie, year: e.target.value.trim() })}
+          />
         </DialogContent>
         <DialogActions style={{ justifyContent: 'space-evenly' }}>
           <Button autoFocus onClick={async () => await handlePostMovie()} color='primary'>
