@@ -5676,6 +5676,13 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
 
+json-test-utility@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/json-test-utility/-/json-test-utility-0.3.4.tgz#02301a4c3a1c03b450d7b205f435ed69f579d872"
+  integrity sha512-9bqO9ESMyhf60XiXcbh83dPn4+dF1Ph+OJUH0PNlCYMwrmErsFKWyQqdjPEOVao4y+lVVGpOUHa4iLqgpSisDA==
+  dependencies:
+    lodash "^4.17.15"
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"

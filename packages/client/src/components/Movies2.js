@@ -32,6 +32,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import React from 'react';
 import DataContext from '../context/DataContext';
 import { AddBoxTwoTone, EditTwoTone } from '@material-ui/icons';
+import { jsonRefactor as jr } from 'json-test-utility';
+
 const useStyles = makeStyles(theme =>
   createStyles({
     container: {
@@ -239,7 +241,9 @@ function Movies2() {
   }
 
   function handleSearch() {
-    const filtered = movies.filter(item => (searchTerm !== '' ? item.title?.toLowerCase().includes(searchTerm) : true));
+    const filtered = movies.filter(item =>
+      searchTerm !== '' ? jr.toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
+    );
     movieCount = filtered.length;
     return filtered;
   }
