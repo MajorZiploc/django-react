@@ -363,7 +363,7 @@ function Movies2() {
                   .slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage)
                   .map(row => {
                     return (
-                      <TableRow hover key={row.title}>
+                      <TableRow hover key={row.id}>
                         <TableCell component='th' scope='row'>
                           {row.title}
                         </TableCell>
