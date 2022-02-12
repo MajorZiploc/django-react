@@ -396,7 +396,7 @@ function Movies2() {
                           {row.genre}
                         </TableCell>
                         <TableCell component='th' scope='row'>
-                          <CheckCircleTwoToneIcon color='primary' />
+                          {row.year}
                         </TableCell>
                         {editMode && (
                           <>
