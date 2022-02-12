@@ -178,20 +178,28 @@ function Movies2() {
     var errorMessage = '';
     if (enteredMovie.title.trim() === '') {
       valid = false;
-      errorMessage = 'Title must be filled';
+      errorMessage += 'Title must be filled.';
+    }
+    if (enteredMovie.genre.trim() === '') {
+      valid = false;
+      errorMessage += 'Genre must be filled.';
+    }
+    if (enteredMovie.year.trim() === '' || isNaN(Number(enteredMovie.year.trim()))) {
+      valid = false;
+      errorMessage += 'Year must be a number.';
     }
     if (!valid) {
       openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
-    return true;
+    return false;
   }
 
   async function handleDeleteMovie() {
     handleMovieAction((movie, token) => data.deleteMovie(movie.id, token), 'delete');
   }
 
-  async function handlePostMovie() {
-    handleMovieAction(data.postMovie);
+  async function handlePostOrPutMovie() {
+    handleMovieAction((movie, token) => (movie.id === 0 ? data.postMovie(movie, token) : data.putMovie(movie, token)));
   }
 
   async function handleMovieAction(action, alertMsgLabel = undefined) {
@@ -295,7 +303,7 @@ function Movies2() {
               Delete
             </Button>
           )}
-          <Button autoFocus onClick={async () => await handlePostMovie()} color='primary'>
+          <Button autoFocus onClick={async () => await handlePostOrPutMovie()} color='primary'>
             Confirm
           </Button>
         </DialogActions>
