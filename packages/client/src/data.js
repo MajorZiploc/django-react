@@ -34,7 +34,7 @@ class Data {
   }
 
   // TODO: need to test
-  async addMovie(movie, token) {
+  async postMovie(movie, token) {
     return axios
       .post('/api/v1/movies/', movie, {
         headers: {
