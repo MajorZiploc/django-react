@@ -279,7 +279,7 @@ function Movies2() {
             variant='outlined'
             size='small'
             value={enteredMovie?.title}
-            onChange={e => setEnteredMovie({ ...enteredMovie, title: e.target.value.trim() })}
+            onChange={e => setEnteredMovie({ ...enteredMovie, title: e.target.value })}
           />
           <TextField
             className={classes.genre}
@@ -287,7 +287,7 @@ function Movies2() {
             variant='outlined'
             size='small'
             value={enteredMovie?.genre}
-            onChange={e => setEnteredMovie({ ...enteredMovie, genre: e.target.value.trim() })}
+            onChange={e => setEnteredMovie({ ...enteredMovie, genre: e.target.value })}
           />
           <TextField
             className={classes.textField}
