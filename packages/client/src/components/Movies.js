@@ -186,7 +186,7 @@ function Movies2() {
       valid = false;
       errorMessage += 'Genre must be filled.';
     }
-    if (enteredMovie.year.trim() === '' || isNaN(Number(enteredMovie.year.trim()))) {
+    if (enteredMovie.year === '' || isNaN(Number(enteredMovie.year))) {
       valid = false;
       errorMessage += 'Year must be a number.';
     }
