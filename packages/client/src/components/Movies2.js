@@ -186,7 +186,16 @@ function Movies2() {
     return true;
   }
 
+  async function handleDeleteMovie() {
+    handleMovieAction((movie, token) => data.deleteMovie(movie.id, token), 'delete');
+  }
+
   async function handlePostMovie() {
+    handleMovieAction(data.postMovie);
+  }
+
+  async function handleMovieAction(action, alertMsgLabel = undefined) {
+    console.log(alertMsgLabel);
     if (!enteredMovie) {
       openAlert({ display: true, message: 'No movie found', severity: 'error' });
       closeModal();
@@ -197,19 +206,22 @@ function Movies2() {
     }
 
     if (auth) {
-      await data
-        .postMovie(enteredMovie, auth.access)
+      await action(enteredMovie, auth.access)
         .then(_e =>
           openAlert({
             display: true,
-            message: `Successfully ${enteredMovie.id === 0 ? 'added' : 'updated'} title ${enteredMovie.title}`,
+            message: `Successfully ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'adde' : 'update')}d title ${
+              enteredMovie.title
+            }`,
             severity: 'success',
           })
         )
         .catch(_e =>
           openAlert({
             display: true,
-            message: `Failed to ${enteredMovie.id === 0 ? 'add' : 'update'} title ${enteredMovie.title}`,
+            message: `Failed to ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'add' : 'update')} title ${
+              enteredMovie.title
+            }`,
             severity: 'error',
           })
         );
@@ -275,11 +287,16 @@ function Movies2() {
           />
         </DialogContent>
         <DialogActions style={{ justifyContent: 'space-evenly' }}>
+          <Button onClick={closeModal} color='default'>
+            Cancel
+          </Button>
+          {enteredMovie?.id !== 0 && (
+            <Button onClick={async () => await handleDeleteMovie()} color='secondary'>
+              Delete
+            </Button>
+          )}
           <Button autoFocus onClick={async () => await handlePostMovie()} color='primary'>
             Confirm
-          </Button>
-          <Button onClick={closeModal} color='secondary'>
-            Return
           </Button>
         </DialogActions>
       </Dialog>
