@@ -2,7 +2,7 @@
 A template for a basic django and react site
 
 ## Requirements
-- Python 3.9
+- Python v3.9
 - bash v5 or zsh
 - mac or linux (1 extra step for linux)
 - gsed (MAC ONLY) (brew install gnu-sed)
@@ -23,4 +23,15 @@ A template for a basic django and react site
 
 - run the demo
 > just_demo
+
+## Things to improve
+- Add api tests in django
+- Add ui tests (either jest or cypress)
+- Add logging
+- Add login/register page
+- Add a third party login/register flow
+- Rework auth to not show user/pass in api call
+- Containerize both client and server, add docker-compose
+- Add cicd pipeline
+- Add hosting
 
