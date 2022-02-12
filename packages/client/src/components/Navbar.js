@@ -17,7 +17,6 @@ import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import Home from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import avatar from '../avatar.jpg';
-import DataContext from '../context/DataContext';
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -49,29 +48,11 @@ const useStyles = makeStyles(theme => ({
 
 const menuItems = [
   { listIcon: <Home />, listText: 'Home', listPath: '/' },
-  { listIcon: <AssignmentInd />, listText: 'Work Experience', listPath: '/workexp' },
+  { listIcon: <AssignmentInd />, listText: 'Movies', listPath: '/movies' },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const [auth, setAuth] = React.useState();
-  const [movies, setMovies] = React.useState();
-  const data = React.useContext(DataContext);
-
-  React.useEffect(() => {
-    (async () => {
-      setAuth(await data.auth);
-    })();
-  }, [auth]);
-
-  React.useEffect(() => {
-    (async () => {
-      if (auth) {
-        console.log(auth.access);
-        setMovies(await data.getMovies(auth.access));
-      }
-    })();
-  }, [auth]);
 
   const classes = useStyles();
 
@@ -107,7 +88,7 @@ const Navbar = () => {
               <MenuIcon className={classes.hamburger} />
             </IconButton>
             <Typography variant='h5' className={classes.title}>
-              Portfolio
+              Movies
             </Typography>
           </Toolbar>
         </AppBar>
@@ -115,7 +96,6 @@ const Navbar = () => {
       <Drawer open={open} anchor='left' onClose={() => setOpen(false)}>
         {sideList()}
       </Drawer>
-      {movies && movies.map(m => <p key={m.id}>{m.title}</p>)}
     </React.Fragment>
   );
 };

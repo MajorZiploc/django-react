@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Home from './components';
-import WorkExp from './components/WorkExp';
+import Movies from './components/Movies';
 import Navbar from './components/Navbar';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DataProvider } from './context/DataContext';
@@ -70,8 +69,8 @@ function App() {
         <DataProvider value={data}>
           <Navbar />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/workexp' element={<WorkExp />} />
+            <Route path='/' element={<Movies />} />
+            <Route path='/movies' element={<Movies />} />
           </Routes>
         </DataProvider>
       </ErrorBoundary>
