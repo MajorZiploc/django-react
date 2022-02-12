@@ -4,9 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './components';
 import WorkExp from './components/WorkExp';
 import Navbar from './components/Navbar';
-import OpenSourceProjects from './components/OpenSourceProjects';
-import TechnicalSummary from './components/TechnicalSummary';
-// import Contact from './components/Contact';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DataProvider } from './context/DataContext';
 import { data } from './data';
@@ -75,9 +72,6 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/workexp' element={<WorkExp />} />
-            <Route path='/opensource' element={<OpenSourceProjects />} />
-            <Route path='/techsummary' element={<TechnicalSummary />} />
-            {/*<Route path='/contact' element={<Contact />} />*/}
           </Routes>
         </DataProvider>
       </ErrorBoundary>

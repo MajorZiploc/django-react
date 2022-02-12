@@ -96,7 +96,7 @@ class Data {
   async deleteMovie(id, token) {
     return axios
       .delete(`/api/v1/movies/${id}`, {
-        headers: {
+        headers:{
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': `Bearer ${token}`,
