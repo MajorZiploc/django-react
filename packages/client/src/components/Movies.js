@@ -424,8 +424,8 @@ function Movies2() {
             count={movieCount}
             rowsPerPage={rowsPerPage}
             page={currentPage}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
       </div>
