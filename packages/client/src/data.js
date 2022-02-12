@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 class Data {
-  constructor() {
+  //curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
 
-    //curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
-
-    this.auth = axios
+  async auth() {
+    return axios
       .post(
         '/api/v1/auth/token/',
         {
@@ -90,7 +89,7 @@ class Data {
   async deleteMovie(id, token) {
     return axios
       .delete(`/api/v1/movies/${id}`, {
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': `Bearer ${token}`,

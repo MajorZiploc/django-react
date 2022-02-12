@@ -29,7 +29,7 @@ function just_first_time_initialize_server {
 }
 
 function just_format_server {
-  autopep8 "$JUST_SERVER_ROOT" && echo "Projected Formated!" || { echo "Failed to format project!"; return 1; }
+  autopep8 "$JUST_SERVER_ROOT" && echo "Server Formatted!" || { echo "Failed to format server!"; return 1; }
 }
 
 function just_build_server {

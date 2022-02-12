@@ -16,9 +16,9 @@ const Movies = () => {
 
   React.useEffect(() => {
     (async () => {
-      setAuth(await data.auth);
+      setAuth(await data.auth());
     })();
-  }, [auth]);
+  }, []);
 
   React.useEffect(() => {
     (async () => {
@@ -33,7 +33,12 @@ const Movies = () => {
 
   return (
     <React.Fragment>
-      {movies && movies.map(m => <p className={classes.title} key={m.id}>{m.title}</p>)}
+      {movies &&
+        movies.map(m => (
+          <p className={classes.title} key={m.id}>
+            {m.title}
+          </p>
+        ))}
     </React.Fragment>
   );
 };
