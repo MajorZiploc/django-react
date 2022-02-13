@@ -58,3 +58,17 @@ class MoviesTests(APITestCase):
     response: HttpResponse = self.rud_view(request, pk=movie.pk)
     self.assertEqual(response.status_code, 200)
     self.assertEqual(models.Movie.objects.filter(title='Cats').count(), 1)
+
+  def test_update_a_movie_with_delete(self):
+    movie = models.Movie.objects.create(title='Ants', genre='Action', year=1999, creator=self.user1)
+    request = self.factory.delete(
+        path=reverse(
+            'movies:get_delete_update_movie',
+            args=(
+                movie.pk,
+            )),
+        format='json')
+    force_authenticate(request, user=self.user1, token=None)
+    response: HttpResponse = self.rud_view(request, pk=movie.pk)
+    self.assertEqual(response.status_code, 204)
+    self.assertEqual(models.Movie.objects.count(), 0)
