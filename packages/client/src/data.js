@@ -111,7 +111,7 @@ class Data {
   // TODO: need to test
   async putMovie(id, movie) {
     return axios
-      .put(`/api/v1/movies/${id}`, movie, {
+      .put(`/api/v1/movies/${id}/`, movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

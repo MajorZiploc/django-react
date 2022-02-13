@@ -197,11 +197,11 @@ function Movies2() {
   }
 
   async function handleDeleteMovie() {
-    handleMovieAction((movie) => data.deleteMovie(movie.id), 'delete');
+    handleMovieAction(movie => data.deleteMovie(movie.id), 'delete');
   }
 
   async function handlePostOrPutMovie() {
-    handleMovieAction((movie) => (movie.id === 0 ? data.postMovie(movie) : data.putMovie(movie)));
+    handleMovieAction(movie => (movie.id === 0 ? data.postMovie(movie) : data.putMovie(movie.id, movie)));
   }
 
   async function handleMovieAction(action, alertMsgLabel = undefined) {
