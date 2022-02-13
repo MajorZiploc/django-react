@@ -6,6 +6,7 @@ A template for a basic django and react site
 - bash v5 or zsh
 - mac or linux (1 extra step for linux)
 - gsed (MAC ONLY) (brew install gnu-sed)
+- internet connection - even when developing in localhost. A proxy setting in the client requires this.
 
 ## NOTES
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
@@ -25,7 +26,7 @@ A template for a basic django and react site
 > just_demo
 
 ## Things to improve
-- Add logout flow
+- Improve logout flow. Look into private routes. https://stackoverflow.com/questions/55520500/how-to-redirect-to-log-in-page-after-click-logout-button-on-navbar-header-in-rea Abstract out login check from components
 - Add ui tests (either jest or cypress)
 - Improve CORS policies
 - Add logging
@@ -36,4 +37,5 @@ A template for a basic django and react site
 - Improve login/register/auth flow (Rework auth to not show user/pass in api call)
 - Add a third party login/register flow
 - Migrate javascript to typescript
+- Look into a way to dev with no internet: client proxy setting requires an internet connection even if only using localhost.
 

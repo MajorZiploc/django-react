@@ -33,6 +33,7 @@ import React from 'react';
 import DataContext from '../context/DataContext';
 import { AddBoxTwoTone, EditTwoTone } from '@material-ui/icons';
 import { jsonRefactor as jr } from 'json-test-utility';
+import { Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -115,9 +116,9 @@ function Movies() {
 
   React.useEffect(() => {
     (async () => {
-      UpdateMovies();
+      await UpdateMovies();
     })();
-  }, []);
+  }, [data.accessToken]);
 
   async function UpdateMovies() {
     const moviesResult = await data.getMovies().catch(_e => {
@@ -246,7 +247,9 @@ function Movies() {
     setCurrentPage(0);
   }
 
-  return (
+  return !data.accessToken ? (
+    <Navigate to='/login' />
+  ) : (
     <div>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}

@@ -17,6 +17,7 @@ import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import Home from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import avatar from '../avatar.jpg';
+import DataContext from '../context/DataContext';
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -53,8 +54,15 @@ const menuItems = [
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-
+  const data = React.useContext(DataContext);
   const classes = useStyles();
+
+  const onLogout = () => {
+    data.accessToken = undefined;
+    data.refreshToken = undefined;
+    localStorage.setItem('accessToken', undefined);
+    localStorage.setItem('refreshToken', undefined);
+  };
 
   const sideList = () => (
     <Box className={classes.menuSliderContainer} component='div'>
@@ -90,6 +98,9 @@ const Navbar = () => {
             <Typography variant='h5' className={classes.title}>
               Movies
             </Typography>
+            <Link className={classes.title} to='/login' onClick={() => onLogout()}>
+              Logout
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>
