@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Movies from './components/Movies';
 import Navbar from './components/Navbar';
+import Login from './components/Login';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DataProvider } from './context/DataContext';
 import { data } from './data';
@@ -70,6 +71,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Movies />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/movies' element={<Movies />} />
           </Routes>
         </DataProvider>
