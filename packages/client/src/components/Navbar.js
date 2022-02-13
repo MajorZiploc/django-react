@@ -58,10 +58,8 @@ const Navbar = () => {
   const classes = useStyles();
 
   const onLogout = () => {
-    data.accessToken = undefined;
-    data.refreshToken = undefined;
-    localStorage.setItem('accessToken', undefined);
-    localStorage.setItem('refreshToken', undefined);
+    data.clearAccessToken();
+    data.clearRefreshToken();
   };
 
   const sideList = () => (

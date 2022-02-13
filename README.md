@@ -26,7 +26,6 @@ A template for a basic django and react site
 > just_demo
 
 ## Things to improve
-- Look into removing token members of data.js and just use local storage directly
 - Replace background image
 - Change functions to const var lambdas
 - Improve logout flow. Look into private routes. https://stackoverflow.com/questions/55520500/how-to-redirect-to-log-in-page-after-click-logout-button-on-navbar-header-in-rea Abstract out login check from components

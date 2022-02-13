@@ -33,7 +33,7 @@ function Login() {
     if ([loginCreds.username, loginCreds.password].every(c => c)) {
       await data.login(loginCreds.username, loginCreds.password);
       // TODO: if login attemp fails, then give an alert
-      if (data.accessToken) {
+      if (data.getAccessToken()) {
         setIsLogined(true);
       }
     }

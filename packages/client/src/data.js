@@ -1,9 +1,30 @@
 import axios from 'axios';
 
 class Data {
-  constructor() {
-    this.accessToken = localStorage.getItem('accessToken');
-    this.refreshToken = localStorage.getItem('refreshToken');
+  constructor() {}
+
+  clearAccessToken() {
+    localStorage.setItem('accessToken', undefined);
+  }
+
+  clearRefreshToken() {
+    localStorage.setItem('refreshToken', undefined);
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
+  setAccessToken(v) {
+    localStorage.setItem('accessToken', v);
+  }
+
+  setRefreshToken(v) {
+    localStorage.setItem('refreshToken', v);
   }
 
   // TODO: need to test
@@ -12,7 +33,7 @@ class Data {
       .post(
         '/api/v1/auth/token/refresh/',
         {
-          refresh: this.refreshToken,
+          refresh: this.getRefreshToken(),
         },
         {
           headers: {
@@ -22,8 +43,7 @@ class Data {
         }
       )
       .then(r => {
-        localStorage.setItem('accessToken', r.data.access);
-        this.accessToken = r.data.access;
+        this.setAccessToken(r.data.access);
         return r.data;
       });
   }
@@ -44,10 +64,8 @@ class Data {
         }
       )
       .then(r => {
-        localStorage.setItem('accessToken', r.data.access);
-        localStorage.setItem('refreshToken', r.data.refresh);
-        this.accessToken = r.data.access;
-        this.refreshToken = r.data.refresh;
+        this.setAccessToken(r.data.access);
+        this.setRefreshToken(r.data.refresh);
         return r.data;
       });
   }
@@ -99,7 +117,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data.results);
@@ -117,7 +135,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data);
@@ -136,7 +154,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data.results);
@@ -154,7 +172,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data);
@@ -173,7 +191,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data);
@@ -191,7 +209,7 @@ class Data {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`,
+          'Authorization': `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(r => r.data);

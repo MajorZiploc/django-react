@@ -118,7 +118,7 @@ function Movies() {
     (async () => {
       await UpdateMovies();
     })();
-  }, [data.accessToken]);
+  }, []);
 
   async function UpdateMovies() {
     const moviesResult = await data.getMovies().catch(_e => {
@@ -247,7 +247,7 @@ function Movies() {
     setCurrentPage(0);
   }
 
-  return !data.accessToken ? (
+  return !data.getAccessToken() ? (
     <Navigate to='/login' />
   ) : (
     <div>
