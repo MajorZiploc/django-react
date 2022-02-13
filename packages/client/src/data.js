@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 class Data {
+  constructor() {
+    this.accessToken = undefined;
+  }
+
   async login(username, password) {
     return axios
       .post(
@@ -16,7 +20,10 @@ class Data {
           },
         }
       )
-      .then(r => r.data);
+      .then(r => {
+        this.accessToken = r.data.access;
+        return r.data;
+      });
   }
 
   async register(email, username, password) {
@@ -44,6 +51,7 @@ class Data {
   //
   //curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
 
+  // TODO: remove this function
   async auth() {
     return axios
       .post(
@@ -62,78 +70,78 @@ class Data {
       .then(r => r.data);
   }
 
-  async getMovies(token) {
+  async getMovies() {
     return axios
       .get('/api/v1/movies/', {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data.results);
   }
 
   // TODO: need to test
-  async postMovie(movie, token) {
+  async postMovie(movie) {
     return axios
       .post('/api/v1/movies/', movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data);
   }
 
   // TODO: need to test
-  async getMovie(id, token) {
+  async getMovie(id) {
     return axios
       .get(`/api/v1/movies/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data.results);
   }
 
   // TODO: need to test
-  async putMovie(id, movie, token) {
+  async putMovie(id, movie) {
     return axios
       .put(`/api/v1/movies/${id}`, movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data);
   }
 
   // TODO: need to test
-  async patchMovie(id, movie, token) {
+  async patchMovie(id, movie) {
     return axios
       .patch(`/api/v1/movies/${id}`, movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data);
   }
 
   // TODO: need to test
-  async deleteMovie(id, token) {
+  async deleteMovie(id) {
     return axios
       .delete(`/api/v1/movies/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${this.accessToken}`,
         },
       })
       .then(r => r.data);

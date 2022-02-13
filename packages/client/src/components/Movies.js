@@ -128,7 +128,7 @@ function Movies2() {
 
   async function UpdateMovies() {
     if (auth) {
-      const moviesResult = await data.getMovies(auth.access).catch(_e => {
+      const moviesResult = await data.getMovies().catch(_e => {
         openAlert({ display: true, message: 'Listed movies failed to load', severity: 'error' });
         return [];
       });
@@ -197,11 +197,11 @@ function Movies2() {
   }
 
   async function handleDeleteMovie() {
-    handleMovieAction((movie, token) => data.deleteMovie(movie.id, token), 'delete');
+    handleMovieAction((movie) => data.deleteMovie(movie.id), 'delete');
   }
 
   async function handlePostOrPutMovie() {
-    handleMovieAction((movie, token) => (movie.id === 0 ? data.postMovie(movie, token) : data.putMovie(movie, token)));
+    handleMovieAction((movie) => (movie.id === 0 ? data.postMovie(movie) : data.putMovie(movie)));
   }
 
   async function handleMovieAction(action, alertMsgLabel = undefined) {
@@ -214,28 +214,26 @@ function Movies2() {
       return;
     }
 
-    if (auth) {
-      await action(enteredMovie, auth.access)
-        .then(_e =>
-          openAlert({
-            display: true,
-            message: `Successfully ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'adde' : 'update')}d title ${
-              enteredMovie.title
-            }`,
-            severity: 'success',
-          })
-        )
-        .catch(_e =>
-          openAlert({
-            display: true,
-            message: `Failed to ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'add' : 'update')} title ${
-              enteredMovie.title
-            }`,
-            severity: 'error',
-          })
-        );
-      UpdateMovies();
-    }
+    await action(enteredMovie)
+      .then(_e =>
+        openAlert({
+          display: true,
+          message: `Successfully ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'adde' : 'update')}d title ${
+            enteredMovie.title
+          }`,
+          severity: 'success',
+        })
+      )
+      .catch(_e =>
+        openAlert({
+          display: true,
+          message: `Failed to ${alertMsgLabel ?? (enteredMovie.id === 0 ? 'add' : 'update')} title ${
+            enteredMovie.title
+          }`,
+          severity: 'error',
+        })
+      );
+    UpdateMovies();
     closeModal();
   }
 

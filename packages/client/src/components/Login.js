@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, makeStyles, TextField } from '@material-ui/core';
+import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 function Login() {
   const [loginCreds, setLoginCreds] = React.useState({ email: '', username: '', password: '', password2: '' });
   const [isRegister, setIsRegister] = React.useState(false);
+  const [isLogined, setIsLogined] = React.useState(false);
   const classes = useStyles();
   const data = React.useContext(DataContext);
 
@@ -31,6 +33,9 @@ function Login() {
     if ([loginCreds.username, loginCreds.password].every(c => c)) {
       await data.login(loginCreds.username, loginCreds.password);
       // TODO: if login attemp fails, then give an alert
+      if (data.accessToken) {
+        setIsLogined(true);
+      }
     }
     // TODO: alert if not all fields were provided
   }
@@ -49,7 +54,9 @@ function Login() {
     setLoginCreds({ ...loginCreds, [e.currentTarget.id]: e.currentTarget.value });
   }
 
-  return (
+  return isLogined ? (
+    <Navigate to='/movies' />
+  ) : (
     <form className={classes.form}>
       {isRegister && (
         <TextField
