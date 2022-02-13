@@ -27,20 +27,22 @@ function Login() {
   const classes = useStyles();
   const data = React.useContext(DataContext);
 
-  function LoginAttempt(_e) {
+  async function LoginAttempt(_e) {
     if ([loginCreds.username, loginCreds.password].every(c => c)) {
-      data.login(loginCreds.username, loginCreds.password);
+      await data.login(loginCreds.username, loginCreds.password);
+      // TODO: if login attemp fails, then give an alert
     }
-    // TODO: if login attemp fails, then give an alert
+    // TODO: alert if not all fields were provided
   }
 
-  function RegisterAttempt(_e) {
+  async function RegisterAttempt(_e) {
     if ([loginCreds.email, loginCreds.username, loginCreds.password, loginCreds.password2].every(c => c)) {
       if (loginCreds.password === loginCreds.password2) {
-        data.register(loginCreds.email, loginCreds.username, loginCreds.password);
+        await data.register(loginCreds.email, loginCreds.username, loginCreds.password);
       }
       // TODO: if passwords do not match. show an alert
     }
+    // TODO: alert if not all fields were provided
   }
 
   function onChange(e) {
@@ -87,11 +89,11 @@ function Login() {
         />
       )}
       {isRegister ? (
-        <Button type='button' color='primary' onClick={e => RegisterAttempt(e)}>
+        <Button type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
           Register
         </Button>
       ) : (
-        <Button type='button' color='primary' onClick={e => LoginAttempt(e)}>
+        <Button type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
           Log in
         </Button>
       )}
