@@ -73,7 +73,7 @@ function App() {
             <Route path='/' element={<Movies />} />
             <Route path='/login' element={<Login />} />
             <Route path='/movies' element={<Movies />} />
-            <Route path="*" element={<Navigate to ="/" />}/>
+            <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </DataProvider>
       </ErrorBoundary>

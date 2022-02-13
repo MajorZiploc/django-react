@@ -81,10 +81,9 @@ function tableSort(contents, sortColumn, sortDesc) {
   return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
 }
 
-function Movies2() {
+function Movies() {
   const classes = useStyles();
   const data = React.useContext(DataContext);
-  const [auth, setAuth] = React.useState();
   const [showModal, setShowModal] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [currentPage, setCurrentPage] = React.useState(0);
@@ -116,25 +115,17 @@ function Movies2() {
 
   React.useEffect(() => {
     (async () => {
-      setAuth(await data.auth());
+      UpdateMovies();
     })();
   }, []);
 
-  React.useEffect(() => {
-    (async () => {
-      UpdateMovies();
-    })();
-  }, [auth]);
-
   async function UpdateMovies() {
-    if (auth) {
-      const moviesResult = await data.getMovies().catch(_e => {
-        openAlert({ display: true, message: 'Listed movies failed to load', severity: 'error' });
-        return [];
-      });
-      if (componentMounted.current) {
-        setMovies(moviesResult);
-      }
+    const moviesResult = await data.getMovies().catch(_e => {
+      openAlert({ display: true, message: 'Listed movies failed to load', severity: 'error' });
+      return [];
+    });
+    if (componentMounted.current) {
+      setMovies(moviesResult);
     }
   }
 
@@ -430,4 +421,4 @@ function Movies2() {
     </div>
   );
 }
-export default Movies2;
+export default Movies;
