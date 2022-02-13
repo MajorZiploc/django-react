@@ -25,13 +25,15 @@ A template for a basic django and react site
 > just_demo
 
 ## Things to improve
-- Add api tests in django
+- Add logout flow
 - Add ui tests (either jest or cypress)
+- Improve CORS policies
 - Add logging
-- Add login/register page
-- Add a third party login/register flow
-- Rework auth to not show user/pass in api call
 - Containerize both client and server, add docker-compose
 - Add cicd pipeline
 - Add hosting
+- Add more api tests in django
+- Improve login/register/auth flow (Rework auth to not show user/pass in api call)
+- Add a third party login/register flow
+- Migrate javascript to typescript
 
