@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Movies from './components/Movies';
 import Navbar from './components/Navbar';
@@ -73,6 +73,7 @@ function App() {
             <Route path='/' element={<Movies />} />
             <Route path='/login' element={<Login />} />
             <Route path='/movies' element={<Movies />} />
+            <Route path="*" element={<Navigate to ="/" />}/>
           </Routes>
         </DataProvider>
       </ErrorBoundary>
