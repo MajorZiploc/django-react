@@ -34,7 +34,7 @@ function just_build {
 }
 
 function just_run {
-  concurrently ". \"$JUST_PROJECT_ROOT/just.bash\"; just_run_server;" ". \"$JUST_PROJECT_ROOT/just.bash\"; just_run_client;";
+  concurrently "$JUST_PROJECT_ROOT/scripts/run_server.sh" "$JUST_PROJECT_ROOT/scripts/run_client.sh";
 }
 
 function just_test {

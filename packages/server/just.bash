@@ -1,7 +1,7 @@
 export JUST_SERVER_ROOT="$1";
 
 function just_venv_create_server {
-  mkdir ~/.venv;
+  mkdir -p ~/.venv;
   python3 -m venv "$HOME/.venv/django-react";
 }
 
@@ -44,7 +44,7 @@ function just_run_server {
 
 function just_test_server {
   just_venv_connect_server;
-  python3 "$JUST_SERVER_ROOT/manage.py" test;
+  python3 "$JUST_SERVER_ROOT/manage.py" test "$JUST_SERVER_ROOT" ;
 }
 
 function just_migrate_db_server {
