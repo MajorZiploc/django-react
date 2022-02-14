@@ -17,7 +17,6 @@ import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import Home from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import avatar from '../avatar.jpg';
-import DataContext from '../context/DataContext';
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -54,12 +53,10 @@ const menuItems = [
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const data = React.useContext(DataContext);
   const classes = useStyles();
 
   const onLogout = () => {
-    data.clearAccessToken();
-    data.clearRefreshToken();
+    localStorage.clear()
   };
 
   const sideList = () => (

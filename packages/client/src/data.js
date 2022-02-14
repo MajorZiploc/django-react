@@ -3,14 +3,6 @@ import axios from 'axios';
 class Data {
   constructor() {}
 
-  clearAccessToken() {
-    localStorage.setItem('accessToken', undefined);
-  }
-
-  clearRefreshToken() {
-    localStorage.setItem('refreshToken', undefined);
-  }
-
   getAccessToken() {
     return localStorage.getItem('accessToken');
   }
