@@ -28,7 +28,6 @@ A template for a basic django and react site
 
 ## Things to improve
 ### In scope for an interview style site
-- Fix register flow
 - Improve logout flow by adding error messages at login and register page
 - Add ui tests (either jest or cypress)
 - Add more api tests in django

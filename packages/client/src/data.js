@@ -62,15 +62,17 @@ class Data {
       });
   }
 
-  async register(email, username, password) {
+  async register(email, username, password, firstName, lastName) {
     return axios
       .post(
         '/api/v1/auth/register/',
         {
           email: email,
           username: username,
-          password1: password,
+          password: password,
           password2: password,
+          first_name: firstName,
+          last_name: lastName,
         },
         {
           headers: {

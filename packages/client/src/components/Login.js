@@ -23,7 +23,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = () => {
-  const [loginCreds, setLoginCreds] = React.useState({ email: '', username: '', password: '', password2: '' });
+  const [loginCreds, setLoginCreds] = React.useState({
+    email: '',
+    username: '',
+    password: '',
+    password2: '',
+    firstName: '',
+    lastName: '',
+  });
   const [isRegister, setIsRegister] = React.useState(false);
   const [isLogined, setIsLogined] = React.useState(false);
   const classes = useStyles();
@@ -41,9 +48,24 @@ const Login = () => {
   };
 
   const RegisterAttempt = async _e => {
-    if ([loginCreds.email, loginCreds.username, loginCreds.password, loginCreds.password2].every(c => c)) {
+    if (
+      [
+        loginCreds.email,
+        loginCreds.username,
+        loginCreds.password,
+        loginCreds.password2,
+        loginCreds.firstName,
+        loginCreds.lastName,
+      ].every(c => c)
+    ) {
       if (loginCreds.password === loginCreds.password2) {
-        await data.register(loginCreds.email, loginCreds.username, loginCreds.password);
+        await data.register(
+          loginCreds.email,
+          loginCreds.username,
+          loginCreds.password,
+          loginCreds.firstName,
+          loginCreds.lastName
+        );
       }
       // TODO: if passwords do not match. show an alert
     }
@@ -59,14 +81,32 @@ const Login = () => {
   ) : (
     <form className={classes.form}>
       {isRegister && (
-        <TextField
-          className={classes.textField}
-          label='Email'
-          id='email'
-          variant='outlined'
-          size='small'
-          onChange={e => onChange(e)}
-        />
+        <>
+          <TextField
+            className={classes.textField}
+            label='Email'
+            id='email'
+            variant='outlined'
+            size='small'
+            onChange={e => onChange(e)}
+          />
+          <TextField
+            className={classes.textField}
+            label='First Name'
+            id='firstName'
+            variant='outlined'
+            size='small'
+            onChange={e => onChange(e)}
+          />
+          <TextField
+            className={classes.textField}
+            label='Last Name'
+            id='lastName'
+            variant='outlined'
+            size='small'
+            onChange={e => onChange(e)}
+          />
+        </>
       )}
       <TextField
         className={classes.textField}
@@ -93,6 +133,7 @@ const Login = () => {
           variant='outlined'
           size='small'
           onChange={e => onChange(e)}
+          type='password'
         />
       )}
       {isRegister ? (
