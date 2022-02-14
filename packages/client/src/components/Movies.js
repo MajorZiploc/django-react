@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-function tableSort(contents, sortColumn, sortDesc) {
+const tableSort = (contents, sortColumn, sortDesc) => {
   if (contents.length === 0) return [];
   const key = sortColumn;
   const sortedContents = contents.sort((obj1, obj2) => {
@@ -80,9 +80,9 @@ function tableSort(contents, sortColumn, sortDesc) {
     return Reflect.get(a, sortColumn) ? (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) : -1;
   });
   return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
-}
+};
 
-function Movies() {
+const Movies = () => {
   const classes = useStyles();
   const data = React.useContext(DataContext);
   const [showModal, setShowModal] = React.useState(false);
@@ -120,7 +120,7 @@ function Movies() {
     })();
   }, []);
 
-  async function UpdateMovies() {
+  const UpdateMovies = async () => {
     const moviesResult = await data.getMovies().catch(_e => {
       openAlert({ display: true, message: 'Listed movies failed to load', severity: 'error' });
       return [];
@@ -128,26 +128,26 @@ function Movies() {
     if (componentMounted.current) {
       setMovies(moviesResult);
     }
-  }
+  };
 
-  function openAlert(alertSettings) {
+  const openAlert = alertSettings => {
     if (componentMounted.current) {
       setAlertSettings(alertSettings);
     }
-  }
+  };
 
-  function closeAlert() {
+  const closeAlert = () => {
     setAlertSettings({ display: false, message: alertSettings?.message, severity: alertSettings?.severity });
-  }
+  };
 
-  function handleChangePage(_e, newPage) {
+  const handleChangePage = (_e, newPage) => {
     setCurrentPage(newPage);
-  }
+  };
 
-  function handleChangeRowsPerPage(e) {
+  const handleChangeRowsPerPage = e => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setCurrentPage(0);
-  }
+  };
 
   async function openModal(
     Movie = {
@@ -161,13 +161,13 @@ function Movies() {
     setShowModal(true);
   }
 
-  function closeModal() {
+  const closeModal = () => {
     if (componentMounted.current) {
       setShowModal(false);
     }
-  }
+  };
 
-  function validatedMovie() {
+  const validatedMovie = () => {
     var valid = true;
     var errorMessage = '';
     if (enteredMovie.title.trim() === '') {
@@ -186,17 +186,17 @@ function Movies() {
       openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
     return valid;
-  }
+  };
 
-  async function handleDeleteMovie() {
+  const handleDeleteMovie = async () => {
     handleMovieAction(movie => data.deleteMovie(movie.id), 'delete');
-  }
+  };
 
-  async function handlePostOrPutMovie() {
+  const handlePostOrPutMovie = async () => {
     handleMovieAction(movie => (movie.id === 0 ? data.postMovie(movie) : data.putMovie(movie.id, movie)));
-  }
+  };
 
-  async function handleMovieAction(action, alertMsgLabel = undefined) {
+  const handleMovieAction = async (action, alertMsgLabel = undefined) => {
     if (!enteredMovie) {
       openAlert({ display: true, message: 'No movie found', severity: 'error' });
       closeModal();
@@ -227,17 +227,17 @@ function Movies() {
       );
     UpdateMovies();
     closeModal();
-  }
+  };
 
-  function handleSearch() {
+  const handleSearch = () => {
     const filtered = movies.filter(item =>
       searchTerm !== '' ? jr.toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
     );
     movieCount = filtered.length;
     return filtered;
-  }
+  };
 
-  function setSortParams(column) {
+  const setSortParams = column => {
     if (column === sortColumn) {
       setSortDesc(!sortDesc);
     } else {
@@ -245,7 +245,7 @@ function Movies() {
       setSortDesc(false);
     }
     setCurrentPage(0);
-  }
+  };
 
   return (
     <div>
@@ -421,5 +421,5 @@ function Movies() {
       </div>
     </div>
   );
-}
+};
 export default Movies;

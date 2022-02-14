@@ -45,7 +45,7 @@ const useStyles = makeStyles(_theme => ({
   },
 }));
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+const ErrorFallback = ({ error, resetErrorBoundary }) => {
   const classes = useStyles();
   return (
     <div role='alert' className={`${classes.errorContent}`}>
@@ -56,9 +56,9 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       </button>
     </div>
   );
-}
+};
 
-function App() {
+const App = () => {
   return (
     <React.Fragment>
       <ErrorBoundary
@@ -71,15 +71,15 @@ function App() {
         <DataProvider value={data}>
           <Navbar />
           <Routes>
-            <Route path='/' element={<PrivateComponent element={<Movies />}/>} />
+            <Route path='/' element={<PrivateComponent element={<Movies />} />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/movies' element={<PrivateComponent element={<Movies />}/>} />
+            <Route path='/movies' element={<PrivateComponent element={<Movies />} />} />
             <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </DataProvider>
       </ErrorBoundary>
     </React.Fragment>
   );
-}
+};
 
 export default App;

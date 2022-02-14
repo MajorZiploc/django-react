@@ -22,14 +22,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Login() {
+const Login = () => {
   const [loginCreds, setLoginCreds] = React.useState({ email: '', username: '', password: '', password2: '' });
   const [isRegister, setIsRegister] = React.useState(false);
   const [isLogined, setIsLogined] = React.useState(false);
   const classes = useStyles();
   const data = React.useContext(DataContext);
 
-  async function LoginAttempt(_e) {
+  const LoginAttempt = async _e => {
     if ([loginCreds.username, loginCreds.password].every(c => c)) {
       await data.login(loginCreds.username, loginCreds.password);
       // TODO: if login attemp fails, then give an alert
@@ -38,9 +38,9 @@ function Login() {
       }
     }
     // TODO: alert if not all fields were provided
-  }
+  };
 
-  async function RegisterAttempt(_e) {
+  const RegisterAttempt = async _e => {
     if ([loginCreds.email, loginCreds.username, loginCreds.password, loginCreds.password2].every(c => c)) {
       if (loginCreds.password === loginCreds.password2) {
         await data.register(loginCreds.email, loginCreds.username, loginCreds.password);
@@ -48,11 +48,11 @@ function Login() {
       // TODO: if passwords do not match. show an alert
     }
     // TODO: alert if not all fields were provided
-  }
+  };
 
-  function onChange(e) {
+  const onChange = e => {
     setLoginCreds({ ...loginCreds, [e.currentTarget.id]: e.currentTarget.value });
-  }
+  };
 
   return isLogined ? (
     <Navigate to='/movies' />
@@ -115,6 +115,6 @@ function Login() {
       )}
     </form>
   );
-}
+};
 
 export default Login;
