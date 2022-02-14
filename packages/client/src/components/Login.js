@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, makeStyles, TextField } from '@material-ui/core';
+import { Button, makeStyles, TextField, Snackbar } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
+import { jsonRefactor as jr } from 'json-test-utility';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -33,43 +35,73 @@ const Login = () => {
   });
   const [isRegister, setIsRegister] = React.useState(false);
   const [isLogined, setIsLogined] = React.useState(false);
+  const [alertSettings, setAlertSettings] = React.useState({
+    display: false,
+    message: '',
+    severity: 'error',
+  });
   const classes = useStyles();
   const data = React.useContext(DataContext);
 
+  const openAlert = alertSettings => {
+    setAlertSettings(alertSettings);
+  };
+
+  const closeAlert = () => {
+    setAlertSettings({ display: false, message: alertSettings?.message, severity: alertSettings?.severity });
+  };
+
   const LoginAttempt = async _e => {
     if ([loginCreds.username, loginCreds.password].every(c => c)) {
-      await data.login(loginCreds.username, loginCreds.password);
-      // TODO: if login attemp fails, then give an alert
+      await data
+        .login(loginCreds.username, loginCreds.password)
+        .catch(_e =>
+          openAlert({ display: true, message: 'Login failed, check your username and password', severity: 'error' })
+        );
       if (data.getAccessToken()) {
         setIsLogined(true);
       }
+    } else {
+      const errorMessage = `Missing the following fields: ${jr
+        .toKeyValArray(loginCreds)
+        .filter(kv => ['username', 'password'].includes(kv.key))
+        .filter(kv => !kv.value)
+        .map(kv => kv.key)
+        .join(', ')}`;
+      openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
-    // TODO: alert if not all fields were provided
   };
 
   const RegisterAttempt = async _e => {
-    if (
-      [
-        loginCreds.email,
-        loginCreds.username,
-        loginCreds.password,
-        loginCreds.password2,
-        loginCreds.firstName,
-        loginCreds.lastName,
-      ].every(c => c)
-    ) {
+    if (jr.toKeyValArray(loginCreds).every(c => c.value)) {
       if (loginCreds.password === loginCreds.password2) {
-        await data.register(
-          loginCreds.email,
-          loginCreds.username,
-          loginCreds.password,
-          loginCreds.firstName,
-          loginCreds.lastName
-        );
+        await data
+          .register(
+            loginCreds.email,
+            loginCreds.username,
+            loginCreds.password,
+            loginCreds.firstName,
+            loginCreds.lastName
+          )
+          .catch(_e =>
+            openAlert({
+              display: true,
+              message: 'Registration failed, check your username and password',
+              severity: 'error',
+            })
+          );
+      } else {
+        const errorMessage = `Passwords do not match`;
+        openAlert({ display: true, message: errorMessage, severity: 'error' });
       }
-      // TODO: if passwords do not match. show an alert
+    } else {
+      const errorMessage = `Missing the following fields: ${jr
+        .toKeyValArray(loginCreds)
+        .filter(kv => !kv.value)
+        .map(kv => kv.key)
+        .join(', ')}`;
+      openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
-    // TODO: alert if not all fields were provided
   };
 
   const onChange = e => {
@@ -79,82 +111,94 @@ const Login = () => {
   return isLogined ? (
     <Navigate to='/movies' />
   ) : (
-    <form className={classes.form}>
-      {isRegister && (
-        <>
-          <TextField
-            className={classes.textField}
-            label='Email'
-            id='email'
-            variant='outlined'
-            size='small'
-            onChange={e => onChange(e)}
-          />
-          <TextField
-            className={classes.textField}
-            label='First Name'
-            id='firstName'
-            variant='outlined'
-            size='small'
-            onChange={e => onChange(e)}
-          />
-          <TextField
-            className={classes.textField}
-            label='Last Name'
-            id='lastName'
-            variant='outlined'
-            size='small'
-            onChange={e => onChange(e)}
-          />
-        </>
-      )}
-      <TextField
-        className={classes.textField}
-        label='Username'
-        id='username'
-        variant='outlined'
-        size='small'
-        onChange={e => onChange(e)}
-      />
-      <TextField
-        className={classes.textField}
-        label='Password'
-        id='password'
-        variant='outlined'
-        size='small'
-        onChange={e => onChange(e)}
-        type='password'
-      />
-      {isRegister && (
+    <>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={alertSettings?.display}
+        autoHideDuration={6000}
+        onClose={closeAlert}
+      >
+        <Alert onClose={closeAlert} severity={alertSettings?.severity}>
+          {alertSettings?.message}
+        </Alert>
+      </Snackbar>
+      <form className={classes.form}>
+        {isRegister && (
+          <>
+            <TextField
+              className={classes.textField}
+              label='Email'
+              id='email'
+              variant='outlined'
+              size='small'
+              onChange={e => onChange(e)}
+            />
+            <TextField
+              className={classes.textField}
+              label='First Name'
+              id='firstName'
+              variant='outlined'
+              size='small'
+              onChange={e => onChange(e)}
+            />
+            <TextField
+              className={classes.textField}
+              label='Last Name'
+              id='lastName'
+              variant='outlined'
+              size='small'
+              onChange={e => onChange(e)}
+            />
+          </>
+        )}
         <TextField
           className={classes.textField}
-          label='Retype password'
-          id='password2'
+          label='Username'
+          id='username'
+          variant='outlined'
+          size='small'
+          onChange={e => onChange(e)}
+        />
+        <TextField
+          className={classes.textField}
+          label='Password'
+          id='password'
           variant='outlined'
           size='small'
           onChange={e => onChange(e)}
           type='password'
         />
-      )}
-      {isRegister ? (
-        <Button type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
-          Register
-        </Button>
-      ) : (
-        <Button type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
-          Log in
-        </Button>
-      )}
-      {isRegister ? (
-        <Button type='button' color='primary' onClick={_e => setIsRegister(false)}>
-          Have an account?
-        </Button>
-      ) : (
-        <Button type='button' color='primary' onClick={_e => setIsRegister(true)}>
-          Dont have an account?
-        </Button>
-      )}
-    </form>
+        {isRegister && (
+          <TextField
+            className={classes.textField}
+            label='Retype password'
+            id='password2'
+            variant='outlined'
+            size='small'
+            onChange={e => onChange(e)}
+            type='password'
+          />
+        )}
+        {isRegister ? (
+          <Button type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
+            Register
+          </Button>
+        ) : (
+          <Button type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
+            Log in
+          </Button>
+        )}
+        {isRegister ? (
+          <Button type='button' color='primary' onClick={_e => setIsRegister(false)}>
+            Have an account?
+          </Button>
+        ) : (
+          <Button type='button' color='primary' onClick={_e => setIsRegister(true)}>
+            Dont have an account?
+          </Button>
+        )}
+      </form>
+    </>
   );
 };
 
