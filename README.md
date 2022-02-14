@@ -4,6 +4,7 @@ A template for a basic django and react site
 ## Requirements
 - Python v3.9
 - bash v5 or zsh
+- yarn (node package manager)
 - mac or linux (1 extra step for linux)
 - gsed (MAC ONLY) (brew install gnu-sed)
 - internet connection - even when developing in localhost. A proxy setting in the client requires this.
@@ -27,7 +28,7 @@ A template for a basic django and react site
 
 ## Things to improve
 ### In scope for an interview style site
-- Change functions to const var lambdas
+- Change out just.bash flow for yarn/pip scripts, the current flow only works for mact
 - Improve logout flow by adding error messages at login and register page
 - Add ui tests (either jest or cypress)
 - Add more api tests in django
