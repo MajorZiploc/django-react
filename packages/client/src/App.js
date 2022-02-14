@@ -8,6 +8,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { DataProvider } from './context/DataContext';
 import { data } from './data';
 import { makeStyles } from '@material-ui/core/styles';
+import PrivateComponent from './components/PrivateComponent';
 
 import './App.css';
 
@@ -70,9 +71,9 @@ function App() {
         <DataProvider value={data}>
           <Navbar />
           <Routes>
-            <Route path='/' element={<Movies />} />
+            <Route path='/' element={<PrivateComponent element={<Movies />}/>} />
             <Route path='/login' element={<Login />} />
-            <Route path='/movies' element={<Movies />} />
+            <Route path='/movies' element={<PrivateComponent element={<Movies />}/>} />
             <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </DataProvider>

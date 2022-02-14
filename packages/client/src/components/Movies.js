@@ -247,9 +247,7 @@ function Movies() {
     setCurrentPage(0);
   }
 
-  return !data.getAccessToken() ? (
-    <Navigate to='/login' />
-  ) : (
+  return (
     <div>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}

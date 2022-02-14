@@ -27,7 +27,7 @@ A template for a basic django and react site
 
 ## Things to improve
 - Change functions to const var lambdas
-- Improve logout flow. Look into private routes. https://stackoverflow.com/questions/55520500/how-to-redirect-to-log-in-page-after-click-logout-button-on-navbar-header-in-rea Abstract out login check from components
+- Improve logout flow by adding error messages at login and register page
 - Add ui tests (either jest or cypress)
 - Improve CORS policies to be more restrictive
 - Add logging
