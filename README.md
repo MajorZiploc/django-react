@@ -26,17 +26,22 @@ A template for a basic django and react site
 > just_demo
 
 ## Things to improve
+### In scope for an interview style site
 - Change functions to const var lambdas
 - Improve logout flow by adding error messages at login and register page
 - Add ui tests (either jest or cypress)
-- Improve CORS policies to be more restrictive
-- Add logging
+- Add more api tests in django
+
+### For making a small decent site. Look at django-react-postgres-docker-heroku repo
+- switch from sqlite to postgres
 - Containerize both client and server, add docker-compose
 - Add cicd pipeline
 - Add hosting
-- Add more api tests in django
+
+### Plus Ultra
 - Improve login/register/auth flow (Rework auth to not show user/pass in api call)
 - Add a third party login/register flow
+- Improve CORS policies to be more restrictive
+- Add logging
 - Migrate javascript to typescript
 - Look into a way to dev with no internet: client proxy setting requires an internet connection even if only using localhost.
-
