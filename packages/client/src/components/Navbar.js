@@ -56,7 +56,7 @@ const Navbar = () => {
   const classes = useStyles();
 
   const onLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
   };
 
   const sideList = () => (

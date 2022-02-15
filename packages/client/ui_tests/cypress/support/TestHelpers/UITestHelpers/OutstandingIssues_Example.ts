@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 // EXAMPLE
 
-import { IFlowHelper } from "../../IFlowHelper";
+import { IFlowHelper } from '../../IFlowHelper';
 
 export class OutstandingIssuesHelper implements IFlowHelper {
   getRoot() {
-    return cy.get("#outstanding-issues");
+    return cy.get('#outstanding-issues');
   }
 
   checkFlow(): void {
@@ -21,21 +21,21 @@ export class OutstandingIssuesHelper implements IFlowHelper {
   }
 
   checkLabels(): void {
-    this.getRoot().find("span").contains("Outstanding Issues").should("exist");
+    this.getRoot().find('span').contains('Outstanding Issues').should('exist');
   }
 
   filterOutstandingIssues() {
     // Click the filter button
-    this.getRoot().find("button").contains("Atlas Only").click().wait(1000);
+    this.getRoot().find('button').contains('Atlas Only').click().wait(1000);
     // Check that labels 'Non-Atlas' are not in the html
     this.getRoot()
-      .find(".card-header")
-      .contains("Outstanding Issues")
+      .find('.card-header')
+      .contains('Outstanding Issues')
       .parent()
       .parent()
       .find("span[class='mx-1 badge']")
       // first option. clean and fairly clear.
-      .should("not.contain", "Non-Atlas");
+      .should('not.contain', 'Non-Atlas');
 
     // second option for the test. clean, but the log is less clear.
     // .contains("Non-Atlas")
@@ -49,19 +49,18 @@ export class OutstandingIssuesHelper implements IFlowHelper {
 
   checkIssueNumbers() {
     this.getRoot()
-      .find("span.badge-dark")
-      .each((e) => {
-        expect(
-          e.text().trim(),
-          "Check that the issue number is a number. Text to check: " + e.text()
-        ).to.match(/^\d+$/);
+      .find('span.badge-dark')
+      .each(e => {
+        expect(e.text().trim(), 'Check that the issue number is a number. Text to check: ' + e.text()).to.match(
+          /^\d+$/
+        );
       });
   }
 
   openAllOutstandingCards() {
     this.getRoot()
-      .find(".card-header")
-      .contains("Outstanding Issues")
+      .find('.card-header')
+      .contains('Outstanding Issues')
       .parent()
       .parent()
       .find('div[class="py-2 card-header"]')

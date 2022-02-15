@@ -1,5 +1,3 @@
-import { MovieTableHelper } from "./MovieTable";
+import { MovieTableHelper } from './MovieTable';
 
-export {
-  MovieTableHelper
-};
+export { MovieTableHelper };

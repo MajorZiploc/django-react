@@ -26,22 +26,15 @@
 
 // Cypress.on("fail", () => {});
 
-Cypress.Commands.add("getHomeIcon", () =>
-  cy.get("a").contains("movies")
-);
+Cypress.Commands.add('getHomeIcon', () => cy.get('a').contains('movies'));
 
-Cypress.Commands.add("checkHomeIcon", () => cy.getHomeIcon().should("exist"));
+Cypress.Commands.add('checkHomeIcon', () => cy.getHomeIcon().should('exist'));
 
-Cypress.Commands.add("getLogoutButton", () =>
-  cy.get("button").contains("Log out")
-);
+Cypress.Commands.add('getLogoutButton', () => cy.get('button').contains('Log out'));
 
-Cypress.Commands.add("checkLogoutButton", () =>
-  cy.getLogoutButton().should("exist")
-);
+Cypress.Commands.add('checkLogoutButton', () => cy.getLogoutButton().should('exist'));
 
-Cypress.Commands.add("checkNavBar", (options) => {
+Cypress.Commands.add('checkNavBar', options => {
   cy.checkHomeIcon();
   cy.checkLogoutButton();
 });
-
