@@ -11,6 +11,7 @@ A template for a basic django and react site
 
 ## NOTES
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
+- concurrently can only run simple bash commands on all os's. You can not source a bash file in one of the commands. scripts in ./scripts/ are workarounds  for this
 
 ## Toggle between Mac and Linux (Mac flavor is default in the repo)
 - There are some commands are are different between mac and linux
