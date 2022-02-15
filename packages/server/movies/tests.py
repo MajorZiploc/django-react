@@ -6,12 +6,13 @@ from rest_framework.test import APITestCase, APIClient, force_authenticate, APIR
 from movies import models
 from movies import views
 from django.contrib.auth.models import User
+import json
 
 class MoviesTests(APITestCase):
 
   def setUp(self):
-    self.factory = APIRequestFactory()
-    # self.client = APIClient()
+    self.factory = APIRequestFactory()  # usefule for just calling the api but not inspecting responses
+    self.client = APIClient()  # useful for calling api and inspecting responses
     self.user1 = User.objects.create_user(
         username='user@foo.com', email='user@foo.com', password='top_secret')
     self.user2 = User.objects.create_user(
@@ -21,11 +22,27 @@ class MoviesTests(APITestCase):
 
   def test_create_a_movie(self):
     data = {'title': 'Ants', 'genre': 'Action', 'year': 1999}
-    request = self.factory.post(reverse('movies:get_post_movies'), data, format='json')
-    force_authenticate(request, user=self.user1, token=None)
-    response: HttpResponse = self.create_view(request)
+    self.client.force_authenticate(user=self.user1, token=None)
+    response = self.client.post(reverse('movies:get_post_movies'), data, format='json')
     self.assertEqual(response.status_code, 201)
     self.assertEqual(models.Movie.objects.count(), 1)
+
+  def test_user_can_see_all_movies_from_all_users(self):
+    data = {'title': 'Ants', 'genre': 'Action', 'year': 1999}
+    request = self.factory.post(reverse('movies:get_post_movies'), data, format='json')
+    force_authenticate(request, user=self.user1, token=None)
+    self.create_view(request)
+    data = {'title': 'Ants2', 'genre': 'Action', 'year': 1999}
+    request = self.factory.post(reverse('movies:get_post_movies'), data, format='json')
+    force_authenticate(request, user=self.user2, token=None)
+    self.create_view(request)
+    request = self.factory.get(reverse('movies:get_post_movies'), format='json')
+    force_authenticate(request, user=self.user1, token=None)
+    self.client.force_authenticate(user=self.user1, token=None)
+    response: HttpResponse = self.client.get(reverse('movies:get_post_movies'), format='json')
+    self.assertEqual(response.status_code, 200)
+    actual = json.loads(response.content)['results']
+    self.assertEqual(len(actual), 2)
 
   def test_update_a_movie_with_put(self):
     movie = models.Movie.objects.create(title='Ants', genre='Action', year=1999, creator=self.user1)
