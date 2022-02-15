@@ -84,7 +84,7 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <Box component='nav'>
+      <Box component='nav' id='nav'>
         <AppBar position='static' className={classes.appbar}>
           <Toolbar>
             <IconButton onClick={() => setOpen(true)}>
