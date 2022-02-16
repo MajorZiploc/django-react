@@ -22,6 +22,10 @@ function just_build_client {
   yarn --cwd "$JUST_CLIENT_ROOT" install;
 }
 
+function just_build_client_ui_tests {
+  yarn --cwd "$JUST_CLIENT_ROOT/ui_tests" install;
+}
+
 function just_run_client {
   yarn --cwd "$JUST_CLIENT_ROOT" start;
 }

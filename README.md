@@ -34,7 +34,7 @@ A template for a basic django and react site
   - To toggle the just commands to mac use:
   > . ./just.bash; just_to_mac
 
-## Demo (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
+## Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
 - source the project root just.bash while inside the project root:
 > . ./just.bash
 

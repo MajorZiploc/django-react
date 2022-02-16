@@ -31,6 +31,7 @@ function just_format_all {
 function just_build {
   just_build_server;
   just_build_client;
+  just_build_client_ui_tests;
 }
 
 function just_run {
@@ -44,7 +45,7 @@ function just_test {
 
 function just_demo {
   just_install;
-  just_first_time_initialize_server;
+  just_initialize_server;
   just_migrate_db_server;
   just_build;
   just_run;

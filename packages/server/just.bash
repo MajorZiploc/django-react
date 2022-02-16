@@ -21,7 +21,7 @@ function just_venv_disconnect_server {
   deactivate;
 }
 
-function just_first_time_initialize_server {
+function just_initialize_server {
   just_venv_create_server;
   just_venv_connect_server;
   just_venv_install_pip_deps_server;
