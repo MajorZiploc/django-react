@@ -8,11 +8,8 @@ import {
   FormControl,
   FormControlLabel,
   IconButton,
-  InputLabel,
   makeStyles,
-  MenuItem,
   Paper,
-  Select,
   Snackbar,
   Switch,
   Table,
@@ -27,13 +24,10 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
-import CancelIcon from '@material-ui/icons/Cancel';
 import React from 'react';
 import DataContext from '../context/DataContext';
 import { AddBoxTwoTone, EditTwoTone } from '@material-ui/icons';
 import { jsonRefactor as jr } from 'json-test-utility';
-import { Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles(theme =>
   createStyles({
