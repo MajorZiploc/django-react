@@ -2,8 +2,9 @@
 A template for a basic django and react site
 
 ## Requirements
-- Python v3.9
+- Python v3.9 (python3 and pip3)
 - bash v5 or zsh
+- nodejs v16+
 - yarn (node package manager)
 - mac or linux/wsl (1 extra step for linux/wsl)
 - internet connection - even when developing in localhost. A proxy setting in the client requires this.
@@ -51,7 +52,7 @@ export JUST_UI_TESTS_PASSWORD="@PassTemp10";
 export JUST_UI_TESTS_ENV="local";
 ```
 - To create a the test user, you need to run the website and register the user.
-> just_demo # to run the application
+> just_demo
 OR
 > just_run # if you have run a just_demo before to purely run the server and client
 
