@@ -113,6 +113,7 @@ const Login = () => {
   ) : (
     <>
       <Snackbar
+        id='loginPageAlertSnackbar'
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={alertSettings?.display}
         autoHideDuration={6000}
@@ -122,7 +123,7 @@ const Login = () => {
           {alertSettings?.message}
         </Alert>
       </Snackbar>
-      <form className={classes.form}>
+      <form id='loginPageForm' className={classes.form}>
         {isRegister && (
           <>
             <TextField
@@ -180,20 +181,20 @@ const Login = () => {
           />
         )}
         {isRegister ? (
-          <Button type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
+          <Button id='registerButton' type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
             Register
           </Button>
         ) : (
-          <Button type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
+          <Button id='logInButton' type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
             Log in
           </Button>
         )}
         {isRegister ? (
-          <Button type='button' color='primary' onClick={_e => setIsRegister(false)}>
+          <Button id='haveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(false)}>
             Have an account?
           </Button>
         ) : (
-          <Button type='button' color='primary' onClick={_e => setIsRegister(true)}>
+          <Button id='dontHaveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(true)}>
             Dont have an account?
           </Button>
         )}

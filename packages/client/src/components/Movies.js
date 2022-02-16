@@ -250,6 +250,7 @@ const Movies = () => {
   return (
     <div>
       <Snackbar
+        id='moviesPageAlertSnackbar'
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={alertSettings?.display}
         autoHideDuration={6000}
@@ -338,7 +339,7 @@ const Movies = () => {
               />
             </div>
           </div>
-          <TableContainer>
+          <TableContainer id='moviesTable'>
             <Table aria-labelledby='tableTitle' size='small' aria-label='enhanced table'>
               <TableHead>
                 <TableRow>

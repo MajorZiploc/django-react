@@ -56,7 +56,7 @@ const Navbar = () => {
   const classes = useStyles();
 
   const onLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
   };
 
   const sideList = () => (
@@ -84,7 +84,7 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <Box component='nav'>
+      <Box component='nav' id='nav'>
         <AppBar position='static' className={classes.appbar}>
           <Toolbar>
             <IconButton onClick={() => setOpen(true)}>
@@ -93,7 +93,7 @@ const Navbar = () => {
             <Typography variant='h5' className={classes.title}>
               Movies
             </Typography>
-            <Link className={classes.title} to='/login' onClick={() => onLogout()}>
+            <Link id='logout' className={classes.title} to='/login' onClick={() => onLogout()}>
               Logout
             </Link>
           </Toolbar>

@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://staging.majorziploc.com/movies",
+  "env": {
+    "clientPort": "",
+    "serverPort": "",
+    "serverExt": "/api/v1"
+  },
+  "chromeWebSecurity": false
+}
