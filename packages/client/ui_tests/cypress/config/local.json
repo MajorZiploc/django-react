@@ -1,8 +1,6 @@
 {
   "baseUrl": "http://localhost:3000",
   "env": {
-    "clientPort": ":3000",
-    "serverPort": ":8000",
     "serverExt": "/api/v1"
   },
   "chromeWebSecurity": false
