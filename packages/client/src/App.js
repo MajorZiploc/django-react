@@ -71,7 +71,7 @@ const App = () => {
         <DataProvider value={data}>
           <Navbar />
           <Routes>
-            <Route path='/' element={<PrivateComponent element={<Movies />} />} />
+            <Route path='/' element={<Login />} />
             <Route path='/login' element={<Login />} />
             <Route path='/movies' element={<PrivateComponent element={<Movies />} />} />
             <Route path='*' element={<Navigate to='/' />} />
