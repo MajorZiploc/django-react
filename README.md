@@ -1,17 +1,31 @@
-# SIMPLE CRUD APP WITH DJANGO AND REACT
+# SIMPLE CRUD WEBSITE WITH DJANGO AND REACT
 A template for a basic django and react site
 
 ## Requirements
 - Python v3.9
 - bash v5 or zsh
 - yarn (node package manager)
-- mac or linux (1 extra step for linux)
-- gsed (MAC ONLY) (brew install gnu-sed)
+- mac or linux/wsl (1 extra step for linux/wsl)
 - internet connection - even when developing in localhost. A proxy setting in the client requires this.
 
+### Requirements Mac only
+- gsed (brew install gnu-sed)
+
+### Requirements Windows only
+- wsl2 ubuntu
+
+### Requirements Windows 10 WSL only
+- XServer - for cypress which requires a gui to launch
+  - requires DISPLAY environment variable set for running gui linux apps. I recommend putting the following into your bashrc or zshrc and relaunching your shell
+    - export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+  - requires workaround script to be run
+    - sudo ./packages/client/ui_tests/wsl_workaround.sh
+
 ## NOTES
+- Running on Windows outside of wsl is not supported
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
 - concurrently can only run simple bash commands on all os's. You can not source a bash file in one of the commands. scripts in ./scripts/ are workarounds  for this
+- view the root level just.bash to see all available commands
 
 ## Toggle between Mac and Linux (Mac flavor is default in the repo)
 - There are some commands are are different between mac and linux
@@ -26,6 +40,9 @@ A template for a basic django and react site
 
 - run the demo
 > just_demo
+
+## Run Tests
+> . ./just.bash; just_test
 
 ## Things to improve
 ### In scope for an interview style site
