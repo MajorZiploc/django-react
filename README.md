@@ -75,6 +75,9 @@ OR
 
 ## Things to improve
 
+### For light version
+- Remove json-test-utility dependency
+
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
 - switch from sqlite to postgres
 - Containerize both client and server, add docker-compose
