@@ -2,11 +2,6 @@
 
 import { LiveEnv } from '../support/UIEnvHelpers';
 import { MovieTableHelper } from './../support/TestHelpers/UITestHelpers';
-import { variable, string } from 'json-test-utility';
-
-function toLabel(str: string) {
-  return string.titleCase('Check ' + str) ?? 'No Label';
-}
 
 describe('movies', () => {
   const envHelper = new LiveEnv();
@@ -18,7 +13,7 @@ describe('movies', () => {
 
   [
     {
-      label: toLabel(variable.splitCamelCase({ movieTable: movieTable }) ?? ''),
+      label: 'Successful login flow',
       flowhelper: movieTable,
     },
   ].forEach(t => {
