@@ -29,7 +29,8 @@ A template for a basic django and react site
 
 ## Things to improve
 ### In scope for an interview style site
-- Add ui tests (either jest or cypress)
+- Add ui tests (cypress)
+- Create a generic crud table based on the Movies component
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
 - switch from sqlite to postgres
