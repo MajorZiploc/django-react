@@ -75,7 +75,7 @@ const tableSort = (contents, sortColumn, sortDesc) => {
   return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
 };
 
-const GenericCrudTable = ({ modelName, defaultModel, modelId, modelFields, modelData, validatedModel }) => {
+const GenericCrudTable = ({ modelName, defaultModel, modelId='id', modelFields, modelData, validatedModel, tableId }) => {
   const classes = useStyles();
   const [showModal, setShowModal] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -92,7 +92,6 @@ const GenericCrudTable = ({ modelName, defaultModel, modelId, modelFields, model
   const [models, setModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
-  var modelId = modelId || 'id';
 
   let modelCount = 0;
 
@@ -270,7 +269,7 @@ const GenericCrudTable = ({ modelName, defaultModel, modelId, modelFields, model
       </Dialog>
 
       <div className={classes.container}>
-        <Paper className={classes.table}>
+        <Paper id={tableId} className={classes.table}>
           <div className={classes.tableHeader}>
             <FormControlLabel
               value='start'
@@ -307,7 +306,7 @@ const GenericCrudTable = ({ modelName, defaultModel, modelId, modelFields, model
             </div>
           </div>
 
-          <TableContainer id='modelsTable'>
+          <TableContainer>
             <Table aria-labelledby='tableTitle' size='small' aria-label='enhanced table'>
               <TableHead>
                 <TableRow>
