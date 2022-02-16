@@ -11,6 +11,7 @@ A template for a basic django and react site
 
 ### Requirements Mac only
 - gsed (brew install gnu-sed)
+- iterm2 with rosetta enabled (needed to run ui tests)
 
 ### Requirements Windows only
 - wsl2 ubuntu
