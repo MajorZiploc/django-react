@@ -73,7 +73,6 @@ OR
 
 ## Things to improve
 ### In scope for an interview style site
-- Add redirection for successful registration
 - Add ui tests (cypress)
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo

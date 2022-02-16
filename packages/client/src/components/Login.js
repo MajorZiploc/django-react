@@ -83,6 +83,14 @@ const Login = () => {
             loginCreds.firstName,
             loginCreds.lastName
           )
+          .then(_v => {
+            openAlert({
+              display: true,
+              message: 'Registration successful! Please Login',
+              severity: 'success',
+            });
+            setIsRegister(false);
+          })
           .catch(_e =>
             openAlert({
               display: true,
