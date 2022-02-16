@@ -93,7 +93,7 @@ const Navbar = () => {
             <Typography variant='h5' className={classes.title}>
               Movies
             </Typography>
-            <Link className={classes.title} to='/login' onClick={() => onLogout()}>
+            <Link id='logout' className={classes.title} to='/login' onClick={() => onLogout()}>
               Logout
             </Link>
           </Toolbar>

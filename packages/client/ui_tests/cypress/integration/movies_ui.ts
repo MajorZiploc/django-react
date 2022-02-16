@@ -30,6 +30,5 @@ describe('movies', () => {
 
   after('Logout from the site', () => {
     cy.getLogoutButton().click();
-    cy.get('img[alt="MajorZiploc  Logo"]');
   });
 });
