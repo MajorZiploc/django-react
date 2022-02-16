@@ -11,6 +11,7 @@ A template for a basic django and react site
 
 ### Requirements Mac only
 - gsed (brew install gnu-sed)
+- iterm2 with rosetta enabled (needed to run ui tests)
 
 ### Requirements Windows only
 - wsl2 ubuntu
@@ -73,8 +74,6 @@ OR
 > just_test
 
 ## Things to improve
-### In scope for an interview style site
-- Add ui tests (cypress)
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
 - switch from sqlite to postgres
