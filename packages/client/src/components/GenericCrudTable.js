@@ -26,7 +26,7 @@ import {
 import { Alert } from '@material-ui/lab';
 import React from 'react';
 import { AddBoxTwoTone, EditTwoTone } from '@material-ui/icons';
-import { jsonRefactor as jr, variable } from 'json-test-utility';
+import { toKeyValArray } from '../utils';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -202,7 +202,7 @@ const GenericCrudTable = ({
 
   const handleSearch = () => {
     const filtered = models.filter(item =>
-      searchTerm !== '' ? jr.toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
+      searchTerm !== '' ? toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
     );
     modelCount = filtered.length;
     return filtered;
@@ -241,9 +241,7 @@ const GenericCrudTable = ({
         <DialogContent dividers className={classes.dialogContent}>
           {modelFields.map((mf, i) => {
             const key = mf;
-            const labelJson = {};
-            labelJson[mf] = mf;
-            const label = toProperCase(variable.splitCamelCase(labelJson) ?? '');
+            const label = toProperCase(mf);
             return (
               <TextField
                 key={i}

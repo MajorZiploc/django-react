@@ -3,7 +3,7 @@ import { Button, makeStyles, TextField, Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
-import { jsonRefactor as jr } from 'json-test-utility';
+import { toKeyValArray } from '../utils';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -62,8 +62,8 @@ const Login = () => {
         setIsLogined(true);
       }
     } else {
-      const errorMessage = `Missing the following fields: ${jr
-        .toKeyValArray(loginCreds)
+      const errorMessage = `Missing the following fields: ${
+        toKeyValArray(loginCreds)
         .filter(kv => ['username', 'password'].includes(kv.key))
         .filter(kv => !kv.value)
         .map(kv => kv.key)
@@ -73,7 +73,7 @@ const Login = () => {
   };
 
   const RegisterAttempt = async _e => {
-    if (jr.toKeyValArray(loginCreds).every(c => c.value)) {
+    if (toKeyValArray(loginCreds).every(c => c.value)) {
       if (loginCreds.password === loginCreds.password2) {
         await data
           .register(
@@ -103,8 +103,8 @@ const Login = () => {
         openAlert({ display: true, message: errorMessage, severity: 'error' });
       }
     } else {
-      const errorMessage = `Missing the following fields: ${jr
-        .toKeyValArray(loginCreds)
+      const errorMessage = `Missing the following fields: ${
+        toKeyValArray(loginCreds)
         .filter(kv => !kv.value)
         .map(kv => kv.key)
         .join(', ')}`;
