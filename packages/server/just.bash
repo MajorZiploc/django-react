@@ -21,7 +21,6 @@ function just_initialize_server {
   just_venv_create_server;
   just_venv_connect_server;
   just_venv_install_pip_deps_server;
-  just_install_server;
 }
 
 function just_format_server {

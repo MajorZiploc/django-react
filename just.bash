@@ -12,7 +12,7 @@ function just_to_mac {
   _just_to_mac "$JUST_PROJECT_ROOT";
 }
 
-function just_install {
+function just_install_dev {
   yarn install;
   just_venv_connect_server;
   pip3 install -r "$JUST_PROJECT_ROOT/requirements.txt";
@@ -44,7 +44,7 @@ function just_test {
 }
 
 function just_demo {
-  just_install;
+  just_install_dev;
   just_initialize_server;
   just_migrate_db_server;
   just_build;
