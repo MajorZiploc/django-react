@@ -8,10 +8,7 @@
     "cy": "cypress",
     "cy:open": "yarn run cy open",
     "cy:headless": "yarn run cy run --headless",
-    "cy:headed": "yarn run cy run --headed",
-    "start": "./cypress_starter.sh \"gui\"",
-    "run:all:headless": "./cypress_starter.sh \"headless\"",
-    "run:all:headed": "./cypress_starter.sh \"headed\""
+    "cy:headed": "yarn run cy run --headed"
   },
   "dependencies": {
     "fs-extra": "^9.0.1",

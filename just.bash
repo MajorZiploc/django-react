@@ -19,18 +19,18 @@ function just_install {
 }
 
 function just_format {
-  just_format_server
-  just_format_client
+  just_format_server;
+  just_format_client;
 }
 
 function just_format_all {
-  just_format_server
-  just_format_all_client
+  just_format_server;
+  just_format_all_client;
 }
 
 function just_build {
-  just_build_server
-  just_build_client
+  just_build_server;
+  just_build_client;
 }
 
 function just_run {
@@ -38,7 +38,8 @@ function just_run {
 }
 
 function just_test {
-  just_test_server
+  just_test_server;
+  just_test_client_headless;
 }
 
 function just_demo {

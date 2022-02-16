@@ -42,11 +42,38 @@ A template for a basic django and react site
 > just_demo
 
 ## Run Tests
-> . ./just.bash; just_test
+
+### CLIENT UI TEST NOTES
+- Requires that you have a test user and password set in the following environment variables (these are the default values)
+```
+export JUST_UI_TESTS_USERNAME="testuserz";
+export JUST_UI_TESTS_PASSWORD="@PassTemp10";
+export JUST_UI_TESTS_ENV="local";
+```
+- To create a the test user, you need to run the website and register the user.
+> just_demo # to run the application
+OR
+> just_run # if you have run a just_demo before to purely run the server and client
+
+### TEST COMMANDS
+- source the project root just.bash while inside the project root:
+> . ./just.bash
+
+- Runs server tests
+> just_test_server
+
+- Runs client tests headless
+> just_test_client_headless
+
+- Runs client tests headed
+> just_test_client_headed
+
+- Runs all tests headlessly (requires the client ui test setup mentioned above)
+> just_test
 
 ## Things to improve
 ### In scope for an interview style site
-- Wire out cypress ui test scripts to root just.bash
+- Add redirection for successful registration
 - Add ui tests (cypress)
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo

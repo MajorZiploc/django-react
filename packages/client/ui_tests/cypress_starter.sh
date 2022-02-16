@@ -1,32 +1,45 @@
 #!/bin/bash
 
-echo "Enter Username"
-read username
+username="$1";
+password="$2";
+choice_env="$3";
+style="$4";
 
-echo "Enter Password"
-stty -echo
-read password
-stty echo
+scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
-choiceEnv=""
-isValidEnv=0
-while [ $isValidEnv -eq 0 ]; do
-  echo "Enter environment ($env) - Choices [dev, local]"
-  read choiceEnv
-  if test -z "$choiceEnv"; then
-    choiceEnv=$env
-  fi
-  isValidEnv=$(echo $choiceEnv | perl -0777 -e 'if(<> =~ m/^(dev|local)$/){print 1}else{print 0}')
-done
+[[ -z "$username" ]] && {
+  echo "Enter Username";
+  read username;
+}
 
-if [ "$1" = "gui" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn run cy:open --env configFile=$choiceEnv
+[[ -z "$password" ]] && {
+  echo "Enter Password";
+  stty -echo;
+  read password;
+  stty echo;
+}
+
+[[ -z "$choice_env" ]] && {
+  isValidEnv=0;
+  while [ $isValidEnv -eq 0 ]; do
+    echo "Enter environment ($env) - Choices [dev, local]"
+    read choice_env
+    if test -z "$choice_env"; then
+      choice_env=$env;
+    fi
+    isValidEnv=$(echo $choice_env | perl -0777 -e 'if(<> =~ m/^(dev|local)$/){print 1}else{print 0}');
+  done
+}
+
+if [ "$style" = "gui" ]; then
+  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:open --env configFile=$choice_env;
 fi
 
-if [ "$1" = "headed" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn run cy:headed --env configFile=$choiceEnv
+if [ "$style" = "headed" ]; then
+  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:headed --env configFile=$choice_env;
 fi
 
-if [ "$1" = "headless" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn run cy:headless --env configFile=$choiceEnv
+if [ "$style" = "headless" ]; then
+  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:headless --env configFile=$choice_env;
 fi
+

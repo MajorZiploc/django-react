@@ -44,7 +44,7 @@ function just_run_server {
 
 function just_test_server {
   just_venv_connect_server;
-  python3 "$JUST_SERVER_ROOT/manage.py" test "$JUST_SERVER_ROOT" ;
+  python3 "$JUST_SERVER_ROOT/manage.py" test "$JUST_SERVER_ROOT";
 }
 
 function just_migrate_db_server {
