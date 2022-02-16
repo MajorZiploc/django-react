@@ -73,7 +73,7 @@ OR
 
 ## Things to improve
 ### In scope for an interview style site
-- Remanage dependency installs. Also look into putting cypress as a uitest dep
+- Remanage dependency installs
 - Add ui tests (cypress)
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo

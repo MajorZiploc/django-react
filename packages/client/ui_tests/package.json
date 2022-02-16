@@ -11,6 +11,7 @@
     "cy:headed": "yarn run cy run --headed"
   },
   "dependencies": {
+    "cypress": "^9.5.0",
     "fs-extra": "^9.0.1",
     "json-test-utility": "^0.2.8",
     "lodash": "^4.17.15"
