@@ -73,7 +73,6 @@ OR
 
 ## Things to improve
 ### In scope for an interview style site
-- Cleanup gitignores and place all into root
 - Add ui tests (cypress)
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
