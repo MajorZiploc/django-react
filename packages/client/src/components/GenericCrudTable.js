@@ -75,7 +75,15 @@ const tableSort = (contents, sortColumn, sortDesc) => {
   return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
 };
 
-const GenericCrudTable = ({ modelName, defaultModel, modelId='id', modelFields, modelData, validatedModel, tableId }) => {
+const GenericCrudTable = ({
+  modelName,
+  defaultModel,
+  modelId = 'id',
+  modelFields,
+  modelData,
+  validatedModel,
+  tableId,
+}) => {
   const classes = useStyles();
   const [showModal, setShowModal] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);

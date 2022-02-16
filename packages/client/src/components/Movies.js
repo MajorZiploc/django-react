@@ -39,7 +39,7 @@ const Movies = () => {
       getModels: data.getMovies.bind(data),
     },
     validatedModel: validatedMovie,
-    tableId: 'moviesTable'
+    tableId: 'moviesTable',
   };
   return <GenericCrudTable {...crudTableProps} />;
 };
