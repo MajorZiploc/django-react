@@ -73,7 +73,6 @@ OR
 
 ## Things to improve
 ### In scope for an interview style site
-- Remanage dependency installs
 - Cleanup gitignores and place all into root
 - Add ui tests (cypress)
 
