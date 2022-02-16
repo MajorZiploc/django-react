@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import * as u from '../support/UIEnvHelpers';
+import { LiveEnv } from '../support/UIEnvHelpers';
 import { MovieTableHelper } from './../support/TestHelpers/UITestHelpers';
 import { variable, string } from 'json-test-utility';
 
@@ -9,7 +9,7 @@ function toLabel(str: string) {
 }
 
 describe('movies', () => {
-  const envHelper = u.envUtil.chooseEnvHelper(Cypress.env('env'));
+  const envHelper = new LiveEnv();
   const movieTable = new MovieTableHelper();
 
   before('Logs into movies', function () {

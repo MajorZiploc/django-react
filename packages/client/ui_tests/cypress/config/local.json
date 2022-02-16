@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost",
+  "baseUrl": "http://localhost:3000",
   "env": {
     "clientPort": ":3000",
     "serverPort": ":8000",

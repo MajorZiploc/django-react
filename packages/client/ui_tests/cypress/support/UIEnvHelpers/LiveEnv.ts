@@ -1,8 +1,6 @@
 /// <reference types="cypress" />
 
-import { IEnvHelper } from './IEnvHelper';
-
-export class LiveEnv implements IEnvHelper {
+export class LiveEnv {
   username: string;
   password: string;
   constructor() {
@@ -11,20 +9,21 @@ export class LiveEnv implements IEnvHelper {
   }
 
   login() {
-    cy.server();
+    // for getting network api call data
+    // cy.server();
     cy.visit('movies');
-    cy.route('**/auth/token').as('userinfo');
-    cy.wait(6000)
+    // for getting network api call data
+    // cy.intercept('**/auth/token').as('userinfo');
+    cy.wait(3000)
       .url()
       .then(url => {
         if (url.match(/login/i) != null) {
-          cy.get('#inputUserName')
+          cy.get('#username')
             .type(this.username)
-            .get('#inputPassword')
+            .get('#password')
             .type(this.password, { log: false })
-            .get('button[value="login"]')
-            .click()
-            .get('a[href*="/movies/"]');
+            .get('#logInButton')
+            .click();
         } else {
           const msg = 'Already logged in.';
           cy.log(msg);
@@ -34,8 +33,8 @@ export class LiveEnv implements IEnvHelper {
           ).to.be.false;
         }
       });
-    // wait for site to initialize
-    cy.wait('@userinfo');
+    // wait for api call data
+    // cy.wait('@userinfo');
     cy.wait(200);
   }
 }
