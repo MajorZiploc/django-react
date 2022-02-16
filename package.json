@@ -1,0 +1,9 @@
+{
+  "scripts" : {
+    "start": "concurrently '$INIT_CWD/scripts/run_server.sh' '$INIT_CWD/scripts/run_client.sh'"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "prettier": "^2.5.1"
+  }
+}

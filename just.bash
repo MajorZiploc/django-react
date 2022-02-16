@@ -13,9 +13,9 @@ function just_to_mac {
 }
 
 function just_install {
-  npm install -g concurrently;
-  just_install_client;
-  just_install_server;
+  yarn install;
+  just_venv_connect_server;
+  pip3 install -r "$JUST_PROJECT_ROOT/requirements.txt";
 }
 
 function just_format {
@@ -35,7 +35,7 @@ function just_build {
 }
 
 function just_run {
-  concurrently "$JUST_PROJECT_ROOT/scripts/run_server.sh" "$JUST_PROJECT_ROOT/scripts/run_client.sh";
+  yarn --cwd "$JUST_PROJECT_ROOT" run start;
 }
 
 function just_test {

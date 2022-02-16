@@ -5,10 +5,6 @@ function just_venv_create_server {
   python3 -m venv "$HOME/.venv/django-react";
 }
 
-function just_install_server {
-  pip3 install autopep8; pip3 install httpie;
-}
-
 function just_venv_install_pip_deps_server {
   pip3 install wheel; pip3 install -r "$JUST_SERVER_ROOT/requirements.txt";
 }
@@ -29,6 +25,7 @@ function just_initialize_server {
 }
 
 function just_format_server {
+  just_venv_connect_server;
   autopep8 "$JUST_SERVER_ROOT" && echo "Server Formatted!" || { echo "Failed to format server!"; return 1; }
 }
 

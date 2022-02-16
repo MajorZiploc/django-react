@@ -6,3 +6,7 @@ djangorestframework-simplejwt==5.0.0
 pytz==2021.3
 sqlparse==0.4.2
 django-cors-headers==3.11.0
+
+# development dependencies
+autopep8==1.6.0
+httpie==3.0.2

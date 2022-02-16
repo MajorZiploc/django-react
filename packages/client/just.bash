@@ -14,10 +14,6 @@ function just_format_all_client {
   prettier --write "${all_files[@]}";
 }
 
-function just_install_client {
-  npm install -g prettier;
-}
-
 function just_build_client {
   yarn --cwd "$JUST_CLIENT_ROOT" install;
 }
