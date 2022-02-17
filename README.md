@@ -7,7 +7,7 @@ A template for a basic django and react site
 - nodejs v16+
 - yarn (node package manager)
 - mac or linux/wsl (1 extra step for linux/wsl)
-- internet connection - even when developing in localhost. A proxy setting in the client requires this.
+- internet connection - even when developing in localhost. A proxy setting in the frontend requires this.
 
 ### Requirements Mac only
 - gsed (brew install gnu-sed)
@@ -21,7 +21,7 @@ A template for a basic django and react site
   - requires DISPLAY environment variable set for running gui linux apps. I recommend putting the following into your bashrc or zshrc and relaunching your shell
     - export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
   - requires workaround script to be run
-    - sudo ./packages/client/ui_tests/wsl_workaround.sh
+    - sudo ./packages/frontend/ui_tests/wsl_workaround.sh
 
 ## NOTES
 - Running on Windows outside of wsl is not supported
@@ -51,7 +51,7 @@ A template for a basic django and react site
 
 ## Run Tests
 
-### CLIENT UI TEST NOTES
+### FRONTEND UI TEST NOTES
 - Requires that you have the project running
 > just_run
 - Requires that you have a test user and password set in the following environment variables (these are the default values)
@@ -67,23 +67,23 @@ export JUST_UI_TESTS_ENV="local";
 - source the project root just.bash while inside the project root:
 > . ./just.bash
 
-- Runs server tests
-> just_test_server
+- Runs backend tests
+> just_test_backend
 
-- Runs client tests headless
-> just_test_client_headless
+- Runs frontend tests headless
+> just_test_frontend_headless
 
-- Runs client tests headed
-> just_test_client_headed
+- Runs frontend tests headed
+> just_test_frontend_headed
 
-- Runs all tests headlessly (requires the client ui test setup mentioned above)
+- Runs all tests headlessly (requires the frontend ui test setup mentioned above)
 > just_test
 
 ## Things to improve
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
 - switch from sqlite to postgres
-- Containerize both client and server, add docker-compose
+- Containerize both frontend and backend, add docker-compose
 - Add cicd pipeline
 - Add hosting
 
@@ -93,4 +93,4 @@ export JUST_UI_TESTS_ENV="local";
 - Improve CORS policies to be more restrictive
 - Add logging
 - Migrate javascript to typescript
-- Look into a way to dev with no internet: client proxy setting requires an internet connection even if only using localhost.
+- Look into a way to dev with no internet: frontend proxy setting requires an internet connection even if only using localhost.
