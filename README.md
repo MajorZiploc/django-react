@@ -43,9 +43,17 @@ A template for a basic django and react site
 - run the demo
 > just_demo
 
+## Run the project
+- source the project root just.bash while inside the project root:
+> . ./just.bash
+
+> just_run
+
 ## Run Tests
 
 ### CLIENT UI TEST NOTES
+- Requires that you have the project running
+> just_run
 - Requires that you have a test user and password set in the following environment variables (these are the default values)
 ```
 export JUST_UI_TESTS_USERNAME="testuserz";
@@ -53,9 +61,7 @@ export JUST_UI_TESTS_PASSWORD="@PassTemp10";
 export JUST_UI_TESTS_ENV="local";
 ```
 - To create a the test user, you need to run the website and register the user.
-> just_demo
-OR
-> just_run # if you have run a just_demo before to purely run the server and client
+> just_run
 
 ### TEST COMMANDS
 - source the project root just.bash while inside the project root:
