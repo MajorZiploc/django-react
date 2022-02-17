@@ -1,6 +1,6 @@
 {
   "scripts" : {
-    "start": "concurrently '$INIT_CWD/scripts/run_server.sh' '$INIT_CWD/scripts/run_frontend.sh'"
+    "start": "concurrently '$INIT_CWD/scripts/run_backend.sh' '$INIT_CWD/scripts/run_frontend.sh'"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

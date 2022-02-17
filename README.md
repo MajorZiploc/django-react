@@ -67,8 +67,8 @@ export JUST_UI_TESTS_ENV="local";
 - source the project root just.bash while inside the project root:
 > . ./just.bash
 
-- Runs server tests
-> just_test_server
+- Runs backend tests
+> just_test_backend
 
 - Runs frontend tests headless
 > just_test_frontend_headless
@@ -83,7 +83,7 @@ export JUST_UI_TESTS_ENV="local";
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
 - switch from sqlite to postgres
-- Containerize both frontend and server, add docker-compose
+- Containerize both frontend and backend, add docker-compose
 - Add cicd pipeline
 - Add hosting
 
