@@ -1,7 +1,5 @@
 {
   "baseUrl": "https://your.website.here/movies",
-  "env": {
-    "serverExt": "/api/v1"
-  },
+  "env": {},
   "chromeWebSecurity": false
 }
