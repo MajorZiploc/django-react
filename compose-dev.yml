@@ -42,4 +42,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - /tmp/postgres-data:/var/lib/postgresql/data
 
