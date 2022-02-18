@@ -6,7 +6,6 @@ function just_format_backend {
 }
 
 function just_test_backend {
-  just_venv_connect_backend;
-  python3 "$JUST_BACKEND_ROOT/manage.py" test "$JUST_BACKEND_ROOT";
+  docker exec -t django-react-backend-1 python /app/backend/manage.py test
 }
 
