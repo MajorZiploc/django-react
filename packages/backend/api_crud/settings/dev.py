@@ -1,4 +1,5 @@
 from api_crud.settings.base import *
+import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -16,7 +17,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'password',
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'HOST': 'db', # set in docker-compose.yml
         'PORT': 5432 # default postgres port
     }

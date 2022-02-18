@@ -8,13 +8,14 @@ services:
     volumes:
       - ./packages/backend:/app/backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     stdin_open: true
     tty: true
     depends_on:
       - db
     environment:
-      - DJANGO_SETTINGS_MODULE=api_crud.settings.dev
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   frontend:
     build:
@@ -25,9 +26,9 @@ services:
       # One-way volume to use node_modules from inside image
       - /app/node_modules
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     environment:
-      - NODE_ENV=development
+      NODE_ENV: ${NODE_ENV}
     depends_on:
       - backend
     command: yarn start
@@ -35,5 +36,5 @@ services:
   db:
     image: postgres:13-alpine
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
