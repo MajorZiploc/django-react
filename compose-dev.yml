@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
     environment:
-      - DJANGO_SETTINGS_MODULE=backend.settings.dev
+      - DJANGO_SETTINGS_MODULE=api_crud.settings.dev
 
   frontend:
     build:
