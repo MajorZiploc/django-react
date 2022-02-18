@@ -82,6 +82,7 @@ export JUST_UI_TESTS_ENV="local";
 ## Things to improve
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
+- Abstract env vars into a .env file
 - Learn about presistencing data for postgres in a container
 - Add cicd pipeline
 - Add hosting
