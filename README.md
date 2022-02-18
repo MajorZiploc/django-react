@@ -82,8 +82,7 @@ export JUST_UI_TESTS_ENV="local";
 ## Things to improve
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
-- switch from sqlite to postgres
-- Containerize both frontend and backend, add docker-compose
+- Change just.bash/dev commands for new docker flow
 - Add cicd pipeline
 - Add hosting
 
