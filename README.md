@@ -81,7 +81,7 @@ export JUST_UI_TESTS_ENV="local";
 
 ## Things to improve
 
-### For making a small decent site. Look at django-react-postgres-docker-heroku repo
+### For making a small decent site
 - Learn about presistencing data for postgres in a container
 - Use webpack on react site so that env variables can be accessed in react code
 - Add cicd pipeline
