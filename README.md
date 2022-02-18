@@ -82,14 +82,12 @@ export JUST_UI_TESTS_ENV="local";
 ## Things to improve
 
 ### For making a small decent site. Look at django-react-postgres-docker-heroku repo
-- Change just.bash/dev commands for new docker flow
 - Add cicd pipeline
 - Add hosting
 
 ### Plus Ultra
 - Improve login/register/auth flow (Rework auth to not show user/pass in api call)
 - Add a third party login/register flow
-- Improve CORS policies to be more restrictive
 - Add logging
 - Migrate javascript to typescript
 - Look into a way to dev with no internet: frontend proxy setting requires an internet connection even if only using localhost.
