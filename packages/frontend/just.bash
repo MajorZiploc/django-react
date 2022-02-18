@@ -14,16 +14,8 @@ function just_format_all_frontend {
   prettier --write "${all_files[@]}";
 }
 
-function just_build_frontend {
-  yarn --cwd "$JUST_FRONTEND_ROOT" install;
-}
-
 function just_build_frontend_ui_tests {
   yarn --cwd "$JUST_FRONTEND_ROOT/ui_tests" install;
-}
-
-function just_run_frontend {
-  yarn --cwd "$JUST_FRONTEND_ROOT" start;
 }
 
 function just_test_frontend_start_ui_test_runner {

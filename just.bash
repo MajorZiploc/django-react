@@ -14,8 +14,10 @@ function just_to_mac {
 
 function just_install_dev {
   yarn install;
-  just_venv_connect_backend;
+  just_venv_create;
+  just_venv_connect;
   pip3 install -r "$JUST_PROJECT_ROOT/requirements.txt";
+  just_build_frontend_ui_tests;
 }
 
 function just_format {
@@ -28,14 +30,8 @@ function just_format_all {
   just_format_all_frontend;
 }
 
-function just_build {
-  just_build_backend;
-  just_build_frontend;
-  just_build_frontend_ui_tests;
-}
-
 function just_run {
-  yarn --cwd "$JUST_PROJECT_ROOT" run start;
+  docker-compose -f compose-dev.yml up --force-recreate -d;
 }
 
 function just_test {
@@ -45,9 +41,19 @@ function just_test {
 
 function just_demo {
   just_install_dev;
-  just_initialize_backend;
-  just_migrate_db_backend;
-  just_build;
   just_run;
+}
+
+function just_venv_create {
+  mkdir -p ~/.venv;
+  python3 -m venv "$HOME/.venv/django-react";
+}
+
+function just_venv_connect {
+  . "$HOME/.venv/django-react/bin/activate";
+}
+
+function just_venv_disconnect {
+  deactivate;
 }
 
