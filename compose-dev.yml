@@ -34,4 +34,7 @@ services:
 
   db:
     image: postgres:13-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+
 
