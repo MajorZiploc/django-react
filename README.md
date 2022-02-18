@@ -2,7 +2,8 @@
 A template for a basic django and react site
 
 ## Requirements
-- Python v3.9 (python3 and pip3)
+- docker v20+
+- python v3.9 (python3 and pip3)
 - bash v5 or zsh
 - nodejs v16+
 - yarn (node package manager)
@@ -26,7 +27,6 @@ A template for a basic django and react site
 ## NOTES
 - Running on Windows outside of wsl is not supported
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
-- concurrently can only run simple bash commands on all os's. You can not source a bash file in one of the commands. scripts in ./scripts/ are workarounds  for this
 - view the root level just.bash to see all available commands
 
 ## Toggle between Mac and Linux (Mac flavor is default in the repo)
@@ -81,7 +81,7 @@ export JUST_UI_TESTS_ENV="local";
 
 ## Things to improve
 
-### For making a small decent site. Look at django-react-postgres-docker-heroku repo
+### For making a small decent site
 - Learn about presistencing data for postgres in a container
 - Use webpack on react site so that env variables can be accessed in react code
 - Add cicd pipeline
