@@ -171,7 +171,7 @@ const GenericCrudTable = ({
       closeModal();
       return;
     }
-    const { isValid, errorMessage } = !validatedModel(enteredModel);
+    const { isValid, errorMessage } = validatedModel(enteredModel);
     if (!isValid) {
       openAlert({ display: true, message: errorMessage, severity: 'error' });
       return;
