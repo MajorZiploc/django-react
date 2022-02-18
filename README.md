@@ -2,7 +2,7 @@
 A template for a basic django and react site
 
 ## Requirements
-- Python v3.9 (python3 and pip3)
+- python v3.9 (python3 and pip3)
 - bash v5 or zsh
 - nodejs v16+
 - yarn (node package manager)
