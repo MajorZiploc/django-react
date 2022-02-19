@@ -1,5 +1,6 @@
 export JUST_PROJECT_ROOT="`pwd`";
 export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/packages";
+. "$JUST_PROJECT_ROOT/.env.bash";
 . "$JUST_PROJECT_PACKAGES/backend/just.bash" "$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_PACKAGES/frontend/just.bash" "$JUST_PROJECT_PACKAGES/frontend";
 
@@ -33,6 +34,8 @@ function just_stop {
 }
 
 function just_test {
+  just_run;
+  just_ensure_test_user;
   just_test_backend;
   just_test_frontend_headless;
 }
