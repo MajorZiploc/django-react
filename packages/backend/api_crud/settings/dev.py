@@ -18,8 +18,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': os.environ['POSTGRES_USER'],
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
-        'HOST': 'db', # set in docker-compose.yml
+        'HOST': 'db',  # set in docker-compose.yml
         'PORT': os.environ['POSTGRES_PORT']
     }
 }
-
