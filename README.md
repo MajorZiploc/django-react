@@ -6,11 +6,10 @@ A template for a basic django and react site
 - bash v5 or zsh
 - nodejs v16+
 - yarn (node package manager)
-- mac or linux/wsl (1 extra step for linux/wsl)
+- mac or linux/wsl
 - internet connection - even when developing in localhost. A proxy setting in the frontend requires this.
 
 ### Requirements Mac only
-- gsed (brew install gnu-sed)
 - iterm2 with rosetta enabled (needed to run ui tests)
 
 ### Requirements Windows only
@@ -32,13 +31,6 @@ A template for a basic django and react site
 ## Just Commands
 - All just_* commands expect that you have sourced the root level just.bash while in the root of the project:
 > . ./just.bash
-
-## Toggle between Mac and Linux (Mac flavor is default in the repo)
-- There are some commands are are different between mac and linux
-  - To toggle the just commands to linux use:
-  > just_to_nonmac
-  - To toggle the just commands to mac use:
-  > just_to_mac
 
 ## Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
 - run the demo

@@ -8,7 +8,6 @@
   "jsxSingleQuote": true,
   "quoteProps": "consistent",
   "requirePragma": false,
-  "jsxBracketSameLine": false,
   "htmlWhitespaceSensitivity": "css",
   "printWidth": 120
 }
