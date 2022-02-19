@@ -14,4 +14,3 @@ export function fromKeyValArray(keyValueArray) {
     return acc;
   });
 }
-

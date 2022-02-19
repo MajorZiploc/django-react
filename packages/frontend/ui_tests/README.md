@@ -3,9 +3,11 @@
 # Setting Up UITestSuite On Your Device:
 
 - Run the cypress gui or run all the test cases depending on what you want to do.
+
   - Running cypress gui is good for development purposes:
     - `yarn start`
   - Other cases:
+
     - `yarn run:all:headed`
     - `yarn run:all:headless`
 
@@ -16,4 +18,3 @@
     done.
 
     If you ended it prematurely, run the following in bash to turn terminal output back on: `stty echo`
-

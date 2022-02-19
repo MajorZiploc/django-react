@@ -1,5 +1,5 @@
 {
-  "scripts" : {
+  "scripts": {
     "start": "concurrently '$INIT_CWD/scripts/run_backend.sh' '$INIT_CWD/scripts/run_frontend.sh'"
   },
   "devDependencies": {

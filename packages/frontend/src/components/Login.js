@@ -62,8 +62,7 @@ const Login = () => {
         setIsLogined(true);
       }
     } else {
-      const errorMessage = `Missing the following fields: ${
-        toKeyValArray(loginCreds)
+      const errorMessage = `Missing the following fields: ${toKeyValArray(loginCreds)
         .filter(kv => ['username', 'password'].includes(kv.key))
         .filter(kv => !kv.value)
         .map(kv => kv.key)
@@ -103,8 +102,7 @@ const Login = () => {
         openAlert({ display: true, message: errorMessage, severity: 'error' });
       }
     } else {
-      const errorMessage = `Missing the following fields: ${
-        toKeyValArray(loginCreds)
+      const errorMessage = `Missing the following fields: ${toKeyValArray(loginCreds)
         .filter(kv => !kv.value)
         .map(kv => kv.key)
         .join(', ')}`;
