@@ -29,24 +29,22 @@ A template for a basic django and react site
 - concurrently can only run simple bash commands on all os's. You can not source a bash file in one of the commands. scripts in ./scripts/ are workarounds  for this
 - view the root level just.bash to see all available commands
 
+## Just Commands
+- All just_* commands expect that you have sourced the root level just.bash while in the root of the project:
+> . ./just.bash
+
 ## Toggle between Mac and Linux (Mac flavor is default in the repo)
 - There are some commands are are different between mac and linux
   - To toggle the just commands to linux use:
-  > . ./just.bash; just_to_nonmac
+  > just_to_nonmac
   - To toggle the just commands to mac use:
-  > . ./just.bash; just_to_mac
+  > just_to_mac
 
 ## Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
-- source the project root just.bash while inside the project root:
-> . ./just.bash
-
 - run the demo
 > just_demo
 
-## Run the project
-- source the project root just.bash while inside the project root:
-> . ./just.bash
-
+## Run the project (start the containers)
 > just_run
 
 ## Run Tests
@@ -64,9 +62,6 @@ export JUST_UI_TESTS_ENV="local";
 > just_run
 
 ### TEST COMMANDS
-- source the project root just.bash while inside the project root:
-> . ./just.bash
-
 - Runs backend tests
 > just_test_backend
 
