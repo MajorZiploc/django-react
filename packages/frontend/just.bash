@@ -5,7 +5,7 @@ export JUST_UI_TESTS_PASSWORD="@PassTemp10";
 export JUST_UI_TESTS_ENV="local";
 
 function just_format_frontend {
-  prettier --write .;
+  prettier --write "$JUST_PROJECT_ROOT";
 }
 
 function just_build_frontend {
