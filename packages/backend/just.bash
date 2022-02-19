@@ -1,7 +1,7 @@
 export JUST_BACKEND_ROOT="$1";
 
 function just_format_backend {
-  just_venv_connect_backend;
+  just_venv_connect;
   autopep8 "$JUST_BACKEND_ROOT" && echo "Backend Formatted!" || { echo "Failed to format backend!"; return 1; }
 }
 
