@@ -1,6 +1,5 @@
-version: "3.9"
+version: '3.9'
 services:
-
   backend:
     build:
       context: ./packages/backend
@@ -8,7 +7,7 @@ services:
     volumes:
       - ./packages/backend:/app/backend
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
     tty: true
     depends_on:
@@ -28,7 +27,7 @@ services:
       # One-way volume to use node_modules from inside image
       - /app/node_modules
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     environment:
       NODE_ENV: ${NODE_ENV}
     depends_on:
@@ -41,7 +40,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - /tmp/postgres-data:/var/lib/postgresql/data
-
