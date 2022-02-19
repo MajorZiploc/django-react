@@ -47,6 +47,9 @@ A template for a basic django and react site
 ## Run the project (start the containers)
 > just_run
 
+## Stop the project (stop the containers)
+> just_stop
+
 ## Run Tests
 
 ### FRONTEND UI TEST NOTES
