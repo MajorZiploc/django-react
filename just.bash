@@ -1,6 +1,5 @@
 export JUST_PROJECT_ROOT="`pwd`";
 export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/packages";
-. "$JUST_PROJECT_ROOT/utils.bash";
 . "$JUST_PROJECT_PACKAGES/backend/just.bash" "$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_PACKAGES/frontend/just.bash" "$JUST_PROJECT_PACKAGES/frontend";
 
@@ -21,13 +20,8 @@ function just_install_dev {
 }
 
 function just_format {
-  just_format_backend;
   just_format_frontend;
-}
-
-function just_format_all {
   just_format_backend;
-  just_format_all_frontend;
 }
 
 function just_run {
