@@ -37,7 +37,7 @@ A template for a basic django and react site
 ## Ensure .env variables are set
 
 - The environment variables need to be set. Use the default values like so:
-> cp .env.example .env
+  > cp .env.example .env; cp .env.bash.example .env.bash
 
 ## Just Commands
 
@@ -59,20 +59,15 @@ A template for a basic django and react site
 
 ## Run Tests
 
-### FRONTEND UI TEST NOTES
+### FRONTEND UI TEST SETUP
 
-- Requires that you have the project running
-  > just_run
-- Requires that you have a test user and password set in the following environment variables (these are the default values)
+- View your .env.bash file for the test user information. If you wish to change that information, then you have to resource your just.bash after changing the information in .env.bash:
+  > . ./just.bash
 
-```
-export JUST_UI_TESTS_USERNAME="testuserz";
-export JUST_UI_TESTS_PASSWORD="@PassTemp10";
-export JUST_UI_TESTS_ENV="local";
-```
+#### FROUND UI TEST CICD SETUP
 
-- To create a the test user, you need to run the website and register the user.
-  > just_run
+- cypress ui test environment choices are: [local, dev] and are found in ./packages/frontend/ui_tests/cypress/config
+  - When preparing to deploy, you will need to edit the dev.json or even add a prod json and then set the JUST_UI_TESTS_ENV to either dev or prod
 
 ### TEST COMMANDS
 
