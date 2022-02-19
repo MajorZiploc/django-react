@@ -34,6 +34,11 @@ A template for a basic django and react site
 - concurrently can only run simple bash commands on all os's. You can not source a bash file in one of the commands. scripts in ./scripts/ are workarounds for this
 - view the root level just.bash to see all available commands
 
+## Ensure .env variables are set
+
+- The environment variables need to be set. Use the default values like so:
+> cp .env.example .env
+
 ## Just Commands
 
 - All just\_\* commands expect that you have sourced the root level just.bash while in the root of the project:
