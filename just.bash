@@ -4,14 +4,6 @@ export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/packages";
 . "$JUST_PROJECT_PACKAGES/backend/just.bash" "$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_PACKAGES/frontend/just.bash" "$JUST_PROJECT_PACKAGES/frontend";
 
-function just_to_nonmac {
-  _just_to_nonmac "$JUST_PROJECT_ROOT";
-}
-
-function just_to_mac {
-  _just_to_mac "$JUST_PROJECT_ROOT";
-}
-
 function just_install_dev {
   yarn install;
   just_venv_connect_backend;
