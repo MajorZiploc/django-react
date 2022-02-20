@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - build_services=`bash ./scripts/detect-changes.sh`
+      - build_services=('backend' 'frontend')
+      - for service in $build_services; do echo $service; done
+  build:
+    commands:
+      - bash ./scripts/build-images.sh $build_services
+  post_build:
+    commands:
+      - bash ./scripts/docker-login.sh
+      - bash ./scripts/push-images.sh $build_services

@@ -101,6 +101,36 @@ A template for a basic django and react site
 
 ## Things to improve
 
+### Production Flow
+
+#### NGINX 405 issue
+
+- even after converting to calling the public url instead of the proxy setup on the frontend. the 405 remains after a token login attempt call
+
+#### AWS Using docker compose to cloud formation template approach
+
+- [Deploying Docker containers on ECS](https://docs.docker.com/cloud/ecs-integration/)
+- [Docker sample for CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html)
+- [How to deploy an application to AWS using Docker, ECS, and ECR](https://medium.com/swlh/how-to-deploy-an-application-to-aws-using-docker-ecs-and-ecr-aa7785fc9667)
+
+#### AWS CloudFormation issues from CloudWatch
+
+##### Postgres Image
+
+- LOG: invalid length of startup packet
+
+##### Backend Image
+
+- standard_init_linux.go:228: exec user process caused: exec format error
+
+#### Backend
+
+- Consider merging Dockerfile and Dockerfile.dev and entrypoint dev/prod scripts. They are very similar
+
+### Minor Changes
+
+- Move Expose ports from Dockerfile's to docker-compose for better management and can use .env flow
+
 ### For making a small decent site
 
 - Learn about presistencing data for postgres in a container

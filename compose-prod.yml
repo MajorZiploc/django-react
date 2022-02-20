@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  backend:
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/django-react-backend
+    stdin_open: true
+    tty: true
+    ports:
+      - target: ${BACKEND_PORT}
+        published: ${BACKEND_PORT}
+        x-aws-protocol: http
+
+  frontend:
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/django-react-frontend
+    ports:
+      - target: 80
+        published: 80
+        x-aws-protocol: http
+
+  db:
+    ports:
+      - target: ${POSTGRES_PORT}
+        published: ${POSTGRES_PORT}
+        x-aws-protocol: http
