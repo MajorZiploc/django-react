@@ -22,7 +22,7 @@ A template for a basic django and react site
 
 ### Requirements Windows 10 WSL only
 
-- XServer - for cypress which requires a gui to launch
+- XServer - for cypress ui tests which requires a gui to launch
   - requires DISPLAY environment variable set for running gui linux apps. I recommend putting the following into your bashrc or zshrc and relaunching your shell
     - export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
   - requires workaround script to be run
@@ -32,7 +32,7 @@ A template for a basic django and react site
 
 - Running on Windows outside of wsl is not supported
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
-- view the root level just.bash to see all available commands
+- view the project root level just.bash to see all available commands
 
 ## Ensure .env variables are set
 
@@ -41,7 +41,7 @@ A template for a basic django and react site
 
 ## Just Commands
 
-- All just\_\* commands expect that you have sourced the root level just.bash while in the root of the project:
+- All just\_\* commands expect that you have sourced the project root level just.bash while in the root of the project:
   > . ./just.bash
 
 ## Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
@@ -61,7 +61,7 @@ A template for a basic django and react site
 
 ### FRONTEND UI TEST SETUP
 
-- View your .env.bash file for the test user information. If you wish to change that information, then you have to resource your just.bash after changing the information in .env.bash:
+- View your .env.bash file for the test user information. If you wish to change that information, then you have to re-source your just.bash after changing the information in .env.bash:
   > . ./just.bash
 
 #### FROUND UI TEST CICD SETUP
