@@ -5,7 +5,7 @@ services:
       context: ./packages/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - ./packages/backend:/app/backend
+      - ./packages/backend:/workspace/app
     ports:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
@@ -23,9 +23,9 @@ services:
       context: ./packages/frontend
       dockerfile: Dockerfile.dev
     volumes:
-      - ./packages/frontend:/app
+      - ./packages/frontend:/workspace/app
       # One-way volume to use node_modules from inside image
-      - /app/node_modules
+      - /workspace/app/node_modules
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     environment:

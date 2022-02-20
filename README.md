@@ -86,6 +86,19 @@ A template for a basic django and react site
 - Runs all tests headlessly (requires the frontend ui test setup mentioned above)
   > just_test
 
+### VSCODE DEVELOPMENT NOTES
+- Install the following extensions:
+  - ms-azuretools.vscode-docker
+  - ms-vscode-remote.remote-containers
+- Relaunch vscode after installing it and vscode will notice you have a .devcontainer and ask you if you want to reopen in a container. Do so.
+  - If the prompt doesnt come up. Then use <ctrl>+<shift>+p Remote-Containers: Reopen in Container
+- Depending on if you are working on the frontend or backend, you will have to make changes to the .devcontainer content
+  - .devcontainer/compose-dev.yml
+    - Under services, specify the container name you want to develop in. For backend, use backend, for frontend, use frontend. This will override that containers creation process to allow you to develop and debug processes related to the frontend or backend depending on your choice.
+  - .devcontainer/devcontainer.json
+    - A similar change needs to be made here depending on if you want to work on the frontend or backend. the service needs to reflect the container you wish to work on.
+      - Ex: you want to work on frontend so: "service": "frontend"
+
 ## Things to improve
 
 ### For making a small decent site

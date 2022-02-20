@@ -7,7 +7,7 @@ function just_format_backend {
 
 function just_test_backend {
   just_run;
-  docker exec -t django-react-backend-1 python /app/backend/manage.py test
+  docker exec -t django-react-backend-1 python /workspace/app/manage.py test
 }
 
 function just_ensure_test_user {
