@@ -1,7 +1,7 @@
 export JUST_PROJECT_ROOT="`pwd`";
 export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/packages";
-export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
-export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
+export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
+export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
 function just_install_dev {
