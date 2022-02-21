@@ -18,11 +18,11 @@ function just_format {
 }
 
 function just_run {
-  docker-compose -f compose-dev.yml up -d;
+  docker-compose -f compose.yml -f compose-dev.yml up -d;
 }
 
 function just_stop {
-  docker-compose -f compose-dev.yml down;
+  docker-compose -f compose.yml -f compose-dev.yml down;
 }
 
 function just_test {
