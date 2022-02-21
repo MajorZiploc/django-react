@@ -8,6 +8,7 @@ services:
     stdin_open: true
     tty: true
     command: /workspace/entrypoint-dev.sh
+    container_name: django-react-backend
 
   frontend:
     volumes:
@@ -17,9 +18,11 @@ services:
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     command: yarn start
+    container_name: django-react-frontend
 
   db:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - /tmp/postgres-data:/var/lib/postgresql/data
+    container_name: django-react-db
