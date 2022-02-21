@@ -1,9 +1,7 @@
 version: '3.9'
 services:
   backend:
-    build:
-      context: ./packages/backend
-      dockerfile: Dockerfile.dev
+    build: ./packages/backend
     depends_on:
       - db
     environment:
@@ -14,9 +12,7 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
 
   frontend:
-    build:
-      context: ./packages/frontend
-      dockerfile: Dockerfile.dev
+    build: ./packages/frontend
     environment:
       NODE_ENV: ${NODE_ENV}
     depends_on:
