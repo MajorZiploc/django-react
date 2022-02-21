@@ -1,6 +1,9 @@
 version: '3.9'
 services:
   backend:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
     volumes:
       - ./packages/backend:/workspace/app
     ports:
@@ -11,6 +14,9 @@ services:
     container_name: django-react-backend
 
   frontend:
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile.dev
     volumes:
       - ./packages/frontend:/workspace/app
       # One-way volume to use node_modules from inside image
