@@ -29,7 +29,6 @@ function just_stop {
 
 function just_test {
   just_run;
-  just_ensure_test_user;
   just_test_backend;
   just_test_frontend_headless;
 }
