@@ -1,44 +1,24 @@
 version: '3.9'
 services:
   backend:
-    build:
-      context: ./packages/backend
-      dockerfile: Dockerfile.dev
     volumes:
       - ./packages/backend:/workspace/app
     ports:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
     tty: true
-    depends_on:
-      - db
-    environment:
-      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_PORT: ${POSTGRES_PORT}
+    command: /workspace/entrypoint-dev.sh
 
   frontend:
-    build:
-      context: ./packages/frontend
-      dockerfile: Dockerfile.dev
     volumes:
       - ./packages/frontend:/workspace/app
       # One-way volume to use node_modules from inside image
       - /workspace/app/node_modules
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
-    environment:
-      NODE_ENV: ${NODE_ENV}
-    depends_on:
-      - backend
     command: yarn start
 
   db:
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:

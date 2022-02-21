@@ -64,7 +64,7 @@ A template for a basic django and react site
 - View your .env.bash file for the test user information. If you wish to change that information, then you have to re-source your just.bash after changing the information in .env.bash:
   > . ./just.bash
 
-#### FROUND UI TEST CICD SETUP
+#### FROUNTEND UI TEST CICD SETUP
 
 - cypress ui test environment choices are: [local, dev] and are found in ./packages/frontend/ui_tests/cypress/config
   - When preparing to deploy, you will need to edit the dev.json or even add a prod json and then set the JUST_UI_TESTS_ENV to either dev or prod

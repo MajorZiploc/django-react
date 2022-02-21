@@ -1,7 +1,7 @@
 export JUST_PROJECT_ROOT="`pwd`";
 export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/packages";
-export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
-export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
+export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
+export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
 function just_install_dev {
@@ -18,11 +18,11 @@ function just_format {
 }
 
 function just_run {
-  docker-compose -f compose-dev.yml up -d;
+  docker-compose -f compose.yml -f compose-dev.yml up -d;
 }
 
 function just_stop {
-  docker-compose -f compose-dev.yml down;
+  docker-compose -f compose.yml -f compose-dev.yml down;
 }
 
 function just_test {
