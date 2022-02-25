@@ -9,7 +9,11 @@ SECRET_KEY = os.environ['BACKEND_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["backend", "api_crud", "localhost", "127.0.0.1"]
+# SECURITY WARNING: Should use CORS_ALLOWED_ORIGINS instead of these 2 things
+# CORS_ORIGIN_ALLOW_ALL = True
+# ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [ f"{os.environ['PUBLIC_URL']}:{os.environ['FRONTEND_PORT']}" ]
 
 DATABASES = {
     'default': {
