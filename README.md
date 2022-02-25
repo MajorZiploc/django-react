@@ -87,6 +87,7 @@ A template for a basic django and react site
   > just_test
 
 ### VSCODE DEVELOPMENT NOTES
+
 - Install the following extensions:
   - ms-azuretools.vscode-docker
   - ms-vscode-remote.remote-containers

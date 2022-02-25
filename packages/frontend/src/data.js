@@ -24,8 +24,8 @@ class Data {
   // TODO: need to test
   async refreshAuth() {
     return axios
-      .post(this.baseUrl +
-        '/api/v1/auth/token/refresh/',
+      .post(
+        this.baseUrl + '/api/v1/auth/token/refresh/',
         {
           refresh: this.getRefreshToken(),
         },
@@ -44,8 +44,8 @@ class Data {
 
   async login(username, password) {
     return axios
-      .post(this.baseUrl +
-        '/api/v1/auth/token/',
+      .post(
+        this.baseUrl + '/api/v1/auth/token/',
         {
           username: username,
           password: password,
@@ -66,8 +66,8 @@ class Data {
 
   async register(email, username, password, firstName, lastName) {
     return axios
-      .post(this.baseUrl +
-        '/api/v1/auth/register/',
+      .post(
+        this.baseUrl + '/api/v1/auth/register/',
         {
           email: email,
           username: username,
@@ -91,8 +91,8 @@ class Data {
   // TODO: remove this function
   async auth() {
     return axios
-      .post(this.baseUrl +
-        '/api/v1/auth/token/',
+      .post(
+        this.baseUrl + '/api/v1/auth/token/',
         {
           username: 'user1',
           password: 'pass@Temp10',
