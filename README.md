@@ -10,7 +10,7 @@ A template for a basic django and react site
 - nodejs v16+
 - yarn (node package manager)
 - mac or linux/wsl
-- internet connection - even when developing in localhost. A proxy setting in the frontend requires this.
+- internet connection
 
 ### Requirements Mac only
 
@@ -104,7 +104,6 @@ A template for a basic django and react site
 ### For making a small decent site
 
 - Learn about presistencing data for postgres in a container
-- Use webpack on react site so that env variables can be accessed in react code
 - Add cicd pipeline
 - Add hosting
 
@@ -114,4 +113,3 @@ A template for a basic django and react site
 - Add a third party login/register flow
 - Add logging
 - Migrate javascript to typescript
-- Look into a way to dev with no internet: frontend proxy setting requires an internet connection even if only using localhost.
