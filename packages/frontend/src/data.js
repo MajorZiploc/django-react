@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 class Data {
-  constructor() {}
+  constructor() {
+    this.baseUrl = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_BACKEND_PORT}`;
+  }
 
   getAccessToken() {
     return localStorage.getItem('accessToken');
@@ -22,7 +24,7 @@ class Data {
   // TODO: need to test
   async refreshAuth() {
     return axios
-      .post(
+      .post(this.baseUrl +
         '/api/v1/auth/token/refresh/',
         {
           refresh: this.getRefreshToken(),
@@ -42,7 +44,7 @@ class Data {
 
   async login(username, password) {
     return axios
-      .post(
+      .post(this.baseUrl +
         '/api/v1/auth/token/',
         {
           username: username,
@@ -64,7 +66,7 @@ class Data {
 
   async register(email, username, password, firstName, lastName) {
     return axios
-      .post(
+      .post(this.baseUrl +
         '/api/v1/auth/register/',
         {
           email: email,
@@ -89,7 +91,7 @@ class Data {
   // TODO: remove this function
   async auth() {
     return axios
-      .post(
+      .post(this.baseUrl +
         '/api/v1/auth/token/',
         {
           username: 'user1',
@@ -107,7 +109,7 @@ class Data {
 
   async _getMoviesHelper() {
     return axios
-      .get('/api/v1/movies/', {
+      .get(this.baseUrl + '/api/v1/movies/', {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -125,7 +127,7 @@ class Data {
 
   async _postMovieHelper(movie) {
     return axios
-      .post('/api/v1/movies/', movie, {
+      .post(this.baseUrl + '/api/v1/movies/', movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -144,7 +146,7 @@ class Data {
   // TODO: need to test
   async _getMovieHelper(id) {
     return axios
-      .get(`/api/v1/movies/${id}`, {
+      .get(this.baseUrl + `/api/v1/movies/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -162,7 +164,7 @@ class Data {
 
   async _putMovieHelper(id, movie) {
     return axios
-      .put(`/api/v1/movies/${id}/`, movie, {
+      .put(this.baseUrl + `/api/v1/movies/${id}/`, movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -181,7 +183,7 @@ class Data {
   // TODO: need to test
   async _patchMovieHelper(id, movie) {
     return axios
-      .patch(`/api/v1/movies/${id}`, movie, {
+      .patch(this.baseUrl + `/api/v1/movies/${id}`, movie, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -199,7 +201,7 @@ class Data {
 
   async _deleteMovieHelper(id) {
     return axios
-      .delete(`/api/v1/movies/${id}/`, {
+      .delete(this.baseUrl + `/api/v1/movies/${id}/`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
