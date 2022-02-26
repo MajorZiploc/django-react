@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class Data {
   constructor() {
-    this.baseUrl = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_BACKEND_PORT}`;
+    this.baseUrl = `${process.env.REACT_APP_PUBLIC_URL}`;
   }
 
   getAccessToken() {

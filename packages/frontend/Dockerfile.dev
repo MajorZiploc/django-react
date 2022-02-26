@@ -1,7 +1,11 @@
 FROM node:16-alpine
+
+FROM nginx:1.21-alpine
+RUN apk add nodejs yarn
+
 WORKDIR /workspace/app/
-COPY package.json yarn.lock /workspace/app/
-RUN yarn install
-COPY . /workspace/app/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY package.json yarn.lock .
+RUN yarn install --network-timeout 1000000
+COPY . .
 EXPOSE 3000
-CMD yarn start
