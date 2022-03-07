@@ -39,12 +39,11 @@ function just_demo {
 }
 
 function just_venv_create {
-  mkdir -p ~/.venv;
-  python3 -m venv "$HOME/.venv/django-react";
+  python3 -m venv "$JUST_PROJECT_ROOT/.venv";
 }
 
 function just_venv_connect {
-  . "$HOME/.venv/django-react/bin/activate";
+  . "$JUST_PROJECT_ROOT/.venv/bin/activate";
 }
 
 function just_venv_disconnect {
