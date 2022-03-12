@@ -12,6 +12,7 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
       PUBLIC_URL: ${PUBLIC_URL}
       FRONTEND_PORT: ${FRONTEND_PORT}
+    container_name: django-react-backend
 
   frontend:
     build: ./packages/frontend
@@ -21,9 +22,11 @@ services:
       REACT_APP_PUBLIC_URL: ${PUBLIC_URL}
     depends_on:
       - backend
+    container_name: django-react-frontend
 
   db:
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    container_name: django-react-db
