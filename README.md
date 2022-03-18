@@ -44,20 +44,20 @@ A template for a basic django and react site
 - All just\_\* commands expect that you have sourced the project root level just.bash while in the root of the project:
   > . ./just.bash
 
-## Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
+### Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
 
 - run the demo
   > just_demo
 
-## Run the project (start the containers)
+### Run the project (start the containers)
 
 > just_run
 
-## Stop the project (stop the containers)
+### Stop the project (stop the containers)
 
 > just_stop
 
-## Run Tests
+### Run Tests
 
 ### FRONTEND UI TEST SETUP
 
@@ -86,7 +86,7 @@ A template for a basic django and react site
 - Runs all tests headlessly (requires the frontend ui test setup mentioned above)
   > just_test
 
-### VSCODE DEVELOPMENT NOTES
+## VSCODE DEVELOPMENT NOTES
 
 - Install the following extensions:
   - ms-azuretools.vscode-docker
