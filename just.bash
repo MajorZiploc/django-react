@@ -66,6 +66,11 @@ function just_ensure_test_user {
   http POST "$JUST_PUBLIC_URL:$JUST_PUBLIC_BACKEND_PORT/api/v1/auth/register/" email="$JUST_UI_TESTS_EMAIL" username="$JUST_UI_TESTS_USERNAME" password="$JUST_UI_TESTS_PASSWORD" password2="$JUST_UI_TESTS_PASSWORD" first_name="$JUST_UI_TESTS_FIRST_NAME" last_name="$JUST_UI_TESTS_LAST_NAME";
 }
 
+function just_migrate {
+  docker exec -t django-react-backend python /workspace/app/manage.py makemigrations;
+  docker exec -t django-react-backend python /workspace/app/manage.py migrate;
+}
+
 function just_format_frontend {
   prettier --write "$JUST_PROJECT_ROOT";
 }

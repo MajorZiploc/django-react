@@ -57,6 +57,16 @@ A template for a basic django and react site
 
 > just_stop
 
+### Make database migrations
+
+> just_migrate
+
+#### NOTE: if your migration fails, then your server container will silently stop working. Fix this with:
+> just_stop; just_run;
+
+## Visit the development site
+- Go to http://127.0.0.1:3000/
+
 ### Run Tests
 
 ### FRONTEND UI TEST SETUP
