@@ -29,4 +29,3 @@ services:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - /tmp/postgres-data:/var/lib/postgresql/data
-    container_name: django-react-db
