@@ -105,3 +105,7 @@ function just_test_frontend_headed {
   "$JUST_FRONTEND_ROOT/ui_tests/cypress_starter.sh" "$JUST_UI_TESTS_USERNAME" "$JUST_UI_TESTS_PASSWORD" "$JUST_UI_TESTS_ENV" "headed" ;
 }
 
+function just_clean {
+  rm -rf "$JUST_PROJECT_ROOT/.venv";
+}
+
