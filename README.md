@@ -102,7 +102,7 @@ A template for a basic django and react site
   - ms-azuretools.vscode-docker
   - ms-vscode-remote.remote-containers
 - Relaunch vscode after installing it and vscode will notice you have a .devcontainer and ask you if you want to reopen in a container. Do so.
-  - If the prompt doesnt come up. Then use <ctrl>+<shift>+p Remote-Containers: Reopen in Container
+  - If the prompt doesnt come up. Then use \<ctrl>+\<shift>+p Remote-Containers: Reopen in Container
 - Depending on if you are working on the frontend or backend, you will have to make changes to the .devcontainer content
   - .devcontainer/compose-dev.yml
     - Under services, specify the container name you want to develop in. For backend, use backend, for frontend, use frontend. This will override that containers creation process to allow you to develop and debug processes related to the frontend or backend depending on your choice.
