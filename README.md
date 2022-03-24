@@ -53,7 +53,11 @@ A template for a basic django and react site
 
 > just_run
 
-## Run Tests
+## Visit the development site
+
+- Go to http://127.0.0.1:3000/
+
+### Run Tests
 
 ### FRONTEND UI TEST SETUP
 

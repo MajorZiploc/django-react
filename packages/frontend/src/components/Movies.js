@@ -7,15 +7,15 @@ const Movies = () => {
   const validatedMovie = enteredMovie => {
     var isValid = true;
     var errorMessage = '';
-    if (enteredMovie.title.trim() === '') {
+    if (!enteredMovie.title || enteredMovie.title.trim() === '') {
       isValid = false;
       errorMessage += 'Title must be filled.';
     }
-    if (enteredMovie.genre.trim() === '') {
+    if (!enteredMovie.genre || enteredMovie.genre.trim() === '') {
       isValid = false;
       errorMessage += 'Genre must be filled.';
     }
-    if (enteredMovie.year === '' || isNaN(Number(enteredMovie.year))) {
+    if (!enteredMovie.year || enteredMovie.year === '' || isNaN(Number(enteredMovie.year))) {
       isValid = false;
       errorMessage += 'Year must be a number.';
     }
@@ -25,10 +25,10 @@ const Movies = () => {
   const crudTableProps = {
     modelName: 'Movie',
     defaultModel: {
-      id: 0,
-      title: '',
-      genre: '',
-      year: '',
+      id: null,
+      title: null,
+      genre: null,
+      year: null,
     },
     modelId: 'id',
     modelFields: ['title', 'genre', 'year'],
