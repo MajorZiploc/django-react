@@ -144,10 +144,10 @@ const GenericCrudTable = ({
     setCurrentPage(0);
   };
 
-  async function openModal(Model = defaultModel) {
+  const openModal = async (Model = defaultModel) => {
     setEnteredModel(Model);
     setShowModal(true);
-  }
+  };
 
   const closeModal = () => {
     if (componentMounted.current) {
@@ -161,7 +161,9 @@ const GenericCrudTable = ({
 
   const handlePostOrPutModel = async () => {
     handleModelAction(model =>
-      model[modelId] === 0 ? modelData.postModel(model) : modelData.putModel(model[modelId], model)
+      model[modelId] === null || model[modelId] === undefined
+        ? modelData.postModel(model)
+        : modelData.putModel(model[modelId], model)
     );
   };
 
