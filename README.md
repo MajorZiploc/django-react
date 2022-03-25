@@ -53,6 +53,10 @@ A template for a basic django and react site
 
 > just_run
 
+## Migrate database
+
+> just_migrate_db_backend
+
 ## Visit the development site
 
 - Go to http://127.0.0.1:3000/

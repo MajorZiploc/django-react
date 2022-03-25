@@ -44,8 +44,8 @@ function just_test_backend {
 }
 
 function just_migrate_db_backend {
+  python3 "$JUST_BACKEND_ROOT/manage.py" makemigrations;
   python3 "$JUST_BACKEND_ROOT/manage.py" migrate;
-  docker exec -t django-react-backend-1 python /app/backend/manage.py test
 }
 
 function just_ensure_test_user {
