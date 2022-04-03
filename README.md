@@ -30,6 +30,9 @@ A template for a basic django and react site
 
 ## NOTES
 
+- The login flow can be a little wonky
+  - If you login and you see that the table failed to load in then:
+    - logout and relogin
 - Running on Windows outside of wsl is not supported
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
 - view the project root level just.bash to see all available commands
