@@ -129,9 +129,15 @@ A template for a basic django and react site
 - [Docker sample for CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html)
 - [How to deploy an application to AWS using Docker, ECS, and ECR](https://medium.com/swlh/how-to-deploy-an-application-to-aws-using-docker-ecs-and-ecr-aa7785fc9667)
 
+### For making a small decent site
+
+- Move all db service info to compose.dev.yml and use AWS RDS in production
+- Add cicd pipeline
+- Add hosting
+
 #### AWS CloudFormation issues from CloudWatch
 
-##### Postgres Image
+##### Postgres Image (Just switch to AWS RDS in production)
 
 - LOG: invalid length of startup packet
 
@@ -146,12 +152,6 @@ A template for a basic django and react site
 ### Minor Changes
 
 - Move Expose ports from Dockerfile's to docker-compose for better management and can use .env flow
-
-### For making a small decent site
-
-- Learn about presistencing data for postgres in a container
-- Add cicd pipeline
-- Add hosting
 
 ### Plus Ultra
 
