@@ -28,4 +28,4 @@ services:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
-      - /tmp/postgres-data:/var/lib/postgresql/data
+      - /tmp/django-react-postgres-data:/var/lib/postgresql/data
