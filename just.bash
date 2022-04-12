@@ -107,7 +107,7 @@ function just_test_frontend_headed {
 
 function just_clean {
   rm -rf "$JUST_PROJECT_ROOT/.venv";
-  rm -rf "$JUST_FRONTEND_ROOT/packages/frontend/node_modules";
-  rm -rf "$JUST_FRONTEND_ROOT/packages/frontend/ui_tests/node_modules";
+  rm -rf "$JUST_FRONTEND_ROOT/node_modules";
+  rm -rf "$JUST_FRONTEND_ROOT/ui_tests/node_modules";
 }
 
