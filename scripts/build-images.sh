@@ -16,4 +16,4 @@ for service in $build_services; do
   just_build;
 done;
 
-docker-compose -f compose.yml -f compose-prod.yml build "${build_services[@]}";
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml build "${build_services[@]}";
