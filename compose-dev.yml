@@ -29,3 +29,21 @@ services:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - /tmp/django-react-postgres-data:/var/lib/postgresql/data
+
+  celery-beat-worker:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/backend:/workspace/app
+
+  celery-data-worker:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/backend:/workspace/app
+
+  mq:
+    volumes:
+      - "../data/mq:/var/lib/rabbitmq"

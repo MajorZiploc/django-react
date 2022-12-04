@@ -1,5 +1,6 @@
 version: '3.9'
 services:
+
   backend:
     build: ./packages/backend
     depends_on:
@@ -24,3 +25,35 @@ services:
     env_file:
       - .env
     container_name: django-react-db
+
+  celery-beat-worker:
+    build: ./packages/backend
+    links:
+      - db
+      - mq
+      - redis
+    restart: always
+    container_name: django-react-celery-beat-worker
+
+  celery-data-worker:
+    build: ./packages/backend
+    links:
+      - db
+      - mq
+      - redis
+    restart: always
+    container_name: django-react-celery-data-worker
+
+  redis:
+    image: redis:alpine3.17
+    ports:
+      - "6379:6379"
+    container_name: django-react-redis
+
+  mq:
+    image: docker.conservis.cc/rabbitmq:3.7.2-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    container_name: django-react-redis
