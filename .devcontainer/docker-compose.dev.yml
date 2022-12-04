@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  # Update this to the name of the service you want to work with in your docker-compose.yml file
+  # Update this to the name of the service you want to work with in your docker-docker-compose..yml file
   backend:
     # If you want add a non-root user to your Dockerfile, you can use the "remoteUser"
     # property in devcontainer.json to cause VS Code its sub-processes (terminals, tasks,
@@ -13,19 +13,19 @@ services:
 
     # Uncomment if you want to override the service's Dockerfile to one in the .devcontainer
     # folder. Note that the path of the Dockerfile and context is relative to the *primary*
-    # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
+    # docker-docker-compose..yml file (the first in the devcontainer.json "dockerComposeFile"
     # array). The sample below assumes your primary file is in the root of your project.
     #
     # build:
     #   context: .
     #   dockerfile: .devcontainer/Dockerfile
 
-    # Uncomment if you need to change the volumes from the project compose-dev.yml
+    # Uncomment if you need to change the volumes from the project docker-compose.dev.yml
     # volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
       # - .:/workspace:cached
 
-      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-docker-compose.for details.
       # - /var/run/docker.sock:/var/run/docker.sock
 
     # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
