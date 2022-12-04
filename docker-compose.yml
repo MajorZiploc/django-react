@@ -58,6 +58,7 @@ services:
     image: rabbitmq:3.9.26-management-alpine
     ports:
       - "5672:5672"
+      # for rabbitmq-ui in browser
       - "15672:15672"
     restart: always
     container_name: django-react-mq
