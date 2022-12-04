@@ -117,7 +117,13 @@ A template for a basic django and react site
 
 ## Things to improve
 
+### Eventing
+
+- current pattern for triggering tasks in queues is likely not using rabbitmq exchanges. Verify and fix if needed
+
 ### Production Flow
+
+#### add event containers to docker-compose.prod.yml
 
 #### NGINX 405 issue
 
