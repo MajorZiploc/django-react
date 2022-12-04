@@ -1,5 +1,5 @@
 #!/bin/bash
-python manage.py makemigrations --no-input
-python manage.py migrate --no-input
+
+python manage.py safemigrate --no-input --database=default
 
 python manage.py runserver 0.0.0.0:$PORT
