@@ -6,6 +6,7 @@ from .permissions import IsOwnerOrReadOnly
 from .serializers import MovieSerializer
 from .pagination import CustomPagination
 from .filters import MovieFilter
+from .tasks import test_task
 
 
 class ListCreateMovieAPIView(ListCreateAPIView):
@@ -17,6 +18,8 @@ class ListCreateMovieAPIView(ListCreateAPIView):
   filterset_class = MovieFilter
 
   def perform_create(self, serializer):
+    # logs should appear in the beat worker
+    test_task.apply_async(queue='crud_api_default_queue')
     # Assign the user who created the movie
     serializer.save(creator=self.request.user)
 
