@@ -30,3 +30,34 @@ services:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - /tmp/django-react-postgres-data:/var/lib/postgresql/data
+
+  celery-beat-worker:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/backend:/workspace/app
+    environment:
+      MINT_WORKER_TYPE: "${BEAT_MINT_WORKER_TYPE}"
+      MINT_WORKER_OPTIONS: "${BEAT_MINT_WORKER_OPTIONS}"
+      CELERY_WORKER_QUEUES: "${BEAT_CELERY_WORKER_QUEUES}"
+    command: python3 manage.py autoreload_celery --mint_worker_options "${BEAT_MINT_WORKER_OPTIONS}" --mint_worker_type "${BEAT_MINT_WORKER_TYPE}" --celery_worker_queues "${BEAT_CELERY_WORKER_QUEUES}"
+    # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
+    # command: /workspace/entrypoint-dev.sh
+
+  celery-data-worker:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/backend:/workspace/app
+    environment:
+      MINT_WORKER_TYPE: "${DATA_MINT_WORKER_TYPE}"
+      CELERY_WORKER_QUEUES: "${DATA_CELERY_WORKER_QUEUES}"
+    command: python3 manage.py autoreload_celery --mint_worker_type "${DATA_MINT_WORKER_TYPE}" --celery_worker_queues "${DATA_CELERY_WORKER_QUEUES}"
+    # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
+    # command: /workspace/entrypoint-dev.sh
+
+  mq:
+    volumes:
+      - "../data/mq:/var/lib/rabbitmq"

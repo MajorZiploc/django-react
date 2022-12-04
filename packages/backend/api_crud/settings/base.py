@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import uuid
+import socket
+
+import redis
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +41,17 @@ REST_FRAMEWORK = {
     # 'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
+REDIS_HOST = os.getenv("HL_REDIS_HOST", "redis")
+REDIS_PORT = int(os.getenv("HL_REDIS_PORT", 6379))
+REDIS_PASSWORD = os.getenv("HL_REDIS_PASSWORD")
+REDIS_SSL = os.getenv("HL_REDIS_SSL_ENABLED", "false")
+REDIS_CLIENT = redis.StrictRedis(
+    host=REDIS_HOST,
+    port=REDIS_PORT,
+    password=REDIS_PASSWORD,
+    ssl=(REDIS_SSL.lower() == "true"),
+)
+REDIS_CLIENT.client_setname(f"{socket.gethostname()}-{uuid.uuid4()}")
 
 # Application definition
 
@@ -52,6 +67,7 @@ INSTALLED_APPS = [
     'django_filters',
     'authentication',
     'movies',
+    "django_celery_beat",
 ]
 
 SITE_ID = 1
