@@ -5,7 +5,7 @@ from movies import models
 from movies import views
 from django.contrib.auth.models import User
 import json
-from . import utils_for_tests as u
+from movies.tests import utils_for_tests as u
 
 get_endpoint = 'movies:get_post_movies'
 post_endpoint = 'movies:get_post_movies'

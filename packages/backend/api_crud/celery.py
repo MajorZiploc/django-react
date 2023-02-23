@@ -1,6 +1,6 @@
 import os
 from celery import Celery
-from . import celeryconfig
+from api_crud import celeryconfig
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "api_crud.settings.dev")
 app = Celery("api_crud")
