@@ -1,12 +1,12 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
-from .models import Movie
-from .permissions import IsOwnerOrReadOnly
-from .serializers import MovieSerializer
-from .pagination import CustomPagination
-from .filters import MovieFilter
-from .tasks import test_task
+from movies.models import Movie
+from movies.permissions import IsOwnerOrReadOnly
+from movies.serializers import MovieSerializer
+from movies.pagination import CustomPagination
+from movies.filters import MovieFilter
+from movies.tasks import test_task
 
 
 class ListCreateMovieAPIView(ListCreateAPIView):
