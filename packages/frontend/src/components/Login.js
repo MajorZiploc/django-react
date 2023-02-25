@@ -3,7 +3,7 @@ import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
-import { toKeyValArray } from '../utils';
+import { toKeyValArray, useGlobalStyles } from '../utils';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -41,6 +41,7 @@ const Login = () => {
     severity: 'error',
   });
   const classes = useStyles();
+  const globalStyles = useGlobalStyles();
   const data = React.useContext(DataContext);
 
   const openAlert = alertSettings => {
@@ -117,7 +118,7 @@ const Login = () => {
   return isLogined ? (
     <Navigate to='/movies' />
   ) : (
-    <>
+    <div className={globalStyles.pageStyles}>
       <Snackbar
         id='loginPageAlertSnackbar'
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -205,7 +206,7 @@ const Login = () => {
           </Button>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

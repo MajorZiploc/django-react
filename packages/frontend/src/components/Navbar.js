@@ -14,51 +14,86 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import Home from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@mui/styles';
 import avatar from '../avatar.jpg';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_theme => ({
   appbar: {
     background: '#222',
-    margin: 0,
+    margin: '0rem',
+    position: 'fixed',
+    zIndex: 100,
   },
   hamburger: {
     color: 'tomato',
   },
   title: {
     color: 'tan',
-    paddingRight: 50,
+    paddingRight: '3.125rem',
+  },
+  codeWars: {
+    color: 'tan',
+    paddingLeft: '1rem',
+  },
+  generalLink: {
+    color: 'tan',
+    marginLeft: '0.938rem',
+    fontSize: '0.875rem',
+  },
+  alink: {
+    color: 'inherit',
   },
   menuSliderContainer: {
-    width: 250,
+    width: '15.625rem',
     background: '#511',
     height: '100%',
   },
   avatar: {
     display: 'block',
     margin: '0.5rem auto',
-    width: theme.spacing(13),
-    height: theme.spacing(13),
+    width: '6.5rem',
+    height: '6.5rem',
   },
   listItem: {
-    color: 'tan',
+    'color': 'tan',
+    '&:hover': {
+      backgroundColor: '#631111',
+    },
+  },
+  listItemActive: {
+    backgroundColor: '#441111',
   },
 }));
+
+const homeListPath = '/';
 
 const menuItems = [
   { listIcon: <Home />, listText: 'Home', listPath: '/' },
   { listIcon: <AssignmentIndIcon />, listText: 'Movies', listPath: '/movies' },
 ];
 
+const setInitActiveTab = () => {
+  return (
+    [...menuItems].reverse().find(menuItem => window.location.href.includes(menuItem.listPath))?.listPath ||
+    homeListPath
+  );
+};
+
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState(setInitActiveTab());
   const classes = useStyles();
 
   const onLogout = () => {
     localStorage.clear();
+  };
+
+  const handleClickListItem = item => () => {
+    setOpen(false);
+    setActiveTab(item.listPath);
   };
 
   const sideList = () => (
@@ -66,12 +101,11 @@ const Navbar = () => {
       <Avatar className={classes.avatar} src={avatar} alt='Manyu Lakhotia' />
       <Divider />
       <List>
-        {menuItems.map((item, i) => (
+        {menuItems.map(item => (
           <ListItem
-            button
-            key={i}
-            className={classes.listItem}
-            onClick={() => setOpen(false)}
+            key={item.listPath}
+            className={`${classes.listItem} ${item.listPath === activeTab ? classes.listItemActive : ''}`}
+            onClick={handleClickListItem(item)}
             component={Link}
             to={item.listPath}
           >

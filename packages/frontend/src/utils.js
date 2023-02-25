@@ -1,3 +1,5 @@
+import { makeStyles } from '@mui/styles';
+
 export function toKeyValArray(json) {
   if (json === null || json === undefined) {
     return null;
@@ -14,3 +16,9 @@ export function fromKeyValArray(keyValueArray) {
     return acc;
   });
 }
+
+export const useGlobalStyles = makeStyles(_theme => ({
+  pageStyles: {
+    paddingTop: '4rem',
+  },
+}));
