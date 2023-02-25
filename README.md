@@ -117,6 +117,10 @@ A template for a basic django and react site
 
 ## Things to improve
 
+### Cypress
+
+- Fix config file switching -- current pattern has been deprecated as of cypress v10 and doesnt work here anymore -- https://docs.cypress.io/api/plugins/configuration-api#Switch-between-multiple-configuration-files
+
 ### Eventing
 
 - current pattern for triggering tasks in queues is likely not using rabbitmq exchanges. Verify and fix if needed
