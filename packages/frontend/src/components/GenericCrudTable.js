@@ -264,7 +264,7 @@ const GenericCrudTable = ({
           })}
         </DialogContent>
         <DialogActions style={{ justifyContent: 'space-evenly' }}>
-          <Button onClick={closeModal} color='default'>
+          <Button onClick={closeModal}>
             Cancel
           </Button>
           {enteredModel && enteredModel[modelId] !== 0 && (
