@@ -320,8 +320,8 @@ const GenericCrudTable = ({
             <Table aria-labelledby='tableTitle' size='small' aria-label='enhanced table'>
               <TableHead>
                 <TableRow>
-                  {modelFields.map(mf => (
-                    <TableCell>
+                  {modelFields.map((mf, i) => (
+                    <TableCell key={i}>
                       <TableSortLabel
                         active={sortColumn === mf}
                         direction={sortDesc ? 'desc' : 'asc'}
