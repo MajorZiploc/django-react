@@ -5,11 +5,11 @@
 - Run the cypress gui or run all the test cases depending on what you want to do.
 
   - Running cypress gui is good for development purposes:
-    - `yarn start`
+    - `npm run start`
   - Other cases:
 
-    - `yarn run:all:headed`
-    - `yarn run:all:headless`
+    - `npm run run:all:headed`
+    - `npm run run:all:headless`
 
     All of these will ask you to fill out the same information used in the test cases.
 

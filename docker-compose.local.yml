@@ -1,12 +1,11 @@
 version: '3.9'
 services:
-
   backend:
     build:
       context: ./packages/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - "./packages/backend:/workspace/app"
+      - './packages/backend:/workspace/app'
     ports:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
@@ -18,29 +17,30 @@ services:
       context: ./packages/frontend
       dockerfile: Dockerfile.dev
     volumes:
-      - "./packages/frontend:/workspace/app"
+      - './packages/frontend:/workspace/app'
       # One-way volume to use node_modules from inside image
-      - "/workspace/app/node_modules"
+      - '/workspace/app/node_modules'
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
-    command: yarn start
+    command: npm run start
+    # command: sleep infinity
 
   db:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
-      - "/tmp/django-react-postgres-data:/var/lib/postgresql/data"
+      - '/tmp/django-react-postgres-data:/var/lib/postgresql/data'
 
   celery-beat-worker:
     build:
       context: ./packages/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - "./packages/backend:/workspace/app"
+      - './packages/backend:/workspace/app'
     environment:
-      MINT_WORKER_TYPE: "${BEAT_MINT_WORKER_TYPE}"
-      MINT_WORKER_OPTIONS: "${BEAT_MINT_WORKER_OPTIONS}"
-      CELERY_WORKER_QUEUES: "${BEAT_CELERY_WORKER_QUEUES}"
+      MINT_WORKER_TYPE: '${BEAT_MINT_WORKER_TYPE}'
+      MINT_WORKER_OPTIONS: '${BEAT_MINT_WORKER_OPTIONS}'
+      CELERY_WORKER_QUEUES: '${BEAT_CELERY_WORKER_QUEUES}'
     command: python3 manage.py autoreload_celery --mint_worker_options "${BEAT_MINT_WORKER_OPTIONS}" --mint_worker_type "${BEAT_MINT_WORKER_TYPE}" --celery_worker_queues "${BEAT_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
     # command: /workspace/entrypoint-dev.sh
@@ -50,14 +50,14 @@ services:
       context: ./packages/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - "./packages/backend:/workspace/app"
+      - './packages/backend:/workspace/app'
     environment:
-      MINT_WORKER_TYPE: "${DATA_MINT_WORKER_TYPE}"
-      CELERY_WORKER_QUEUES: "${DATA_CELERY_WORKER_QUEUES}"
+      MINT_WORKER_TYPE: '${DATA_MINT_WORKER_TYPE}'
+      CELERY_WORKER_QUEUES: '${DATA_CELERY_WORKER_QUEUES}'
     command: python3 manage.py autoreload_celery --mint_worker_type "${DATA_MINT_WORKER_TYPE}" --celery_worker_queues "${DATA_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
     # command: /workspace/entrypoint-dev.sh
 
   mq:
     volumes:
-      - "/tmp/django-react-mq/data/mq:/var/lib/rabbitmq"
+      - '/tmp/django-react-mq/data/mq:/var/lib/rabbitmq'

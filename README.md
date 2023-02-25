@@ -8,7 +8,7 @@ A template for a basic django and react site
 - python v3.9 (python3 and pip3)
 - bash v5 or zsh
 - nodejs v16+
-- yarn (node package manager)
+- npm (node package manager)
 - mac or linux/wsl
 - internet connection
 
@@ -116,6 +116,10 @@ A template for a basic django and react site
       - Ex: you want to work on frontend so: "service": "frontend"
 
 ## Things to improve
+
+### Cypress
+
+- Fix config file switching -- current pattern has been deprecated as of cypress v10 and doesnt work here anymore -- https://docs.cypress.io/api/plugins/configuration-api#Switch-between-multiple-configuration-files
 
 ### Eventing
 

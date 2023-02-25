@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, makeStyles, TextField, Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Button, TextField, Snackbar, Alert } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
 import { toKeyValArray } from '../utils';

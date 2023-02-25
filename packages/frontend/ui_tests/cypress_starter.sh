@@ -31,15 +31,16 @@ scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   done
 }
 
+cd "$scriptpath";
 if [ "$style" = "gui" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:open --env configFile=$choice_env;
+  CYPRESS_username=$username CYPRESS_password=$password npm run cy:open --env configFile=$choice_env;
 fi
 
 if [ "$style" = "headed" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:headed --env configFile=$choice_env;
+  CYPRESS_username=$username CYPRESS_password=$password npm run cy:headed --env configFile=$choice_env;
 fi
 
 if [ "$style" = "headless" ]; then
-  CYPRESS_username=$username CYPRESS_password=$password yarn --cwd "$scriptpath" run cy:headless --env configFile=$choice_env;
+  CYPRESS_username=$username CYPRESS_password=$password npm run cy:headless --env configFile=$choice_env;
 fi
 
