@@ -1,18 +1,17 @@
 version: '3.9'
 services:
-
   backend:
     build: ./packages/backend
     depends_on:
       - db
     env_file:
-        - .env
+      - .env
     container_name: django-react-backend
 
   frontend:
     build: ./packages/frontend
     env_file:
-        - .env
+      - .env
     environment:
       REACT_APP_BACKEND_PORT: ${BACKEND_PORT}
       REACT_APP_PUBLIC_URL: ${PUBLIC_URL}
@@ -29,7 +28,7 @@ services:
   celery-beat-worker:
     build: ./packages/backend
     env_file:
-        - .env
+      - .env
     links:
       - db
       - mq
@@ -40,7 +39,7 @@ services:
   celery-data-worker:
     build: ./packages/backend
     env_file:
-        - .env
+      - .env
     links:
       - db
       - mq
@@ -51,14 +50,14 @@ services:
   redis:
     image: redis:alpine3.17
     ports:
-      - "6379:6379"
+      - '6379:6379'
     container_name: django-react-redis
 
   mq:
     image: rabbitmq:3.9.26-management-alpine
     ports:
-      - "5672:5672"
+      - '5672:5672'
       # for rabbitmq-ui in browser
-      - "15672:15672"
+      - '15672:15672'
     restart: always
     container_name: django-react-mq

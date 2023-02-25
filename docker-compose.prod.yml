@@ -1,6 +1,5 @@
 version: '3.9'
 services:
-
   backend:
     image: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/django-react-backend
     stdin_open: true
