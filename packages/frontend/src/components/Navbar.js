@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
-import AssignmentInd from '@material-ui/icons/AssignmentInd';
-import Home from '@material-ui/icons/Home';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  Drawer,
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Avatar,
+  Divider,
+  Typography,
+} from '@mui/material';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import Home from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
+import { makeStyles } from '@mui/styles';
 import avatar from '../avatar.jpg';
 
 const useStyles = makeStyles(theme => ({
@@ -48,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 const menuItems = [
   { listIcon: <Home />, listText: 'Home', listPath: '/' },
-  { listIcon: <AssignmentInd />, listText: 'Movies', listPath: '/movies' },
+  { listIcon: <AssignmentIndIcon />, listText: 'Movies', listPath: '/movies' },
 ];
 
 const Navbar = () => {

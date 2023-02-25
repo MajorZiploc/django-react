@@ -8,7 +8,6 @@ import {
   FormControl,
   FormControlLabel,
   IconButton,
-  makeStyles,
   Paper,
   Snackbar,
   Switch,
@@ -22,10 +21,13 @@ import {
   TableSortLabel,
   TextField,
   Tooltip,
-} from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+  Alert,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
-import { AddBoxTwoTone, EditTwoTone } from '@material-ui/icons';
+import AddBoxTwoTone from '@mui/icons-material/AddBoxTwoTone';
+import EditTwoTone from '@mui/icons-material/EditTwoTone';
+
 import { toKeyValArray } from '../utils';
 
 const useStyles = makeStyles(theme =>
