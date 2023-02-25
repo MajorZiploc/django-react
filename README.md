@@ -8,7 +8,7 @@ A template for a basic django and react site
 - python v3.9 (python3 and pip3)
 - bash v5 or zsh
 - nodejs v16+
-- yarn (node package manager)
+- npm (node package manager)
 - mac or linux/wsl
 - internet connection
 

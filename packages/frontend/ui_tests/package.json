@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "cy": "cypress",
-    "cy:open": "yarn run cy open",
-    "cy:headless": "yarn run cy run --headless",
-    "cy:headed": "yarn run cy run --headed"
+    "cy:open": "npm run cy open",
+    "cy:headless": "npm run cy run --headless",
+    "cy:headed": "npm run cy run --headed"
   },
   "dependencies": {
     "cypress": "^9.5.0",
