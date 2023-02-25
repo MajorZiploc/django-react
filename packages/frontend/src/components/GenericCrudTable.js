@@ -267,7 +267,7 @@ const GenericCrudTable = ({
           <Button onClick={closeModal}>
             Cancel
           </Button>
-          {enteredModel && enteredModel[modelId] !== 0 && (
+          {enteredModel && enteredModel[modelId] != null && (
             <Button onClick={async () => await handleDeleteModel()} color='secondary'>
               Delete
             </Button>
