@@ -5,7 +5,7 @@ export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
 function just_install_dev {
-  yarn install;
+  npm install;
   just_venv_create;
   just_venv_connect;
   pip3 install -r "$JUST_PROJECT_ROOT/requirements.txt";
@@ -76,11 +76,15 @@ function just_format_frontend {
 }
 
 function just_build_frontend_ui_tests {
-  yarn --cwd "$JUST_FRONTEND_ROOT/ui_tests" install;
+  cd "$JUST_FRONTEND_ROOT/ui_tests";
+  npm install;
+  cd ~-;
 }
 
 function just_build_frontend {
-  yarn --cwd "$JUST_FRONTEND_ROOT" install;
+  cd "$JUST_FRONTEND_ROOT";
+  npm install --force;
+  cd ~-;
 }
 
 function just_build_backend {

@@ -23,7 +23,8 @@ services:
       - "/workspace/app/node_modules"
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
-    command: yarn start
+    command: npm run start
+    # command: sleep infinity
 
   db:
     ports:
