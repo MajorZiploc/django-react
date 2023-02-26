@@ -1,6 +1,7 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
+from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from movies.models import Movie
 from movies.permissions import IsOwnerOrReadOnly
 from movies.serializers import MovieSerializer
@@ -28,3 +29,10 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
   serializer_class = MovieSerializer
   queryset = Movie.objects.all()
   permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+
+def support_page(request):
+  return render(request, 'movies/preact_ex.html', context=dict(
+      movie_id=1,
+      movies=[{'name': 'first movie'}]
+  ))
