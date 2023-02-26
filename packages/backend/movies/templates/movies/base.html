@@ -64,7 +64,8 @@
           </div>
 
           <div class="collapse navbar-collapse">
-            <p class="navbar-text navbar-right">signed in as {{ user.first_name }} {{ user.last_name }}</p>
+            <a class="navbar-text navbar-right" href="{% url 'admin:logout' %}">Log out</a>
+            <p class="navbar-text navbar-right">signed in as {{ user.username }}</p>
           </div>
         </div>
       </nav>

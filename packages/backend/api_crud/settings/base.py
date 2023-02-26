@@ -156,6 +156,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
+LOGIN_URL = "/admin/login"
+
+WHITELIST_URLS = [r"^%s" % LOGIN_URL.lstrip("/"), r"^test/anonymous"]
+
 def global_template_variables(request):
   """Provides global variables to all templates."""
   return {'project_env': os.getenv('PROJECT_ENV', None)}

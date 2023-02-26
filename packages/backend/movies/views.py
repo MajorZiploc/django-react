@@ -8,7 +8,8 @@ from movies.serializers import MovieSerializer
 from movies.pagination import CustomPagination
 from movies.filters import MovieFilter
 from movies.tasks import test_task
-
+from api_crud.authorization_decorators import authorize_user
+from django.contrib.auth.decorators import login_required
 
 class ListCreateMovieAPIView(ListCreateAPIView):
   serializer_class = MovieSerializer
@@ -30,7 +31,8 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
   queryset = Movie.objects.all()
   permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
-
+@authorize_user
+@login_required
 def support_page(request):
   return render(request, 'movies/preact_ex.html', context=dict(
       movie_id=1,
