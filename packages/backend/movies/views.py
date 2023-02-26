@@ -31,7 +31,8 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
   queryset = Movie.objects.all()
   permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
-@authorize_user
+# NOTE: authorize_user to 403 non logged in django users
+# @authorize_user
 @login_required
 def support_page(request):
   return render(request, 'movies/preact_ex.html', context=dict(
