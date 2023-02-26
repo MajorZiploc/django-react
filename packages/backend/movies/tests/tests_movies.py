@@ -14,6 +14,7 @@ patch_endpoint = 'movies:get_delete_update_movie'
 delete_endpoint = 'movies:get_delete_update_movie'
 
 class MoviesTests(APITestCase):
+  databases = {'default'}
 
   def setUp(self):
     # self.factory = APIRequestFactory()  # usefule for just calling the api but not inspecting responses
