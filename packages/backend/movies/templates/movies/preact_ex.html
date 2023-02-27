@@ -1,0 +1,62 @@
+{% extends "movies/base.html" %} {% load report_extras %} {% block content %}
+<div id="preactRoot"></div>
+{% endblock content %} {% block scripts %}
+<script type="module">
+
+  // define vars from template context
+  const movie_id = "{{ movie_id }}";
+  const movies = {{ movies|to_safe_json }};
+
+  // include js snippets -- snippets will include snippets they depend on, but not 3rd part dependencies
+  {% js_imports as imports %}
+  {% include "js/preact.js" %}
+  {% include "js/Button.js" %}
+  {% include "js/Text.js" %}
+  {% include "js/SearchableSelect.js" %}
+  {% include "js/MultiSelect.js" %}
+  {% include "js/DateRange.js" %}
+  {% include "js/CopyButton.js" %}
+  {% include "js/useCSS.js" %}
+  {% include "js/OneTouchButton.js" %}
+
+  // go into verbatim mode so we don't have any double curly funny business
+  {% verbatim %}
+
+  function App() {
+    const [loading, setLoading] = useState(false);
+    const [resp, setResp] = useState("stubbed");
+
+    return html`
+      <div
+        style=${{
+          background: "#f8f8f8",
+          padding: "1rem",
+          border: "1px solid #e7e7e7",
+          borderRadius: "0.25rem",
+        }}
+      >
+      </div>
+      <${ResponseDisplay} loading=${loading} resp=${resp} />
+    `;
+  }
+
+  function ResponseDisplay({ loading, resp }) {
+    if (loading) {
+      return html`<h3>Loading...</h3>`;
+    }
+    if (!resp) {
+      return html`<h3>Fetch Data</h3>`;
+    }
+    return html`
+      <h3>Response</h3>
+      <${Button}>Hi<//>
+    `;
+  }
+
+  // Render App
+  render(html`<${App} />`, document.getElementById("preactRoot"));
+
+  // close things out
+  {% endverbatim %}
+</script>
+{% endblock scripts%}

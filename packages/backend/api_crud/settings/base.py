@@ -16,9 +16,10 @@ import socket
 
 import redis
 
+import os
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -154,3 +155,28 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+LOGIN_URL = "/admin/login"
+
+WHITELIST_URLS = [r"^%s" % LOGIN_URL.lstrip("/"), r"^test/anonymous"]
+
+def global_template_variables(request):
+  """Provides global variables to all templates."""
+  return {'project_env': os.getenv('PROJECT_ENV', None)}
+
+TEMPLATES = [
+  {
+    "BACKEND": "django.template.backends.django.DjangoTemplates",
+    "DIRS": [],
+    "APP_DIRS": True,
+    "OPTIONS": {
+      "context_processors": [
+        "django.template.context_processors.debug",
+        "django.template.context_processors.request",
+        "django.contrib.auth.context_processors.auth",
+        "django.contrib.messages.context_processors.messages",
+        "api_crud.settings.base.global_template_variables",
+      ]
+    },
+  }
+]
