@@ -5,7 +5,7 @@ A template for a basic django and react site
 ## Requirements
 
 - docker v20+
-- python v3.9 (python3 and pip3)
+- python v3.11 (python3 and pip3)
 - bash v5 or zsh
 - nodejs v16+
 - npm (node package manager)
