@@ -37,6 +37,15 @@ A template for a basic django and react site
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
 - view the project root level just.bash to see all available commands
 
+## Troubleshooting
+
+- psql: FATAL: role "postgres" does not exist
+
+    you need to setup a postgres user
+
+> $(dirname "`which psql`")/createuser -s postgres
+
+
 ## Ensure .env variables are set
 
 - The environment variables need to be set. Use the default values like so:
