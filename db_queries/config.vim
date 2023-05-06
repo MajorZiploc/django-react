@@ -1,4 +1,4 @@
-" localhost 5432 localhost_tables
+" localhost 5432 localhost_databases
 
 let $PGHOST="127.0.0.1" |
 let $PGPORT="5432" |
@@ -6,7 +6,7 @@ let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
 let $PGPASSWORD="password"
 
-" DEV dev_tables TODO
+" DEV dev_databases TODO
 
 let $PGHOST="host" |
 let $PGPORT="5432" |
@@ -50,7 +50,7 @@ WHERE
 ORDER BY c.TABLE_NAME, c.COLUMN_NAME
 ;
 
-" localhost localhost_tables
+" localhost localhost_databases
 postgres
 
-" DEV dev_tables TODO
+" DEV dev_databases TODO
