@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-  local command="
+  local _command="
 SELECT
 c.TABLE_NAME
 , c.COLUMN_NAME
@@ -29,7 +29,7 @@ ORDER BY c.TABLE_NAME, c.COLUMN_NAME
   export PGUSER="postgres";
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
-  psql -c "$command" ./src/tables/localhost.csv;
+  psql -c "$_command" ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
 
