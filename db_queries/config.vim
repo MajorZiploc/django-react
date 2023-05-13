@@ -11,7 +11,8 @@ let use_env_vars_in_container="true"
 
 " OR run locally in the container
 
-let g:container_name='django-react-db'
+let g:container_name='django-react-db' |
+let g:use_env_vars_in_container='true'
 
 " DEV dev_databases TODO
 
