@@ -8,7 +8,7 @@ let $PGPASSWORD="password" |
 
 " OR run locally in the container
 
-let container_name="django-react-db-1" |
+let container_name="django-react-db" |
 let use_env_vars_in_container="true"
 
 " DEV dev_databases TODO
