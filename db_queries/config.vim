@@ -5,6 +5,9 @@ let $PGPORT="5432" |
 let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
 let $PGPASSWORD="password" |
+
+" OR run locally in the container
+
 let g:container_name='django-react-db'
 
 " DEV dev_databases TODO
