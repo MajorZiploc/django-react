@@ -6,12 +6,10 @@ let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
 let $PGPASSWORD="password" |
 
-let container_name="django-react-db-1" |
-let use_env_vars_in_container="true"
-
 " OR run locally in the container
 
-let g:container_name='django-react-db'
+let container_name="django-react-db-1" |
+let use_env_vars_in_container="true"
 
 " DEV dev_databases TODO
 
