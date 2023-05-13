@@ -4,7 +4,8 @@ let $PGHOST="127.0.0.1" |
 let $PGPORT="5432" |
 let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
-let $PGPASSWORD="password"
+let $PGPASSWORD="password" |
+let g:container_name='django-react-db'
 
 " DEV dev_databases TODO
 
