@@ -7,6 +7,7 @@ let $PGUSER="postgres" |
 let $PGPASSWORD="password" |
 
 let container_name="django-react-db" |
+let container_type="docker" |
 let use_runner_options_in_container="true" |
 let vim_code_runner_sql_as_csv="true" |
 " ^^^ OR run locally in the container
