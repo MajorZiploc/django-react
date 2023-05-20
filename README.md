@@ -45,6 +45,11 @@ A template for a basic django and react site
 
 > $(dirname "`which psql`")/createuser -s postgres
 
+- psql: initdb: error: directory "/var/lib/postgresql/data" exists but is not empty
+
+  your local volume of the db is likely on a different version of psql. you need to delete it to prevent this problem in the future.
+
+> rm -rf /tmp/django-react-postgres-data
 
 ## Ensure .env variables are set
 
