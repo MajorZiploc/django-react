@@ -1,3 +1,4 @@
+```vim
 " localhost 5432 localhost_databases
 
 let $PGHOST="127.0.0.1" |
@@ -22,6 +23,8 @@ let $PGPORT="5432" |
 let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
 let $PGPASSWORD="password"
+
+```
 
 " table dump
 PGPASSWORD="password" pg_dump -U "username" -d "database" -h "host" -p "port" --schema-only > create_the_tables_db_name.sql
