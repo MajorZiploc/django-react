@@ -1,3 +1,4 @@
+```vim
 " localhost 6379 localhost_caches
 
 let $REDISHOST="127.0.0.1" |
@@ -7,3 +8,4 @@ let container_name="django-react-redis" |
 let container_type="docker" |
 let vim_code_runner_history_size="10" |
 
+```
