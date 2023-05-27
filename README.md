@@ -54,7 +54,7 @@ A template for a basic django and react site
 ## Ensure .env variables are set
 
 - The environment variables need to be set. Use the default values like so:
-  > cp .env.example .env; cp .env.bash.example .env.bash
+  > cp .example.env .env; cp .example.env.bash .env.bash
 
 ## Just Commands
 
