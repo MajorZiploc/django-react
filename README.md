@@ -26,7 +26,7 @@ A template for a basic django and react site
   - requires DISPLAY environment variable set for running gui linux apps. I recommend putting the following into your bashrc or zshrc and relaunching your shell
     - export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
   - requires workaround script to be run
-    - sudo ./packages/frontend/ui_tests/wsl_workaround.sh
+    - sudo ./services/frontend/ui_tests/wsl_workaround.sh
 
 ## NOTES
 
@@ -41,7 +41,7 @@ A template for a basic django and react site
 
 - psql: FATAL: role "postgres" does not exist
 
-    you need to setup a postgres user
+  you need to setup a postgres user
 
 > $(dirname "`which psql`")/createuser -s postgres
 
@@ -95,7 +95,7 @@ A template for a basic django and react site
 
 #### FROUNTEND UI TEST CICD SETUP
 
-- cypress ui test environment choices are: [local, dev] and are found in ./packages/frontend/ui_tests/cypress/config
+- cypress ui test environment choices are: [local, dev] and are found in ./services/frontend/ui_tests/cypress/config
   - When preparing to deploy, you will need to edit the dev.json or even add a prod json and then set the JUST_UI_TESTS_ENV to either dev or prod
 
 ### TEST COMMANDS

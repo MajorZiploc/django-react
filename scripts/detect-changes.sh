@@ -21,7 +21,7 @@ function add_services {
 }
 
 for file in $changed_files; do
-  if [[ $file =~ packages/([^/]+) ]]; then
+  if [[ $file =~ services/([^/]+) ]]; then
     add_services ${BASH_REMATCH[1]};
   fi
 done
