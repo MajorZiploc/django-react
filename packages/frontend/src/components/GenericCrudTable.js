@@ -76,17 +76,6 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-const tableSort = (contents, sortColumn, sortDesc) => {
-  if (contents.length === 0) return [];
-  const key = sortColumn;
-  const sortedContents = contents.sort((obj1, obj2) => {
-    const a = sortDesc ? obj2 : obj1;
-    const b = sortDesc ? obj1 : obj2;
-    return Reflect.get(a, sortColumn) ? (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) : -1;
-  });
-  return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
-};
-
 /**
  *
  * @template Data
@@ -124,6 +113,18 @@ const GenericCrudTable = ({
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [modelCount, setModelCount] = React.useState(0);
+
+  /** @type {(contents: Data[], sortColumn: string, sortDesc: boolean) => Data[]} */
+  const tableSort = (contents, sortColumn, sortDesc) => {
+    if (contents.length === 0) return [];
+    const key = sortColumn;
+    const sortedContents = contents.sort((obj1, obj2) => {
+      const a = sortDesc ? obj2 : obj1;
+      const b = sortDesc ? obj1 : obj2;
+      return a[sortColumn] ? (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) : -1;
+    });
+    return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
+  };
 
   React.useEffect(() => {
     return () => {
