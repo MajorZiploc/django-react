@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   backend:
-    build: ./packages/backend
+    build: ./services/backend
     depends_on:
       - db
     env_file:
@@ -9,7 +9,7 @@ services:
     container_name: django-react-backend
 
   frontend:
-    build: ./packages/frontend
+    build: ./services/frontend
     env_file:
       - .env
     environment:
@@ -26,7 +26,7 @@ services:
     container_name: django-react-db
 
   celery-beat-worker:
-    build: ./packages/backend
+    build: ./services/backend
     env_file:
       - .env
     links:
@@ -37,7 +37,7 @@ services:
     container_name: django-react-celery-beat-worker
 
   celery-data-worker:
-    build: ./packages/backend
+    build: ./services/backend
     env_file:
       - .env
     links:

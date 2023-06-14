@@ -2,10 +2,10 @@ version: '3.9'
 services:
   backend:
     build:
-      context: ./packages/backend
+      context: ./services/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - './packages/backend:/workspace/app'
+      - './services/backend:/workspace/app'
     ports:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
@@ -14,10 +14,10 @@ services:
 
   frontend:
     build:
-      context: ./packages/frontend
+      context: ./services/frontend
       dockerfile: Dockerfile.dev
     volumes:
-      - './packages/frontend:/workspace/app'
+      - './services/frontend:/workspace/app'
       # One-way volume to use node_modules from inside image
       - '/workspace/app/node_modules'
     ports:
@@ -33,10 +33,10 @@ services:
 
   celery-beat-worker:
     build:
-      context: ./packages/backend
+      context: ./services/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - './packages/backend:/workspace/app'
+      - './services/backend:/workspace/app'
     environment:
       MINT_WORKER_TYPE: '${BEAT_MINT_WORKER_TYPE}'
       MINT_WORKER_OPTIONS: '${BEAT_MINT_WORKER_OPTIONS}'
@@ -47,10 +47,10 @@ services:
 
   celery-data-worker:
     build:
-      context: ./packages/backend
+      context: ./services/backend
       dockerfile: Dockerfile.dev
     volumes:
-      - './packages/backend:/workspace/app'
+      - './services/backend:/workspace/app'
     environment:
       MINT_WORKER_TYPE: '${DATA_MINT_WORKER_TYPE}'
       CELERY_WORKER_QUEUES: '${DATA_CELERY_WORKER_QUEUES}'

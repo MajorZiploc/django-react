@@ -12,7 +12,7 @@ this_path=$(dirname "`realpath $0`");
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
 
 for service in $build_services; do
-  . "$this_path/../packages/$service/just.bash" "$this_path/../packages/$service";
+  . "$this_path/../services/$service/just.bash" "$this_path/../services/$service";
   just_build;
 done;
 
