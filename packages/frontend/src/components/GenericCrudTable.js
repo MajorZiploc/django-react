@@ -103,12 +103,13 @@ const GenericCrudTable = ({
   modalToString,
   validatedModel,
   tableId,
+  defaultSortColumn,
 }) => {
   const classes = useStyles();
   const [showModal, setShowModal] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [currentPage, setCurrentPage] = React.useState(0);
-  const [sortColumn, setSortColumn] = React.useState('title');
+  const [sortColumn, setSortColumn] = React.useState(defaultSortColumn);
   const [sortDesc, setSortDesc] = React.useState(false);
   /** @type {import('../interfaces').useState<AlertSettings>} */
   const [alertSettings, setAlertSettings] = React.useState({

@@ -28,6 +28,7 @@ export interface GenericCrudTableProps<Data> {
   defaultModel: Data;
   modelId?: string;
   modelFields: string[];
+  defaultSortColumn: string;
   modelData: {
     deleteModel: (id: string) => Promise<any>;
     postModel: (model: Data) => Promise<any>;

@@ -53,6 +53,7 @@ const Movies = () => {
     },
     validatedModel: validatedMovie,
     tableId: 'moviesTable',
+    defaultSortColumn: 'title',
   };
 
   return (
