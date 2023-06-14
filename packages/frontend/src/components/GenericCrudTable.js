@@ -33,7 +33,6 @@ import { toKeyValArray } from '../utils';
 
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
- * @typedef {import('../interfaces').GenericCrudTableProps} GenericCrudTableProps
  */
 
 /** @type {(props?: any) => import('@mui/styles/withStyles').ClassNameMap<any>} */
@@ -89,7 +88,10 @@ const tableSort = (contents, sortColumn, sortDesc) => {
 };
 
 /**
- * @type {React.FC<GenericCrudTableProps>}
+ *
+ * @template Data
+ *
+ * @param {import('../interfaces').GenericCrudTableProps<Data>} props
  * @returns {React.ReactElement}
  */
 const GenericCrudTable = ({
@@ -98,6 +100,7 @@ const GenericCrudTable = ({
   modelId = 'id',
   modelFields,
   modelData,
+  modalToString,
   validatedModel,
   tableId,
 }) => {
@@ -201,18 +204,18 @@ const GenericCrudTable = ({
       .then(_e =>
         openAlert({
           display: true,
-          message: `Successfully ${alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'adde' : 'update')}d title ${
-            enteredModel.title
-          }`,
+          message: `Successfully ${
+            alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'adde' : 'update')
+          }d title ${modalToString(enteredModel)}`,
           severity: 'success',
         })
       )
       .catch(_e =>
         openAlert({
           display: true,
-          message: `Failed to ${alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'add' : 'update')} title ${
-            enteredModel.title
-          }`,
+          message: `Failed to ${
+            alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'add' : 'update')
+          } title ${modalToString(enteredModel)}`,
           severity: 'error',
         })
       );

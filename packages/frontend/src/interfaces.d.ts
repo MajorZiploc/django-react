@@ -12,20 +12,31 @@ export interface PrivateComponentProps {
   element: React.ReactElement;
 }
 
-export interface GenericCrudTableProps {
+export interface Movie {
+  id: string;
+  title: string;
+  genre: string;
+  year: number;
+  created_at: string;
+  updated_at: string;
+  creator: string;
+}
+
+export interface GenericCrudTableProps<Data> {
   tableId: string;
   modelName: string;
-  defaultModel: any;
+  defaultModel: Data;
   modelId?: string;
   modelFields: string[];
   modelData: {
     deleteModel: (id: string) => Promise<any>;
-    postModel: (model: any) => Promise<any>;
-    putModel: (id: any, model: any) => Promise<any>;
-    getModels: () => Promise<any>;
+    postModel: (model: Data) => Promise<any>;
+    putModel: (id: string, model: Data) => Promise<any>;
+    getModels: () => Promise<Data[]>;
   };
-  validatedModel: (enteredModal: any) => {
+  validatedModel: (enteredModel: Data) => {
     isValid: boolean;
     errorMessage?: string;
   };
+  modalToString: (model: Data) => string;
 }
