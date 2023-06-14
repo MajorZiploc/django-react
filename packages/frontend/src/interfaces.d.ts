@@ -1,9 +1,9 @@
-import { AlertColor } from "@mui/material";
+import { AlertColor } from '@mui/material';
 
 export interface AlertSettings {
-  display: boolean,
-  message: string,
-  severity: AlertColor,
+  display: boolean;
+  message: string;
+  severity: AlertColor;
 }
 
 export type useState<T> = [T, React.Dispatch<React.SetStateAction<T>>];
@@ -11,8 +11,6 @@ export type useState<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 export interface PrivateComponentProps {
   element: React.ReactElement;
 }
-
-
 
 export interface GenericCrudTableProps {
   tableId: string;
