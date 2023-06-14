@@ -136,6 +136,7 @@ const GenericCrudTable = ({
     })();
   }, []);
 
+  /** @type {() => Promise<any>} */
   const UpdateModels = async () => {
     const modelsResult = await modelData.getModels().catch(_e => {
       openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
@@ -146,48 +147,57 @@ const GenericCrudTable = ({
     }
   };
 
+  /** @type {(alertSettings: any) => void} */
   const openAlert = alertSettings => {
     if (componentMounted.current) {
       setAlertSettings(alertSettings);
     }
   };
 
+  /** @type {() => void} */
   const closeAlert = () => {
     setAlertSettings({ display: false, message: alertSettings?.message, severity: alertSettings?.severity });
   };
 
+  /** @type {(event: any, newPage: number) => void} */
   const handleChangePage = (_e, newPage) => {
     setCurrentPage(newPage);
   };
 
+  /** @type {(event: any) => void} */
   const handleChangeRowsPerPage = e => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setCurrentPage(0);
   };
 
+  /** @type {(Model?: Data) => Promise<any>} */
   const openModal = async (Model = defaultModel) => {
     setEnteredModel(Model);
     setShowModal(true);
   };
 
+  /** @type {() => void} */
   const closeModal = () => {
     if (componentMounted.current) {
       setShowModal(false);
     }
   };
 
+  /** @type {() => Promise<any>} */
   const handleDeleteModel = async () => {
-    handleModelAction(model => modelData.deleteModel(model[modelId]), 'delete');
+    await handleModelAction(model => modelData.deleteModel(model[modelId]), 'delete');
   };
 
+  /** @type {() => Promise<any>} */
   const handlePostOrPutModel = async () => {
-    handleModelAction(model =>
+    await handleModelAction(model =>
       model[modelId] === null || model[modelId] === undefined
         ? modelData.postModel(model)
         : modelData.putModel(model[modelId], model)
     );
   };
 
+  /** @type {(action: (model: Data) => Promise<any>, alertMsgLabel?: string) => Promise<any>} */
   const handleModelAction = async (action, alertMsgLabel = undefined) => {
     if (!enteredModel) {
       openAlert({ display: true, message: 'No model found', severity: 'error' });
@@ -223,6 +233,7 @@ const GenericCrudTable = ({
     closeModal();
   };
 
+  /** @type {() => Data[]} */
   const handleSearch = () => {
     const filtered = models.filter(item =>
       searchTerm !== '' ? toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
@@ -231,6 +242,7 @@ const GenericCrudTable = ({
     return filtered;
   };
 
+  /** @type {(str: string) => void} */
   const setSortParams = column => {
     if (column === sortColumn) {
       setSortDesc(!sortDesc);
@@ -241,7 +253,8 @@ const GenericCrudTable = ({
     setCurrentPage(0);
   };
 
-  const toProperCase = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  /** @type {(str: string) => string} */
+  const toProperCase = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
   return (
     <div>
