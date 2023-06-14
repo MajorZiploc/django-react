@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -18,7 +19,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import Home from '@mui/icons-material/Home';
 import { makeStyles } from '@mui/styles';
+// @ts-ignore
 import avatar from '../avatar.jpg';
+
+/**
+ * @typedef {any} ResumeData
+ * @typedef {any} MenuItem
+ */
 
 const useStyles = makeStyles(_theme => ({
   appbar: {
@@ -68,13 +75,16 @@ const useStyles = makeStyles(_theme => ({
   },
 }));
 
+/** @type {string} */
 const homeListPath = '/';
 
+/** @type {MenuItem[]} */
 const menuItems = [
   { listIcon: <Home />, listText: 'Home', listPath: '/' },
   { listIcon: <AssignmentIndIcon />, listText: 'Movies', listPath: '/movies' },
 ];
 
+/** @type {() => string} */
 const setInitActiveTab = () => {
   return (
     [...menuItems].reverse().find(menuItem => window.location.href.includes(menuItem.listPath))?.listPath ||
@@ -82,6 +92,9 @@ const setInitActiveTab = () => {
   );
 };
 
+/**
+ * @returns {React.ReactElement}
+ */
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(setInitActiveTab());

@@ -2,6 +2,10 @@
   "name": "movies",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "typescript": "^5.0.4"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -23,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier . --write",
+    "test:types": "tsc"
   },
   "eslintConfig": {
     "extends": "react-app"

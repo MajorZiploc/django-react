@@ -1,8 +1,17 @@
+// @ts-check
 import React from 'react';
 import DataContext from '../context/DataContext';
 import { useGlobalStyles } from '../utils';
 import GenericCrudTable from './GenericCrudTable';
 
+/**
+ * @typedef {import('../interfaces').Movie} Movie
+ * @typedef {import('../interfaces').GenericCrudTableProps<Partial<Movie>>} GenericCrudTableProps
+ */
+
+/**
+ * @returns {React.ReactElement}
+ */
 const Movies = () => {
   const data = React.useContext(DataContext);
   const globalStyles = useGlobalStyles();
@@ -24,15 +33,17 @@ const Movies = () => {
     return { isValid, errorMessage };
   };
 
+  /** @type {GenericCrudTableProps} */
   const crudTableProps = {
     modelName: 'Movie',
     defaultModel: {
-      id: null,
-      title: null,
-      genre: null,
-      year: null,
+      id: undefined,
+      title: undefined,
+      genre: undefined,
+      year: undefined,
     },
     modelId: 'id',
+    modalToString: model => model.title,
     modelFields: ['title', 'genre', 'year'],
     modelData: {
       deleteModel: data.deleteMovie.bind(data),

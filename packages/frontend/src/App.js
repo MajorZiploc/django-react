@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -57,6 +58,9 @@ const useStyles = makeStyles(_theme => ({
   },
 }));
 
+/**
+ * @returns {React.ReactElement}
+ */
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   const classes = useStyles();
   return (
@@ -70,6 +74,9 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
   );
 };
 
+/**
+ * @returns {React.ReactElement}
+ */
 const App = () => {
   return (
     <React.Fragment>
