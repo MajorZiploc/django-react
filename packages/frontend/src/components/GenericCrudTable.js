@@ -304,7 +304,7 @@ const GenericCrudTable = ({
               Delete
             </Button>
           )}
-          <Button autoFocus onClick={async () => await handlePostOrPutModel()} color='primary'>
+          <Button autoFocus type='submit' onClick={async () => await handlePostOrPutModel()} color='primary'>
             Confirm
           </Button>
         </DialogActions>
