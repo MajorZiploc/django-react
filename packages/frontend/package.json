@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "prettier": "^2.8.4",
     "typescript": "^5.0.4"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier . --write",
     "test:types": "tsc"
   },
   "eslintConfig": {

@@ -41,7 +41,7 @@ A template for a basic django and react site
 
 - psql: FATAL: role "postgres" does not exist
 
-    you need to setup a postgres user
+  you need to setup a postgres user
 
 > $(dirname "`which psql`")/createuser -s postgres
 
