@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -5,10 +6,13 @@ import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
 import { toKeyValArray, useGlobalStyles } from '../utils';
 
+/**
+ * @typedef {import('../interfaces').AlertSettings} AlertSettings
+ */
+
 const useStyles = makeStyles(theme => ({
   form: {
     maxWidth: '330px',
-    marginTop: '0',
     marginBottom: '0',
     marginRight: 'auto',
     marginLeft: 'auto',
@@ -20,10 +24,14 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     minWidth: 130,
+    // @ts-ignore
     margin: theme.spacing(1),
   },
 }));
 
+/**
+ * @returns {React.ReactElement}
+ */
 const Login = () => {
   const [loginCreds, setLoginCreds] = React.useState({
     email: '',
@@ -35,6 +43,7 @@ const Login = () => {
   });
   const [isRegister, setIsRegister] = React.useState(false);
   const [isLogined, setIsLogined] = React.useState(false);
+  /** @type {import('../interfaces').useState<AlertSettings>} */
   const [alertSettings, setAlertSettings] = React.useState({
     display: false,
     message: '',

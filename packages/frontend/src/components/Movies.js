@@ -1,8 +1,12 @@
+// @ts-check
 import React from 'react';
 import DataContext from '../context/DataContext';
 import { useGlobalStyles } from '../utils';
 import GenericCrudTable from './GenericCrudTable';
 
+/**
+ * @returns {React.ReactElement}
+ */
 const Movies = () => {
   const data = React.useContext(DataContext);
   const globalStyles = useGlobalStyles();

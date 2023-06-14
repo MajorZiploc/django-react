@@ -1,3 +1,4 @@
+// @ts-check
 import {
   Button,
   createStyles,
@@ -30,6 +31,12 @@ import EditTwoTone from '@mui/icons-material/EditTwoTone';
 
 import { toKeyValArray } from '../utils';
 
+/**
+ * @typedef {import('../interfaces').AlertSettings} AlertSettings
+ * @typedef {import('../interfaces').GenericCrudTableProps} GenericCrudTableProps
+ */
+
+/** @type {(props?: any) => import('@mui/styles/withStyles').ClassNameMap<any>} */
 const useStyles = makeStyles(theme =>
   createStyles({
     container: {
@@ -38,19 +45,23 @@ const useStyles = makeStyles(theme =>
       justifyContent: 'center',
     },
     selectField: {
+      // @ts-ignore
       margin: theme.spacing(1),
       minWidth: 130,
     },
     textField: {
       minWidth: 130,
+      // @ts-ignore
       margin: theme.spacing(1),
     },
     button: {
       width: '5%',
+      // @ts-ignore
       margin: theme.spacing(1),
     },
     table: {
       width: '66%',
+      // @ts-ignore
       margin: theme.spacing(1),
     },
     tableHeader: {
@@ -77,6 +88,10 @@ const tableSort = (contents, sortColumn, sortDesc) => {
   return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
 };
 
+/**
+ * @type {React.FC<GenericCrudTableProps>}
+ * @returns {React.ReactElement}
+ */
 const GenericCrudTable = ({
   modelName,
   defaultModel,
@@ -92,6 +107,7 @@ const GenericCrudTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [sortColumn, setSortColumn] = React.useState('title');
   const [sortDesc, setSortDesc] = React.useState(false);
+  /** @type {import('../interfaces').useState<AlertSettings>} */
   const [alertSettings, setAlertSettings] = React.useState({
     display: false,
     message: '',
@@ -242,14 +258,14 @@ const GenericCrudTable = ({
         <DialogTitle id='customized-dialog-title'>
           {enteredModel && enteredModel[modelId] !== 0 ? 'Edit' : 'Add'} {modelName}:
         </DialogTitle>
-        <DialogContent dividers className={classes.dialogContent}>
+        <DialogContent dividers className={classes['dialogContent']}>
           {modelFields.map((mf, i) => {
             const key = mf;
             const label = toProperCase(mf);
             return (
               <TextField
                 key={i}
-                className={classes.textField}
+                className={classes['textField']}
                 label={label}
                 variant='outlined'
                 size='small'
@@ -276,9 +292,9 @@ const GenericCrudTable = ({
         </DialogActions>
       </Dialog>
 
-      <div className={classes.container}>
-        <Paper id={tableId} className={classes.table}>
-          <div className={classes.tableHeader}>
+      <div className={classes['container']}>
+        <Paper id={tableId} className={classes['table']}>
+          <div className={classes['tableHeader']}>
             <FormControlLabel
               value='start'
               control={<Switch color='primary' />}
@@ -292,7 +308,7 @@ const GenericCrudTable = ({
             />
             {editMode && (
               <div>
-                <FormControl variant='outlined' className={classes.selectField} size='small'></FormControl>
+                <FormControl variant='outlined' className={classes['selectField']} size='small'></FormControl>
                 <Tooltip title={`Add ${modelName}`}>
                   <IconButton onClick={async () => await openModal()}>
                     <AddBoxTwoTone color='primary' fontSize='large' />
@@ -302,7 +318,7 @@ const GenericCrudTable = ({
             )}
             <div>
               <TextField
-                className={classes.textField}
+                className={classes['textField']}
                 label='Search...'
                 variant='outlined'
                 size='small'
