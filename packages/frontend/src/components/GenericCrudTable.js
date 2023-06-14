@@ -76,17 +76,6 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-const tableSort = (contents, sortColumn, sortDesc) => {
-  if (contents.length === 0) return [];
-  const key = sortColumn;
-  const sortedContents = contents.sort((obj1, obj2) => {
-    const a = sortDesc ? obj2 : obj1;
-    const b = sortDesc ? obj1 : obj2;
-    return Reflect.get(a, sortColumn) ? (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) : -1;
-  });
-  return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
-};
-
 /**
  *
  * @template Data
@@ -103,12 +92,13 @@ const GenericCrudTable = ({
   modalToString,
   validatedModel,
   tableId,
+  defaultSortColumn,
 }) => {
   const classes = useStyles();
   const [showModal, setShowModal] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [currentPage, setCurrentPage] = React.useState(0);
-  const [sortColumn, setSortColumn] = React.useState('title');
+  const [sortColumn, setSortColumn] = React.useState(defaultSortColumn);
   const [sortDesc, setSortDesc] = React.useState(false);
   /** @type {import('../interfaces').useState<AlertSettings>} */
   const [alertSettings, setAlertSettings] = React.useState({
@@ -119,10 +109,22 @@ const GenericCrudTable = ({
   const [editMode, setEditMode] = React.useState(false);
   const componentMounted = React.useRef(true);
   const [models, setModels] = React.useState([]);
+  const [filteredModels, setFilteredModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [modelCount, setModelCount] = React.useState(0);
 
-  let modelCount = 0;
+  /** @type {(contents: Data[], sortColumn: string, sortDesc: boolean) => Data[]} */
+  const tableSort = (contents, sortColumn, sortDesc) => {
+    if (contents.length === 0) return [];
+    const key = sortColumn;
+    const sortedContents = contents.sort((obj1, obj2) => {
+      const a = sortDesc ? obj2 : obj1;
+      const b = sortDesc ? obj1 : obj2;
+      return a[sortColumn] ? (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) : -1;
+    });
+    return typeof contents[0][key] !== 'boolean' ? sortedContents : sortedContents.reverse();
+  };
 
   React.useEffect(() => {
     return () => {
@@ -136,6 +138,7 @@ const GenericCrudTable = ({
     })();
   }, []);
 
+  /** @type {() => Promise<any>} */
   const UpdateModels = async () => {
     const modelsResult = await modelData.getModels().catch(_e => {
       openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
@@ -146,48 +149,57 @@ const GenericCrudTable = ({
     }
   };
 
+  /** @type {(alertSettings: any) => void} */
   const openAlert = alertSettings => {
     if (componentMounted.current) {
       setAlertSettings(alertSettings);
     }
   };
 
+  /** @type {() => void} */
   const closeAlert = () => {
     setAlertSettings({ display: false, message: alertSettings?.message, severity: alertSettings?.severity });
   };
 
+  /** @type {(event: any, newPage: number) => void} */
   const handleChangePage = (_e, newPage) => {
     setCurrentPage(newPage);
   };
 
+  /** @type {(event: any) => void} */
   const handleChangeRowsPerPage = e => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setCurrentPage(0);
   };
 
+  /** @type {(Model?: Data) => Promise<any>} */
   const openModal = async (Model = defaultModel) => {
     setEnteredModel(Model);
     setShowModal(true);
   };
 
+  /** @type {() => void} */
   const closeModal = () => {
     if (componentMounted.current) {
       setShowModal(false);
     }
   };
 
+  /** @type {() => Promise<any>} */
   const handleDeleteModel = async () => {
-    handleModelAction(model => modelData.deleteModel(model[modelId]), 'delete');
+    await handleModelAction(model => modelData.deleteModel(model[modelId]), 'delete');
   };
 
+  /** @type {() => Promise<any>} */
   const handlePostOrPutModel = async () => {
-    handleModelAction(model =>
+    await handleModelAction(model =>
       model[modelId] === null || model[modelId] === undefined
         ? modelData.postModel(model)
         : modelData.putModel(model[modelId], model)
     );
   };
 
+  /** @type {(action: (model: Data) => Promise<any>, alertMsgLabel?: string) => Promise<any>} */
   const handleModelAction = async (action, alertMsgLabel = undefined) => {
     if (!enteredModel) {
       openAlert({ display: true, message: 'No model found', severity: 'error' });
@@ -223,14 +235,15 @@ const GenericCrudTable = ({
     closeModal();
   };
 
-  const handleSearch = () => {
+  React.useEffect(() => {
     const filtered = models.filter(item =>
       searchTerm !== '' ? toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
     );
-    modelCount = filtered.length;
-    return filtered;
-  };
+    setModelCount(filtered.length);
+    setFilteredModels(filtered);
+  }, [models]);
 
+  /** @type {(str: string) => void} */
   const setSortParams = column => {
     if (column === sortColumn) {
       setSortDesc(!sortDesc);
@@ -241,7 +254,9 @@ const GenericCrudTable = ({
     setCurrentPage(0);
   };
 
-  const toProperCase = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  /** @type {(str: string) => string} */
+  const toProperCase = str =>
+    str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
   return (
     <div>
@@ -259,7 +274,7 @@ const GenericCrudTable = ({
 
       <Dialog onClose={closeModal} aria-labelledby='customized-dialog-title' open={showModal}>
         <DialogTitle id='customized-dialog-title'>
-          {enteredModel && enteredModel[modelId] !== 0 ? 'Edit' : 'Add'} {modelName}:
+          {enteredModel && enteredModel[modelId] ? 'Edit' : 'Add'} {modelName}:
         </DialogTitle>
         <DialogContent dividers className={classes['dialogContent']}>
           {modelFields.map((mf, i) => {
@@ -275,7 +290,7 @@ const GenericCrudTable = ({
                 value={(enteredModel && enteredModel[mf]) || ''}
                 onChange={e => {
                   const newField = {};
-                  newField[`${key}`] = e.target.value;
+                  newField[key] = e.target.value;
                   setEnteredModel({ ...enteredModel, ...newField });
                 }}
               />
@@ -289,7 +304,7 @@ const GenericCrudTable = ({
               Delete
             </Button>
           )}
-          <Button autoFocus onClick={async () => await handlePostOrPutModel()} color='primary'>
+          <Button autoFocus type='submit' onClick={async () => await handlePostOrPutModel()} color='primary'>
             Confirm
           </Button>
         </DialogActions>
@@ -357,7 +372,7 @@ const GenericCrudTable = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tableSort(handleSearch(), sortColumn, sortDesc)
+                {tableSort(filteredModels, sortColumn, sortDesc)
                   .slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage)
                   .map(row => {
                     return (
