@@ -111,6 +111,16 @@ const Login = () => {
     }
   };
 
+  const onFormSubmit = async e => {
+    e.preventDefault();
+    console.log('onFormSubmit');
+    if (isRegister) {
+      await RegisterAttempt(e);
+    } else {
+      await LoginAttempt(e);
+    }
+  };
+
   const onChange = e => {
     setLoginCreds({ ...loginCreds, [e.currentTarget.id]: e.currentTarget.value });
   };
@@ -130,7 +140,7 @@ const Login = () => {
           {alertSettings?.message}
         </Alert>
       </Snackbar>
-      <form id='loginPageForm' className={classes.form}>
+      <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className={classes.form}>
         {isRegister && (
           <>
             <TextField
@@ -187,15 +197,9 @@ const Login = () => {
             type='password'
           />
         )}
-        {isRegister ? (
-          <Button id='registerButton' type='button' color='primary' onClick={async e => await RegisterAttempt(e)}>
-            Register
-          </Button>
-        ) : (
-          <Button id='logInButton' type='button' color='primary' onClick={async e => await LoginAttempt(e)}>
-            Log in
-          </Button>
-        )}
+        <Button id='logInButton' type='submit' color='primary'>
+          {isRegister ? 'Register' : 'Log in'}
+        </Button>
         {isRegister ? (
           <Button id='haveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(false)}>
             Have an account?
