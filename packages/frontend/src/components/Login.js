@@ -122,7 +122,6 @@ const Login = () => {
 
   const onFormSubmit = async e => {
     e.preventDefault();
-    console.log('onFormSubmit');
     if (isRegister) {
       await RegisterAttempt(e);
     } else {
