@@ -290,7 +290,7 @@ const GenericCrudTable = ({
                 value={(enteredModel && enteredModel[mf]) || ''}
                 onChange={e => {
                   const newField = {};
-                  newField[`${key}`] = e.target.value;
+                  newField[key] = e.target.value;
                   setEnteredModel({ ...enteredModel, ...newField });
                 }}
               />
