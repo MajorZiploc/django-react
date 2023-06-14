@@ -119,10 +119,10 @@ const GenericCrudTable = ({
   const [editMode, setEditMode] = React.useState(false);
   const componentMounted = React.useRef(true);
   const [models, setModels] = React.useState([]);
+  const [filteredModels, setFilteredModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
-
-  let modelCount = 0;
+  const [modelCount, setModelCount] = React.useState(0);
 
   React.useEffect(() => {
     return () => {
@@ -233,14 +233,13 @@ const GenericCrudTable = ({
     closeModal();
   };
 
-  /** @type {() => Data[]} */
-  const handleSearch = () => {
+  React.useEffect(() => {
     const filtered = models.filter(item =>
       searchTerm !== '' ? toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
     );
-    modelCount = filtered.length;
-    return filtered;
-  };
+    setModelCount(filtered.length);
+    setFilteredModels(filtered);
+  }, [models]);
 
   /** @type {(str: string) => void} */
   const setSortParams = column => {
@@ -254,7 +253,8 @@ const GenericCrudTable = ({
   };
 
   /** @type {(str: string) => string} */
-  const toProperCase = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
+  const toProperCase = str =>
+    str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
   return (
     <div>
@@ -370,7 +370,7 @@ const GenericCrudTable = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tableSort(handleSearch(), sortColumn, sortDesc)
+                {tableSort(filteredModels, sortColumn, sortDesc)
                   .slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage)
                   .map(row => {
                     return (
