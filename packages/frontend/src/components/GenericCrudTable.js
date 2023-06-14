@@ -274,7 +274,7 @@ const GenericCrudTable = ({
 
       <Dialog onClose={closeModal} aria-labelledby='customized-dialog-title' open={showModal}>
         <DialogTitle id='customized-dialog-title'>
-          {enteredModel && enteredModel[modelId] !== 0 ? 'Edit' : 'Add'} {modelName}:
+          {enteredModel && enteredModel[modelId] ? 'Edit' : 'Add'} {modelName}:
         </DialogTitle>
         <DialogContent dividers className={classes['dialogContent']}>
           {modelFields.map((mf, i) => {
