@@ -89,14 +89,8 @@ const GenericCrudTable = ({
     };
   }, []);
 
-  React.useEffect(() => {
-    (async () => {
-      await UpdateModels();
-    })();
-  }, []);
-
   /** @type {() => Promise<any>} */
-  const UpdateModels = async () => {
+  const UpdateModels = React.useCallback(async () => {
     const modelsResult = await modelData.getModels().catch(_e => {
       openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
       return [];
@@ -104,7 +98,13 @@ const GenericCrudTable = ({
     if (componentMounted.current) {
       setModels(modelsResult);
     }
-  };
+  }, [modelData]);
+
+  React.useEffect(() => {
+    (async () => {
+      await UpdateModels();
+    })();
+  }, [UpdateModels]);
 
   /** @type {(alertSettings: any) => void} */
   const openAlert = alertSettings => {
@@ -198,7 +198,7 @@ const GenericCrudTable = ({
     );
     setModelCount(filtered.length);
     setFilteredModels(filtered);
-  }, [models]);
+  }, [models, searchTerm]);
 
   /** @type {(str: string) => void} */
   const setSortParams = column => {
