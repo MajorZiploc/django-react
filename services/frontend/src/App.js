@@ -8,7 +8,6 @@ import Login from './components/Login';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DataProvider } from './context/DataContext';
 import { data } from './data';
-import { makeStyles } from '@mui/styles';
 import PrivateComponent from './components/PrivateComponent';
 
 import { StyledEngineProvider } from '@mui/material/styles';
@@ -16,7 +15,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { ThemeProvider, createTheme } from '@mui/material';
 
-import './App.css';
+import './App.scss';
 
 const theme = createTheme();
 
@@ -25,49 +24,15 @@ const cache = createCache({
   prepend: true,
 });
 
-const useStyles = makeStyles(_theme => ({
-  errorContent: {
-    'position': 'relative',
-    'padding': '1rem',
-    'margin': 'o auto',
-    '&:before': {
-      content: "''",
-      position: 'absolute',
-      height: '100%',
-      border: '1px solid tan',
-      right: '40px',
-      top: 0,
-    },
-  },
-  errorHeading: {
-    color: 'tomato',
-    padding: '3rem 0',
-    textTransform: 'uppercase',
-    fontSize: 24,
-  },
-  errorSubHeading: {
-    color: '#fff',
-    padding: 0,
-    textTransform: 'uppercase',
-    fontSize: 22,
-    inlineSize: '400px',
-    overflowWrap: 'break-word',
-  },
-  errorButton: {
-    fontSize: 22,
-  },
-}));
-
 /**
  * @returns {React.ReactElement}
  */
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
-  const classes = useStyles();
   return (
-    <div role='alert' className={`${classes.errorContent}`}>
-      <p className={classes.errorHeading}>Something went wrong:</p>
-      <p className={classes.errorSubHeading}>{error.message}</p>
-      <button onClick={resetErrorBoundary} className={classes.errorButton}>
+    <div role='alert' className='errorContent'>
+      <p className='errorHeading'>Something went wrong:</p>
+      <p className='errorSubHeading'>{error.message}</p>
+      <button onClick={resetErrorBoundary} className='errorButton'>
         Try again
       </button>
     </div>

@@ -1,0 +1,39 @@
+.appbar {
+  background: #222;
+  margin: 0rem;
+  position: fixed;
+  z-index: 100;
+}
+
+.hamburger {
+  color: tomato;
+}
+
+.navBarTitle {
+  color: tan;
+  padding-right: 3.125rem;
+}
+
+.menuSliderContainer {
+  width: 15.625rem;
+  background: #511;
+  height: 100%;
+}
+
+.navBarAvatar {
+  display: block;
+  margin: 0.5rem auto;
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.navBarListItem {
+  color: tan;
+  &:hover {
+    background-color: #631111;
+  }
+}
+
+.navBarListItemActive {
+  background-color: #441111;
+}
