@@ -1,0 +1,37 @@
+.crudTableContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crudTableSelectField {
+  margin: 1rem;
+  min-width: 130;
+}
+
+.crudTableTextField {
+  min-width: 130;
+  margin: 1rem;
+}
+
+.crudTableButton {
+  width: 5%;
+  margin: 1rem;
+}
+
+.crudTable {
+  width: 66%;
+  margin: 1rem;
+}
+
+.crudTableHeader {
+  display: flex;
+  width: 98%;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.crudTableDialogContent {
+  display: flex;
+  flex-direction: column;
+}

@@ -18,62 +18,14 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import Home from '@mui/icons-material/Home';
-import { makeStyles } from '@mui/styles';
 // @ts-ignore
 import avatar from '../avatar.jpg';
+import '../styles/Navbar.scss';
 
 /**
  * @typedef {any} ResumeData
  * @typedef {any} MenuItem
  */
-
-const useStyles = makeStyles(_theme => ({
-  appbar: {
-    background: '#222',
-    margin: '0rem',
-    position: 'fixed',
-    zIndex: 100,
-  },
-  hamburger: {
-    color: 'tomato',
-  },
-  title: {
-    color: 'tan',
-    paddingRight: '3.125rem',
-  },
-  codeWars: {
-    color: 'tan',
-    paddingLeft: '1rem',
-  },
-  generalLink: {
-    color: 'tan',
-    marginLeft: '0.938rem',
-    fontSize: '0.875rem',
-  },
-  alink: {
-    color: 'inherit',
-  },
-  menuSliderContainer: {
-    width: '15.625rem',
-    background: '#511',
-    height: '100%',
-  },
-  avatar: {
-    display: 'block',
-    margin: '0.5rem auto',
-    width: '6.5rem',
-    height: '6.5rem',
-  },
-  listItem: {
-    'color': 'tan',
-    '&:hover': {
-      backgroundColor: '#631111',
-    },
-  },
-  listItemActive: {
-    backgroundColor: '#441111',
-  },
-}));
 
 /** @type {string} */
 const homeListPath = '/';
@@ -98,7 +50,6 @@ const setInitActiveTab = () => {
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(setInitActiveTab());
-  const classes = useStyles();
 
   const onLogout = () => {
     localStorage.clear();
@@ -110,19 +61,19 @@ const Navbar = () => {
   };
 
   const sideList = () => (
-    <Box className={classes.menuSliderContainer} component='div'>
-      <Avatar className={classes.avatar} src={avatar} alt='Manyu Lakhotia' />
+    <Box className='menuSliderContainer' component='div'>
+      <Avatar className='navBarAvatar' src={avatar} alt='Manyu Lakhotia' />
       <Divider />
       <List>
         {menuItems.map(item => (
           <ListItem
             key={item.listPath}
-            className={`${classes.listItem} ${item.listPath === activeTab ? classes.listItemActive : ''}`}
+            className={`navBarListItem ${item.listPath === activeTab ? 'navBarListItemActive' : ''}`}
             onClick={handleClickListItem(item)}
             component={Link}
             to={item.listPath}
           >
-            <ListItemIcon className={classes.listItem}>{item.listIcon}</ListItemIcon>
+            <ListItemIcon className='navBarListItem'>{item.listIcon}</ListItemIcon>
             <ListItemText primary={item.listText} />
           </ListItem>
         ))}
@@ -134,15 +85,15 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <Box component='nav' id='nav'>
-        <AppBar position='static' className={classes.appbar}>
+        <AppBar position='static' className='appbar'>
           <Toolbar>
             <IconButton onClick={() => setOpen(true)}>
-              <MenuIcon className={classes.hamburger} />
+              <MenuIcon className='hamburger' />
             </IconButton>
-            <Typography variant='h5' className={classes.title}>
+            <Typography variant='h5' className='navBarTitle'>
               Movies
             </Typography>
-            <Link id='logout' className={classes.title} to='/login' onClick={() => onLogout()}>
+            <Link id='logout' className='navBarTitle' to='/login' onClick={() => onLogout()}>
               Logout
             </Link>
           </Toolbar>

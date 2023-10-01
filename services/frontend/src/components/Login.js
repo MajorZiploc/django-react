@@ -1,33 +1,14 @@
 // @ts-check
 import React from 'react';
 import { Button, TextField, Snackbar, Alert } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
-import { toKeyValArray, useGlobalStyles } from '../utils';
+import { toKeyValArray } from '../utils';
+import '../styles/Login.scss';
 
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
  */
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    maxWidth: '330px',
-    marginBottom: '0',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'white',
-    padding: '20px',
-    marginTop: '30px',
-  },
-  textField: {
-    minWidth: 130,
-    // @ts-ignore
-    margin: theme.spacing(1),
-  },
-}));
 
 /**
  * @returns {React.ReactElement}
@@ -49,8 +30,6 @@ const Login = () => {
     message: '',
     severity: 'error',
   });
-  const classes = useStyles();
-  const globalStyles = useGlobalStyles();
   const data = React.useContext(DataContext);
 
   const openAlert = alertSettings => {
@@ -136,7 +115,7 @@ const Login = () => {
   return isLogined ? (
     <Navigate to='/movies' />
   ) : (
-    <div className={globalStyles.pageStyles}>
+    <div className='pageStyles'>
       <Snackbar
         id='loginPageAlertSnackbar'
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -148,11 +127,11 @@ const Login = () => {
           {alertSettings?.message}
         </Alert>
       </Snackbar>
-      <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className={classes.form}>
+      <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className='loginForm'>
         {isRegister && (
           <>
             <TextField
-              className={classes.textField}
+              className='loginTextField'
               label='Email'
               id='email'
               variant='outlined'
@@ -160,7 +139,7 @@ const Login = () => {
               onChange={e => onChange(e)}
             />
             <TextField
-              className={classes.textField}
+              className='loginTextField'
               label='First Name'
               id='firstName'
               variant='outlined'
@@ -168,7 +147,7 @@ const Login = () => {
               onChange={e => onChange(e)}
             />
             <TextField
-              className={classes.textField}
+              className='loginTextField'
               label='Last Name'
               id='lastName'
               variant='outlined'
@@ -178,7 +157,7 @@ const Login = () => {
           </>
         )}
         <TextField
-          className={classes.textField}
+          className='loginTextField'
           label='Username'
           id='username'
           variant='outlined'
@@ -186,7 +165,7 @@ const Login = () => {
           onChange={e => onChange(e)}
         />
         <TextField
-          className={classes.textField}
+          className='loginTextField'
           label='Password'
           id='password'
           variant='outlined'
@@ -196,7 +175,7 @@ const Login = () => {
         />
         {isRegister && (
           <TextField
-            className={classes.textField}
+            className='loginTextField'
             label='Retype password'
             id='password2'
             variant='outlined'

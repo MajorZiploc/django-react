@@ -29,7 +29,7 @@ services:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
-      - '/tmp/django-react-postgres-data:${PGDATA}'
+      - 'pg_data:/var/lib/postgresql/data/'
 
   celery-beat-worker:
     build:
@@ -61,3 +61,6 @@ services:
   mq:
     volumes:
       - '/tmp/django-react-mq/data/mq:/var/lib/rabbitmq'
+
+volumes:
+  pg_data:
