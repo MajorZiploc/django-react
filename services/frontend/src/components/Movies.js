@@ -1,8 +1,8 @@
 // @ts-check
 import React from 'react';
 import DataContext from '../context/DataContext';
-import { useGlobalStyles } from '../utils';
 import GenericCrudTable from './GenericCrudTable';
+import '../styles/Global.scss';
 
 /**
  * @typedef {import('../interfaces').Movie} Movie
@@ -14,7 +14,6 @@ import GenericCrudTable from './GenericCrudTable';
  */
 const Movies = () => {
   const data = React.useContext(DataContext);
-  const globalStyles = useGlobalStyles();
   const validatedMovie = enteredMovie => {
     var isValid = true;
     var errorMessage = '';
@@ -57,7 +56,7 @@ const Movies = () => {
   };
 
   return (
-    <div className={globalStyles.pageStyles}>
+    <div className='pageStyles'>
       <GenericCrudTable {...crudTableProps} />
     </div>
   );
