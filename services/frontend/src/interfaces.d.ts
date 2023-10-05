@@ -6,7 +6,7 @@ export interface AlertSettings {
   severity: AlertColor;
 }
 
-export type useState<T> = [T, (setter: ((previous: T) => T) | T) => void];
+export type useState<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 
 export interface PrivateComponentProps {
   element: React.ReactElement;
