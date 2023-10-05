@@ -56,8 +56,10 @@ const Movies = () => {
   };
 
   return (
-    <div className='pageStyles'>
-      <GenericCrudTable {...crudTableProps} />
+    <div className='background'>
+      <div className='pageStyles'>
+        <GenericCrudTable {...crudTableProps} />
+      </div>
     </div>
   );
 };

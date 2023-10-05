@@ -4,6 +4,7 @@ import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
 import { toKeyValArray } from '../utils';
+import '../styles/Global.scss';
 import '../styles/Login.scss';
 
 /**
@@ -115,88 +116,90 @@ const Login = () => {
   return isLogined ? (
     <Navigate to='/movies' />
   ) : (
-    <div className='pageStyles'>
-      <Snackbar
-        id='loginPageAlertSnackbar'
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={alertSettings?.display}
-        autoHideDuration={6000}
-        onClose={closeAlert}
-      >
-        <Alert onClose={closeAlert} severity={alertSettings?.severity}>
-          {alertSettings?.message}
-        </Alert>
-      </Snackbar>
-      <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className='loginForm'>
-        {isRegister && (
-          <>
-            <TextField
-              className='loginTextField'
-              label='Email'
-              id='email'
-              variant='outlined'
-              size='small'
-              onChange={e => onChange(e)}
-            />
-            <TextField
-              className='loginTextField'
-              label='First Name'
-              id='firstName'
-              variant='outlined'
-              size='small'
-              onChange={e => onChange(e)}
-            />
-            <TextField
-              className='loginTextField'
-              label='Last Name'
-              id='lastName'
-              variant='outlined'
-              size='small'
-              onChange={e => onChange(e)}
-            />
-          </>
-        )}
-        <TextField
-          className='loginTextField'
-          label='Username'
-          id='username'
-          variant='outlined'
-          size='small'
-          onChange={e => onChange(e)}
-        />
-        <TextField
-          className='loginTextField'
-          label='Password'
-          id='password'
-          variant='outlined'
-          size='small'
-          onChange={e => onChange(e)}
-          type='password'
-        />
-        {isRegister && (
+    <div className='background'>
+      <div className='pageStyles'>
+        <Snackbar
+          id='loginPageAlertSnackbar'
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={alertSettings?.display}
+          autoHideDuration={6000}
+          onClose={closeAlert}
+        >
+          <Alert onClose={closeAlert} severity={alertSettings?.severity}>
+            {alertSettings?.message}
+          </Alert>
+        </Snackbar>
+        <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className='loginForm'>
+          {isRegister && (
+            <>
+              <TextField
+                className='loginTextField'
+                label='Email'
+                id='email'
+                variant='outlined'
+                size='small'
+                onChange={e => onChange(e)}
+              />
+              <TextField
+                className='loginTextField'
+                label='First Name'
+                id='firstName'
+                variant='outlined'
+                size='small'
+                onChange={e => onChange(e)}
+              />
+              <TextField
+                className='loginTextField'
+                label='Last Name'
+                id='lastName'
+                variant='outlined'
+                size='small'
+                onChange={e => onChange(e)}
+              />
+            </>
+          )}
           <TextField
             className='loginTextField'
-            label='Retype password'
-            id='password2'
+            label='Username'
+            id='username'
+            variant='outlined'
+            size='small'
+            onChange={e => onChange(e)}
+          />
+          <TextField
+            className='loginTextField'
+            label='Password'
+            id='password'
             variant='outlined'
             size='small'
             onChange={e => onChange(e)}
             type='password'
           />
-        )}
-        <Button id='logInButton' type='submit' color='primary'>
-          {isRegister ? 'Register' : 'Log in'}
-        </Button>
-        {isRegister ? (
-          <Button id='haveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(false)}>
-            Have an account?
+          {isRegister && (
+            <TextField
+              className='loginTextField'
+              label='Retype password'
+              id='password2'
+              variant='outlined'
+              size='small'
+              onChange={e => onChange(e)}
+              type='password'
+            />
+          )}
+          <Button id='logInButton' type='submit' color='primary'>
+            {isRegister ? 'Register' : 'Log in'}
           </Button>
-        ) : (
-          <Button id='dontHaveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(true)}>
-            Dont have an account?
-          </Button>
-        )}
-      </form>
+          {isRegister ? (
+            <Button id='haveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(false)}>
+              Have an account?
+            </Button>
+          ) : (
+            <Button id='dontHaveAnAccountButton' type='button' color='primary' onClick={_e => setIsRegister(true)}>
+              Dont have an account?
+            </Button>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
