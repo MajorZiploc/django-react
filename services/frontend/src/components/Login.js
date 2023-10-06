@@ -124,6 +124,7 @@ const Login = () => {
           open={alertSettings?.display}
           autoHideDuration={6000}
           onClose={closeAlert}
+          className='alertBox'
         >
           <Alert onClose={closeAlert} severity={alertSettings?.severity}>
             {alertSettings?.message}
