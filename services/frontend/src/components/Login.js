@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import DataContext from '../context/DataContext';
-import { toKeyValArray } from '../utils';
+import { getAccessToken, toKeyValArray } from '../utils';
 import '../styles/Global.scss';
 import '../styles/Login.scss';
 
@@ -48,7 +48,7 @@ const Login = () => {
         .catch(_e =>
           openAlert({ display: true, message: 'Login failed, check your username and password', severity: 'error' })
         );
-      if (data.getAccessToken()) {
+      if (getAccessToken()) {
         setIsLogined(true);
       }
     } else {

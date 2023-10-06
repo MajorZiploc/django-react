@@ -1,7 +1,7 @@
 // @ts-check
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import DataContext from '../context/DataContext';
+import { getAccessToken } from '../utils';
 
 /**
  * @typedef {import('../interfaces').PrivateComponentProps} PrivateComponentProps
@@ -12,8 +12,7 @@ import DataContext from '../context/DataContext';
  * @returns {React.ReactElement}
  */
 const PrivateComponent = ({ element }) => {
-  const data = React.useContext(DataContext);
-  return data.getAccessToken() ? element : <Navigate to='/login' />;
+  return getAccessToken() ? element : <Navigate to='/login' />;
 };
 
 export default PrivateComponent;
