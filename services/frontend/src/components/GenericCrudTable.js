@@ -223,6 +223,7 @@ const GenericCrudTable = ({
         open={alertSettings?.display}
         autoHideDuration={6000}
         onClose={closeAlert}
+        className='crudAlert'
       >
         <Alert onClose={closeAlert} severity={alertSettings?.severity}>
           {alertSettings?.message}

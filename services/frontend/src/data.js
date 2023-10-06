@@ -39,6 +39,11 @@ class Data {
       .then(r => {
         this.setAccessToken(r.data.access);
         return r.data;
+      })
+      .catch(err => {
+        this.setAccessToken(null);
+        this.setRefreshToken(null);
+        throw err;
       });
   }
 
