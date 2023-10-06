@@ -1,7 +1,7 @@
 FROM node:18-alpine
 WORKDIR /workspace/app/
 COPY package.json package-lock.json /workspace/app/
-RUN npm install --force
+RUN npm install
 COPY . /workspace/app/
 EXPOSE 3000
 CMD npm start

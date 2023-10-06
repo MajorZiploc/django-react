@@ -89,7 +89,7 @@ function just_build_frontend_ui_tests {
 
 function just_build_frontend {
   cd "$JUST_FRONTEND_ROOT";
-  npm install --force;
+  npm install;
   cd ~-;
 }
 
