@@ -284,12 +284,13 @@ const GenericCrudTable = ({
             />
             {editMode && (
               <div>
-                <FormControl variant='outlined' className='crudTableSelectField' size='small'></FormControl>
-                <Tooltip title={`Add ${modelName}`}>
-                  <IconButton onClick={async () => await openModal()}>
-                    <AddBoxTwoTone color='primary' fontSize='large' />
-                  </IconButton>
-                </Tooltip>
+                <FormControl variant='outlined' className='crudTableSelectField' size='small'>
+                  <Tooltip title={`Add ${modelName}`}>
+                    <IconButton onClick={async () => await openModal()}>
+                      <AddBoxTwoTone color='primary' fontSize='large' />
+                    </IconButton>
+                  </Tooltip>
+                </FormControl>
               </div>
             )}
             <div>
