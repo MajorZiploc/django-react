@@ -121,3 +121,7 @@ function just_clean {
   rm -rf "$JUST_FRONTEND_ROOT/ui_tests/node_modules";
 }
 
+function just_backend_debug_shell {
+  local container_name="django-react-backend";
+  docker exec -i -t "$container_name" python manage.py debug_shell;
+}
