@@ -26,11 +26,11 @@ function just_format {
 
 function just_run {
   just_setup_postgres_volume;
-  docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d;
+  docker-compose -f docker-compose.local.yml up -d;
 }
 
 function just_stop {
-  docker-compose -f docker-compose.yml -f docker-compose.local.yml down;
+  docker-compose -f docker-compose.local.yml down;
 }
 
 function just_test {

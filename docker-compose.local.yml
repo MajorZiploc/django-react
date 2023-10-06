@@ -4,6 +4,10 @@ services:
     build:
       context: ./services/backend
       dockerfile: Dockerfile.dev
+    depends_on:
+      - db
+    env_file:
+      - .env
     volumes:
       - './services/backend:/workspace/app'
     ports:
@@ -11,11 +15,19 @@ services:
     stdin_open: true
     tty: true
     command: /workspace/entrypoint-dev.sh
+    container_name: django-react-backend
 
   frontend:
     build:
       context: ./services/frontend
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    environment:
+      REACT_APP_BACKEND_PORT: ${BACKEND_PORT}
+      REACT_APP_PUBLIC_URL: ${PUBLIC_URL}
+    depends_on:
+      - backend
     volumes:
       - './services/frontend:/workspace/app'
       # One-way volume to use node_modules from inside image
@@ -24,17 +36,29 @@ services:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     command: npm run start
     # command: sleep infinity
+    container_name: django-react-frontend
 
   db:
+    image: postgres:13-alpine
+    env_file:
+      - .env
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - 'pg_data:/var/lib/postgresql/data/'
+    container_name: django-react-db
 
   celery-beat-worker:
     build:
       context: ./services/backend
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    links:
+      - db
+      - mq
+      - redis
+    restart: always
     volumes:
       - './services/backend:/workspace/app'
     environment:
@@ -44,11 +68,19 @@ services:
     command: python3 manage.py autoreload_celery --mint_worker_options "${BEAT_MINT_WORKER_OPTIONS}" --mint_worker_type "${BEAT_MINT_WORKER_TYPE}" --celery_worker_queues "${BEAT_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
     # command: /workspace/entrypoint-dev.sh
+    container_name: django-react-celery-beat-worker
 
   celery-data-worker:
     build:
       context: ./services/backend
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    links:
+      - db
+      - mq
+      - redis
+    restart: always
     volumes:
       - './services/backend:/workspace/app'
     environment:
@@ -57,10 +89,24 @@ services:
     command: python3 manage.py autoreload_celery --mint_worker_type "${DATA_MINT_WORKER_TYPE}" --celery_worker_queues "${DATA_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
     # command: /workspace/entrypoint-dev.sh
+    container_name: django-react-celery-data-worker
+
+  redis:
+    image: redis:alpine3.17
+    ports:
+      - '6379:6379'
+    container_name: django-react-redis
 
   mq:
+    image: rabbitmq:3.9.26-management-alpine
+    ports:
+      - '5672:5672'
+      # for rabbitmq-ui in browser
+      - '15672:15672'
+    restart: always
     volumes:
       - '/tmp/django-react-mq/data/mq:/var/lib/rabbitmq'
+    container_name: django-react-mq
 
 volumes:
   pg_data:
