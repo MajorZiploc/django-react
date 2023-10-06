@@ -4,5 +4,6 @@
   },
   "scripts": {
     "format": "prettier . --write"
-  }
+  },
+  "dependencies": {}
 }
