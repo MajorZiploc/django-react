@@ -14,3 +14,35 @@ export function fromKeyValArray(keyValueArray) {
     return acc;
   });
 }
+
+export function getAccessToken() {
+  return localStorage.getItem('accessToken');
+}
+
+export function getRefreshToken() {
+  return localStorage.getItem('refreshToken');
+}
+
+export function setAccessToken(v) {
+  localStorage.setItem('accessToken', v);
+}
+
+export function setRefreshToken(v) {
+  localStorage.setItem('refreshToken', v);
+}
+
+export function getDefaultHeaders() {
+  return {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  };
+}
+
+export function getDefaultAuthedHeaders() {
+  return {
+    ...getDefaultHeaders(),
+    Authorization: `Bearer ${getAccessToken()}`,
+  };
+}
+
+export const apiUrl = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_BACKEND_PORT}`;

@@ -1,48 +1,36 @@
 import axios from 'axios';
+import {
+  getRefreshToken,
+  getAccessToken,
+  setAccessToken,
+  setRefreshToken,
+  getDefaultHeaders,
+  getDefaultAuthedHeaders,
+  apiUrl,
+} from './utils';
 
 class Data {
-  constructor() {
-    this.baseUrl = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_BACKEND_PORT}`;
-  }
-
-  getAccessToken() {
-    return localStorage.getItem('accessToken');
-  }
-
-  getRefreshToken() {
-    return localStorage.getItem('refreshToken');
-  }
-
-  setAccessToken(v) {
-    localStorage.setItem('accessToken', v);
-  }
-
-  setRefreshToken(v) {
-    localStorage.setItem('refreshToken', v);
-  }
+  constructor() {}
 
   // TODO: need to test
   async refreshAuth() {
     return axios
       .post(
-        this.baseUrl + '/api/v1/auth/token/refresh/',
+        apiUrl + '/api/v1/auth/token/refresh/',
         {
-          refresh: this.getRefreshToken(),
+          refresh: getRefreshToken(),
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
+          headers: getDefaultHeaders(),
         }
       )
       .then(r => {
-        this.setAccessToken(r.data.access);
+        setAccessToken(r.data.access);
         return r.data;
       })
       .catch(err => {
-        this.setAccessToken(null);
-        this.setRefreshToken(null);
+        setAccessToken(null);
+        setRefreshToken(null);
         throw err;
       });
   }
@@ -50,21 +38,18 @@ class Data {
   async login(username, password) {
     return axios
       .post(
-        this.baseUrl + '/api/v1/auth/token/',
+        apiUrl + '/api/v1/auth/token/',
         {
           username: username,
           password: password,
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
+          headers: getDefaultHeaders(),
         }
       )
       .then(r => {
-        this.setAccessToken(r.data.access);
-        this.setRefreshToken(r.data.refresh);
+        setAccessToken(r.data.access);
+        setRefreshToken(r.data.refresh);
         return r.data;
       });
   }
@@ -72,7 +57,7 @@ class Data {
   async register(email, username, password, firstName, lastName) {
     return axios
       .post(
-        this.baseUrl + '/api/v1/auth/register/',
+        apiUrl + '/api/v1/auth/register/',
         {
           email: email,
           username: username,
@@ -82,10 +67,7 @@ class Data {
           last_name: lastName,
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
+          headers: getDefaultHeaders(),
         }
       )
       .then(r => r.data);
@@ -97,129 +79,94 @@ class Data {
   async auth() {
     return axios
       .post(
-        this.baseUrl + '/api/v1/auth/token/',
+        apiUrl + '/api/v1/auth/token/',
         {
           username: 'user1',
           password: 'pass@Temp10',
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
+          headers: getDefaultHeaders(),
         }
       )
       .then(r => r.data);
   }
 
+  async retry(apiCall) {
+    return await getRefreshToken().then(async _r => await apiCall());
+  }
+
   async _getMoviesHelper() {
     return axios
-      .get(this.baseUrl + '/api/v1/movies/', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .get(apiUrl + '/api/v1/movies/', {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data.results);
   }
 
   async getMovies() {
-    return await this._getMoviesHelper().catch(
-      async _e => await this.refreshToken().then(async _r => await this._getMoviesHelper())
-    );
+    return await this._getMoviesHelper().catch(_e => this.retry(() => this._getMoviesHelper()));
   }
 
   async _postMovieHelper(movie) {
     return axios
-      .post(this.baseUrl + '/api/v1/movies/', movie, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .post(apiUrl + '/api/v1/movies/', movie, {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data);
   }
 
   async postMovie(movie) {
-    return await this._postMovieHelper(movie).catch(
-      async _e => await this.refreshToken().then(async _r => await this._postMovieHelper(movie))
-    );
+    return await this._postMovieHelper(movie).catch(_e => this.retry(() => this._postMovieHelper(movie)));
   }
 
   // TODO: need to test
   async _getMovieHelper(id) {
     return axios
-      .get(this.baseUrl + `/api/v1/movies/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .get(apiUrl + `/api/v1/movies/${id}`, {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data.results);
   }
 
   async getMovie(id) {
-    return await this._getMovieHelper(id).catch(
-      async _e => await this.refreshToken().then(async _r => await this._getMovieHelper(id))
-    );
+    return await this._getMovieHelper(id).catch(_e => this.retry(() => this._getMovieHelper(id)));
   }
 
   async _putMovieHelper(id, movie) {
     return axios
-      .put(this.baseUrl + `/api/v1/movies/${id}/`, movie, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .put(apiUrl + `/api/v1/movies/${id}/`, movie, {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data);
   }
 
   async putMovie(id, movie) {
-    return await this._putMovieHelper(id, movie).catch(
-      async _e => await this.refreshToken().then(async _r => await this._putMovieHelper(id, movie))
-    );
+    return await this._putMovieHelper(id, movie).catch(_e => this.retry(() => this._putMovieHelper(id, movie)));
   }
 
   // TODO: need to test
   async _patchMovieHelper(id, movie) {
     return axios
-      .patch(this.baseUrl + `/api/v1/movies/${id}`, movie, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .patch(apiUrl + `/api/v1/movies/${id}`, movie, {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data);
   }
 
   async patchMovie(id, movie) {
-    return await this._patchMovieHelper(id, movie).catch(
-      async _e => await this.refreshToken().then(async _r => await this._patchMovieHelper(id, movie))
-    );
+    return await this._patchMovieHelper(id, movie).catch(_e => this.retry(() => this._patchMovieHelper(id, movie)));
   }
 
   async _deleteMovieHelper(id) {
     return axios
-      .delete(this.baseUrl + `/api/v1/movies/${id}/`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${this.getAccessToken()}`,
-        },
+      .delete(apiUrl + `/api/v1/movies/${id}/`, {
+        headers: getDefaultAuthedHeaders(),
       })
       .then(r => r.data);
   }
 
   async deleteMovie(id) {
-    return await this._deleteMovieHelper(id).catch(
-      async _e => await this.refreshToken().then(async _r => await this._deleteMovieHelper(id))
-    );
+    return await this._deleteMovieHelper(id).catch(_e => this.retry(() => this._deleteMovieHelper(id)));
   }
 }
 

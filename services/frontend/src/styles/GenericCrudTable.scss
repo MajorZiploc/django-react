@@ -5,7 +5,7 @@
 }
 
 .crudTableSelectField {
-  margin: 1rem;
+  margin: 1rem 11rem 1rem 0rem;
   min-width: 130;
 }
 
@@ -34,8 +34,4 @@
 .crudTableDialogContent {
   display: flex;
   flex-direction: column;
-}
-
-.crudAlert {
-  z-index: 101;
 }
