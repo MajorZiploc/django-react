@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
+import { OidcProvider } from 'redux-oidc';
 import store from './redux/store';
 
 const container = document.getElementById('root');
@@ -11,9 +12,11 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <OidcProvider store={store} userManager={userManager}>
+      <Router>
+        <App />
+      </Router>
+    </OidcProvider>
   </Provider>
 );
 
