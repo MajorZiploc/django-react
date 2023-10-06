@@ -91,6 +91,10 @@ class Data {
       .then(r => r.data);
   }
 
+  async retry(apiCall) {
+    return await getRefreshToken().then(async _r => await apiCall());
+  }
+
   async _getMoviesHelper() {
     return axios
       .get(apiUrl + '/api/v1/movies/', {
@@ -100,9 +104,7 @@ class Data {
   }
 
   async getMovies() {
-    return await this._getMoviesHelper().catch(
-      async _e => await getRefreshToken().then(async _r => await this._getMoviesHelper())
-    );
+    return await this._getMoviesHelper().catch(_e => this.retry(() => this._getMoviesHelper()));
   }
 
   async _postMovieHelper(movie) {
@@ -114,9 +116,7 @@ class Data {
   }
 
   async postMovie(movie) {
-    return await this._postMovieHelper(movie).catch(
-      async _e => await getRefreshToken().then(async _r => await this._postMovieHelper(movie))
-    );
+    return await this._postMovieHelper(movie).catch(_e => this.retry(() => this._postMovieHelper(movie)));
   }
 
   // TODO: need to test
@@ -129,9 +129,7 @@ class Data {
   }
 
   async getMovie(id) {
-    return await this._getMovieHelper(id).catch(
-      async _e => await getRefreshToken().then(async _r => await this._getMovieHelper(id))
-    );
+    return await this._getMovieHelper(id).catch(_e => this.retry(() => this._getMovieHelper(id)));
   }
 
   async _putMovieHelper(id, movie) {
@@ -143,9 +141,7 @@ class Data {
   }
 
   async putMovie(id, movie) {
-    return await this._putMovieHelper(id, movie).catch(
-      async _e => await getRefreshToken().then(async _r => await this._putMovieHelper(id, movie))
-    );
+    return await this._putMovieHelper(id, movie).catch(_e => this.retry(() => this._putMovieHelper(id, movie)));
   }
 
   // TODO: need to test
@@ -158,9 +154,7 @@ class Data {
   }
 
   async patchMovie(id, movie) {
-    return await this._patchMovieHelper(id, movie).catch(
-      async _e => await getRefreshToken().then(async _r => await this._patchMovieHelper(id, movie))
-    );
+    return await this._patchMovieHelper(id, movie).catch(_e => this.retry(() => this._patchMovieHelper(id, movie)));
   }
 
   async _deleteMovieHelper(id) {
@@ -172,9 +166,7 @@ class Data {
   }
 
   async deleteMovie(id) {
-    return await this._deleteMovieHelper(id).catch(
-      async _e => await getRefreshToken().then(async _r => await this._deleteMovieHelper(id))
-    );
+    return await this._deleteMovieHelper(id).catch(_e => this.retry(() => this._deleteMovieHelper(id)));
   }
 }
 
