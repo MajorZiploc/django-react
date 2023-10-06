@@ -18,6 +18,17 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import './App.scss';
 import { useDispatch } from 'react-redux';
 // import { incrementByAmount } from './redux/reducers/countReducer';
+import { UserManager, WebStorageStateStore } from 'oidc-client';
+import oidcConfig from './oidcConfig';
+
+const userManager = new UserManager({
+  ...oidcConfig,
+  userStore: new WebStorageStateStore({ store: window.localStorage }),
+});
+
+// // Initialize the OIDC client
+// userManager.signinSilentCallback(); // Handles silent token renewal
+// userManager.signinRedirectCallback(); // Handles redirects after login
 
 const theme = createTheme();
 
