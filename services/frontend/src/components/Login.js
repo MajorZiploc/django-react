@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { Navigate } from 'react-router-dom';
-import DataContext from '../context/DataContext';
+import * as data from '../data';
 import { getAccessToken, toKeyValArray } from '../utils';
 import '../styles/Global.scss';
 import '../styles/Login.scss';
@@ -31,7 +31,6 @@ const Login = () => {
     message: '',
     severity: 'error',
   });
-  const data = React.useContext(DataContext);
 
   const openAlert = alertSettings => {
     setAlertSettings(alertSettings);

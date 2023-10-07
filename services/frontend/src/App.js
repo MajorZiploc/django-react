@@ -6,8 +6,6 @@ import Movies from './components/Movies';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import { ErrorBoundary } from 'react-error-boundary';
-import { DataProvider } from './context/DataContext';
-import { data } from './data';
 import PrivateComponent from './components/PrivateComponent';
 
 import { StyledEngineProvider } from '@mui/material/styles';
@@ -59,15 +57,13 @@ const App = () => {
               }}
             >
               <CssBaseline />
-              <DataProvider value={data}>
-                <Navbar />
-                <Routes>
-                  <Route path='/' element={<Login />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/movies' element={<PrivateComponent element={<Movies />} />} />
-                  <Route path='*' element={<Navigate to='/' />} />
-                </Routes>
-              </DataProvider>
+              <Navbar />
+              <Routes>
+                <Route path='/' element={<Login />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/movies' element={<PrivateComponent element={<Movies />} />} />
+                <Route path='*' element={<Navigate to='/' />} />
+              </Routes>
             </ErrorBoundary>
           </ThemeProvider>
         </CacheProvider>
