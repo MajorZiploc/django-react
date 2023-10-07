@@ -215,22 +215,26 @@ const GenericCrudTable = ({
   const toProperCase = str =>
     str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
+  const alert = (
+    <Snackbar
+      id='modelsPageAlertSnackbar'
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      open={alertSettings?.display}
+      autoHideDuration={6000}
+      onClose={closeAlert}
+      className='alertBox'
+    >
+      <Alert onClose={closeAlert} severity={alertSettings?.severity}>
+        {alertSettings?.message}
+      </Alert>
+    </Snackbar>
+  );
+
   return (
     <div>
-      <Snackbar
-        id='modelsPageAlertSnackbar'
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={alertSettings?.display}
-        autoHideDuration={6000}
-        onClose={closeAlert}
-        className='alertBox'
-      >
-        <Alert onClose={closeAlert} severity={alertSettings?.severity}>
-          {alertSettings?.message}
-        </Alert>
-      </Snackbar>
-
+      {!showModal && alert}
       <Dialog onClose={closeModal} aria-labelledby='customized-dialog-title' open={showModal}>
+        {showModal && alert}
         <DialogTitle id='customized-dialog-title'>
           {enteredModel && enteredModel[modelId] ? 'Edit' : 'Add'} {modelName}:
         </DialogTitle>
