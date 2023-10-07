@@ -1,8 +1,8 @@
 // @ts-check
 import React from 'react';
-import DataContext from '../context/DataContext';
 import GenericCrudTable from './GenericCrudTable';
 import '../styles/Global.scss';
+import * as data from '../data';
 
 /**
  * @typedef {import('../interfaces').Movie} Movie
@@ -13,7 +13,6 @@ import '../styles/Global.scss';
  * @returns {React.ReactElement}
  */
 const Movies = () => {
-  const data = React.useContext(DataContext);
   const validatedMovie = enteredMovie => {
     var isValid = true;
     var errorMessage = '';

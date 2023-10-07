@@ -9,165 +9,159 @@ import {
   apiUrl,
 } from './utils';
 
-class Data {
-  constructor() {}
-
-  // TODO: need to test
-  async refreshAuth() {
-    return axios
-      .post(
-        apiUrl + '/api/v1/auth/token/refresh/',
-        {
-          refresh: getRefreshToken(),
-        },
-        {
-          headers: getDefaultHeaders(),
-        }
-      )
-      .then(r => {
-        setAccessToken(r.data.access);
-        return r.data;
-      })
-      .catch(err => {
-        setAccessToken(null);
-        setRefreshToken(null);
-        throw err;
-      });
-  }
-
-  async login(username, password) {
-    return axios
-      .post(
-        apiUrl + '/api/v1/auth/token/',
-        {
-          username: username,
-          password: password,
-        },
-        {
-          headers: getDefaultHeaders(),
-        }
-      )
-      .then(r => {
-        setAccessToken(r.data.access);
-        setRefreshToken(r.data.refresh);
-        return r.data;
-      });
-  }
-
-  async register(email, username, password, firstName, lastName) {
-    return axios
-      .post(
-        apiUrl + '/api/v1/auth/register/',
-        {
-          email: email,
-          username: username,
-          password: password,
-          password2: password,
-          first_name: firstName,
-          last_name: lastName,
-        },
-        {
-          headers: getDefaultHeaders(),
-        }
-      )
-      .then(r => r.data);
-  }
-
-  //curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
-
-  // TODO: remove this function
-  async auth() {
-    return axios
-      .post(
-        apiUrl + '/api/v1/auth/token/',
-        {
-          username: 'user1',
-          password: 'pass@Temp10',
-        },
-        {
-          headers: getDefaultHeaders(),
-        }
-      )
-      .then(r => r.data);
-  }
-
-  async retry(apiCall) {
-    return await getRefreshToken().then(async _r => await apiCall());
-  }
-
-  async _getMoviesHelper() {
-    return axios
-      .get(apiUrl + '/api/v1/movies/', {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data.results);
-  }
-
-  async getMovies() {
-    return await this._getMoviesHelper().catch(_e => this.retry(() => this._getMoviesHelper()));
-  }
-
-  async _postMovieHelper(movie) {
-    return axios
-      .post(apiUrl + '/api/v1/movies/', movie, {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data);
-  }
-
-  async postMovie(movie) {
-    return await this._postMovieHelper(movie).catch(_e => this.retry(() => this._postMovieHelper(movie)));
-  }
-
-  // TODO: need to test
-  async _getMovieHelper(id) {
-    return axios
-      .get(apiUrl + `/api/v1/movies/${id}`, {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data.results);
-  }
-
-  async getMovie(id) {
-    return await this._getMovieHelper(id).catch(_e => this.retry(() => this._getMovieHelper(id)));
-  }
-
-  async _putMovieHelper(id, movie) {
-    return axios
-      .put(apiUrl + `/api/v1/movies/${id}/`, movie, {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data);
-  }
-
-  async putMovie(id, movie) {
-    return await this._putMovieHelper(id, movie).catch(_e => this.retry(() => this._putMovieHelper(id, movie)));
-  }
-
-  // TODO: need to test
-  async _patchMovieHelper(id, movie) {
-    return axios
-      .patch(apiUrl + `/api/v1/movies/${id}`, movie, {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data);
-  }
-
-  async patchMovie(id, movie) {
-    return await this._patchMovieHelper(id, movie).catch(_e => this.retry(() => this._patchMovieHelper(id, movie)));
-  }
-
-  async _deleteMovieHelper(id) {
-    return axios
-      .delete(apiUrl + `/api/v1/movies/${id}/`, {
-        headers: getDefaultAuthedHeaders(),
-      })
-      .then(r => r.data);
-  }
-
-  async deleteMovie(id) {
-    return await this._deleteMovieHelper(id).catch(_e => this.retry(() => this._deleteMovieHelper(id)));
-  }
+// TODO: need to test
+export async function refreshAuth() {
+  return axios
+    .post(
+      apiUrl + '/api/v1/auth/token/refresh/',
+      {
+        refresh: getRefreshToken(),
+      },
+      {
+        headers: getDefaultHeaders(),
+      }
+    )
+    .then(r => {
+      setAccessToken(r.data.access);
+      return r.data;
+    })
+    .catch(err => {
+      setAccessToken(null);
+      setRefreshToken(null);
+      throw err;
+    });
 }
 
-export const data = new Data();
+export async function login(username, password) {
+  return axios
+    .post(
+      apiUrl + '/api/v1/auth/token/',
+      {
+        username: username,
+        password: password,
+      },
+      {
+        headers: getDefaultHeaders(),
+      }
+    )
+    .then(r => {
+      setAccessToken(r.data.access);
+      setRefreshToken(r.data.refresh);
+      return r.data;
+    });
+}
+
+export async function register(email, username, password, firstName, lastName) {
+  return axios
+    .post(
+      apiUrl + '/api/v1/auth/register/',
+      {
+        email: email,
+        username: username,
+        password: password,
+        password2: password,
+        first_name: firstName,
+        last_name: lastName,
+      },
+      {
+        headers: getDefaultHeaders(),
+      }
+    )
+    .then(r => r.data);
+}
+
+//curl -X POST http://127.0.0.1:8000/api/v1/auth/token/ --data '{"username":"USERNAME", "password":"pass@Temp10"}' -H 'content-type: application/json' -H 'accept: application/json; indent=4'
+
+// TODO: remove this function
+export async function auth() {
+  return axios
+    .post(
+      apiUrl + '/api/v1/auth/token/',
+      {
+        username: 'user1',
+        password: 'pass@Temp10',
+      },
+      {
+        headers: getDefaultHeaders(),
+      }
+    )
+    .then(r => r.data);
+}
+
+export async function retry(apiCall) {
+  return await getRefreshToken().then(async _r => await apiCall());
+}
+
+async function _getMoviesHelper() {
+  return axios
+    .get(apiUrl + '/api/v1/movies/', {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data.results);
+}
+
+export async function getMovies() {
+  return await _getMoviesHelper().catch(_e => retry(() => _getMoviesHelper()));
+}
+
+async function _postMovieHelper(movie) {
+  return axios
+    .post(apiUrl + '/api/v1/movies/', movie, {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data);
+}
+
+export async function postMovie(movie) {
+  return await _postMovieHelper(movie).catch(_e => retry(() => _postMovieHelper(movie)));
+}
+
+// TODO: need to test
+async function _getMovieHelper(id) {
+  return axios
+    .get(apiUrl + `/api/v1/movies/${id}`, {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data.results);
+}
+
+export async function getMovie(id) {
+  return await _getMovieHelper(id).catch(_e => retry(() => _getMovieHelper(id)));
+}
+
+async function _putMovieHelper(id, movie) {
+  return axios
+    .put(apiUrl + `/api/v1/movies/${id}/`, movie, {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data);
+}
+
+export async function putMovie(id, movie) {
+  return await _putMovieHelper(id, movie).catch(_e => retry(() => _putMovieHelper(id, movie)));
+}
+
+// TODO: need to test
+async function _patchMovieHelper(id, movie) {
+  return axios
+    .patch(apiUrl + `/api/v1/movies/${id}`, movie, {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data);
+}
+
+export async function patchMovie(id, movie) {
+  return await _patchMovieHelper(id, movie).catch(_e => retry(() => _patchMovieHelper(id, movie)));
+}
+
+async function _deleteMovieHelper(id) {
+  return axios
+    .delete(apiUrl + `/api/v1/movies/${id}/`, {
+      headers: getDefaultAuthedHeaders(),
+    })
+    .then(r => r.data);
+}
+
+export async function deleteMovie(id) {
+  return await _deleteMovieHelper(id).catch(_e => retry(() => _deleteMovieHelper(id)));
+}
