@@ -1,4 +1,6 @@
 import { AlertColor } from '@mui/material';
+import { Dispatch } from 'react';
+import { AnyAction } from '@reduxjs/toolkit';
 
 export interface AlertSettings {
   display: boolean;
@@ -41,3 +43,13 @@ export interface GenericCrudTableProps<Data> {
   };
   modalToString: (model: Data) => string;
 }
+
+export interface ReduxState {
+  counter: CountState;
+}
+
+export interface CounterState {
+  value: number;
+}
+
+export type Dispatch = Dispatch<AnyAction>;

@@ -7,7 +7,7 @@ import { getAccessToken, toKeyValArray } from '../utils';
 import '../styles/Global.scss';
 import '../styles/Login.scss';
 // import { useSelector } from 'react-redux';
-// import { selectCount } from '../redux/reducers/countReducer';
+// import { selectCount } from '../redux/reducers/counterReducer';
 
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
