@@ -6,6 +6,8 @@ import * as data from '../data';
 import { getAccessToken, toKeyValArray } from '../utils';
 import '../styles/Global.scss';
 import '../styles/Login.scss';
+// import { useSelector } from 'react-redux';
+// import { selectCount } from '../redux/reducers/countReducer';
 
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
@@ -31,6 +33,7 @@ const Login = () => {
     message: '',
     severity: 'error',
   });
+  // const count = useSelector(selectCount);
 
   const openAlert = alertSettings => {
     setAlertSettings(alertSettings);
@@ -129,6 +132,7 @@ const Login = () => {
             {alertSettings?.message}
           </Alert>
         </Snackbar>
+        {/* <p>Redux count: {count}</p> */}
         <form noValidate={true} id='loginPageForm' onSubmit={onFormSubmit} className='loginForm'>
           {isRegister && (
             <>

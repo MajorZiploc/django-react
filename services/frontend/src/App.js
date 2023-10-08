@@ -14,8 +14,6 @@ import { CacheProvider } from '@emotion/react';
 import { ThemeProvider, createTheme } from '@mui/material';
 
 import './App.scss';
-import { useDispatch } from 'react-redux';
-// import { incrementByAmount } from './redux/reducers/countReducer';
 
 const theme = createTheme();
 
@@ -43,8 +41,6 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
  * @returns {React.ReactElement}
  */
 const App = () => {
-  const dispatch = useDispatch();
-  // dispatch(incrementByAmount(10));
   return (
     <React.Fragment>
       <StyledEngineProvider injectFirst>
