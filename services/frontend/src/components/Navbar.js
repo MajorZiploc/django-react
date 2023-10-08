@@ -22,7 +22,7 @@ import Home from '@mui/icons-material/Home';
 import avatar from '../avatar.jpg';
 import '../styles/Navbar.scss';
 // import { useDispatch } from 'react-redux';
-// import { incrementByAmount, incrementByAmountAsync } from '../redux/reducers/counterReducer';
+// import { incrementByAmount, incrementByAmountAsync } from '../redux/slices/counterReducer';
 
 /**
  * @typedef {any} ResumeData
