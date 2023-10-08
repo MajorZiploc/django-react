@@ -5,9 +5,7 @@ import logger from 'redux-logger';
 const preloadedState = {};
 
 export default configureStore({
-  reducer: {
-    rootReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
   preloadedState,

@@ -21,6 +21,8 @@ import Home from '@mui/icons-material/Home';
 // @ts-ignore
 import avatar from '../avatar.jpg';
 import '../styles/Navbar.scss';
+// import { useDispatch } from 'react-redux';
+// import { incrementByAmount, incrementByAmountAsync } from '../redux/reducers/countReducer';
 
 /**
  * @typedef {any} ResumeData
@@ -50,6 +52,7 @@ const setInitActiveTab = () => {
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(setInitActiveTab());
+  // const dispatch = useDispatch();
 
   const onLogout = () => {
     localStorage.clear();
@@ -93,7 +96,18 @@ const Navbar = () => {
             <Typography variant='h5' className='navBarTitle'>
               Movies
             </Typography>
-            <Link id='logout' className='navBarTitle' to='/login' onClick={() => onLogout()}>
+            <Link
+              id='logout'
+              className='navBarTitle'
+              to='/login'
+              onClick={() => {
+                onLogout();
+                // dispatch(incrementByAmount(10));
+                // (async () => {
+                //   await incrementByAmountAsync(5)(dispatch);
+                // })();
+              }}
+            >
               Logout
             </Link>
           </Toolbar>
