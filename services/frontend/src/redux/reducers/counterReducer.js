@@ -1,4 +1,11 @@
+// @ts-check
 import { createSlice } from '@reduxjs/toolkit';
+
+/**
+ * @typedef {import('../../interfaces').ReduxState} ReduxState
+ * @typedef {import('../../interfaces').CounterState} CounterState
+ * @typedef {import('../../interfaces').Dispatch} Dispatch
+ */
 
 export const counterSlice = createSlice({
   name: 'counter',
@@ -22,7 +29,8 @@ export const counterSlice = createSlice({
   },
 });
 
-// Add an async action that increments the state by a specified amount
+// Similar pattern for calling apis can be used
+/** @type {(amount: number) => (dispatch: Dispatch) => void} */
 export const incrementByAmountAsync = amount => dispatch => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -37,6 +45,7 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.count.value)`
-export const selectCount = state => state.count.value;
+/** @type {(state: ReduxState) => CounterState['value']} */
+export const selectCount = state => state.counter.value;
 
 export default counterSlice.reducer;
