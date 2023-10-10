@@ -35,6 +35,7 @@ WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
 ORDER BY TABLE_NAME, COLUMN_NAME
 ;
   ";
+  local container_name="django-react-db";
   local padding="---------";
   local begin="BEGIN";
   local end="END";
@@ -44,7 +45,8 @@ ORDER BY TABLE_NAME, COLUMN_NAME
   export PGUSER="postgres";
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
-  psql --csv -c "$_command" > ./src/tables/localhost.csv;
+  docker exec "$container_name" psql --csv -c "$_command" > ./src/tables/localhost.csv;
+  # psql --csv -c "$_command" > ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
 
