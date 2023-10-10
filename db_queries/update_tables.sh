@@ -5,21 +5,37 @@ function main {
 SELECT
 c.TABLE_NAME
 , c.COLUMN_NAME
-, c.IS_NULLABLE
 , c.DATA_TYPE
+, c.IS_NULLABLE
 , c.CHARACTER_MAXIMUM_LENGTH
 , c.NUMERIC_PRECISION
 , c.DATETIME_PRECISION
 , c.COLUMN_DEFAULT
 FROM INFORMATION_SCHEMA.COLUMNS AS c -- WITH(NOLOCK)
--- WHERE
-  -- c.TABLE_NAME NOT LIKE '_pg_%'
-  -- AND c.TABLE_NAME NOT LIKE 'pg_%'
-  -- AND c.TABLE_NAME NOT LIKE 'sql_%'
-  -- AND c.TABLE_NAME NOT LIKE 'routine_%'
-ORDER BY c.TABLE_NAME, c.COLUMN_NAME
+WHERE
+  c.TABLE_NAME NOT ILIKE '_pg_%'
+  AND c.TABLE_NAME NOT ILIKE 'pg_%'
+  -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
+  -- AND c.TABLE_NAME NOT ILIKE 'routine_%'
+UNION
+SELECT tc.TABLE_NAME
+, concat('zzz CONSTRAINT: ', tc.CONSTRAINT_NAME) as COLUMN_NAME
+, tc.CONSTRAINT_TYPE as DATA_TYPE
+, '' as IS_NULLABLE
+, 0 as CHARACTER_MAXIMUM_LENGTH
+, 0 as NUMERIC_PRECISION
+, 0 as DATETIME_PRECISION
+, '' as COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
+WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
+  AND tc.TABLE_NAME NOT ILIKE '_pg_%'
+  AND tc.TABLE_NAME NOT ILIKE 'pg_%'
+  -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
+  -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'
+ORDER BY TABLE_NAME, COLUMN_NAME
 ;
   ";
+  local container_name="django-react-db";
   local padding="---------";
   local begin="BEGIN";
   local end="END";
@@ -29,7 +45,8 @@ ORDER BY c.TABLE_NAME, c.COLUMN_NAME
   export PGUSER="postgres";
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
-  psql -c "$_command" ./src/tables/localhost.csv;
+  docker exec "$container_name" psql --csv -c "$_command" > ./src/tables/localhost.csv;
+  # psql --csv -c "$_command" > ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
 
