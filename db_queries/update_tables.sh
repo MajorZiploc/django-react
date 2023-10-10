@@ -40,7 +40,7 @@ ORDER BY TABLE_NAME, COLUMN_NAME
   export PGUSER="postgres";
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
-  psql -c "$_command" > ./src/tables/localhost.csv;
+  psql --csv -c "$_command" > ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
 
