@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 
 class AuditableModel(models.Model):
-    created_date = models.DateTimeField(default=now, editable=False, null=True)
+    created_date = models.DateTimeField(default=now, editable=False)
     updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
