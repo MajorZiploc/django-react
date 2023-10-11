@@ -7,8 +7,8 @@ let $PGDATABASE="postgres" |
 let $PGUSER="postgres" |
 let $PGPASSWORD="password" |
 
-let container_name="django-react-db" |
-let container_type="docker" |
+let vim_code_runner_container_name="django-react-db" |
+let vim_code_runner_container_type="docker" |
 let vim_code_runner_csv_type="rfc_csv" |
 let vim_code_runner_sql_as_csv="true" |
 
