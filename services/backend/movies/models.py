@@ -1,13 +1,18 @@
 from django.db import models
+from django.utils.timezone import now
 
+class AuditableModel(models.Model):
+    created_date = models.DateTimeField(default=now, editable=False, null=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
-class Movie(models.Model):
+    class Meta:
+        abstract = True
+
+class Movie(AuditableModel):
   id = models.AutoField(primary_key=True)
   title = models.CharField(max_length=100)
   genre = models.CharField(max_length=100)
   year = models.IntegerField()
-  created_at = models.DateTimeField(auto_now_add=True)
-  updated_at = models.DateTimeField(auto_now=True)
   creator = models.ForeignKey('auth.User', related_name='movies', on_delete=models.CASCADE)
 
   class Meta:
