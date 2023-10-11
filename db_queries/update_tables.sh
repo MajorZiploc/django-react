@@ -45,7 +45,7 @@ ORDER BY TABLE_NAME, COLUMN_NAME
   export PGUSER="postgres";
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
-  docker exec "$container_name" psql -c "$_command" --csv --output ./src/tables/localhost.csv;
+  docker exec "$container_name" psql -c "$_command" --csv > ./src/tables/localhost.csv;
   # psql -c "$_command" --csv --output ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
