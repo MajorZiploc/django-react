@@ -16,6 +16,7 @@ function just_install_dev {
 
 function just_setup_postgres_volume {
   # TODO: add env var for local db dir
+  mkdir -p /tmp/django-react-postgres-data/;
   cp -a "$JUST_PROJECT_ROOT/container_configs/pgdb/." /tmp/django-react-postgres-data/;
 }
 
