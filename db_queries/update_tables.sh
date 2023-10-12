@@ -50,6 +50,7 @@ ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
   export PGPASSWORD="password";
   echo "$padding $begin updating localhost $padding";
   local table_dir="./src/tables";
+  mkdir -p "${table_dir}";
   docker exec "$container_name" psql -c "$_command" --csv > "${table_dir}/localhost.csv";
   # psql -c "$_command" --csv --output ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
