@@ -2,6 +2,28 @@
 
 function main {
 
+  local function_sub_query="
+UNION
+SELECT
+lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+, 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
+, r.SPECIFIC_NAME AS ENTRY_NAME
+-- , r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - can be large
+, '' AS DATA_TYPE -- use if you want to minify this query
+, '' as IS_NULLABLE
+, 0 as CHARACTER_MAXIMUM_LENGTH
+, 0 as NUMERIC_PRECISION
+, 0 as DATETIME_PRECISION
+, '' as COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK)
+FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
+  ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
+WHERE
+  r.ROUTINE_TYPE IS NOT NULL
+  ";
+  # comment this out to see function part of query
+  function_sub_query="";
+
   local _command="
 SELECT
 'column' as ENTRY_TYPE
@@ -37,6 +59,7 @@ WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
   AND tc.TABLE_NAME NOT ILIKE 'pg_%'
   -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
   -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'
+${function_sub_query}
 ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
 ;
 ";
