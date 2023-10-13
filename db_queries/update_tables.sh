@@ -2,14 +2,17 @@
 
 function main {
 
+  local warn="WARNING: ";
+
+  local fn_def=", r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - can be large"
+  fn_def=", '' AS DATA_TYPE -- use if you want to minify this query";
   local function_sub_query="
 UNION
 SELECT
 lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
 , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
 , r.SPECIFIC_NAME AS ENTRY_NAME
--- , r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - can be large
-, '' AS DATA_TYPE -- use if you want to minify this query
+${fn_def}
 , '' as IS_NULLABLE
 , 0 as CHARACTER_MAXIMUM_LENGTH
 , 0 as NUMERIC_PRECISION
@@ -23,6 +26,34 @@ WHERE
   ";
   # comment this out to see function part of query
   function_sub_query="";
+  [[ -z "$function_sub_query" ]] && { echo "${warn}function_sub_query not included"; }
+  [[ -n "$function_sub_query" && "$fn_def" == ", '' AS DATA_TYPE -- use if you want to minify this query" ]] && { echo "${warn}fn_def not included"; }
+
+  local view_def=", v.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - can be large"
+  view_def=", '' AS DATA_TYPE -- use if you want to minify this query";
+  local view_sub_query="
+UNION
+SELECT
+'view' AS ENTRY_TYPE
+, v.TABLE_NAME
+, '' AS ENTRY_NAME
+${view_def}
+, '' as IS_NULLABLE
+, 0 as CHARACTER_MAXIMUM_LENGTH
+, 0 as NUMERIC_PRECISION
+, 0 as DATETIME_PRECISION
+, '' as COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
+WHERE
+  v.TABLE_NAME NOT ILIKE '_pg_%'
+  AND v.TABLE_NAME NOT ILIKE 'pg_%'
+  -- AND v.TABLE_NAME NOT ILIKE 'sql_%'
+  -- AND v.TABLE_NAME NOT ILIKE 'routine_%'
+"
+  # comment this out to see view part of query
+  # view_sub_query="";
+  [[ -z "$view_sub_query" ]] && { echo "${warn}view_sub_query not included"; }
+  [[ -n "$view_sub_query" && "$view_def" == ", '' AS DATA_TYPE -- use if you want to minify this query" ]] && { echo "${warn}view_def not included"; }
 
   local _command="
 SELECT
@@ -60,6 +91,7 @@ WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
   -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
   -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'
 ${function_sub_query}
+${view_sub_query}
 ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
 ;
 ";
