@@ -4,7 +4,7 @@ export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
 export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
-function just_install_dev {
+function just_install {
   npm install;
   just_venv_create;
   just_venv_connect;
@@ -41,7 +41,7 @@ function just_test {
 }
 
 function just_demo {
-  just_install_dev;
+  just_install;
   just_run;
 }
 
