@@ -4,7 +4,7 @@ function main {
 
   # from my dotfiles: https://github.com/MajorZiploc/dotfiles/blob/master/shared/required/home/.bashrc.d/portable/snippets.bash
   . ~/.bashrc.d/portable/snippets.bash;
-  local _command; _command="$(snip_sql_column_view_fn_info "low" "low" "none")";
+  local _command; _command="$(snip_sql_column_view_fn_info "pgsql" "low" "low" "none")";
 
   local container_name="django-react-db";
   local padding="---------";
