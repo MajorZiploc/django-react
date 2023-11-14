@@ -31,7 +31,7 @@ function just_run {
 }
 
 function just_stop {
-  docker-compose -f docker-compose.yml -f docker-compose.local.yml down -v;
+  docker-compose -f docker-compose.yml -f docker-compose.local.yml down;
 }
 
 function just_test {
