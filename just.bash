@@ -42,6 +42,7 @@ function just_test {
 
 function just_demo {
   just_install;
+  cd "$JUST_PROJECT_ROOT";
   just_run;
 }
 
