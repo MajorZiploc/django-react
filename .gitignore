@@ -13,3 +13,5 @@ videos
 yarn-debug.log*
 yarn-error.log*
 **/tables/*csv
+tags
+*.vim
