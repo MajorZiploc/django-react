@@ -26,7 +26,7 @@ function just_format {
 }
 
 function just_run {
-  just_setup_postgres_volume;
+  # just_setup_postgres_volume;
   docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d;
 }
 
