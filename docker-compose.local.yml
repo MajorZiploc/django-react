@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - './services/backend:/workspace/app'
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
@@ -29,7 +32,12 @@ services:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
-      - 'pg_data:/var/lib/postgresql/data/'
+      - '${PGDBLOCAL}:/var/lib/postgresql/data/'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -p 5432 -q -U ${POSTGRES_USER}"]
+      interval: 3s
+      timeout: 2s
+      retries: 7
 
   celery-beat-worker:
     build:
@@ -61,6 +69,3 @@ services:
   mq:
     volumes:
       - '/tmp/django-react-mq/data/mq:/var/lib/rabbitmq'
-
-volumes:
-  pg_data:
