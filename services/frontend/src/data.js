@@ -9,7 +9,6 @@ import {
   apiUrl,
 } from './utils';
 
-// TODO: need to test
 export async function refreshAuth() {
   return axios
     .post(
@@ -33,6 +32,8 @@ export async function refreshAuth() {
 }
 
 export async function login(username, password) {
+  setAccessToken(null);
+  setRefreshToken(null);
   return axios
     .post(
       apiUrl + '/api/v1/auth/token/',
@@ -89,7 +90,7 @@ export async function auth() {
 }
 
 export async function retry(apiCall) {
-  return await getRefreshToken().then(async _r => await apiCall());
+  return await refreshAuth().then(async _r => await apiCall());
 }
 
 async function _getMoviesHelper() {
