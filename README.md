@@ -188,4 +188,3 @@ A template for a basic django and react site
 - Improve login/register/auth flow (Rework auth to not show user/pass in api call)
 - Add a third party login/register flow
 - Add logging
-- Migrate javascript to typescript
