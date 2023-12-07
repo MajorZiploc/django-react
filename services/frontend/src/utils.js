@@ -24,11 +24,19 @@ export function getRefreshToken() {
 }
 
 export function setAccessToken(v) {
-  localStorage.setItem('accessToken', v);
+  if (v == null) {
+    localStorage.removeItem('accessToken');
+  } else {
+    localStorage.setItem('accessToken', v);
+  }
 }
 
 export function setRefreshToken(v) {
-  localStorage.setItem('refreshToken', v);
+  if (v == null) {
+    localStorage.removeItem('refreshToken');
+  } else {
+    localStorage.setItem('refreshToken', v);
+  }
 }
 
 export function getDefaultHeaders() {
