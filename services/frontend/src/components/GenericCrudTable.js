@@ -173,18 +173,18 @@ const GenericCrudTable = ({
       .then(_e =>
         openAlert({
           display: true,
-          message: `Successfully ${
-            alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'adde' : 'update')
-          }d title ${modalToString(enteredModel)}`,
+          message: `Successfully ${alertMsgLabel || (!enteredModel[modelId] ? 'adde' : 'update')}d ${modalToString(
+            enteredModel
+          )}`,
           severity: 'success',
         })
       )
       .catch(_e =>
         openAlert({
           display: true,
-          message: `Failed to ${
-            alertMsgLabel ?? (enteredModel[modelId] === 0 ? 'add' : 'update')
-          } title ${modalToString(enteredModel)}`,
+          message: `Failed to ${alertMsgLabel || (!enteredModel[modelId] ? 'add' : 'update')} ${modalToString(
+            enteredModel
+          )}`,
           severity: 'error',
         })
       );
