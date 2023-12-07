@@ -53,4 +53,5 @@ export function getDefaultAuthedHeaders() {
   };
 }
 
-export const apiUrl = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_BACKEND_PORT}`;
+export const apiUrl = process.env.REACT_APP_BACKEND_URL;
+export const frontendUrl = process.env.REACT_APP_FRONTEND_URL;

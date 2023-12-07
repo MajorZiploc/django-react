@@ -7,6 +7,7 @@ import {
   getDefaultHeaders,
   getDefaultAuthedHeaders,
   apiUrl,
+  frontendUrl,
 } from './utils';
 
 export async function refreshAuth() {
@@ -90,7 +91,13 @@ export async function auth() {
 }
 
 export async function retry(apiCall) {
-  return await refreshAuth().then(async _r => await apiCall());
+  return await refreshAuth().then(async _r => await apiCall()).catch(_e => {
+    if (_e?.request?.status === 401) {
+      setAccessToken(null);
+      setRefreshToken(null);
+      window.location.href = frontendUrl;
+    }
+  });
 }
 
 async function _getMoviesHelper() {

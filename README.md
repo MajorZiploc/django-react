@@ -177,6 +177,7 @@ A template for a basic django and react site
 
 #### Backend
 
+- use CORS_ALLOWED_ORIGINS in settings
 - Consider merging Dockerfile and Dockerfile.dev and entrypoint dev/prod scripts. They are very similar
 
 ### Minor Changes
