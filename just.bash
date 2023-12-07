@@ -15,9 +15,8 @@ function just_install {
 }
 
 function just_setup_postgres_volume {
-  # TODO: add env var for local db dir
-  mkdir -p /tmp/django-react-postgres-data/;
-  cp -a "$JUST_PROJECT_ROOT/container_configs/pgdb/." /tmp/django-react-postgres-data/;
+  mkdir -p "$PGDBLOCAL";
+  cp -a "$JUST_PROJECT_ROOT/container_configs/pgdb/." "$PGDBLOCAL";
 }
 
 function just_format {
@@ -26,7 +25,7 @@ function just_format {
 }
 
 function just_run {
-  just_setup_postgres_volume;
+  # just_setup_postgres_volume;
   docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d;
 }
 
