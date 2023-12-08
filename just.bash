@@ -4,6 +4,8 @@ export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
 export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
+echo "NOTE: SOURCE THIS FILE WHILE INSIDE THE SAME PATH AS THIS FILE. ELSE YOU WILL HAVE INVALID BEHAVIOR";
+
 function just_install {
   npm install;
   just_venv_create;
@@ -117,9 +119,9 @@ function just_test_frontend_headed {
 }
 
 function just_clean {
-  rm -rf "$JUST_PROJECT_ROOT/.venv";
-  rm -rf "$JUST_FRONTEND_ROOT/node_modules";
-  rm -rf "$JUST_FRONTEND_ROOT/ui_tests/node_modules";
+  rm -rf "${JUST_PROJECT_ROOT:?}/.venv";
+  rm -rf "${JUST_FRONTEND_ROOT:?}/node_modules";
+  rm -rf "${JUST_FRONTEND_ROOT:?}/ui_tests/node_modules";
 }
 
 function just_backend_debug_shell {
