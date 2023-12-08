@@ -35,7 +35,7 @@ Ex: 127.0.0.1:3000/ to view the frontend of the site in a browser. NOT localhost
 ## NOTES
 
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
-- Designed to run fully in docker. Some just_* scripts attempt to install dependencies locally. This is just dev quality of life for LSP support locally
+- Designed to run fully in docker. Some just\_\* scripts attempt to install dependencies locally. This is just dev quality of life for LSP support locally
 - view the project root level just.bash to see all available commands
 - Running on Windows outside of wsl is not supported
 
