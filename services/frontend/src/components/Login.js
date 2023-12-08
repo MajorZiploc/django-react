@@ -1,6 +1,8 @@
 // @ts-check
 import React from 'react';
 import { Button, TextField, Snackbar, Alert } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Navigate } from 'react-router-dom';
 import * as data from '../data';
 import { getAccessToken, toKeyValArray } from '../utils';
@@ -27,6 +29,8 @@ const Login = () => {
   });
   const [isRegister, setIsRegister] = React.useState(false);
   const [isLogined, setIsLogined] = React.useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+  const [isRePasswordVisible, setIsRePasswordVisible] = React.useState(false);
   /** @type {import('../interfaces').useState<AlertSettings>} */
   const [alertSettings, setAlertSettings] = React.useState({
     display: false,
@@ -170,25 +174,59 @@ const Login = () => {
             size='small'
             onChange={e => onChange(e)}
           />
-          <TextField
-            className='loginTextField'
-            label='Password'
-            id='password'
-            variant='outlined'
-            size='small'
-            onChange={e => onChange(e)}
-            type='password'
-          />
-          {isRegister && (
+          <div style={{ display: 'flex' }}>
             <TextField
-              className='loginTextField'
-              label='Retype password'
-              id='password2'
+              className='loginPasswordField'
+              label='Password'
+              id='password'
               variant='outlined'
               size='small'
               onChange={e => onChange(e)}
-              type='password'
+              type={isPasswordVisible ? 'text' : 'password'}
             />
+            {isPasswordVisible ? (
+              <VisibilityOffIcon
+                className='login-eye-styles'
+                onClick={() => setIsPasswordVisible(false)}
+                id='visibility-off-icon'
+                color='primary'
+              />
+            ) : (
+              <VisibilityIcon
+                className='login-eye-styles'
+                onClick={() => setIsPasswordVisible(true)}
+                id='visibility-icon'
+                color='primary'
+              />
+            )}
+          </div>
+          {isRegister && (
+            <div style={{ display: 'flex' }}>
+              <TextField
+                className='loginPasswordField'
+                label='Retype password'
+                id='password2'
+                variant='outlined'
+                size='small'
+                onChange={e => onChange(e)}
+                type={isRePasswordVisible ? 'text' : 'password'}
+              />
+              {isRePasswordVisible ? (
+                <VisibilityOffIcon
+                  className='login-eye-styles'
+                  onClick={() => setIsRePasswordVisible(false)}
+                  id='visibility-off-icon'
+                  color='primary'
+                />
+              ) : (
+                <VisibilityIcon
+                  className='login-eye-styles'
+                  onClick={() => setIsRePasswordVisible(true)}
+                  id='visibility-icon'
+                  color='primary'
+                />
+              )}
+            </div>
           )}
           <Button id='logInButton' type='submit' color='primary'>
             {isRegister ? 'Register' : 'Log in'}
