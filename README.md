@@ -2,19 +2,23 @@
 
 A template for a basic django and react site
 
+Use 127.0.0.1 and NOT localhost in your urls for using various resources
+
+Ex: 127.0.0.1:3000/ to view the frontend of the site in a browser. NOT localhost:3000/
+
 ## Requirements
 
 - docker v20+
 - python v3.11 (python3 and pip3)
 - bash v5 or zsh
-- nodejs v16+
+- nodejs v18+
 - npm (node package manager)
 - mac or linux/wsl
 - internet connection
 
 ### Requirements Mac only
 
-- iterm2 with rosetta enabled (needed to run ui tests)
+- iterm2 with rosetta enabled (needed to run ui tests else any terminal emulator is fine)
 
 ### Requirements Windows only
 
@@ -30,12 +34,10 @@ A template for a basic django and react site
 
 ## NOTES
 
-- The login flow can be a little wonky
-  - If you login and you see that the table failed to load in then:
-    - logout and relogin
-- Running on Windows outside of wsl is not supported
 - All commands listed here assume you are running them from the root of the project unless otherwise specified
+- Designed to run fully in docker. Some just_* scripts attempt to install dependencies locally. This is just dev quality of life for LSP support locally
 - view the project root level just.bash to see all available commands
+- Running on Windows outside of wsl is not supported
 
 ## Troubleshooting
 
@@ -61,10 +63,12 @@ A template for a basic django and react site
 - All just\_\* commands expect that you have sourced the project root level just.bash while in the root of the project:
   > . ./just.bash
 
-### Demo/First Time Setup (takes care of all steps needed to run the app from begin to end assuming you have taken care of the requirements section)
+### Demo/First Time Setup (takes care of most steps needed to run the app from begin to end assuming you have taken care of the requirements section and have setup environment variables)
 
 - run the demo
   > just_demo
+- if that fails (likely do to installing deps locally) then try:
+  > just_run
 
 ### Run the project (start the containers)
 

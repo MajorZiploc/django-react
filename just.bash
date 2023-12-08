@@ -4,11 +4,13 @@ export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
 export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
+echo "NOTE: SOURCE THIS FILE WHILE INSIDE THE SAME PATH AS THIS FILE. ELSE YOU WILL HAVE INVALID BEHAVIOR";
+
 function just_install {
   npm install;
   just_venv_create;
   just_venv_connect;
-  pip3 install -r "$JUST_PROJECT_ROOT/requirements.txt";
+  cat "$JUST_PROJECT_ROOT/requirements.txt" | grep -Ev "(^#|^\s*$)" | xargs -n 1 pip3 install;
   just_build_frontend;
   just_build_backend;
   just_build_frontend_ui_tests;
@@ -95,7 +97,7 @@ function just_build_frontend {
 }
 
 function just_build_backend {
-  pip3 install -r "$JUST_BACKEND_ROOT/requirements.txt";
+  cat "$JUST_BACKEND_ROOT/requirements.txt" | grep -Ev "(^#|^\s*$)" | xargs -n 1 pip3 install;
 }
 
 function just_test_frontend_start_ui_test_runner {
@@ -117,9 +119,9 @@ function just_test_frontend_headed {
 }
 
 function just_clean {
-  rm -rf "$JUST_PROJECT_ROOT/.venv";
-  rm -rf "$JUST_FRONTEND_ROOT/node_modules";
-  rm -rf "$JUST_FRONTEND_ROOT/ui_tests/node_modules";
+  rm -rf "${JUST_PROJECT_ROOT:?}/.venv";
+  rm -rf "${JUST_FRONTEND_ROOT:?}/node_modules";
+  rm -rf "${JUST_FRONTEND_ROOT:?}/ui_tests/node_modules";
 }
 
 function just_backend_debug_shell {
