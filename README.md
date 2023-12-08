@@ -39,20 +39,6 @@ Ex: 127.0.0.1:3000/ to view the frontend of the site in a browser. NOT localhost
 - view the project root level just.bash to see all available commands
 - Running on Windows outside of wsl is not supported
 
-## Troubleshooting
-
-- psql: FATAL: role "postgres" does not exist
-
-  you need to setup a postgres user
-
-> $(dirname "`which psql`")/createuser -s postgres
-
-- psql: initdb: error: directory "/var/lib/postgresql/data" exists but is not empty
-
-  your local volume of the db is likely on a different version of psql. you need to delete it to prevent this problem in the future.
-
-> rm -rf /tmp/django-react-postgres-data
-
 ## Ensure .env variables are set
 
 - The environment variables need to be set. Use the default values like so:
@@ -118,6 +104,20 @@ Ex: 127.0.0.1:3000/ to view the frontend of the site in a browser. NOT localhost
 
 - Runs all tests headlessly (requires the frontend ui test setup mentioned above)
   > just_test
+
+## Troubleshooting
+
+- psql: FATAL: role "postgres" does not exist
+
+  you need to setup a postgres user
+
+> $(dirname "`which psql`")/createuser -s postgres
+
+- psql: initdb: error: directory "/var/lib/postgresql/data" exists but is not empty
+
+  your local volume of the db is likely on a different version of psql. you need to delete it to prevent this problem in the future.
+
+> rm -rf /tmp/django-react-postgres-data
 
 ## VSCODE DEVELOPMENT NOTES
 
