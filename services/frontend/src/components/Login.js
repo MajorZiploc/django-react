@@ -90,22 +90,22 @@ const Login = () => {
             /** @type{JSX.Element | null | string} */
             let message = 'Registration Failed: check your form information';
             if (err?.response?.data) {
-              /** @type{{key: string, content: string[]}[]} */
-              const issues = Object.keys(err.response.data).map(key => ({ key, content: err.response.data[key] }));
+              /** @type{[string, string[]][]} */
+              const issues = Object.entries(err.response.data);
               const title = `Registration Failed with the following issue${
-                issues.reduce((acc, i) => acc + i.content.length, 0) === 1 ? '' : 's'
+                issues.reduce((acc, [_, content]) => acc + content.length, 0) === 1 ? '' : 's'
               }:`;
               message = (
                 <div>
                   {' '}
                   {title}
                   <ul>
-                    {issues.map(issue => (
-                      <li key={issue.key} style={{ textAlign: 'left' }}>
+                    {issues.map(([field, content]) => (
+                      <li key={field} style={{ textAlign: 'left' }}>
                         <div>
-                          {issue.key}
+                          {field}
                           <ul>
-                            {issue.content.map(point => (
+                            {content.map(point => (
                               <li className='login-issue-point' key={point}>
                                 {point}
                               </li>
