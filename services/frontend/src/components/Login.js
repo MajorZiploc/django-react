@@ -39,6 +39,7 @@ const Login = () => {
   });
   // const count = useSelector(selectCount);
 
+  /** @type {(alertSettings: AlertSettings) => void} */
   const openAlert = alertSettings => {
     setAlertSettings(alertSettings);
   };
