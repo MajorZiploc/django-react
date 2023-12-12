@@ -86,13 +86,44 @@ const Login = () => {
             });
             setIsRegister(false);
           })
-          .catch(_e =>
+          .catch(err => {
+            /** @type{JSX.Element | null | string} */
+            let message = 'Registration Failed: check your form information';
+            if (err?.response?.data) {
+              /** @type{{key: string, content: string[]}[]} */
+              const issues = Object.keys(err.response.data).map(key => ({ key, content: err.response.data[key] }));
+              const title = `Registration Failed with the following issue${
+                issues.reduce((acc, i) => acc + i.content.length, 0) === 1 ? '' : 's'
+              }:`;
+              message = (
+                <div>
+                  {' '}
+                  {title}
+                  <ul>
+                    {issues.map(issue => (
+                      <li key={issue.key} style={{ textAlign: 'left' }}>
+                        <div>
+                          {issue.key}
+                          <ul>
+                            {issue.content.map(point => (
+                              <li className='login-issue-point' key={point}>
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            }
             openAlert({
               display: true,
-              message: 'Registration failed, check your username and password',
+              message,
               severity: 'error',
-            })
-          );
+            });
+          });
       } else {
         const errorMessage = `Passwords do not match`;
         openAlert({ display: true, message: errorMessage, severity: 'error' });
@@ -128,7 +159,6 @@ const Login = () => {
           id='loginPageAlertSnackbar'
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={alertSettings?.display}
-          autoHideDuration={6000}
           onClose={closeAlert}
           className='alertBox'
         >

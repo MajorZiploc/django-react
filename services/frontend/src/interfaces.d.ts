@@ -4,7 +4,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 
 export interface AlertSettings {
   display: boolean;
-  message: string;
+  message: string | JSX.Element | null;
   severity: AlertColor;
 }
 
