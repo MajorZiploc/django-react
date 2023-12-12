@@ -22,7 +22,8 @@ services:
     volumes:
       - './services/frontend:/workspace/app'
       # One-way volume to use node_modules from inside image
-      - '/workspace/app/node_modules'
+      # NOTE: this can cause docker out of memory issues
+      # - '/workspace/app/node_modules'
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     command: npm run start
