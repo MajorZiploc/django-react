@@ -5,7 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Navigate } from 'react-router-dom';
 import * as data from '../data';
-import { getAccessToken, toKeyValArray } from '../utils';
+import { getAccessToken } from '../utils';
 import '../styles/Global.scss';
 import '../styles/Login.scss';
 // import { useSelector } from 'react-redux';
@@ -58,17 +58,17 @@ const Login = () => {
         setIsLogined(true);
       }
     } else {
-      const errorMessage = `Missing the following fields: ${toKeyValArray(loginCreds)
-        .filter(kv => ['username', 'password'].includes(kv.key))
-        .filter(kv => !kv.value)
-        .map(kv => kv.key)
+      const errorMessage = `Missing the following fields: ${Object.entries(loginCreds)
+        .filter(([key, _value]) => ['username', 'password'].includes(key))
+        .filter(([_key, value]) => !value)
+        .map(([key, _value]) => key)
         .join(', ')}`;
       openAlert({ display: true, message: errorMessage, severity: 'error' });
     }
   };
 
   const RegisterAttempt = async _e => {
-    if (toKeyValArray(loginCreds).every(c => c.value)) {
+    if (Object.entries(loginCreds).every(([_key, value]) => value)) {
       if (loginCreds.password === loginCreds.password2) {
         await data
           .register(
@@ -129,9 +129,9 @@ const Login = () => {
         openAlert({ display: true, message: errorMessage, severity: 'error' });
       }
     } else {
-      const errorMessage = `Missing the following fields: ${toKeyValArray(loginCreds)
-        .filter(kv => !kv.value)
-        .map(kv => kv.key)
+      const errorMessage = `Missing the following fields: ${Object.entries(loginCreds)
+        .filter(([_key, value]) => !value)
+        .map(([key, _value]) => key)
         .join(', ')}`;
       openAlert({ display: true, message: errorMessage, severity: 'error' });
     }

@@ -28,8 +28,6 @@ import AddBoxTwoTone from '@mui/icons-material/AddBoxTwoTone';
 import EditTwoTone from '@mui/icons-material/EditTwoTone';
 import '../styles/GenericCrudTable.scss';
 
-import { toKeyValArray } from '../utils';
-
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
  */
@@ -194,7 +192,9 @@ const GenericCrudTable = ({
 
   React.useEffect(() => {
     const filtered = models.filter(item =>
-      searchTerm !== '' ? toKeyValArray(item).some(kv => (kv.value + '').toLowerCase().includes(searchTerm)) : true
+      searchTerm !== ''
+        ? Object.entries(item).some(([_key, value]) => (value + '').toLowerCase().includes(searchTerm))
+        : true
     );
     setModelCount(filtered.length);
     setFilteredModels(filtered);
