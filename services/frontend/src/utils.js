@@ -6,20 +6,20 @@ export function getRefreshToken() {
   return localStorage.getItem('refreshToken');
 }
 
-export function setAccessToken(v) {
+export function setLocalStorageItem(key, v) {
   if (v == null) {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(key);
   } else {
-    localStorage.setItem('accessToken', v);
+    localStorage.setItem(key, v);
   }
 }
 
+export function setAccessToken(v) {
+  setLocalStorageItem('accessToken', v);
+}
+
 export function setRefreshToken(v) {
-  if (v == null) {
-    localStorage.removeItem('refreshToken');
-  } else {
-    localStorage.setItem('refreshToken', v);
-  }
+  setLocalStorageItem('refreshToken', v);
 }
 
 export function getDefaultHeaders() {
