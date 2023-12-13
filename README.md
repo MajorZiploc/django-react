@@ -133,6 +133,12 @@ A template for a basic django and react site
 
 ### Frontend npm run (start|build) warning
 
+Use useLocalStorage hook instead of directly using localStorage
+
+Use React Intl for locale
+
+would be nice if i had a way to store the api call results in redux
+
 - TypeError: Cannot set property mark of #<Object> which has only a getter
 
   Likely related to sass dependency
