@@ -2,10 +2,6 @@
 
 A template for a basic django and react site
 
-Use 127.0.0.1 and NOT localhost in your urls for using various resources
-
-Ex: 127.0.0.1:3000/ to view the frontend of the site in a browser. NOT localhost:3000/
-
 ## Requirements
 
 - docker v20+
