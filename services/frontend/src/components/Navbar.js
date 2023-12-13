@@ -21,6 +21,7 @@ import Home from '@mui/icons-material/Home';
 // @ts-ignore
 import avatar from '../avatar.jpg';
 import '../styles/Navbar.scss';
+import { setAccessToken, setRefreshToken } from '../utils';
 // import { useDispatch } from 'react-redux';
 // import { incrementByAmount, incrementByAmountAsync } from '../redux/slices/counterSlice';
 
@@ -55,7 +56,8 @@ const Navbar = () => {
   // const dispatch = useDispatch();
 
   const onLogout = () => {
-    localStorage.clear();
+    setAccessToken(null);
+    setRefreshToken(null);
   };
 
   const handleClickListItem = item => () => {
