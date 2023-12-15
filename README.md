@@ -14,7 +14,7 @@ A template for a basic django and react site
 
 ### Requirements Mac only
 
-- iterm2 with rosetta enabled (needed to run ui tests else any terminal emulator is fine)
+- (OPTIONAL) terminal emulator with rosetta enabled (needed to run ui tests else any terminal emulator is fine)
 
 ### Requirements Windows only
 
