@@ -13,11 +13,12 @@ RUN  \
     apk --purge del .build-deps
 # Add the rest of the code
 # COPY . /workspace/app
-COPY ./scripts/ /workspace/
+# COPY ./scripts/ /workspace/
 # Make port 8000 available for the app
 ENV PORT 8000
 EXPOSE 8000
 # Be sure to use 0.0.0.0 for the host within the Docker container,
 # otherwise the browser won't be able to find it
-RUN ["chmod", "+x", "/workspace/entrypoint-dev.sh"]
-CMD [ "/workspace/entrypoint-dev.sh" ]
+# RUN ["chmod", "+x", "/workspace/entrypoint-dev.sh"]
+# CMD [ "/workspace/entrypoint-dev.sh" ]
+CMD ["true"]

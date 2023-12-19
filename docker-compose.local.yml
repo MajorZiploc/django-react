@@ -13,7 +13,7 @@ services:
       - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
     tty: true
-    command: /workspace/entrypoint-dev.sh
+    command: /workspace/app/scripts/entrypoint-dev.sh
 
   frontend:
     build:
@@ -28,7 +28,8 @@ services:
       # - '/workspace/app/node_modules'
     ports:
       - '${FRONTEND_PORT}:${FRONTEND_PORT}'
-    command: npm run start
+    # command: npm run start
+    command: /workspace/app/scripts/entrypoint-dev.sh
     # command: sleep infinity
 
   db:
@@ -54,7 +55,7 @@ services:
       CELERY_WORKER_QUEUES: '${BEAT_CELERY_WORKER_QUEUES}'
     command: python3 manage.py autoreload_celery --mint_worker_options "${BEAT_MINT_WORKER_OPTIONS}" --mint_worker_type "${BEAT_MINT_WORKER_TYPE}" --celery_worker_queues "${BEAT_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
-    # command: /workspace/entrypoint-dev.sh
+    # command: /workspace/app/scripts/entrypoint-dev.sh
 
   celery-data-worker:
     build:
@@ -67,7 +68,7 @@ services:
       CELERY_WORKER_QUEUES: '${DATA_CELERY_WORKER_QUEUES}'
     command: python3 manage.py autoreload_celery --mint_worker_type "${DATA_MINT_WORKER_TYPE}" --celery_worker_queues "${DATA_CELERY_WORKER_QUEUES}"
     # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
-    # command: /workspace/entrypoint-dev.sh
+    # command: /workspace/app/scripts/entrypoint-dev.sh
 
   mq:
     volumes:
