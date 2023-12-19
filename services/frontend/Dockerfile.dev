@@ -1,7 +1,10 @@
 FROM node:18-alpine
+# NOTE: using this can help with out of space in some cases
+# FROM node:18
 WORKDIR /workspace/app/
 COPY package.json package-lock.json /workspace/app/
+# NOTE: this can cause out of space. if it does, just install locally and use in the container
 RUN npm install
-COPY . /workspace/app/
+# COPY . /workspace/app/
 EXPOSE 3000
 CMD npm start
