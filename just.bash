@@ -118,13 +118,29 @@ function just_test_frontend_headed {
   "$JUST_FRONTEND_ROOT/ui_tests/cypress_starter.sh" "$JUST_UI_TESTS_USERNAME" "$JUST_UI_TESTS_PASSWORD" "$JUST_UI_TESTS_ENV" "headed" ;
 }
 
-function just_clean {
-  rm -rf "${JUST_PROJECT_ROOT:?}/.venv";
-  rm -rf "${JUST_FRONTEND_ROOT:?}/node_modules";
-  rm -rf "${JUST_FRONTEND_ROOT:?}/ui_tests/node_modules";
-}
-
 function just_backend_debug_shell {
   local container_name="django-react-backend";
   docker exec -i -t "$container_name" python manage.py debug_shell;
 }
+
+function just_clean {
+  local target="${1}";
+  target="${target:-"$JUST_PROJECT_ROOT"}";
+  cd "$target";
+  rm -rf "${target}/node_modules" "${target}/.venv" "${target}/services/frontend/node_modules" "${target}/services/frontend/ui_tests/node_modules" "${target}/tags" "${target}/services/backend/api_crud/settings/__pycache__" "${target}/services/backend/api_crud/__pycache__" "${target}/services/backend/integrations/templatetags/__pycache__" "${target}/services/backend/integrations/migrations/__pycache__" "${target}/services/backend/integrations/tasks/__pycache__" "${target}/services/backend/integrations/management/__pycache__" "${target}/services/backend/integrations/management/commands/__pycache__" "${target}/services/backend/integrations/__pycache__" "${target}/services/backend/authentication/migrations/__pycache__" "${target}/services/backend/authentication/__pycache__";
+  git remote remove origin;
+}
+
+function just_zip {
+  if [[ -n "${JUST_PROJECT_ROOT}" ]]; then
+    local target="$HOME/Downloads/django-react";
+    rm -rf "$target";
+    cp -r "${JUST_PROJECT_ROOT}" "$target";
+    cd "$target";
+    just_clean "$target";
+    cd ~/Downloads;
+    zip -r ~/Downloads/django-react.zip ./django-react;
+    cd "$JUST_PROJECT_ROOT";
+  fi
+}
+
