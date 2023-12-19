@@ -12,7 +12,7 @@ RUN  \
     pip3 install --upgrade pip -r requirements.txt && \
     apk --purge del .build-deps
 # Add the rest of the code
-COPY . /workspace/app
+# COPY . /workspace/app
 COPY ./scripts/ /workspace/
 # Make port 8000 available for the app
 ENV PORT 8000
