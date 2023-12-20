@@ -27,6 +27,7 @@ import React from 'react';
 import AddBoxTwoTone from '@mui/icons-material/AddBoxTwoTone';
 import EditTwoTone from '@mui/icons-material/EditTwoTone';
 import '../styles/GenericCrudTable.scss';
+import { toProperCase } from '../utils';
 
 /**
  * @typedef {import('../interfaces').AlertSettings} AlertSettings
@@ -193,7 +194,9 @@ const GenericCrudTable = ({
   React.useEffect(() => {
     const filtered = models.filter(item =>
       searchTerm !== ''
-        ? Object.entries(item).some(([_key, value]) => (value + '').toLowerCase().includes(searchTerm))
+        ? Object.entries(item)
+            .filter(([key, _value]) => modelFields.map(mf => mf.name).includes(key))
+            .some(([_key, value]) => (value + '').toLowerCase().includes(searchTerm))
         : true
     );
     setModelCount(filtered.length);
@@ -210,10 +213,6 @@ const GenericCrudTable = ({
     }
     setCurrentPage(0);
   };
-
-  /** @type {(str: string) => string} */
-  const toProperCase = str =>
-    str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 
   const alert = (
     <Snackbar
@@ -241,7 +240,7 @@ const GenericCrudTable = ({
         <DialogContent dividers className='crudTableDialogContent'>
           {modelFields.map((mf, i) => {
             const key = mf;
-            const label = toProperCase(mf);
+            const label = toProperCase(mf.label);
             return (
               <TextField
                 key={i}
@@ -249,7 +248,7 @@ const GenericCrudTable = ({
                 label={label}
                 variant='outlined'
                 size='small'
-                value={(enteredModel && enteredModel[mf]) || ''}
+                value={(enteredModel && enteredModel[mf.name]) || ''}
                 onChange={e => {
                   const newField = {};
                   newField[key] = e.target.value;
@@ -318,11 +317,11 @@ const GenericCrudTable = ({
                   {modelFields.map((mf, i) => (
                     <TableCell key={i}>
                       <TableSortLabel
-                        active={sortColumn === mf}
+                        active={sortColumn === mf.name}
                         direction={sortDesc ? 'desc' : 'asc'}
-                        onClick={() => setSortParams(mf)}
+                        onClick={() => setSortParams(mf.name)}
                       >
-                        {toProperCase(mf)}
+                        {toProperCase(mf.label)}
                       </TableSortLabel>
                     </TableCell>
                   ))}
@@ -342,7 +341,7 @@ const GenericCrudTable = ({
                       <TableRow hover key={row[modelId]}>
                         {modelFields.map((mf, i) => (
                           <TableCell key={i} component='th' scope='row'>
-                            {row[mf]}
+                            {row[mf.name]}
                           </TableCell>
                         ))}
                         {editMode && (
