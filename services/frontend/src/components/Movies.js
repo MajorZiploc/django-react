@@ -13,6 +13,7 @@ import * as data from '../data';
  * @returns {React.ReactElement}
  */
 const Movies = () => {
+  /** @type {(enteredMovie: Movie) => { isValid: boolean; errorMessage: JSX.Element; }} */
   const validatedMovie = enteredMovie => {
     var isValid = true;
     var errorPoints = [];
@@ -24,7 +25,7 @@ const Movies = () => {
       isValid = false;
       errorPoints.push('Genre must be filled.');
     }
-    if (!enteredMovie.year || enteredMovie.year === '' || isNaN(Number(enteredMovie.year))) {
+    if (!enteredMovie.year || `${enteredMovie.year}` === '' || isNaN(Number(enteredMovie.year))) {
       isValid = false;
       errorPoints.push('Year must be a number.');
     }
