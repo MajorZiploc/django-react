@@ -42,7 +42,11 @@ const Movies = () => {
     },
     modelId: 'id',
     modalToString: model => model.title,
-    modelFields: ['title', 'genre', 'year'],
+    modelFields: [
+      { name: 'title', label: 'title' },
+      { name: 'genre', label: 'genre' },
+      { name: 'year', label: 'year' },
+    ],
     modelData: {
       deleteModel: data.deleteMovie.bind(data),
       postModel: data.postMovie.bind(data),

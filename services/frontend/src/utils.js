@@ -38,3 +38,13 @@ export function getDefaultAuthedHeaders() {
 
 export const apiUrl = process.env.REACT_APP_BACKEND_URL;
 export const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
+
+/** @type {(str: string) => string} */
+export const toCamel = str =>
+  str
+    .toLowerCase()
+    .replace(/([-_ ][a-z])/g, group => group.toUpperCase().replace('-', '').replace('_', '').replace(' ', ''));
+
+/** @type {(str: string) => string} */
+export const toProperCase = str =>
+  str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
