@@ -15,20 +15,27 @@ import * as data from '../data';
 const Movies = () => {
   const validatedMovie = enteredMovie => {
     var isValid = true;
-    var errorMessage = '';
+    var errorPoints = [];
     if (!enteredMovie.title || enteredMovie.title.trim() === '') {
       isValid = false;
-      errorMessage += 'Title must be filled.';
+      errorPoints.push('Title must be filled.');
     }
     if (!enteredMovie.genre || enteredMovie.genre.trim() === '') {
       isValid = false;
-      errorMessage += 'Genre must be filled.';
+      errorPoints.push('Genre must be filled.');
     }
     if (!enteredMovie.year || enteredMovie.year === '' || isNaN(Number(enteredMovie.year))) {
       isValid = false;
-      errorMessage += 'Year must be a number.';
+      errorPoints.push('Year must be a number.');
     }
-    return { isValid, errorMessage };
+    const errorMessage = (
+      <ul>
+        {errorPoints.map(errorPoint => (
+          <li key={errorPoint}>{errorPoint}</li>
+        ))}
+      </ul>
+    );
+    return { isValid, errorMessage: errorPoints.length !== 0 ? errorMessage : null };
   };
 
   /** @type {GenericCrudTableProps} */
