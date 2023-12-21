@@ -44,9 +44,8 @@ task_routes = ([
     (re.compile(r'(video|image)\.tasks\..*'), {'queue': 'media'}),
 ],)
 
-# use these settings when testing so tasks don't get sent to the
-# rabbit queue
-IS_TESTING = "test" in sys.argv
-if IS_TESTING:
-  task_always_eager = True
-  task_eager_propagates = True
+# use these settings when you want the messages to be sent straight to the workers and not go into the rabbitmq message queue
+# IS_TESTING = "test" in sys.argv
+# if IS_TESTING:
+#     task_always_eager = True
+#     task_eager_propagates = True
