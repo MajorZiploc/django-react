@@ -32,7 +32,9 @@ const Movies = () => {
     const errorMessage = (
       <ul>
         {errorPoints.map(errorPoint => (
-          <li key={errorPoint}>{errorPoint}</li>
+          <li className='issue-point' key={errorPoint}>
+            {errorPoint}
+          </li>
         ))}
       </ul>
     );
