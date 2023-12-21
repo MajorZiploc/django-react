@@ -107,7 +107,7 @@ const Login = () => {
                           {field}
                           <ul>
                             {content.map(point => (
-                              <li className='login-issue-point' key={point}>
+                              <li className='issue-point' key={point}>
                                 {point}
                               </li>
                             ))}

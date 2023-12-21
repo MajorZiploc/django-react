@@ -1,3 +1,4 @@
+// @ts-check
 export function getAccessToken() {
   return localStorage.getItem('accessToken');
 }
@@ -6,6 +7,7 @@ export function getRefreshToken() {
   return localStorage.getItem('refreshToken');
 }
 
+/** @type{(key: string, v: any) => void} */
 export function setLocalStorageItem(key, v) {
   if (v == null) {
     localStorage.removeItem(key);
@@ -14,10 +16,12 @@ export function setLocalStorageItem(key, v) {
   }
 }
 
+/** @type{(v: string) => void} */
 export function setAccessToken(v) {
   setLocalStorageItem('accessToken', v);
 }
 
+/** @type{(v: string) => void} */
 export function setRefreshToken(v) {
   setLocalStorageItem('refreshToken', v);
 }
@@ -38,6 +42,14 @@ export function getDefaultAuthedHeaders() {
 
 export const apiUrl = process.env.REACT_APP_BACKEND_URL;
 export const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
+
+/** @type{(json: any) => string} */
+export function jsonToQueryString(json) {
+  const qps = Object.entries(json)
+    .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
+    .join('&');
+  return qps ? `?${qps}` : '';
+}
 
 /** @type {(str: string) => string} */
 export const toCamel = str =>

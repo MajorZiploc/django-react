@@ -42,7 +42,7 @@ export interface GenericCrudTableProps<Data> {
   };
   validatedModel: (enteredModel: Data) => {
     isValid: boolean;
-    errorMessage?: string;
+    errorMessage: string | JSX.Element | null;
   };
   modalToString: (model: Data) => string;
 }
