@@ -1,4 +1,7 @@
 #!/bin/bash
+
+pip3 install --upgrade pip -r requirements.txt;
+
 python manage.py makemigrations --no-input
 python manage.py migrate --no-input
 
