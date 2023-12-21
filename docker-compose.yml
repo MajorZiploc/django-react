@@ -62,6 +62,7 @@ services:
     ports:
       - '5672:5672'
       # for rabbitmq-ui in browser
+      # default user/password is guest/guest
       - '15672:15672'
     restart: always
     container_name: django-react-mq
