@@ -4,9 +4,9 @@ from celery import (
 
 @shared_task(name="test_task")
 def test_task():
-  msg = "task worked"
-  print(msg)
-  return msg
+    msg = "task worked"
+    print(msg)
+    return msg
 
 @shared_task(name="delayed_task_watchdog")
 def delayed_task_watchdog():

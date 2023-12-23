@@ -1,5 +1,5 @@
 [tool.autopep8]
-indent-size = 2
+indent-size = 4
 max_line_length = 120
 ignore = ["E121", "E302", "E305", "W293"]
 in-place = true
