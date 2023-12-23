@@ -186,9 +186,9 @@ const GenericCrudTable = ({
           )}`,
           severity: 'error',
         })
-      );
+      )
+      .finally(() => closeModal());
     UpdateModels();
-    closeModal();
   };
 
   React.useEffect(() => {
