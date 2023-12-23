@@ -62,9 +62,9 @@ services:
     volumes:
       - './services/backend:/workspace/app'
     environment:
-      MINT_WORKER_TYPE: '${DATA_MINT_WORKER_TYPE}'
+      MINT_WORKER_TYPE: '${DATA_MI_WORKER_TYPE}'
       CELERY_WORKER_QUEUES: '${DATA_CELERY_WORKER_QUEUES}'
-    command: /workspace/app/scripts/entrypoint-dev.sh "" "${DATA_MINT_WORKER_TYPE}" "${DATA_CELERY_WORKER_QUEUES}"
+    command: /workspace/app/scripts/entrypoint-dev.sh "" "${DATA_MI_WORKER_TYPE}" "${DATA_CELERY_WORKER_QUEUES}"
 
   mq:
     volumes:
