@@ -27,11 +27,11 @@ task_acks_late = True
 
 
 beat_schedule = {
-    "delayed_task_watchdog": {
-        "task": "delayed_task_watchdog",
-        "schedule": 10,
-        "args": None,
-    },
+    # "delayed_task_watchdog": {
+    #     "task": "delayed_task_watchdog",
+    #     "schedule": 10,
+    #     "args": None,
+    # },
     "schedule_jobs": {"task": "schedule_jobs", "schedule": 30, "args": None},
 }
 
