@@ -18,31 +18,35 @@ task_soft_time_limit = 60 * 29
 
 task_default_queue = "crud_api_default_queue"
 
-imports = "api_crud"
+imports = "integrations.tasks.tasks"
 
 worker_prefetch_multiplier = 1
 task_acks_late = True
 
-# imports = "partner_integrations.tasks.tasks"
-
-
 beat_schedule = {
-    # "delayed_task_watchdog": {
-    #     "task": "delayed_task_watchdog",
-    #     "schedule": 10,
-    #     "args": None,
-    # },
+    "delayed_task_watchdog": {
+        "task": "delayed_task_watchdog",
+        "schedule": 10,
+        "args": None,
+    },
     "schedule_jobs": {"task": "schedule_jobs", "schedule": 30, "args": None},
 }
 
-# TODO: make these line up with queues in .env
-# as of now, this is just an example
-# reference celery routing docs: https://docs.celeryq.dev/en/latest/userguide/routing.html#basics
-task_routes = ([
-    ('feed.tasks.*', {'queue': 'feeds'}),
-    ('web.tasks.*', {'queue': 'web'}),
-    (re.compile(r'(video|image)\.tasks\..*'), {'queue': 'media'}),
-],)
+# task_create_missing_queues = True
+
+# # TODO: make these line up with queues in .env
+# # as of now, this is just an example
+# # reference celery routing docs: https://docs.celeryq.dev/en/latest/userguide/routing.html#basics
+# task_routes = ([
+#     ('feed.tasks.*', {'queue': 'feeds'}),
+#     ('web.tasks.*', {'queue': 'web'}),
+#     (re.compile(r'(video|image)\.tasks\..*'), {'queue': 'media'}),
+#     # ('api_crud.scheduled_task.*', {'queue': 'crud_api_scheduled_task_queue'}),
+#     # ('api_crud.default_task.*', {'queue': 'crud_api_default_queue'}),
+#     # ('partner1.tasks.*', {'queue': 'mint_partner1_queue'}),
+#     # ('partner2.tasks.*', {'queue': 'mint_partner2_queue'}),
+#     # ('*', {'queue': 'mint_default_queue'}),  # Default queue for unspecified tasks
+# ],)
 
 # use these settings when you want the messages to be sent straight to the workers and not go into the rabbitmq message queue
 # IS_TESTING = "test" in sys.argv
