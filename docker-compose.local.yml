@@ -53,9 +53,7 @@ services:
       MINT_WORKER_TYPE: '${BEAT_MINT_WORKER_TYPE}'
       MINT_WORKER_OPTIONS: '${BEAT_MINT_WORKER_OPTIONS}'
       CELERY_WORKER_QUEUES: '${BEAT_CELERY_WORKER_QUEUES}'
-    command: python3 manage.py autoreload_celery --mint_worker_options "${BEAT_MINT_WORKER_OPTIONS}" --mint_worker_type "${BEAT_MINT_WORKER_TYPE}" --celery_worker_queues "${BEAT_CELERY_WORKER_QUEUES}"
-    # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
-    # command: /workspace/app/scripts/entrypoint-dev.sh
+    command: /workspace/app/scripts/entrypoint-dev.sh "${BEAT_MI_WORKER_OPTIONS}" "${BEAT_MI_WORKER_TYPE}" "${BEAT_CELERY_WORKER_QUEUES}"
 
   celery-data-worker:
     build:
@@ -66,9 +64,7 @@ services:
     environment:
       MINT_WORKER_TYPE: '${DATA_MINT_WORKER_TYPE}'
       CELERY_WORKER_QUEUES: '${DATA_CELERY_WORKER_QUEUES}'
-    command: python3 manage.py autoreload_celery --mint_worker_type "${DATA_MINT_WORKER_TYPE}" --celery_worker_queues "${DATA_CELERY_WORKER_QUEUES}"
-    # NOTE: Use below if the above 'autoreload_celery' command is not found; hotreloading will not work with the below so you need to restart the container for changes to take effect
-    # command: /workspace/app/scripts/entrypoint-dev.sh
+    command: /workspace/app/scripts/entrypoint-dev.sh "" "${DATA_MINT_WORKER_TYPE}" "${DATA_CELERY_WORKER_QUEUES}"
 
   mq:
     volumes:
