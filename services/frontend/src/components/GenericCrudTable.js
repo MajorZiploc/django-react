@@ -239,7 +239,6 @@ const GenericCrudTable = ({
         </DialogTitle>
         <DialogContent dividers className='crudTableDialogContent'>
           {modelFields.map((mf, i) => {
-            const key = mf;
             const label = toProperCase(mf.label);
             return (
               <TextField
@@ -251,7 +250,7 @@ const GenericCrudTable = ({
                 value={(enteredModel && enteredModel[mf.name]) || ''}
                 onChange={e => {
                   const newField = {};
-                  newField[key] = e.target.value;
+                  newField[mf.label] = e.target.value;
                   setEnteredModel({ ...enteredModel, ...newField });
                 }}
               />
