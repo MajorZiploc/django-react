@@ -50,8 +50,8 @@ services:
     volumes:
       - './services/backend:/workspace/app'
     environment:
-      MINT_WORKER_TYPE: '${BEAT_MINT_WORKER_TYPE}'
-      MINT_WORKER_OPTIONS: '${BEAT_MINT_WORKER_OPTIONS}'
+      MINT_WORKER_TYPE: '${BEAT_MI_WORKER_TYPE}'
+      MINT_WORKER_OPTIONS: '${BEAT_MI_WORKER_OPTIONS}'
       CELERY_WORKER_QUEUES: '${BEAT_CELERY_WORKER_QUEUES}'
     command: /workspace/app/scripts/entrypoint-dev.sh "${BEAT_MI_WORKER_OPTIONS}" "${BEAT_MI_WORKER_TYPE}" "${BEAT_CELERY_WORKER_QUEUES}"
 
