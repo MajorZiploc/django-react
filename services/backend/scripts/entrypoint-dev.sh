@@ -2,10 +2,6 @@
 
 pip3 install --upgrade pip -r requirements.txt;
 
-MINT_WORKER_OPTIONS="$1";
-MINT_WORKER_TYPE="$2";
-CELERY_WORKER_QUEUES="$3";
-
 if [[ -z "$MINT_WORKER_TYPE" ]]; then
   echo "Launching Server"
   python manage.py makemigrations --no-input
