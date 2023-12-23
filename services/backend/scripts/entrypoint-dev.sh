@@ -2,14 +2,13 @@
 
 pip3 install --upgrade pip -r requirements.txt;
 
-python manage.py makemigrations --no-input
-python manage.py migrate --no-input
-
 MINT_WORKER_OPTIONS="$1";
 MINT_WORKER_TYPE="$2";
 CELERY_WORKER_QUEUES="$3";
 
 if [[ -z "$MINT_WORKER_TYPE" ]]; then
+  python manage.py makemigrations --no-input
+  python manage.py migrate --no-input
   python manage.py runserver 0.0.0.0:8000;
 else
   echo "Launching MINT Celery Worker"
