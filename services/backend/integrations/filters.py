@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from movies.models import Movie
+from integrations.models import Movie
 
 
 # We create filters for each field we want to be able to filter on

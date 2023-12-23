@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework.test import APIClient
 # useful to have this in INSTALLED_APPS in your settings.py for the following import 'rest_framework.authtoken',
 # from rest_framework.authtoken.models import Token
-from movies import models
+from integrations import models
 
 def create_movie_db_entry(user, title='Ants', genre='Action', year=1999):
   movie = models.Movie.objects.create(title=title, genre=genre, year=year, creator=user)
