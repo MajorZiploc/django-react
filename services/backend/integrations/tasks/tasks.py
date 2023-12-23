@@ -10,9 +10,9 @@ def test_task():
 
 @shared_task(name="delayed_task_watchdog")
 def delayed_task_watchdog():
-    pass
+  pass
 
 
 @shared_task(name="schedule_jobs")
 def schedule_jobs():
-    pass
+  pass
