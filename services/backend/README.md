@@ -27,7 +27,7 @@ pip install httpie
 Only authenticated users can use the API services, for that reason if we try this:
 
 ```
-http  http://127.0.0.1:8000/api/v1/movies/
+http  http://127.0.0.1:8000/api/v1/integrations/movies/
 ```
 
 we get:
@@ -41,7 +41,7 @@ we get:
 Instead, if we try to access with credentials:
 
 ```
-http http://127.0.0.1:8000/api/v1/movies/3 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2MjA4Mjk1LCJqdGkiOiI4NGNhZmMzMmFiZDA0MDQ2YjZhMzFhZjJjMmRiNjUyYyIsInVzZXJfaWQiOjJ9.NJrs-sXnghAwcMsIWyCvE2RuGcQ3Hiu5p3vBmLkHSvM"
+http http://127.0.0.1:8000/api/v1/integrations/movies/3 "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2MjA4Mjk1LCJqdGkiOiI4NGNhZmMzMmFiZDA0MDQ2YjZhMzFhZjJjMmRiNjUyYyIsInVzZXJfaWQiOjJ9.NJrs-sXnghAwcMsIWyCvE2RuGcQ3Hiu5p3vBmLkHSvM"
 ```
 
 we get the movie with id = 3
@@ -103,17 +103,17 @@ The API has some restrictions:
 
 ```
 Get all movies
-http http://127.0.0.1:8000/api/v1/movies/ "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/ "Authorization: Bearer {YOUR_TOKEN}"
 Get a single movie
-http GET http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}"
+http GET http://127.0.0.1:8000/api/v1/integrations/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}"
 Create a new movie
-http POST http://127.0.0.1:8000/api/v1/movies/ "Authorization: Bearer {YOUR_TOKEN}" title="Ant Man and The Wasp" genre="Action" year=2018
+http POST http://127.0.0.1:8000/api/v1/integrations/movies/ "Authorization: Bearer {YOUR_TOKEN}" title="Ant Man and The Wasp" genre="Action" year=2018
 Full update a movie
-http PUT http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp" genre="Action" year=2018
+http PUT http://127.0.0.1:8000/api/v1/integrations/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp" genre="Action" year=2018
 Partial update a movie
-http PATCH http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp"
+http PATCH http://127.0.0.1:8000/api/v1/integrations/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}" title="AntMan and The Wasp"
 Delete a movie
-http DELETE http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}"
+http DELETE http://127.0.0.1:8000/api/v1/integrations/movies/{movie_id}/ "Authorization: Bearer {YOUR_TOKEN}"
 ```
 
 ### Pagination
@@ -121,9 +121,9 @@ http DELETE http://127.0.0.1:8000/api/v1/movies/{movie_id}/ "Authorization: Bear
 The API supports pagination, by default responses have a page_size=10 but if you want change that you can pass through params page_size={your_page_size_number}
 
 ```
-http http://127.0.0.1:8000/api/v1/movies/?page=1 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?page=3 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?page=3&page_size=15 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?page=1 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?page=3 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?page=3&page_size=15 "Authorization: Bearer {YOUR_TOKEN}"
 ```
 
 ### Filters
@@ -131,16 +131,16 @@ http http://127.0.0.1:8000/api/v1/movies/?page=3&page_size=15 "Authorization: Be
 The API supports filtering, you can filter by the attributes of a movie like this
 
 ```
-http http://127.0.0.1:8000/api/v1/movies/?title="AntMan" "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year=2020 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year__gt=2019&year__lt=2022 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?creator__username="myUsername" "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?title="AntMan" "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?year=2020 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?year__gt=2019&year__lt=2022 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?creator__username="myUsername" "Authorization: Bearer {YOUR_TOKEN}"
 ```
 
 You can also combine multiples filters like so
 
 ```
-http http://127.0.0.1:8000/api/v1/movies/?title="AntMan"&year=2020 "Authorization: Bearer {YOUR_TOKEN}"
-http http://127.0.0.1:8000/api/v1/movies/?year__gt=2019&year__lt=2022&genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?title="AntMan"&year=2020 "Authorization: Bearer {YOUR_TOKEN}"
+http http://127.0.0.1:8000/api/v1/integrations/movies/?year__gt=2019&year__lt=2022&genre="Action" "Authorization: Bearer {YOUR_TOKEN}"
 ```

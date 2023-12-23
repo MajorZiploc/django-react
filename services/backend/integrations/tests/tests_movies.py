@@ -1,17 +1,17 @@
 from rest_framework.test import APITestCase
 # useful to have this in INSTALLED_APPS in your settings.py for the following import 'rest_framework.authtoken',
 # from rest_framework.authtoken.models import Token
-from movies import models
-from movies import views
+from integrations import models
+from integrations import views
 from django.contrib.auth.models import User
 import json
-from movies.tests import utils_for_tests as u
+from integrations.tests import utils_for_tests as u
 
-get_endpoint = 'movies:get_post_movies'
-post_endpoint = 'movies:get_post_movies'
-put_endpoint = 'movies:get_delete_update_movie'
-patch_endpoint = 'movies:get_delete_update_movie'
-delete_endpoint = 'movies:get_delete_update_movie'
+get_endpoint = 'integrations:get_post_movies'
+post_endpoint = 'integrations:get_post_movies'
+put_endpoint = 'integrations:get_delete_update_movie'
+patch_endpoint = 'integrations:get_delete_update_movie'
+delete_endpoint = 'integrations:get_delete_update_movie'
 
 class MoviesTests(APITestCase):
   databases = {'default'}

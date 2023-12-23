@@ -16,7 +16,7 @@ task_default_priority = 1
 task_time_limit = 60 * 29 + 30
 task_soft_time_limit = 60 * 29
 
-task_default_queue = "movies_default_queue"
+task_default_queue = "crud_api_default_queue"
 
 imports = "api_crud"
 
@@ -27,11 +27,11 @@ task_acks_late = True
 
 
 beat_schedule = {
-    "delayed_task_watchdog": {
-        "task": "delayed_task_watchdog",
-        "schedule": 10,
-        "args": None,
-    },
+    # "delayed_task_watchdog": {
+    #     "task": "delayed_task_watchdog",
+    #     "schedule": 10,
+    #     "args": None,
+    # },
     "schedule_jobs": {"task": "schedule_jobs", "schedule": 30, "args": None},
 }
 

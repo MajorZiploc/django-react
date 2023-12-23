@@ -2,12 +2,12 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
-from movies.models import Movie
-from movies.permissions import IsOwnerOrReadOnly
-from movies.serializers import MovieSerializer
-from movies.pagination import CustomPagination
-from movies.filters import MovieFilter
-from movies.tasks import test_task
+from integrations.models import Movie
+from integrations.permissions import IsOwnerOrReadOnly
+from integrations.serializers import MovieSerializer
+from integrations.pagination import CustomPagination
+from integrations.filters import MovieFilter
+from integrations.tasks import test_task
 from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
 
@@ -35,7 +35,7 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
 # @authorize_user
 @login_required
 def support_page(request):
-  return render(request, 'movies/preact_ex.html', context=dict(
+  return render(request, 'integrations/preact_ex.html', context=dict(
       movie_id=1,
       movies=[{'name': 'first movie'}]
   ))

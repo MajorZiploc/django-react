@@ -104,7 +104,7 @@ export async function retry(apiCall) {
 
 async function _getMoviesHelper() {
   return axios
-    .get(apiUrl + '/api/v1/movies/', {
+    .get(apiUrl + '/api/v1/integrations/movies', {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data.results);
@@ -116,7 +116,7 @@ export async function getMovies() {
 
 async function _postMovieHelper(movie) {
   return axios
-    .post(apiUrl + '/api/v1/movies/', movie, {
+    .post(apiUrl + '/api/v1/integrations/movies', movie, {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data);
@@ -129,7 +129,7 @@ export async function postMovie(movie) {
 // TODO: need to test
 async function _getMovieHelper(id) {
   return axios
-    .get(apiUrl + `/api/v1/movies/${id}`, {
+    .get(apiUrl + `/api/v1/integrations/movies/${id}`, {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data.results);
@@ -141,7 +141,7 @@ export async function getMovie(id) {
 
 async function _putMovieHelper(id, movie) {
   return axios
-    .put(apiUrl + `/api/v1/movies/${id}/`, movie, {
+    .put(apiUrl + `/api/v1/integrations/movies/${id}`, movie, {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data);
@@ -154,7 +154,7 @@ export async function putMovie(id, movie) {
 // TODO: need to test
 async function _patchMovieHelper(id, movie) {
   return axios
-    .patch(apiUrl + `/api/v1/movies/${id}`, movie, {
+    .patch(apiUrl + `/api/v1/integrations/movies/${id}`, movie, {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data);
@@ -166,7 +166,7 @@ export async function patchMovie(id, movie) {
 
 async function _deleteMovieHelper(id) {
   return axios
-    .delete(apiUrl + `/api/v1/movies/${id}/`, {
+    .delete(apiUrl + `/api/v1/integrations/movies/${id}`, {
       headers: getDefaultAuthedHeaders(),
     })
     .then(r => r.data);
