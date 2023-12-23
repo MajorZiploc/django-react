@@ -18,20 +18,17 @@ task_soft_time_limit = 60 * 29
 
 task_default_queue = "crud_api_default_queue"
 
-imports = "api_crud"
+imports = "integrations.tasks.tasks"
 
 worker_prefetch_multiplier = 1
 task_acks_late = True
 
-# imports = "partner_integrations.tasks.tasks"
-
-
 beat_schedule = {
-    # "delayed_task_watchdog": {
-    #     "task": "delayed_task_watchdog",
-    #     "schedule": 10,
-    #     "args": None,
-    # },
+    "delayed_task_watchdog": {
+        "task": "delayed_task_watchdog",
+        "schedule": 10,
+        "args": None,
+    },
     "schedule_jobs": {"task": "schedule_jobs", "schedule": 30, "args": None},
 }
 
