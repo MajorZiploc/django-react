@@ -12,30 +12,30 @@ from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
 
 class ListCreateMovieAPIView(ListCreateAPIView):
-  serializer_class = MovieSerializer
-  queryset = Movie.objects.all()
-  permission_classes = [IsAuthenticated]
-  pagination_class = CustomPagination
-  filter_backends = (filters.DjangoFilterBackend,)
-  filterset_class = MovieFilter
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.all()
+    permission_classes = [IsAuthenticated]
+    pagination_class = CustomPagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = MovieFilter
 
-  def perform_create(self, serializer):
-    # logs should appear in the beat worker
-    test_task.apply_async(queue='crud_api_default_queue')
-    # Assign the user who created the movie
-    serializer.save(creator=self.request.user)
+    def perform_create(self, serializer):
+        # logs should appear in the beat worker
+        test_task.apply_async(queue='crud_api_default_queue')
+        # Assign the user who created the movie
+        serializer.save(creator=self.request.user)
 
 
 class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
-  serializer_class = MovieSerializer
-  queryset = Movie.objects.all()
-  permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.all()
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
 # NOTE: authorize_user to 403 non logged in django users
 # @authorize_user
 @login_required
 def support_page(request):
-  return render(request, 'integrations/preact_ex.html', context=dict(
-      movie_id=1,
-      movies=[{'name': 'first movie'}]
-  ))
+    return render(request, 'integrations/preact_ex.html', context=dict(
+        movie_id=1,
+        movies=[{'name': 'first movie'}]
+    ))
