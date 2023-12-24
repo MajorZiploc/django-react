@@ -22,6 +22,7 @@ import {
   TextField,
   Tooltip,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import React from 'react';
 import AddBoxTwoTone from '@mui/icons-material/AddBoxTwoTone';
@@ -65,6 +66,8 @@ const GenericCrudTable = ({
   const [editMode, setEditMode] = React.useState(false);
   const componentMounted = React.useRef(true);
   const [models, setModels] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
   const [filteredModels, setFilteredModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -90,10 +93,16 @@ const GenericCrudTable = ({
 
   /** @type {() => Promise<any>} */
   const UpdateModels = React.useCallback(async () => {
-    const modelsResult = await modelData.getModels().catch(_e => {
-      openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
-      return [];
-    });
+    setLoading(true);
+    const modelsResult = await modelData
+      .getModels()
+      .catch(_e => {
+        openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
+        return [];
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     if (componentMounted.current) {
       setModels(modelsResult);
     }
@@ -157,6 +166,7 @@ const GenericCrudTable = ({
 
   /** @type {(action: (model: Data) => Promise<any>, alertMsgLabel?: string) => Promise<any>} */
   const handleModelAction = async (action, alertMsgLabel = undefined) => {
+    setSubmitting(true);
     if (!enteredModel) {
       openAlert({ display: true, message: 'No model found', severity: 'error' });
       closeModal();
@@ -187,7 +197,10 @@ const GenericCrudTable = ({
           severity: 'error',
         })
       )
-      .finally(() => closeModal());
+      .finally(() => {
+        closeModal();
+        setSubmitting(false);
+      });
     UpdateModels();
   };
 
@@ -258,13 +271,21 @@ const GenericCrudTable = ({
           })}
         </DialogContent>
         <DialogActions style={{ justifyContent: 'space-evenly' }}>
-          <Button onClick={closeModal}>Cancel</Button>
+          <Button disabled={submitting} onClick={closeModal}>
+            Cancel
+          </Button>
           {enteredModel && enteredModel[modelId] != null && (
             <Button onClick={async () => await handleDeleteModel()} color='secondary'>
               Delete
             </Button>
           )}
-          <Button autoFocus type='submit' onClick={async () => await handlePostOrPutModel()} color='primary'>
+          <Button
+            disabled={submitting}
+            autoFocus
+            type='submit'
+            onClick={async () => await handlePostOrPutModel()}
+            color='primary'
+          >
             Confirm
           </Button>
         </DialogActions>
@@ -309,6 +330,7 @@ const GenericCrudTable = ({
             </div>
           </div>
 
+          {loading && <CircularProgress color='secondary' />}
           <TableContainer>
             <Table aria-labelledby='tableTitle' size='small' aria-label='enhanced table'>
               <TableHead>
