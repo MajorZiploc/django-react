@@ -49,8 +49,6 @@ A template for a basic django and react site
 
 - run the demo
   > just_demo
-- if that fails (likely do to installing deps locally) then try:
-  > just_run
 
 ### Run the project (start the containers)
 
@@ -60,7 +58,7 @@ A template for a basic django and react site
 
 > just_stop
 
-### Make database migrations
+### Make and Apply database migrations
 
 > just_migrate
 
@@ -175,7 +173,6 @@ would be nice if i had a way to store the api call results in redux
 #### Backend
 
 - use CORS_ALLOWED_ORIGINS in settings
-- Consider merging Dockerfile and Dockerfile.dev and entrypoint dev/prod scripts. They are very similar
 
 ### Minor Changes
 
