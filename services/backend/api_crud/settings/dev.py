@@ -18,7 +18,7 @@ CORS_ALLOWED_ORIGINS = [ os.environ['FRONTEND_PUBLIC_URL'] ]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': os.environ['POSTGRES_DB'],
         'USER': os.environ['POSTGRES_USER'],
         'PASSWORD': os.environ['POSTGRES_PASSWORD'],
         'HOST': 'db',  # set in docker-compose.yml
