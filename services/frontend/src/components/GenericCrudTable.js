@@ -22,6 +22,7 @@ import {
   TextField,
   Tooltip,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import React from 'react';
 import AddBoxTwoTone from '@mui/icons-material/AddBoxTwoTone';
@@ -65,6 +66,7 @@ const GenericCrudTable = ({
   const [editMode, setEditMode] = React.useState(false);
   const componentMounted = React.useRef(true);
   const [models, setModels] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   const [filteredModels, setFilteredModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -90,10 +92,16 @@ const GenericCrudTable = ({
 
   /** @type {() => Promise<any>} */
   const UpdateModels = React.useCallback(async () => {
-    const modelsResult = await modelData.getModels().catch(_e => {
-      openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
-      return [];
-    });
+    setLoading(true);
+    const modelsResult = await modelData
+      .getModels()
+      .catch(_e => {
+        openAlert({ display: true, message: 'Listed models failed to load', severity: 'error' });
+        return [];
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     if (componentMounted.current) {
       setModels(modelsResult);
     }
@@ -309,6 +317,7 @@ const GenericCrudTable = ({
             </div>
           </div>
 
+          {loading && <CircularProgress color='secondary' />}
           <TableContainer>
             <Table aria-labelledby='tableTitle' size='small' aria-label='enhanced table'>
               <TableHead>
