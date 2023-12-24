@@ -1,6 +1,7 @@
 export JUST_PROJECT_ROOT="`pwd`";
 export JUST_PROJECT_PACKAGES="${JUST_PROJECT_ROOT}/services";
 export JUST_FRONTEND_ROOT="$JUST_PROJECT_PACKAGES/frontend";
+export JUST_UI_TESTS_ROOT="$JUST_FRONTEND_ROOT/ui_tests";
 export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 . "$JUST_PROJECT_ROOT/.env.bash";
 
@@ -103,19 +104,25 @@ function just_build_backend {
 function just_test_frontend_start_ui_test_runner {
   just_run;
   just_ensure_test_user;
-  "$JUST_FRONTEND_ROOT/ui_tests/cypress_starter.sh" "$JUST_UI_TESTS_USERNAME" "$JUST_UI_TESTS_PASSWORD" "$JUST_UI_TESTS_ENV" "gui" ;
+  cd "$JUST_UI_TESTS_ROOT";
+  npm run cy:open;
+  cd ~-;
 }
 
 function just_test_frontend_headless {
   just_run;
   just_ensure_test_user;
-  "$JUST_FRONTEND_ROOT/ui_tests/cypress_starter.sh" "$JUST_UI_TESTS_USERNAME" "$JUST_UI_TESTS_PASSWORD" "$JUST_UI_TESTS_ENV" "headless" ;
+  cd "$JUST_UI_TESTS_ROOT";
+  npm run cy:headless;
+  cd ~-;
 }
 
 function just_test_frontend_headed {
   just_run;
   just_ensure_test_user;
-  "$JUST_FRONTEND_ROOT/ui_tests/cypress_starter.sh" "$JUST_UI_TESTS_USERNAME" "$JUST_UI_TESTS_PASSWORD" "$JUST_UI_TESTS_ENV" "headed" ;
+  cd "$JUST_UI_TESTS_ROOT";
+  npm run cy:headed;
+  cd ~-;
 }
 
 function just_backend_debug_shell {

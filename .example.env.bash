@@ -14,6 +14,8 @@ export PGUSER='postgres';
 export PGPASSWORD='password';
 export PGPORT=5432;
 export PGDATABASE="postgres";
+export CYPRESS_username="$JUST_UI_TESTS_USERNAME";
+export CYPRESS_password="$JUST_UI_TESTS_PASSWORD";
 
 # These will be set in a pipline and do not need to be set locally unless you want to test deployments locally
 export AWS_ACCOUNT_ID='abc123';
