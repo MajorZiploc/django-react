@@ -126,6 +126,10 @@ A template for a basic django and react site
 
 ## Things to improve
 
+### Frontend MUI Theme
+
+add styles to createTheme() so that every component doesnt have to fight the default styles of mui. styles will be managed globally if this is done
+
 ### Frontend npm run (start|build) warning
 
 Use useLocalStorage hook instead of directly using localStorage
