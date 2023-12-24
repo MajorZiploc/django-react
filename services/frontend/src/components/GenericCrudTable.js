@@ -67,6 +67,7 @@ const GenericCrudTable = ({
   const componentMounted = React.useRef(true);
   const [models, setModels] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
   const [filteredModels, setFilteredModels] = React.useState([]);
   const [enteredModel, setEnteredModel] = React.useState(defaultModel);
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -165,6 +166,7 @@ const GenericCrudTable = ({
 
   /** @type {(action: (model: Data) => Promise<any>, alertMsgLabel?: string) => Promise<any>} */
   const handleModelAction = async (action, alertMsgLabel = undefined) => {
+    setSubmitting(true);
     if (!enteredModel) {
       openAlert({ display: true, message: 'No model found', severity: 'error' });
       closeModal();
@@ -195,7 +197,10 @@ const GenericCrudTable = ({
           severity: 'error',
         })
       )
-      .finally(() => closeModal());
+      .finally(() => {
+        closeModal();
+        setSubmitting(false);
+      });
     UpdateModels();
   };
 
@@ -266,13 +271,21 @@ const GenericCrudTable = ({
           })}
         </DialogContent>
         <DialogActions style={{ justifyContent: 'space-evenly' }}>
-          <Button onClick={closeModal}>Cancel</Button>
+          <Button disabled={submitting} onClick={closeModal}>
+            Cancel
+          </Button>
           {enteredModel && enteredModel[modelId] != null && (
             <Button onClick={async () => await handleDeleteModel()} color='secondary'>
               Delete
             </Button>
           )}
-          <Button autoFocus type='submit' onClick={async () => await handlePostOrPutModel()} color='primary'>
+          <Button
+            disabled={submitting}
+            autoFocus
+            type='submit'
+            onClick={async () => await handlePostOrPutModel()}
+            color='primary'
+          >
             Confirm
           </Button>
         </DialogActions>
