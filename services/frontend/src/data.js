@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {
   getRefreshToken,
-  getAccessToken,
   setAccessToken,
   setRefreshToken,
   getDefaultHeaders,
