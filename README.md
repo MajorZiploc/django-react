@@ -170,10 +170,6 @@ would be nice if i had a way to store the api call results in redux
 
 - standard_init_linux.go:228: exec user process caused: exec format error
 
-#### Backend
-
-- use CORS_ALLOWED_ORIGINS in settings
-
 ### Minor Changes
 
 - Move Expose ports from Dockerfile's to docker-compose for better management and can use .env flow
