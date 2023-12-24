@@ -79,11 +79,6 @@ A template for a basic django and react site
 - View your .env.bash file for the test user information. If you wish to change that information, then you have to re-source your just.bash after changing the information in .env.bash:
   > . ./just.bash
 
-#### FROUNTEND UI TEST CICD SETUP
-
-- cypress ui test environment choices are: [local, dev] and are found in ./services/frontend/ui_tests/cypress/config
-  - When preparing to deploy, you will need to edit the dev.json or even add a prod json and then set the JUST_UI_TESTS_ENV to either dev or prod
-
 ### TEST COMMANDS
 
 - Runs backend tests
@@ -142,14 +137,6 @@ would be nice if i had a way to store the api call results in redux
 - TypeError: Cannot set property mark of #<Object> which has only a getter
 
   Likely related to sass dependency
-
-### Cypress
-
-- Fix config file switching -- current pattern has been deprecated as of cypress v10 and doesnt work here anymore -- https://docs.cypress.io/api/plugins/configuration-api#Switch-between-multiple-configuration-files
-
-### Eventing
-
-- current pattern for triggering tasks in queues is likely not using rabbitmq exchanges. Verify and fix if needed
 
 ### Production Flow
 
