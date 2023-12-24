@@ -201,7 +201,7 @@ const GenericCrudTable = ({
     );
     setModelCount(filtered.length);
     setFilteredModels(filtered);
-  }, [models, searchTerm]);
+  }, [models, searchTerm, modelFields]);
 
   /** @type {(str: string) => void} */
   const setSortParams = column => {
