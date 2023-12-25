@@ -275,7 +275,7 @@ const GenericCrudTable = ({
             Cancel
           </Button>
           {enteredModel && enteredModel[modelId] != null && (
-            <Button onClick={async () => await handleDeleteModel()} color='secondary'>
+            <Button disabled={submitting} onClick={async () => await handleDeleteModel()} color='secondary'>
               Delete
             </Button>
           )}
