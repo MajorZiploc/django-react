@@ -1,15 +1,21 @@
+import json
+from django.http import HttpRequest, JsonResponse
+import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
+from rest_framework.views import APIView
 from integrations.models import Movie
 from integrations.permissions import IsOwnerOrReadOnly
 from integrations.serializers import MovieSerializer
 from integrations.pagination import CustomPagination
 from integrations.filters import MovieFilter
 from integrations.tasks import test_task
+from integrations.utils import parse_request_body, get_data_from_endpoint, post_data_to_endpoint, patch_data_to_endpoint, delete_data_from_endpoint, exec_sql_to_dicts
 from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
+from api_crud.settings.base import REDIS_CLIENT
 
 class ListCreateMovieAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
@@ -20,11 +26,35 @@ class ListCreateMovieAPIView(ListCreateAPIView):
     filterset_class = MovieFilter
 
     def perform_create(self, serializer):
+        # REDIS CACHE EXAMPLE BEGIN
+        data_to_cache = {
+            "stuff1": 'hi stuff1',
+            "stuff2": ['hi', 'stuff2'],
+            "stuff3": {
+                'greet': 'hi',
+                'things': ['stuff3', 'stuff3s_cat']
+            },
+        }
+        cache = REDIS_CLIENT
+        cache_key = "yogurt"
+        cache_value = cache.get(cache_key)
+        print('cache_value should be None because it was not set yet or is expired:')
+        print(cache_value)
+        # Set the value in the cache with expiration time and milliseconds parameter
+        # ex=1800 = expires in 1800 seconds (30 minutes)
+        cache.set(cache_key, json.dumps(data_to_cache), ex=1800)
+        cache_value = cache.get(cache_key)
+        cache_data = json.loads(cache_value.decode())
+        print('cache_data')
+        print(cache_data)
+        cache.delete(cache_key)
+        # Redis Cache Example END
+        # FIRE EVENT EXAMPLE BEGIN
         # logs should appear in the beat worker
         test_task.apply_async(queue='crud_api_default_queue')
+        # FIRE EVENT EXAMPLE END
         # Assign the user who created the movie
         serializer.save(creator=self.request.user)
-
 
 class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
@@ -39,3 +69,50 @@ def support_page(request):
         movie_id=1,
         movies=[{'name': 'first movie'}]
     ))
+
+class MovieFilterDataAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: HttpRequest):
+        return JsonResponse({'data': {
+            'genres': ['kids', 'action']
+        }})
+
+class ListMovieAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: HttpRequest):
+        # request_body = parse_request_body(request.body)
+        # response = requests.get(f'{base_url}/all')
+        response = {'status_code': 200, 'data': ["stuff1", "stuff2"]}
+        if response['status_code'] == 200:
+            # data = response.json()
+            data = response['data']
+        else:
+            print(f"Error: {response['status_code']} - {response['text']}")
+
+    def post(self, request: HttpRequest):
+        print('list_movies_post')
+        # query_param1 = request.GET.get('query_param1', None)
+        # print('query_param1')
+        # print(query_param1)
+        request_body = parse_request_body(request.body)
+        # NOTE: statuses
+        # status.HTTP_400_BAD_REQUEST
+        # status.HTTP_200_OK
+        # status.HTTP_201_CREATED
+        # status.HTTP_202_ACCEPTED
+        # status.HTTP_204_NO_CONTENT # good for DELETE
+        # NOTE: to return an explicit status
+        # return JsonResponse(request_body, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse(request_body)
+
+    def patch(self, request: HttpRequest):
+        print('list_movies_patch')
+        request_body = parse_request_body(request.body)
+        return JsonResponse(request_body)
+
+    def delete(self, request: HttpRequest):
+        print('list_movies_delete')
+        request_body = parse_request_body(request.body)
+        return JsonResponse(request_body)

@@ -1,5 +1,5 @@
 select
 *
-from movies_movie
+from integrations_movie
 ;
 

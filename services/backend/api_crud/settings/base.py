@@ -187,3 +187,28 @@ TEMPLATES = [
     },
   }
 ]
+
+# Django email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "todo@todo.net"
+EMAIL_HOST_PASSWORD = "user@password"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+DEV_EMAIL_ALERT_RECEIVER = "devteam@todo.net"
+CS_EMAIL_ALERT_RECEIVER = "support@todo.net"
+
+REDIS_HOST = os.getenv("HL_REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("HL_REDIS_PORT", "6379"))
+REDIS_PASSWORD = os.getenv("HL_REDIS_PASSWORD")
+REDIS_SSL = os.getenv("HL_REDIS_SSL_ENABLED", "false")
+
+REDIS_CLIENT = redis.StrictRedis(
+    host=REDIS_HOST,
+    port=REDIS_PORT,
+    password=REDIS_PASSWORD,
+    ssl=(REDIS_SSL.lower() == "true"),
+)
+REDIS_CLIENT.client_setname(f"{socket.gethostname()}-{uuid.uuid4()}")

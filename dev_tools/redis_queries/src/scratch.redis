@@ -1,3 +1,7 @@
 SET key1 value1
 
 GET key1
+
+GET yogurt
+
+CONFIG GET *
