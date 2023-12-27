@@ -37,6 +37,9 @@ class ListCreateMovieAPIView(ListCreateAPIView):
         }
         cache = REDIS_CLIENT
         cache_key = "yogurt"
+        cache_value = cache.get(cache_key)
+        print('cache_value should be None because it was not set yet or is expired:')
+        print(cache_value)
         # Set the value in the cache with expiration time and milliseconds parameter
         # ex=1800 = expires in 1800 seconds (30 minutes)
         cache.set(cache_key, json.dumps(data_to_cache), ex=1800)
