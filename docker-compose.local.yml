@@ -9,8 +9,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - '${BACKEND_PORT}:${BACKEND_PORT}'
     stdin_open: true
     tty: true
     command: /workspace/app/scripts/entrypoint-dev.sh
@@ -26,15 +24,11 @@ services:
       #   this can cause docker out of memory issues
       #   this also causes the frontend to be very slow even if you run the frontend locally not in docker
       # - '/workspace/app/node_modules'
-    ports:
-      - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     # command: npm run start
     command: /workspace/app/scripts/entrypoint-dev.sh
     # command: sleep infinity
 
   db:
-    ports:
-      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - '${PGDBLOCAL}:/var/lib/postgresql/data/'
     healthcheck:

@@ -6,6 +6,8 @@ services:
       - db
     env_file:
       - .env
+    ports:
+      - '${BACKEND_PORT}:${BACKEND_PORT}'
     restart: always
     container_name: django-react-backend
 
@@ -16,6 +18,8 @@ services:
     environment:
       REACT_APP_BACKEND_URL: ${BACKEND_PUBLIC_URL}
       REACT_APP_FRONTEND_URL: ${FRONTEND_PUBLIC_URL}
+    ports:
+      - '${FRONTEND_PORT}:${FRONTEND_PORT}'
     restart: always
     depends_on:
       - backend
@@ -25,6 +29,8 @@ services:
     image: postgres:13-alpine
     env_file:
       - .env
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     restart: always
     container_name: django-react-db
 
