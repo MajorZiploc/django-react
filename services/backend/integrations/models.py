@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils.timezone import now
 
@@ -9,7 +10,7 @@ class AuditableModel(models.Model):
         abstract = True
 
 class Movie(AuditableModel):
-    id = models.AutoField(primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     year = models.IntegerField()
