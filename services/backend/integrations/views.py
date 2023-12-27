@@ -1,14 +1,18 @@
 import json
+from django.http import HttpRequest, JsonResponse
+import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
+from rest_framework.views import APIView
 from integrations.models import Movie
 from integrations.permissions import IsOwnerOrReadOnly
 from integrations.serializers import MovieSerializer
 from integrations.pagination import CustomPagination
 from integrations.filters import MovieFilter
 from integrations.tasks import test_task
+from integrations.utils import parse_request_body, get_data_from_endpoint, post_data_to_endpoint, patch_data_to_endpoint, delete_data_from_endpoint, exec_sql_to_dicts
 from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
 from api_crud.settings.base import REDIS_CLIENT
@@ -62,3 +66,50 @@ def support_page(request):
         movie_id=1,
         movies=[{'name': 'first movie'}]
     ))
+
+class MovieFilterDataAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: HttpRequest):
+        return JsonResponse({'data': {
+            'genres': ['kids', 'action']
+        }})
+
+class ListMovieAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: HttpRequest):
+        # request_body = parse_request_body(request.body)
+        # response = requests.get(f'{base_url}/all')
+        response = {'status_code': 200, 'data': ["stuff1", "stuff2"]}
+        if response['status_code'] == 200:
+            # data = response.json()
+            data = response['data']
+        else:
+            print(f"Error: {response['status_code']} - {response['text']}")
+
+    def post(self, request: HttpRequest):
+        print('list_movies_post')
+        # query_param1 = request.GET.get('query_param1', None)
+        # print('query_param1')
+        # print(query_param1)
+        request_body = parse_request_body(request.body)
+        # NOTE: statuses
+        # status.HTTP_400_BAD_REQUEST
+        # status.HTTP_200_OK
+        # status.HTTP_201_CREATED
+        # status.HTTP_202_ACCEPTED
+        # status.HTTP_204_NO_CONTENT # good for DELETE
+        # NOTE: to return an explicit status
+        # return JsonResponse(request_body, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse(request_body)
+
+    def patch(self, request: HttpRequest):
+        print('list_movies_patch')
+        request_body = parse_request_body(request.body)
+        return JsonResponse(request_body)
+
+    def delete(self, request: HttpRequest):
+        print('list_movies_delete')
+        request_body = parse_request_body(request.body)
+        return JsonResponse(request_body)
