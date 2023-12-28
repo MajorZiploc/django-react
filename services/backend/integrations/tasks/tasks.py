@@ -33,7 +33,9 @@ def schedule_jobs():
         if not task:
             continue
         task(**job.job_info)
-        job.next_scheduled = now() + timedelta(seconds=job.delay_seconds or 0)
+        current_time = now()
+        job.last_ran = current_time
+        job.next_scheduled = current_time + timedelta(seconds=job.delay_seconds or 0)
         job.run_count = job.run_count + 1
         if job.run_count >= job.delete_after_count:
             job.delete()
