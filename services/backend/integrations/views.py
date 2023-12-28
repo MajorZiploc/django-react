@@ -93,10 +93,11 @@ class ListMovieAPIView(APIView):
 
     def post(self, request: HttpRequest):
         print('list_movies_post')
-        # query_param1 = request.GET.get('query_param1', None)
+        query_param1 = request.GET.get('query_param1', None)
         # print('query_param1')
         # print(query_param1)
         request_body = parse_request_body(request.body)
+        request_body['query_param1'] = query_param1
         # NOTE: statuses
         # status.HTTP_400_BAD_REQUEST
         # status.HTTP_200_OK
