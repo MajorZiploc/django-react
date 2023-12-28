@@ -15,3 +15,4 @@ yarn-error.log*
 **/tables/*csv
 tags
 *.vim
+dev_tools/rest_queries/*.json
