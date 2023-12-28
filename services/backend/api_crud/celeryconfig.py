@@ -23,13 +23,15 @@ imports = "integrations.tasks.tasks"
 worker_prefetch_multiplier = 1
 task_acks_late = True
 
+schedule_jobs_interval_seconds = 30
+
 beat_schedule = {
     "delayed_task_watchdog": {
         "task": "delayed_task_watchdog",
         "schedule": 10,
         "args": None,
     },
-    "schedule_jobs": {"task": "schedule_jobs", "schedule": 30, "args": None},
+    "schedule_jobs": {"task": "schedule_jobs", "schedule": schedule_jobs_interval_seconds, "args": None},
 }
 
 # task_create_missing_queues = True
