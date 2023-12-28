@@ -1,8 +1,5 @@
 export JUST_THIS_ROOT="`pwd`";
-cd ../..;
-export JUST_PROJECT_ROOT="`pwd`";
-. "$JUST_PROJECT_ROOT/.env.bash";
-cd ~-;
+. "$JUST_PROJECT_ROOT/../../.env.bash";
 
 echo "NOTE: SOURCE THIS FILE WHILE INSIDE THE SAME PATH AS THIS FILE. ELSE YOU WILL HAVE INVALID BEHAVIOR";
 
@@ -14,7 +11,7 @@ function just_rest_url_encode {
 
 function just_rest_get_token {
   cd "$JUST_THIS_ROOT";
-  local token; token=$(curl 'http://127.0.0.1:8000/api/v1/auth/token' \
+  local token; token=$(curl '${BACKEND_PUBLIC_URL}/api/v1/auth/token' \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   --data-raw "{\"username\":\"$JUST_UI_TESTS_USERNAME\",\"password\":\"$JUST_UI_TESTS_PASSWORD\"}" \
@@ -29,7 +26,7 @@ function just_rest_movies_all_post {
   query_params="$(cat ./data/query_params/integrations/movies_all/post/1.txt)";
   query_params="?$(just_rest_url_encode "$query_params")";
   local token; token="$(just_rest_get_token)";
-  local response; response="$(curl "http://127.0.0.1:8000/api/v1/integrations/movies/all${query_params}" \
+  local response; response="$(curl "${BACKEND_PUBLIC_URL}/api/v1/integrations/movies/all${query_params}" \
   -X 'POST' \
   -H 'Accept: application/json' \
   --data-raw "$request_body" \
