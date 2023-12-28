@@ -153,12 +153,14 @@ function just_clean {
 function just_zip {
   if [[ -n "${JUST_PROJECT_ROOT}" ]]; then
     local target="$HOME/Downloads/django-react";
+    local target_zip="$target.zip";
     rm -rf "$target";
+    rm -rf "$target_zip";
     cp -r "${JUST_PROJECT_ROOT}" "$target";
     cd "$target";
     just_clean "$target";
     cd ~/Downloads;
-    zip -r ~/Downloads/django-react.zip ./django-react;
+    zip -r "$target_zip" ./django-react;
     cd "$JUST_PROJECT_ROOT";
   fi
 }
