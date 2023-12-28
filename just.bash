@@ -8,6 +8,7 @@ export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 echo "NOTE: SOURCE THIS FILE WHILE INSIDE THE SAME PATH AS THIS FILE. ELSE YOU WILL HAVE INVALID BEHAVIOR";
 
 function just_install {
+  cd "$JUST_PROJECT_ROOT";
   npm install;
   just_venv_create;
   just_venv_connect;
@@ -15,6 +16,7 @@ function just_install {
   just_build_frontend;
   just_build_backend;
   just_build_frontend_ui_tests;
+  cd ~-;
 }
 
 function just_setup_postgres_volume {
@@ -28,12 +30,16 @@ function just_format {
 }
 
 function just_run {
+  cd "$JUST_PROJECT_ROOT";
   # just_setup_postgres_volume;
   docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d;
+  cd ~-;
 }
 
 function just_stop {
+  cd "$JUST_PROJECT_ROOT";
   docker-compose -f docker-compose.yml -f docker-compose.local.yml down;
+  cd ~-;
 }
 
 function just_test {
@@ -44,16 +50,19 @@ function just_test {
 
 function just_demo {
   just_install;
-  cd "$JUST_PROJECT_ROOT";
   just_run;
 }
 
 function just_venv_create {
+  cd "$JUST_PROJECT_ROOT";
   python3 -m venv "$JUST_PROJECT_ROOT/.venv";
+  cd ~-;
 }
 
 function just_venv_connect {
+  cd "$JUST_PROJECT_ROOT";
   . "$JUST_PROJECT_ROOT/.venv/bin/activate";
+  cd ~-;
 }
 
 function just_venv_disconnect {
@@ -62,7 +71,9 @@ function just_venv_disconnect {
 
 function just_format_backend {
   just_venv_connect;
+  cd "$JUST_PROJECT_ROOT";
   autopep8 "$JUST_BACKEND_ROOT" && echo "Backend Formatted!" || { echo "Failed to format backend!"; return 1; }
+  cd ~-;
 }
 
 function just_test_backend {
