@@ -29,11 +29,13 @@ function just_rest_movies_all_post {
   query_params="$(cat ./data/query_params/integrations/movies_all/post/1.txt)";
   query_params="?$(just_rest_url_encode "$query_params")";
   local token; token="$(just_rest_get_token)";
-  curl "http://127.0.0.1:8000/api/v1/integrations/movies/all${query_params}" \
+  local response; response="$(curl "http://127.0.0.1:8000/api/v1/integrations/movies/all${query_params}" \
   -X 'POST' \
   -H 'Accept: application/json' \
   --data-raw "$request_body" \
-  -H "Authorization: Bearer ${token}" --compressed | jq | tee movies_all_post.json;
+  -H "Authorization: Bearer ${token}" --compressed)";
+  echo "$response" | jq > movies_all_post.json;
+  echo "$response" | jq;
   cd ~-;
 }
 
