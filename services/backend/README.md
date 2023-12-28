@@ -55,7 +55,7 @@ we get the movie with id = 3
 First we need to create a user, so we can log in
 
 ```
-http POST http://127.0.0.1:8000/api/v1/auth/register/ email="email@email.com" username="USERNAME" password1="PASSWORD" password2="PASSWORD"
+http POST http://127.0.0.1:8000/api/v1/auth/register email="email@email.com" username="USERNAME" password1="PASSWORD" password2="PASSWORD"
 ```
 
 After we create an account we can use those credentials to get a token
@@ -63,7 +63,7 @@ After we create an account we can use those credentials to get a token
 To get a token first we need to request
 
 ```
-http http://127.0.0.1:8000/api/v1/auth/token/ username="username" password="password"
+http http://127.0.0.1:8000/api/v1/auth/token username="username" password="password"
 ```
 
 after that, we get the token
@@ -81,7 +81,7 @@ We can use the refresh token to request a need access token.
 requesting new access token
 
 ```
-http http://127.0.0.1:8000/api/v1/auth/token/refresh/ refresh="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxNjI5MjMyMSwianRpIjoiNGNkODA3YTlkMmMxNDA2NWFhMzNhYzMxOTgyMzhkZTgiLCJ1c2VyX2lkIjozfQ.hP1wPOPvaPo2DYTC9M1AuOSogdRL_mGP30CHsbpf4zA"
+http http://127.0.0.1:8000/api/v1/auth/token/refresh refresh="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxNjI5MjMyMSwianRpIjoiNGNkODA3YTlkMmMxNDA2NWFhMzNhYzMxOTgyMzhkZTgiLCJ1c2VyX2lkIjozfQ.hP1wPOPvaPo2DYTC9M1AuOSogdRL_mGP30CHsbpf4zA"
 ```
 
 and we will get a new access token

@@ -12,7 +12,7 @@ import {
 export async function refreshAuth() {
   return axios
     .post(
-      apiUrl + '/api/v1/auth/token/refresh/',
+      apiUrl + '/api/v1/auth/token/refresh',
       {
         refresh: getRefreshToken(),
       },
@@ -36,7 +36,7 @@ export async function login(username, password) {
   setRefreshToken(null);
   return axios
     .post(
-      apiUrl + '/api/v1/auth/token/',
+      apiUrl + '/api/v1/auth/token',
       {
         username: username,
         password: password,
@@ -55,7 +55,7 @@ export async function login(username, password) {
 export async function register(email, username, password, firstName, lastName) {
   return axios
     .post(
-      apiUrl + '/api/v1/auth/register/',
+      apiUrl + '/api/v1/auth/register',
       {
         email: email,
         username: username,
