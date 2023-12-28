@@ -145,19 +145,22 @@ function just_clean {
   local target="${1}";
   target="${target:-"$JUST_PROJECT_ROOT"}";
   cd "$target";
-  rm -rf "${target}/node_modules" "${target}/.venv" "${target}/services/frontend/node_modules" "${target}/services/frontend/ui_tests/node_modules" "${target}/tags" "${target}/services/backend/api_crud/settings/__pycache__" "${target}/services/backend/api_crud/__pycache__" "${target}/services/backend/integrations/templatetags/__pycache__" "${target}/services/backend/integrations/migrations/__pycache__" "${target}/services/backend/integrations/tasks/__pycache__" "${target}/services/backend/integrations/management/__pycache__" "${target}/services/backend/integrations/management/commands/__pycache__" "${target}/services/backend/integrations/__pycache__" "${target}/services/backend/authentication/migrations/__pycache__" "${target}/services/backend/authentication/__pycache__";
+  rm -rf "${target}/node_modules" "${target}/.venv" "${target}/services/frontend/node_modules" "${target}/services/frontend/ui_tests/node_modules" "${target}/tags";
+  find "${target}/services/backend" -type d -iname "__pycache__" -exec rm -rf "{}" \;
   git remote remove origin;
 }
 
 function just_zip {
   if [[ -n "${JUST_PROJECT_ROOT}" ]]; then
     local target="$HOME/Downloads/django-react";
+    local target_zip="$target.zip";
     rm -rf "$target";
+    rm -rf "$target_zip";
     cp -r "${JUST_PROJECT_ROOT}" "$target";
     cd "$target";
     just_clean "$target";
     cd ~/Downloads;
-    zip -r ~/Downloads/django-react.zip ./django-react;
+    zip -r "$target_zip" ./django-react;
     cd "$JUST_PROJECT_ROOT";
   fi
 }
