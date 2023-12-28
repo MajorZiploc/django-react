@@ -147,7 +147,9 @@ function just_clean {
   cd "$target";
   rm -rf "${target}/node_modules" "${target}/.venv" "${target}/services/frontend/node_modules" "${target}/services/frontend/ui_tests/node_modules" "${target}/tags";
   find "${target}/services/backend" -type d -iname "__pycache__" -exec rm -rf "{}" \;
-  git remote remove origin;
+  if [[ -n "$1" ]]; then
+    git remote remove origin;
+  fi
 }
 
 function just_zip {
