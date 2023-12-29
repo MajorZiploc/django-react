@@ -1,7 +1,8 @@
+from datetime import timedelta
 from celery import (
   shared_task,
 )
-from django.utils.timezone import now, timedelta
+from django.utils.timezone import now
 from integrations.models import ScheduledJob
 from api_crud import celeryconfig
 
