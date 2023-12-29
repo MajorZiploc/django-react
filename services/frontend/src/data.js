@@ -92,11 +92,18 @@ export async function auth() {
 export async function retry(apiCall) {
   return await refreshAuth()
     .then(async _r => await apiCall())
-    .catch(_e => {
-      if (_e?.request?.status === 401) {
+    .catch(err => {
+      if (err?.request?.status === 401) {
         setAccessToken(null);
         setRefreshToken(null);
         window.location.href = frontendUrl;
+      } else {
+        const errorContent = {
+          status: err?.request?.status,
+          data: err?.request?.data,
+          statusText: err?.request?.statusText,
+        };
+        return Promise.reject(errorContent);
       }
     });
 }
