@@ -22,7 +22,6 @@ schedulable_tasks = {
     'test_task': test_task,
 }
 
-# TODO: TEST
 @shared_task(name="schedule_jobs")
 def schedule_jobs():
     current_time = now()
