@@ -22,7 +22,6 @@ schedulable_tasks = {
     'test_task': test_task,
 }
 
-# TODO: TEST
 @shared_task(name="schedule_jobs")
 def schedule_jobs():
     current_time = now()
@@ -32,6 +31,7 @@ def schedule_jobs():
         task = schedulable_tasks.get(job.job_type, None)
         if not task:
             continue
+        # TODO: should consider how to handle failed tasks. as is, it will not retry or anything
         task(**job.job_info)
         current_time = now()
         job.last_ran = current_time
