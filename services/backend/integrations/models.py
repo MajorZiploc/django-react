@@ -11,7 +11,7 @@ class ScheduledJob(models.Model):
     job_info = models.JSONField(default=dict)
     last_ran = models.DateTimeField(null=True)
     run_count = models.IntegerField(default=0)
-    delete_after_count = models.IntegerField(default=1)
+    delete_after_count = models.IntegerField(null=True)
 
 # TODO: add ScheduledJobHistory which will track results of previous runs of ScheduledJob with FK to ScheduledJob.id
 

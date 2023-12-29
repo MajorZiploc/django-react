@@ -38,7 +38,7 @@ def schedule_jobs():
         job.last_ran = current_time
         job.next_scheduled = current_time + timedelta(seconds=job.delay_seconds or 0)
         job.run_count = job.run_count + 1
-        if job.run_count >= job.delete_after_count:
+        if job.delete_after_count is not None and job.run_count >= job.delete_after_count:
             job.delete()
         else:
             job.save()
