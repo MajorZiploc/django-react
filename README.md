@@ -124,23 +124,35 @@ A template for a basic django and react site
 
 ## Things to improve
 
-### Frontend MUI Theme
+### Frontend
+
+#### MUI Theme
 
 add styles to createTheme() so that every component doesnt have to fight the default styles of mui. styles will be managed globally if this is done
 
-### Frontend npm run (start|build) warning
-
-Use useLocalStorage hook instead of directly using localStorage
-
-Use React Intl for locale
-
-would be nice if i had a way to store the api call results in redux
+#### npm run (start|build) warning
 
 - TypeError: Cannot set property mark of #<Object> which has only a getter
 
   Likely related to sass dependency
 
+#### Use useLocalStorage hook instead of directly using localStorage
+
+Would be good for added expired timestamps on local storage data
+
+#### Use React Intl for locale
+
+would be nice if frontend had a way to store the api call results in redux
+
+#### Multi submit on spam click can happen
+
+This is true even with the disable button logic when submitting
+
 ### Production Flow
+
+#### Move towards k8s and eks
+
+This will remove the need to address pretty much every other Production Flow issue
 
 #### add event containers to docker-compose.prod.yml
 
@@ -177,5 +189,5 @@ would be nice if i had a way to store the api call results in redux
 ### Plus Ultra
 
 - Improve login/register/auth flow (Rework auth to not show user/pass in api call)
-- Add a third party login/register flow
+- Add third party login/register flow (google, apple, microsoft, facebook)
 - Add logging
