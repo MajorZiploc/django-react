@@ -8,6 +8,7 @@ export JUST_BACKEND_ROOT="$JUST_PROJECT_PACKAGES/backend";
 echo "NOTE: SOURCE THIS FILE WHILE INSIDE THE SAME PATH AS THIS FILE. ELSE YOU WILL HAVE INVALID BEHAVIOR";
 
 function just_install {
+  local og_path="$(pwd)";
   cd "$JUST_PROJECT_ROOT";
   npm install;
   just_venv_create;
@@ -16,7 +17,7 @@ function just_install {
   just_build_frontend;
   just_build_backend;
   just_build_frontend_ui_tests;
-  cd ~-;
+  cd "$og_path";
 }
 
 function just_setup_postgres_volume {
