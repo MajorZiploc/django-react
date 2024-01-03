@@ -46,3 +46,9 @@ function kompose_convert_down {
 # NOTE: looks like you can provide multi docker compose files to kompose
 # kompose -f docker-compose.yml -f docker-guestbook.yml convert
 # generate a Chart file for Helm: kompose convert -c
+
+
+# extra commands:
+# kubectl cluster-info
+# kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+# kubectl get deployments
