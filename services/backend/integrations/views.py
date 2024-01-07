@@ -1,12 +1,14 @@
+from datetime import timedelta
 import json
 from django.http import HttpRequest, JsonResponse
+from django.utils.timezone import now
 import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from rest_framework.views import APIView
-from integrations.models import Movie
+from integrations.models import Movie, ScheduledJob
 from integrations.permissions import IsOwnerOrReadOnly
 from integrations.serializers import MovieSerializer
 from integrations.pagination import CustomPagination
@@ -26,33 +28,6 @@ class ListCreateMovieAPIView(ListCreateAPIView):
     filterset_class = MovieFilter
 
     def perform_create(self, serializer):
-        # REDIS CACHE EXAMPLE BEGIN
-        data_to_cache = {
-            "stuff1": 'hi stuff1',
-            "stuff2": ['hi', 'stuff2'],
-            "stuff3": {
-                'greet': 'hi',
-                'things': ['stuff3', 'stuff3s_cat']
-            },
-        }
-        cache = REDIS_CLIENT
-        cache_key = "yogurt"
-        cache_value = cache.get(cache_key)
-        print('cache_value should be None because it was not set yet or is expired:')
-        print(cache_value)
-        # Set the value in the cache with expiration time and milliseconds parameter
-        # ex=1800 = expires in 1800 seconds (30 minutes)
-        cache.set(cache_key, json.dumps(data_to_cache), ex=1800)
-        cache_value = cache.get(cache_key)
-        cache_data = json.loads(cache_value.decode())
-        print('cache_data')
-        print(cache_data)
-        cache.delete(cache_key)
-        # Redis Cache Example END
-        # FIRE EVENT EXAMPLE BEGIN
-        # logs should appear in the beat worker
-        test_task.apply_async(queue='crud_api_default_queue')
-        # FIRE EVENT EXAMPLE END
         # Assign the user who created the movie
         serializer.save(creator=self.request.user)
 
@@ -117,3 +92,56 @@ class ListMovieAPIView(APIView):
         print('list_movies_delete')
         request_body = parse_request_body(request.body)
         return JsonResponse(request_body)
+
+def redis_entry_create():
+    cache = REDIS_CLIENT
+    cache_key = "yogurt"
+    data_to_cache = {
+        "stuff1": 'hi stuff1',
+        "stuff2": ['hi', 'stuff2'],
+        "stuff3": {
+            'greet': 'hi',
+            'things': ['stuff3', 'stuff3s_cat']
+        },
+    }
+    cache_value = cache.get(cache_key)
+    print('cache_value should be None because it was not set yet or is expired:')
+    print(cache_value)
+    # Set the value in the cache with expiration time and milliseconds parameter
+    # ex=1800 = expires in 1800 seconds (30 minutes)
+    cache.set(cache_key, json.dumps(data_to_cache), ex=1800)
+    cache_value = cache.get(cache_key)
+    cache_data = json.loads(cache_value.decode())
+    print('cache_data')
+    print(cache_data)
+
+def redis_entry_delete():
+    cache = REDIS_CLIENT
+    cache_key = "yogurt"
+    cache.delete(cache_key)
+
+def task_eager():
+    # FIRE EVENT EXAMPLE
+    # logs should appear in the beat worker
+    test_task.apply_async(queue='crud_api_default_queue')
+
+def task_scheduled():
+    # will be scheduled by integrations/tasks/tasks.py.schedule_jobs() which
+    # is called on intervals and other configs based on
+    # api_crud/celeryconfig.py.beat_schedule['schedule_jobs']
+    ScheduledJob.objects.create(
+        job_type='test_task',
+        next_scheduled=now() +
+        timedelta(
+            seconds=30),
+        delay_seconds=20,
+        job_info={
+            'stuff1': 'this dict will be passed as kwargs to test_task for custom behavior',
+            'x': [
+                1,
+                2,
+                3],
+            'y': {
+                'z': 1}},
+        delete_after_count=2,
+    )
