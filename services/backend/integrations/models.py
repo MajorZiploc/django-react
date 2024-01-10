@@ -22,6 +22,15 @@ class AuditableModel(models.Model):
     class Meta:
         abstract = True
 
+# Used like AuditableModel
+class StatusModel(models.Model):
+    status = models.TextField()
+    error_codes = models.JSONField(default=list)
+
+    class Meta:
+        abstract = True
+
+
 class Movie(AuditableModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
@@ -31,3 +40,12 @@ class Movie(AuditableModel):
 
     class Meta:
         ordering = ['-id']
+
+
+class Status:
+    PROCESSING = "PROCESSING"
+    COMPLETE = "COMPLETE"
+    FAILED = "FAILED"
+
+    CHOICES = [(PROCESSING, "PROCESSING"), (COMPLETE, "COMPLETE"), (FAILED, "FAILED")]
+
