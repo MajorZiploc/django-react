@@ -147,7 +147,19 @@ function just_clean {
   target="${target:-"$JUST_PROJECT_ROOT"}";
   cd "$target";
   rm -rf "${target}/node_modules" "${target}/.venv" "${target}/services/frontend/node_modules" "${target}/services/frontend/ui_tests/node_modules" "${target}/tags";
-  find "${target}/services/backend" -type d -iname "__pycache__" -exec rm -rf "{}" \;
+  local ds_store=".DS_Store";
+  local files_to_delete=("${ds_store}");
+  local dirs_to_delete=("__pycache");
+  rm "${ds_store}";
+  local dirs_to_clean=("services" "scripts" "dev_tools" "container_configs" "devcontainer" ".vscode")
+  for dir_to_clean in ${dirs_to_clean[@]}; do
+    for file_to_delete in ${files_to_delete[@]}; do
+      find "${target}/${dir_to_clean}" -type f -iname "${file_to_delete}" -exec rm "{}" \;
+    done;
+    for dir_to_delete in ${dirs_to_delete[@]}; do
+      find "${target}/${dir_to_clean}" -type d -iname "${dir_to_delete}" -exec rm -rf "{}" \;
+    done;
+  done;
   if [[ -n "$1" ]]; then
     git remote remove origin;
   fi
