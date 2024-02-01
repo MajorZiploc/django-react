@@ -5,7 +5,8 @@
 
   // define vars from template context
   const movie_id = "{{ movie_id }}";
-  const movies = {{ movies|to_safe_json }};
+  const meta_data = {{ meta_data|to_safe_json }};
+  const get_movies_url = "{% url 'integrations:get_movies_dirty' %}";
 
   // include js snippets -- snippets will include snippets they depend on, but not 3rd part dependencies
   {% js_imports as imports %}
@@ -25,6 +26,16 @@
   function App() {
     const [loading, setLoading] = useState(false);
     const [resp, setResp] = useState("stubbed");
+    const [movies, setMovies] = useState();
+
+    useEffect(() => {
+      fetch(get_movies_url)
+      .then(r => r.json())
+      .then(r => {
+        console.log(r)
+        setMovies(r.movies)
+      });
+    },[]);
 
     return html`
       <div
@@ -37,6 +48,7 @@
       >
       </div>
       <${ResponseDisplay} loading=${loading} resp=${resp} />
+      {movies && (<div>${JSON.stringify(movies)}</div>)}
     `;
   }
 

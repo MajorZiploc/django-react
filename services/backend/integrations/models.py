@@ -31,3 +31,12 @@ class Movie(AuditableModel):
 
     class Meta:
         ordering = ['-id']
+
+    def to_json_dict(self):
+        return dict(
+            id=self.id,
+            title=self.title,
+            genre=self.genre,
+            year=self.year,
+            creator_id=self.creator_id,
+        )
