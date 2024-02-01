@@ -38,11 +38,12 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
 
 # NOTE: authorize_user to 403 non logged in django users
 # @authorize_user
-@login_required
-def support_page(request):
+# This one for django admin users
+# @login_required
+def support_page(request, id):
     return render(request, 'integrations/preact_ex.html', context=dict(
-        movie_id=1,
-        movies=[{'name': 'first movie'}]
+        movie_id=id,
+        meta_data=[{'snack': 'popcorn'}]
     ))
 
 class MovieFilterDataAPIView(APIView):
@@ -145,3 +146,8 @@ def task_scheduled():
                 'z': 1}},
         delete_after_count=2,
     )
+
+def get_movies_dirty(request):
+    return JsonResponse(dict(
+        movies=[m.to_json_dict() for m in Movie.objects.all()]
+    ))
