@@ -11,7 +11,7 @@ function just_rest_url_encode {
 
 function just_rest_get_token {
   cd "$JUST_THIS_ROOT";
-  local token; token=$(curl '${BACKEND_PUBLIC_URL}/api/v1/auth/token' \
+  local token; token=$(curl "$JUST_PUBLIC_URL:$JUST_PUBLIC_BACKEND_PORT/api/v1/auth/token" \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   --data-raw "{\"username\":\"$JUST_UI_TESTS_USERNAME\",\"password\":\"$JUST_UI_TESTS_PASSWORD\"}" \
