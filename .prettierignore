@@ -1,4 +1,4 @@
 **/node_modules
 **/build
 **/.venv
-**/backend/**/templates/js/*.js
+**/backend/**/templates/*
