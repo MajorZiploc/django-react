@@ -1,6 +1,6 @@
 from datetime import timedelta
 import json
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, HttpResponseBadRequest, JsonResponse
 from django.utils.timezone import now
 import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
@@ -18,6 +18,8 @@ from integrations.utils import parse_request_body, get_data_from_endpoint, post_
 from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
 from api_crud.settings.base import REDIS_CLIENT
+from django.views.decorators.http import require_http_methods
+from integrations.forms import GenreForm
 
 class ListCreateMovieAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
@@ -35,16 +37,6 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-
-# NOTE: authorize_user to 403 non logged in django users
-# @authorize_user
-# This one for django admin users
-# @login_required
-def support_page(request, id):
-    return render(request, 'integrations/preact_ex.html', context=dict(
-        movie_id=id,
-        meta_data=[{'snack': 'popcorn'}]
-    ))
 
 class MovieFilterDataAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -146,8 +138,3 @@ def task_scheduled():
                 'z': 1}},
         delete_after_count=2,
     )
-
-def get_movies_dirty(request):
-    return JsonResponse(dict(
-        movies=[m.to_json_dict() for m in Movie.objects.all()]
-    ))
