@@ -48,7 +48,22 @@
       >
       </div>
       <${ResponseDisplay} loading=${loading} resp=${resp} />
-      {movies && (<div>${JSON.stringify(movies)}</div>)}
+      ${movies && html`<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${movies.map(movie => html`<tr key=${movie.id}>
+            <td>${movie.title}</td>
+            <td>${movie.genre}</td>
+            <td>${movie.year}</td>
+          </tr>`)}
+        </tbody>
+      </table>`}
     `;
   }
 
