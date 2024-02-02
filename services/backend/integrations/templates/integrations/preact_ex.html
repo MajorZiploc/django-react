@@ -7,6 +7,7 @@
   const movie_id = "{{ movie_id }}";
   const meta_data = {{ meta_data|to_safe_json }};
   const get_movies_url = "{% url 'integrations:get_movies_dirty' %}";
+  const csrfToken = "{{ csrf_token }}";
 
   // include js snippets -- snippets will include snippets they depend on, but not 3rd part dependencies
   {% js_imports as imports %}
@@ -29,7 +30,13 @@
     const [movies, setMovies] = useState();
 
     useEffect(() => {
-      fetch(get_movies_url)
+      fetch(get_movies_url, {
+        headers: {
+          // "X-CSRFToken": csrfToken,
+          "Content-Type": "application/json",
+        }
+
+      })
       .then(r => r.json())
       .then(r => {
         console.log(r)
