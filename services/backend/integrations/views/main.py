@@ -38,16 +38,6 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
-# NOTE: authorize_user to 403 non logged in django users
-# @authorize_user
-# This one for django admin users
-# @login_required
-def support_page(request, id):
-    return render(request, 'integrations/preact_ex.html', context=dict(
-        movie_id=id,
-        meta_data=[{'snack': 'popcorn'}]
-    ))
-
 class MovieFilterDataAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -148,77 +138,3 @@ def task_scheduled():
                 'z': 1}},
         delete_after_count=2,
     )
-
-def get_movies_dirty(request):
-    return JsonResponse(dict(
-        movies=[m.to_json_dict() for m in Movie.objects.all()]
-    ))
-
-
-def config_store_main(request):
-    movies = Movie.objects.all()
-    genres = [
-        {
-            "label": "Kids",
-            "id": "Kids",
-        },
-        {
-            "label": "Adults",
-            "id": "Adults",
-        }
-    ]
-    return render(request, 'integrations/config_store_main.html', context=dict(
-        movies=movies,
-        genres=genres
-    ))
-
-@require_http_methods(['DELETE'])
-def delete_movie(request, id):
-    # Movie.objects.filter(id=id).delete()
-    movies = Movie.objects.all()
-    return HttpResponseBadRequest("Bad Request: Some condition not met")
-    # return render(request, 'integrations/movies_list.html', {'movies': movies})
-
-@require_http_methods(['POST'])
-def save_movie(request, id):
-    movie = Movie.objects.filter(id=id).first()
-    if not movie:
-        return HttpResponseBadRequest("Movie not found")
-    # print('request.GET')
-    # print(request.GET)
-    # query_param1 = request.GET.get('query_param1', None)
-    # print('query_param1')
-    # print(query_param1)
-    form = GenreForm(request.POST)
-    if form.is_valid():
-        print('form.data')
-        print(form.data)
-        movie.genre = form.data['genre']
-        movie.save()
-        movies = Movie.objects.all()
-        genres = [
-            {
-                "label": "Kids",
-                "id": "Kids",
-            },
-            {
-                "label": "Adults",
-                "id": "Adults",
-            }
-        ]
-        return render(request, 'integrations/movies_list.html', {'movies': movies, 'genres': genres})
-    return HttpResponseBadRequest("Bad Request: Some condition not met")
-
-@require_http_methods(['GET'])
-def load_genres(request):
-    genres = [
-        {
-            "label": "Kids2",
-            "id": "Kids",
-        },
-        {
-            "label": "Adults2",
-            "id": "Adults",
-        }
-    ]
-    return JsonResponse({'genres': genres})
