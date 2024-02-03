@@ -56,3 +56,9 @@ export interface CounterState {
 }
 
 export type Dispatch = Dispatch<AnyAction>;
+
+export interface MenuItem {
+  listIcon: JSX.Element;
+  listText: string;
+  listPath: string;
+}

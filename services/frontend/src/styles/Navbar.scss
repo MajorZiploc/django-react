@@ -7,6 +7,24 @@
 
 .hamburger {
   color: tomato;
+  &:hover {
+    opacity: 0.7;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+}
+
+.navMoviesTitle {
+  text-decoration: none;
+  &:hover {
+    opacity: 0.7;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
 }
 
 .navBarTitle {
