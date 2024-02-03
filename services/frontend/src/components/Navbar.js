@@ -26,8 +26,7 @@ import { setAccessToken, setRefreshToken } from '../utils';
 // import { incrementByAmount, incrementByAmountAsync } from '../redux/slices/counterSlice';
 
 /**
- * @typedef {any} ResumeData
- * @typedef {any} MenuItem
+ * @typedef {import('../interfaces').MenuItem} MenuItem
  */
 
 /** @type {string} */
@@ -35,7 +34,7 @@ const homeListPath = '/';
 
 /** @type {MenuItem[]} */
 const menuItems = [
-  { listIcon: <Home />, listText: 'Home', listPath: '/' },
+  { listIcon: <Home />, listText: 'Home', listPath: homeListPath },
   { listIcon: <AssignmentIndIcon />, listText: 'Movies', listPath: '/movies' },
 ];
 
@@ -95,9 +94,11 @@ const Navbar = () => {
             <IconButton onClick={() => setOpen(true)}>
               <MenuIcon className='hamburger' />
             </IconButton>
-            <Typography variant='h5' className='navBarTitle'>
-              Movies
-            </Typography>
+            <Link onClick={() => setActiveTab(homeListPath)} className='navMoviesTitle' to={homeListPath}>
+              <Typography variant='h5' className='navBarTitle'>
+                Movies
+              </Typography>
+            </Link>
             <Link
               id='logout'
               className='navBarTitle'
