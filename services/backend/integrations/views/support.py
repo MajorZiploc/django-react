@@ -31,7 +31,7 @@ def support_preact(request, id):
         meta_data=[{'snack': 'popcorn'}]
     ))
 
-def get_movies_dirty(request):
+def support_get_movies_dirty(request):
     return JsonResponse(dict(
         movies=[m.to_json_dict() for m in Movie.objects.all()]
     ))
@@ -55,14 +55,14 @@ def support_htmx(request):
     ))
 
 @require_http_methods(['DELETE'])
-def delete_movie(request, id):
+def support_delete_movie_htmx(request, id):
     # Movie.objects.filter(id=id).delete()
     movies = Movie.objects.all()
     return HttpResponseBadRequest("Bad Request: Some condition not met")
-    # return render(request, 'integrations/movies_list.html', {'movies': movies})
+    # return render(request, 'integrations/support_movies_list_htmx.html', {'movies': movies})
 
 @require_http_methods(['POST'])
-def save_movie(request, id):
+def support_save_movie_htmx(request, id):
     movie = Movie.objects.filter(id=id).first()
     if not movie:
         return HttpResponseBadRequest("Movie not found")
@@ -88,11 +88,11 @@ def save_movie(request, id):
                 "id": "Adults",
             }
         ]
-        return render(request, 'integrations/movies_list.html', {'movies': movies, 'genres': genres})
+        return render(request, 'integrations/support_movies_list_htmx.html', {'movies': movies, 'genres': genres})
     return HttpResponseBadRequest("Bad Request: Some condition not met")
 
 @require_http_methods(['POST'])
-def save_movie_alpine(request, id):
+def support_save_movie_alpine(request, id):
     movie = Movie.objects.filter(id=id).first()
     if not movie:
         return JsonResponse({'message': 'Movie not found!'}, status=status.HTTP_400_BAD_REQUEST)
@@ -106,7 +106,7 @@ def save_movie_alpine(request, id):
     return JsonResponse(data={'message': 'im here', 'title': 'yo dog'})
 
 @require_http_methods(['GET'])
-def load_genres(request):
+def support_load_genres(request):
     genres = [
         {
             "label": "Kids2",

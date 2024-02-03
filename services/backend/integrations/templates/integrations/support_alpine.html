@@ -2,7 +2,7 @@
 <div x-data="movieForm()">
     <div class="container mx-auto mt-8">
 
-      <form action="{% url 'integrations:save_movie_alpine' movie.id %}" method="POST" class="w-64 mx-auto" @submit.prevent="submitData">
+      <form action="{% url 'integrations:support_save_movie_alpine' movie.id %}" method="POST" class="w-64 mx-auto" @submit.prevent="submitData">
         {% csrf_token %}
         <div class="mb-4">
           <label class="block mb-2">Title:</label>
@@ -43,7 +43,7 @@
 
           submitData() {
 
-            fetch("{% url 'integrations:save_movie_alpine' movie.id %}", {
+            fetch("{% url 'integrations:support_save_movie_alpine' movie.id %}", {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

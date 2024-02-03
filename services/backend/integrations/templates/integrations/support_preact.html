@@ -6,7 +6,7 @@
   // define vars from template context
   const movie_id = "{{ movie_id }}";
   const meta_data = {{ meta_data|to_safe_json }};
-  const get_movies_url = "{% url 'integrations:get_movies_dirty' %}";
+  const get_movies_url = "{% url 'integrations:support_get_movies_dirty' %}";
   const csrf_token = "{{ csrf_token }}";
   console.log('movie_id');
   console.log(movie_id);
