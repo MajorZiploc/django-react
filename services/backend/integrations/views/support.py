@@ -73,12 +73,13 @@ def support_save_movie_htmx(request, id):
     # print('query_param1')
     # print(query_param1)
     form = GenreForm(request.POST)
+    print('form.data')
+    print(form.data)
     if form.is_valid():
-        print('form.data')
-        print(form.data)
+        forloop = {}
         movie.genre = form.data['genre']
+        forloop['counter'] = form.data['forloop_counter']
         movie.save()
-        movies = Movie.objects.all()
         genres = [
             {
                 "label": "Kids",
@@ -89,7 +90,7 @@ def support_save_movie_htmx(request, id):
                 "id": "Adults",
             }
         ]
-        return render(request, 'integrations/support_movies_list_htmx.html', {'movies': movies, 'genres': genres})
+        return render(request, 'integrations/support_movie_htmx.html', {'movie': movie, 'genres': genres, 'forloop': forloop})
     return HttpResponseBadRequest("Bad Request: Some condition not met")
 
 @require_http_methods(['POST'])

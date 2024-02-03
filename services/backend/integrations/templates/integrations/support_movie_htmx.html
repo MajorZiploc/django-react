@@ -1,0 +1,35 @@
+<div id="movie-{{movie.id}}">
+  {{ forloop.counter }} {{ movie.title }} {{ movie.genre }}
+  <button
+    class="btn btn-secondary"
+    hx-delete="{% url 'integrations:support_delete_movie_htmx' movie.id %}"
+    hx-trigger="click"
+    hx-confirm="Are you sure you want to delete this movie?"
+    hx-target="#movies"
+    hx-swap="outerHTML"
+  >
+    Delete?
+  </button>
+  <form
+    hx-post="{% url 'integrations:support_save_movie_htmx' movie.id %}"
+    hx-confirm="Are you sure you want to save this movie?"
+    hx-target="#movie-{{ movie.id }}"
+    hx-swap="outerHTML">
+    <div id="movie-content-{{ movie.id }}">
+      <input type="text" id="forloop_counter-{{movie.id}}" name="forloop_counter" value="{{forloop.counter}}" hidden>
+      <select name="genre" id="genre-select-{{ movie.id }}">
+        {% for genre in genres %}
+        <option value="{{genre.id}}" {% if genre == cur_genre %}selected="selected"{% endif %}>
+          {{genre.label|capfirst}}
+        </option>
+        {% endfor %}
+      </select>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
