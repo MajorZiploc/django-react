@@ -4,7 +4,7 @@
     {{ forloop.counter }} {{ movie.title }} {{ movie.genre }}
     <button
       class="btn btn-secondary"
-      hx-delete="{% url 'integrations:delete_movie' movie.id %}"
+      hx-delete="{% url 'integrations:support_delete_movie_htmx' movie.id %}"
       hx-trigger="click"
       hx-confirm="Are you sure you want to delete this movie?"
       hx-target="#movies"
@@ -22,7 +22,7 @@
       </select>
       <button
         class="btn btn-primary"
-        hx-post="{% url 'integrations:save_movie' movie.id %}"
+        hx-post="{% url 'integrations:support_save_movie_htmx' movie.id %}"
         hx-trigger="click"
         hx-target="#movies"
         hx-confirm="Are you sure you want to save this movie?"
@@ -35,7 +35,7 @@
   {% endfor %}
   <button
     class="btn btn-primary"
-    hx-get="{% url 'integrations:load_genres' %}"
+    hx-get="{% url 'integrations:support_load_genres' %}"
     hx-trigger="click"
     hx-target="#genre-list"
     hx-swap-oob="outerHTML"
@@ -44,19 +44,16 @@
   </button>
 
   <div id="genre-list">
-    <!-- This div will be updated with the response from the load_genres view -->
+    <!-- This div will be updated with the response from the support_load_genres view -->
   </div>
   <script>
-    console.log('movies_list');
+    console.log('support_movies_list_htmx');
 
     function updateSelectOptions(data) {
       const selectOptionsList = document.querySelectorAll('select[id*=genre-select-]');
-      console.log('selectOptionsList');
-      console.log(selectOptionsList);
       for (const selectOptions of selectOptionsList) {
         selectOptions.innerHTML = ''; // Clear existing options
         data.genres.forEach(function (genre) {
-          console.log(genre);
           var option = document.createElement('option');
           option.value = genre.id;
           option.text = genre.label;
@@ -66,9 +63,7 @@
     }
 
     document.body.addEventListener('htmx:afterSwap', function (event) {
-      console.log('h');
       if (event.target.id === 'genre-list') {
-        console.log('h');
         var responseData = JSON.parse(document.getElementById('genre-list').innerText);
         updateSelectOptions(responseData);
       }
