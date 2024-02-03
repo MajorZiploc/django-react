@@ -51,12 +51,9 @@
 
     function updateSelectOptions(data) {
       const selectOptionsList = document.querySelectorAll('select[id*=genre-select-]');
-      console.log('selectOptionsList');
-      console.log(selectOptionsList);
       for (const selectOptions of selectOptionsList) {
         selectOptions.innerHTML = ''; // Clear existing options
         data.genres.forEach(function (genre) {
-          console.log(genre);
           var option = document.createElement('option');
           option.value = genre.id;
           option.text = genre.label;
@@ -66,9 +63,7 @@
     }
 
     document.body.addEventListener('htmx:afterSwap', function (event) {
-      console.log('h');
       if (event.target.id === 'genre-list') {
-        console.log('h');
         var responseData = JSON.parse(document.getElementById('genre-list').innerText);
         updateSelectOptions(responseData);
       }

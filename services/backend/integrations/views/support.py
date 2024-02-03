@@ -7,7 +7,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
-from rest_framework.views import APIView
+from rest_framework.views import APIView, status
 from integrations.models import Movie, ScheduledJob
 from integrations.permissions import IsOwnerOrReadOnly
 from integrations.serializers import MovieSerializer
@@ -25,7 +25,7 @@ from integrations.forms import GenreForm
 # @authorize_user
 # This one for django admin users
 # @login_required
-def support_page(request, id):
+def support_preact(request, id):
     return render(request, 'integrations/support_preact.html', context=dict(
         movie_id=id,
         meta_data=[{'snack': 'popcorn'}]
@@ -91,6 +91,20 @@ def save_movie(request, id):
         return render(request, 'integrations/movies_list.html', {'movies': movies, 'genres': genres})
     return HttpResponseBadRequest("Bad Request: Some condition not met")
 
+@require_http_methods(['POST'])
+def save_movie_alpine(request, id):
+    movie = Movie.objects.filter(id=id).first()
+    if not movie:
+        return JsonResponse({'message': 'Movie not found!'}, status=status.HTTP_400_BAD_REQUEST)
+    print(request.body)
+    request_body = parse_request_body(request.body)
+    print(request_body)
+    movie.title = request_body['title']
+    movie.genre = request_body['genre']
+    movie.year = request_body['year']
+    movie.save()
+    return JsonResponse(data={'message': 'im here', 'title': 'yo dog'})
+
 @require_http_methods(['GET'])
 def load_genres(request):
     genres = [
@@ -104,3 +118,13 @@ def load_genres(request):
         }
     ]
     return JsonResponse({'genres': genres})
+
+def support_alpine(request, id):
+    movie = Movie.objects.filter(id=id).first()
+    if not movie:
+        return HttpResponseBadRequest("Movie not found")
+    print(movie.to_json_dict())
+    return render(request, 'integrations/support_alpine.html', context=dict(
+        movie=movie,
+        meta_data=[{'snack': 'popcorn'}]
+    ))

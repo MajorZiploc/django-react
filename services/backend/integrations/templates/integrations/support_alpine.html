@@ -1,0 +1,70 @@
+{% extends "integrations/base_alpine.html" %} {% block main %}
+<div x-data="movieForm()">
+    <div class="container mx-auto mt-8">
+
+      <form action="{% url 'integrations:save_movie_alpine' movie.id %}" method="POST" class="w-64 mx-auto" @submit.prevent="submitData">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label class="block mb-2">Title:</label>
+          <input type="text" name="title" class="border w-full p-1" x-model="formData.title">
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2">Genre:</label>
+          <input type="text" name="genre" class="border w-full p-1" x-model="formData.genre">
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2">Message:</label>
+          <textarea name="year" class="border w-full p-1" x-model="formData.year"></textarea>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+
+      <div x-show="submittedData" class="mt-4">
+          <div>
+              <div x-text="submittedData.title"></div>
+              <div x-text="submittedData.message"></div>
+          </div>
+      </div>
+
+    </div>
+
+    <script>
+
+      function movieForm() {
+        return {
+          formData: {
+            title: '{{movie.title}}',
+            genre: '{{movie.genre}}',
+            year: '{{movie.year}}',
+          },
+          submittedData: {},
+
+          submitData() {
+
+            fetch("{% url 'integrations:save_movie_alpine' movie.id %}", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": '{{csrf_token}}',
+              },
+              body: JSON.stringify(this.formData)
+            })
+            .then(() => {
+              // TODO: check for invalid status codes and show that there was an error instead of success
+              this.submittedData.message = 'Form sucessfully submitted!'
+            })
+            .catch(() => {
+              this.submittedData.message = 'Ooops! Something went wrong!'
+            })
+            .finally(() => {
+              this.submittedData.title = 'Submission Results'
+            });
+          }
+        }
+      }
+
+    </script>
+</div>
+{% endblock %}
