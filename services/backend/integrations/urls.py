@@ -15,4 +15,6 @@ urlpatterns = [
     path('movies/support/genres-data', views.support_load_genres, name='support_load_genres'),
     path('movies/support/<str:id>/alpine', views.support_alpine, name='support_alpine'),
     path('movies/support/<str:id>/alpine/save', views.support_save_movie_alpine, name='support_save_movie_alpine'),
+    path('movies/support/<str:id>/unpoly', views.support_unpoly, name='support_unpoly'),
+    path('movies/support/<str:id>/unpoly/save', views.support_save_movie_unpoly, name='support_save_movie_unpoly'),
 ]

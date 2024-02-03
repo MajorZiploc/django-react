@@ -1,6 +1,7 @@
 from datetime import timedelta
 import json
 from django.http import HttpRequest, HttpResponseBadRequest, JsonResponse
+from django.urls import reverse
 from django.utils.timezone import now
 import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
@@ -19,7 +20,7 @@ from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
 from api_crud.settings.base import REDIS_CLIENT
 from django.views.decorators.http import require_http_methods
-from integrations.forms import GenreForm
+from integrations.forms import GenreForm, MovieForm
 
 # NOTE: authorize_user to 403 non logged in django users
 # @authorize_user
@@ -105,6 +106,30 @@ def support_save_movie_alpine(request, id):
     movie.save()
     return JsonResponse(data={'message': 'im here', 'title': 'yo dog'})
 
+@require_http_methods(['POST'])
+def support_save_movie_unpoly(request, id):
+    movie = Movie.objects.filter(id=id).first()
+    if not movie:
+        return HttpResponseBadRequest("Movie not found")
+    # print('request.GET')
+    # print(request.GET)
+    # query_param1 = request.GET.get('query_param1', None)
+    # print('query_param1')
+    # print(query_param1)
+    form = MovieForm(request.POST)
+    if form.is_valid():
+        print('form.data')
+        print(form.data)
+        movie.title = form.data['title']
+        movie.genre = form.data['genre']
+        movie.year = form.data['year']
+        movie.save()
+        print('movie.id')
+        print(movie.id)
+        return support_unpoly(request, id)
+        # return render(request, reverse('integrations/support_unpoly.html', kwargs=dict(id=movie.id)))
+    return HttpResponseBadRequest("Bad Request: Some condition not met")
+
 @require_http_methods(['GET'])
 def support_load_genres(request):
     genres = [
@@ -125,6 +150,16 @@ def support_alpine(request, id):
         return HttpResponseBadRequest("Movie not found")
     print(movie.to_json_dict())
     return render(request, 'integrations/support_alpine.html', context=dict(
+        movie=movie,
+        meta_data=[{'snack': 'popcorn'}]
+    ))
+
+def support_unpoly(request, id):
+    movie = Movie.objects.filter(id=id).first()
+    if not movie:
+        return HttpResponseBadRequest("Movie not found")
+    print(movie.to_json_dict())
+    return render(request, 'integrations/support_unpoly.html', context=dict(
         movie=movie,
         meta_data=[{'snack': 'popcorn'}]
     ))
