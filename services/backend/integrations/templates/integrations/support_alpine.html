@@ -32,15 +32,25 @@
 
     <script>
 
+      // @ts-check
+
+      /**
+       * @typedef {{title: string; genre: string; year: string;}} MovieFormData
+       * @typedef {{title: string; message: string;}} SubmittedData
+       */
+
       function movieForm() {
         return {
+          /** @type {MovieFormData} */
           formData: {
             title: '{{movie.title}}',
             genre: '{{movie.genre}}',
             year: '{{movie.year}}',
           },
+          /** @type {Partial<SubmittedData>} */
           submittedData: {},
 
+          /** @type {() => void} */
           submitData() {
 
             fetch("{% url 'integrations:support_save_movie_alpine' movie.id %}", {
