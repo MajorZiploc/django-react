@@ -2,11 +2,21 @@
 <div id="preactRoot"></div>
 {% endblock content %} {% block scripts %}
 <script type="module">
+  // @ts-check
+
+  /**
+   * @typedef {{id: string; title: string; genre: string; year: number; created_date: string; updated_date: string;}} Movie
+   * @typedef {{snack: string;}} MovieMetaData
+   */
 
   // define vars from template context
+  /** @type {string} */
   const movie_id = "{{ movie_id }}";
+  /** @type {MovieMetaData} */
   const meta_data = {{ meta_data|to_safe_json }};
+  /** @type {string} */
   const get_movies_url = "{% url 'integrations:support_get_movies_dirty' %}";
+  /** @type {string} */
   const csrf_token = "{{ csrf_token }}";
   console.log('movie_id');
   console.log(movie_id);
@@ -33,8 +43,11 @@
   {% verbatim %}
 
   function App() {
+    /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
     const [loading, setLoading] = useState(false);
+    /** @type {[string, React.Dispatch<React.SetStateAction<string>>]} */
     const [resp, setResp] = useState("stubbed");
+    /** @type {[Movie[], React.Dispatch<React.SetStateAction<Movie[]>>]} */
     const [movies, setMovies] = useState();
 
     useEffect(() => {
