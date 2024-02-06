@@ -1,4 +1,5 @@
-from datetime import timedelta
+from datetime import time, timedelta
+import time as timeit
 import json
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.urls import reverse
@@ -97,6 +98,7 @@ def support_save_movie_htmx(request, id):
 def support_search_htmx(request):
     print(request.GET)
     q = request.GET.get('q', None)
+    timeit.sleep(3)
     return HttpResponse(f"<div id='search-results'>you searched for: {q}</div>")
 
 @require_http_methods(['POST'])

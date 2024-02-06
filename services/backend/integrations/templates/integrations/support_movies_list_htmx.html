@@ -16,9 +16,14 @@
     <!-- This div will be updated with the response from the support_load_genres view -->
   </div>
   <input name="q"
-    hx-get="{% url 'integrations:support_search_htmx' %}" hx-trigger="keyup changed delay:1s"
+    hx-get="{% url 'integrations:support_search_htmx' %}"
+    hx-trigger="keyup changed delay:1s"
+    hx-indicator=".htmx-indicator"
     hx-target="#search-results"/>
   <div id="search-results"></div>
+  <span class="htmx-indicator"> 
+    Searching... 
+   </span>
   <script>
     console.log('support_movies_list_htmx');
 
