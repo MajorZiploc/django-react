@@ -91,7 +91,8 @@ def support_save_movie_htmx(request, id):
                 "id": "Adults",
             }
         ]
-        return render(request, 'integrations/support_movie_htmx.html', {'movie': movie, 'genres': genres, 'forloop': forloop})
+        return render(request, 'integrations/support_movie_htmx.html',
+                      {'movie': movie, 'genres': genres, 'forloop': forloop})
     return HttpResponseBadRequest("Bad Request: Some condition not met")
 
 @require_http_methods(['GET'])
