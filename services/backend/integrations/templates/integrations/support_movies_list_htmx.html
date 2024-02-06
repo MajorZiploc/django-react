@@ -17,11 +17,11 @@
   </div>
   <input name="q"
     hx-get="{% url 'integrations:support_search_htmx' %}"
-    hx-trigger="keyup changed delay:1s"
-    hx-indicator=".htmx-indicator"
+    hx-trigger="keyup changed delay:500ms"
+    hx-indicator="#searchable-select"
     hx-target="#search-results"/>
   <div id="search-results"></div>
-  <span class="htmx-indicator"> 
+  <span class="htmx-indicator" id="searchable-select">
     Searching... 
    </span>
   <script>

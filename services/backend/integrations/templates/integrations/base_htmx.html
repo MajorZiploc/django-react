@@ -101,15 +101,18 @@
     <!-- <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script> -->
     <script>
       console.log('base_htmx');
-      document.body.addEventListener('htmx:sendError', function (e) {
-        console.log('htmx:sendError->e');
-        console.log(e);
-        alert(`A network error occured: ${e?.detail?.xhr?.responseText} -- ${e?.detail?.error}`);
-      });
-      document.body.addEventListener('htmx:responseError', function (e) {
-        console.log('htmx:responseError->e');
-        console.log(e);
-        alert(`A response error occured: ${e?.detail?.xhr?.responseText} ${e?.detail?.error}`);
+      $(document).ready(function() {
+        document.body.addEventListener('htmx:sendError', function (e) {
+          console.log('htmx:sendError->e');
+          console.log(e);
+          alert(`A network error occured: ${e?.detail?.xhr?.responseText} -- ${e?.detail?.error}`);
+        });
+        document.body.addEventListener('htmx:responseError', function (e) {
+          console.log('htmx:responseError->e');
+          console.log(e);
+          alert(`A response error occured: ${e?.detail?.xhr?.responseText} ${e?.detail?.error}`);
+        });
+        $('.searchable-select').select2();
       });
     </script>
   </body>

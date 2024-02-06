@@ -17,7 +17,7 @@
     hx-swap="outerHTML">
     <div id="movie-content-{{ movie.id }}">
       <input type="text" id="forloop_counter-{{movie.id}}" name="forloop_counter" value="{{forloop.counter}}" hidden>
-      <select class="js-example-basic-single" name="genre" id="genre-select-{{ movie.id }}">
+      <select class="searchable-select" name="genre" id="genre-select-{{ movie.id }}">
         {% for genre in genres %}
         <option value="{{genre.id}}" {% if genre == cur_genre %}selected="selected"{% endif %}>
           {{genre.label|capfirst}}
@@ -32,9 +32,4 @@
       </button>
     </div>
   </form>
-  <script>
-    $(document).ready(function() {
-      $('.js-example-basic-single').select2();
-    });
-  </script>
 </div>
