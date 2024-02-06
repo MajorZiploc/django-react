@@ -10,6 +10,7 @@ urlpatterns = [
     path('movies/support/<str:id>/preact', views.support_preact, name='support_preact'),
     path('movies/support/support_get_movies_dirty', views.support_get_movies_dirty, name='support_get_movies_dirty'),
     path('movies/support/htmx', views.support_htmx, name='support_htmx'),
+    path('movies/support/htmx/search', views.support_search_htmx, name='support_search_htmx'),
     path('movies/support/<str:id>/htmx/delete', views.support_delete_movie_htmx, name='support_delete_movie_htmx'),
     path('movies/support/<str:id>/htmx/save', views.support_save_movie_htmx, name='support_save_movie_htmx'),
     path('movies/support/genres-data', views.support_load_genres, name='support_load_genres'),

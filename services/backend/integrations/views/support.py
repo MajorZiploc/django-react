@@ -1,6 +1,6 @@
 from datetime import timedelta
 import json
-from django.http import HttpRequest, HttpResponseBadRequest, JsonResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.urls import reverse
 from django.utils.timezone import now
 import requests
@@ -92,6 +92,12 @@ def support_save_movie_htmx(request, id):
         ]
         return render(request, 'integrations/support_movie_htmx.html', {'movie': movie, 'genres': genres, 'forloop': forloop})
     return HttpResponseBadRequest("Bad Request: Some condition not met")
+
+@require_http_methods(['GET'])
+def support_search_htmx(request):
+    print(request.GET)
+    q = request.GET.get('q', None)
+    return HttpResponse(f"<div id='search-results'>you searched for: {q}</div>")
 
 @require_http_methods(['POST'])
 def support_save_movie_alpine(request, id):
