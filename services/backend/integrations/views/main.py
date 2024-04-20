@@ -62,7 +62,7 @@ class ListMovieAPIView(APIView):
 
     def post(self, request: Request):
         print('list_movies_post')
-        # NOTE: request.query_params is also common, but apparently it doesnt exist on HttpRequest
+        # NOTE: request.GET if request: HttpRequest
         query_param1 = request.query_params.get('query_param1', None)
         # print('query_param1')
         # print(query_param1)
