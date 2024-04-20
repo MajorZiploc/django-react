@@ -1,6 +1,7 @@
 from datetime import timedelta
 import json
 from django.http import HttpRequest, HttpResponseBadRequest, JsonResponse
+from rest_framework.request import Request
 from django.utils.timezone import now
 import requests
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
@@ -41,7 +42,7 @@ class RetrieveUpdateDestroyMovieAPIView(RetrieveUpdateDestroyAPIView):
 class MovieFilterDataAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request: HttpRequest):
+    def get(self, request: Request):
         return JsonResponse({'data': {
             'genres': ['kids', 'action']
         }})
@@ -49,7 +50,7 @@ class MovieFilterDataAPIView(APIView):
 class ListMovieAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request: HttpRequest):
+    def get(self, request: Request):
         # request_body = parse_request_body(request.body)
         # response = requests.get(f'{base_url}/all')
         response = {'status_code': 200, 'data': ["stuff1", "stuff2"]}
@@ -59,10 +60,10 @@ class ListMovieAPIView(APIView):
         else:
             print(f"Error: {response['status_code']} - {response['text']}")
 
-    def post(self, request: HttpRequest):
+    def post(self, request: Request):
         print('list_movies_post')
         # NOTE: request.query_params is also common, but apparently it doesnt exist on HttpRequest
-        query_param1 = request.GET.get('query_param1', None)
+        query_param1 = request.query_params.get('query_param1', None)
         # print('query_param1')
         # print(query_param1)
         request_body = parse_request_body(request.body)
@@ -77,12 +78,12 @@ class ListMovieAPIView(APIView):
         # return JsonResponse(request_body, status=status.HTTP_400_BAD_REQUEST)
         return JsonResponse(request_body)
 
-    def patch(self, request: HttpRequest):
+    def patch(self, request: Request):
         print('list_movies_patch')
         request_body = parse_request_body(request.body)
         return JsonResponse(request_body)
 
-    def delete(self, request: HttpRequest):
+    def delete(self, request: Request):
         print('list_movies_delete')
         request_body = parse_request_body(request.body)
         return JsonResponse(request_body)
