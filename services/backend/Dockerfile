@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.12-alpine
 # Adding backend directory to make absolute filepaths consistent across services
 WORKDIR /workspace/app
 # Install Python dependencies
