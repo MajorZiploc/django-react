@@ -1,3 +1,5 @@
+NOTE: would be similar to just use heroku for the server and netlify for the frontend
+
 TODO:
 figure out how to serve react and django separately heroku
 https://chatgpt.com/share/781002fc-2c1b-4df7-b9ba-9fbce7a357d0
