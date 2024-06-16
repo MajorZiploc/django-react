@@ -22,11 +22,13 @@ from api_crud.settings.base import REDIS_CLIENT, BASE_DIR
 from django.views.decorators.http import require_http_methods
 from integrations.forms import GenreForm
 from django.views.generic import TemplateView
-from django.views.static import serve as static_serve
 import os
 
-def frontend_app_view(request):
-    return static_serve(request, "index.html", os.path.join(BASE_DIR, 'frontend'))
+class FrontendAppView(TemplateView):
+    def get_template_names(self):
+        # Locate the index.html file inside the static directory
+        index_path = os.path.join(BASE_DIR, 'frontend', 'index.html')
+        return [index_path]
 
 class ListCreateMovieAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
