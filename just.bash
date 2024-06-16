@@ -180,3 +180,11 @@ function just_zip {
   fi
 }
 
+function just_collectstatic {
+  cd "${JUST_FRONTEND_ROOT}";
+  npm run build;
+  cd "${JUST_PROJECT_ROOT}";
+  rm -rf services/backend/api_crud/frontend/;
+  mkdir -p services/backend/api_crud/frontend/;
+  mv services/frontend/build/* services/backend/api_crud/frontend/;
+}

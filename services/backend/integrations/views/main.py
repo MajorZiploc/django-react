@@ -18,9 +18,17 @@ from integrations.tasks import test_task
 from integrations.utils import parse_request_body, get_data_from_endpoint, post_data_to_endpoint, patch_data_to_endpoint, delete_data_from_endpoint, exec_sql_to_dicts
 from api_crud.authorization_decorators import authorize_user
 from django.contrib.auth.decorators import login_required
-from api_crud.settings.base import REDIS_CLIENT
+from api_crud.settings.base import REDIS_CLIENT, BASE_DIR
 from django.views.decorators.http import require_http_methods
 from integrations.forms import GenreForm
+from django.views.generic import TemplateView
+import os
+
+class FrontendAppView(TemplateView):
+    def get_template_names(self):
+        # Locate the index.html file inside the static directory
+        index_path = os.path.join(BASE_DIR, 'frontend', 'index.html')
+        return [index_path]
 
 class ListCreateMovieAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer

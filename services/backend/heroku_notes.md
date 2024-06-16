@@ -1,3 +1,8 @@
+follow to search react from django
+https://chatgpt.com/share/1dd2d3e6-051a-4191-8bd5-6e87138eed63
+
+
+
 https://stackoverflow.com/questions/69605603/what-should-go-in-my-procfile-for-a-django-application
   an answer:
   You will need 3 files in order to successfully deploy a django app to Heroku.

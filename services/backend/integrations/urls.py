@@ -3,6 +3,7 @@ from integrations import views
 
 app_name = 'integrations'
 urlpatterns = [
+    path('', views.FrontendAppView.as_view(), name='home'),
     path('movies', views.ListCreateMovieAPIView.as_view(), name='get_post_movies'),
     path('movies/<str:pk>', views.RetrieveUpdateDestroyMovieAPIView.as_view(), name='get_delete_update_movie'),
     path('movies/all', views.ListMovieAPIView.as_view(), name='list_movies'),

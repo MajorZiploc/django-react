@@ -1,5 +1,8 @@
 from api_crud.settings.base import *
 import os
+# import django_heroku
+
+# django_heroku.settings(locals())
 
 SECRET_KEY = os.environ['BACKEND_SECRET_KEY']
 

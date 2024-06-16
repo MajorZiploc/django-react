@@ -4,6 +4,7 @@ pip3 install --upgrade pip -r requirements.txt;
 
 if [[ -z "$MINT_WORKER_TYPE" ]]; then
   echo "Launching Server"
+  python manage.py collectstatic --no-input
   python manage.py makemigrations --no-input
   python manage.py migrate --no-input
   python manage.py runserver 0.0.0.0:8000;
