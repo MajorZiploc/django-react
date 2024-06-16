@@ -180,3 +180,14 @@ function just_zip {
   fi
 }
 
+function just_heroku_setup {
+  heroku buildpacks:add heroku/python
+  heroku buildpacks:add heroku/nodejs
+  # heroku buildpacks:add mars/create-react-app
+}
+
+function just_heroku_set_env_vars {
+  # TODO: fill these stuff in and use the .env.bash values here
+  heroku config:set DJANGO_SECRET_KEY='your_secret_key'
+  heroku config:set DEBUG=False
+}

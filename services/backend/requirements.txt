@@ -16,3 +16,5 @@ redis~=5.0.5
 requests==2.32.3
 gunicorn==22.0.0
 
+# fails to install because it attempts to install psycopg2 instead of using my psycopg2-binary
+# django-heroku==0.3.1

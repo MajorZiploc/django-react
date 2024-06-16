@@ -1,5 +1,6 @@
 TODO:
 figure out how to serve react and django separately heroku
+https://chatgpt.com/share/781002fc-2c1b-4df7-b9ba-9fbce7a357d0
 react: https://dev.to/mrcflorian/how-to-deploy-a-react-app-to-heroku-44ig
 
 
