@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
+[build]
+  # base directory for the pipeline - "/" = root of project
+  base = "/services/frontend"
+  command = "echo '----------- ENVIRONMENT -----------' && env && echo '----------- BUILD -----------' && npm run build"
+  # Needed if packages have breaking peer deps that can not be easily fixed in the short term
+  # environment = { NPM_FLAGS = "--force" }
