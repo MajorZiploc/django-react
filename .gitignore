@@ -16,5 +16,3 @@ yarn-error.log*
 tags
 *.vim
 dev_tools/rest_queries/*.json
-services/backend/api_crud/frontend/**
-services/backend/api_crud/staticfiles/**
