@@ -1,3 +1,8 @@
+TODO:
+figure out how to serve react and django separately heroku
+react: https://dev.to/mrcflorian/how-to-deploy-a-react-app-to-heroku-44ig
+
+
 https://stackoverflow.com/questions/69605603/what-should-go-in-my-procfile-for-a-django-application
   an answer:
   You will need 3 files in order to successfully deploy a django app to Heroku.
