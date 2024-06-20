@@ -1,8 +1,8 @@
 databases:
-  - name: api_crud_db
+  - name: majorziploc_db
     plan: free
-    databaseName: api_crud_db
-    user: postgres
+    databaseName: api_crud_db_sb9a
+    user: majorziploc
 
 services:
   - type: web
@@ -14,7 +14,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: api_crud_db
+          name: majorziploc_db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
