@@ -10,7 +10,7 @@ services:
     name: api_crud
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "cd ./services/backend && python -m gunicorn api_crud.wsgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "cd ./services/backend && python -m gunicorn api_crud.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
