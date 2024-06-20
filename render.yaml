@@ -1,0 +1,22 @@
+databases:
+  - name: api_crud_db
+    plan: free
+    databaseName: api_crud_db
+    user: postgres
+
+services:
+  - type: web
+    plan: free
+    name: api_crud
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "cd ./services/backend && python -m gunicorn api_crud.wsgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: api_crud_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

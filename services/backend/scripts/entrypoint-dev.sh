@@ -6,7 +6,8 @@ if [[ -z "$MINT_WORKER_TYPE" ]]; then
   echo "Launching Server"
   python manage.py makemigrations --no-input
   python manage.py migrate --no-input
-  python manage.py runserver 0.0.0.0:8000;
+  # python manage.py runserver 0.0.0.0:8000;
+  python -m gunicorn api_crud.wsgi:application -k uvicorn.workers.UvicornWorker
 else
   echo "Launching MINT Celery Worker"
   # NOTE: do not run the web app for the celery worker
