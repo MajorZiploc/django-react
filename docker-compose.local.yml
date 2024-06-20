@@ -10,7 +10,8 @@ services:
         condition: service_healthy
     stdin_open: true
     tty: true
-    command: /workspace/app/scripts/entrypoint-dev.sh
+    # command: /workspace/app/scripts/entrypoint-dev.sh
+    command: sleep infinity
 
   frontend:
     build:
