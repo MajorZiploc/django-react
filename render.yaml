@@ -1,0 +1,22 @@
+databases:
+  - name: majorziploc_db
+    plan: free
+    databaseName: api_crud_db_sb9a
+    user: majorziploc
+
+services:
+  - type: web
+    plan: free
+    name: majorziploc_django
+    runtime: python
+    buildCommand: "./scripts/build.sh"
+    startCommand: "./scripts/run_server.sh"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: majorziploc_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

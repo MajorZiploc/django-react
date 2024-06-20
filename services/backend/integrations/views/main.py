@@ -22,6 +22,9 @@ from api_crud.settings.base import REDIS_CLIENT
 from django.views.decorators.http import require_http_methods
 from integrations.forms import GenreForm
 
+def hello_world(request):
+    return render(request, 'integrations/hello_world.html', {})
+
 class ListCreateMovieAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
