@@ -18,12 +18,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGINS = [os.environ['FRONTEND_PUBLIC_URL']]
 
-# Import dj-database-url at the beginning of the file.
-# Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/api_crud_db',
+        default=f'postgresql://${os.environ["POSTGRES_USER"]}:${os.environ["POSTGRES_USER"]}@${os.environ["POSTGRES_HOST"]}:${os.environ["POSTGRES_PORT"]}/api_crud_db',
         conn_max_age=600
     )
 }
