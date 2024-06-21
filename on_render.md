@@ -20,6 +20,8 @@ add background worker: https://docs.render.com/deploy-celery
     switch to rabbitmq if it is actually needed
 
 TODO:
+  recreate the django-react web_service to have the majorziploc_django style url
+    rename old service and replicate it. then delete the old web_service
   backend always gives make a 400 bad request with strict cors settings
     related to cors restrictions
       currently left it with dev like settings
