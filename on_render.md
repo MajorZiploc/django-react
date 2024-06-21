@@ -10,3 +10,7 @@ make a db and connect its url via POSTGRES_EXTERNAL_URL
 
 make a redis service and connect its url via HL_REDIS_URL
   https://docs.render.com/redis
+
+TODO:
+add celery and rabbitmq
+add react site
