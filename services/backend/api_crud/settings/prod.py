@@ -2,8 +2,6 @@ from api_crud.settings.base import *
 import os
 import dj_database_url
 
-SECRET_KEY = os.environ['BACKEND_SECRET_KEY']
-
 DEBUG = False
 
 # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)

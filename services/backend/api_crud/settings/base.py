@@ -199,3 +199,5 @@ else:
         ssl=(REDIS_SSL.lower() == "true"),
     )
     REDIS_CLIENT.client_setname(f"{socket.gethostname()}-{uuid.uuid4()}")
+
+SECRET_KEY = os.environ['BACKEND_SECRET_KEY']
