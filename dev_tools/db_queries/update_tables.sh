@@ -15,7 +15,8 @@ function main {
   echo "$padding $begin updating localhost $padding";
   local table_dir="./src/tables";
   mkdir -p "${table_dir}";
-  docker exec "$container_name" psql -c "$_command" --csv > "${table_dir}/localhost.csv";
+  table_cache_output="$(docker exec "$container_name" sh -c "export PGHOST=${PGHOST}; export PGPORT=${PGPORT}; export PGDATABASE=${PGDATABASE}; export PGUSER=${PGUSER}; export PGPASSWORD=${PGPASSWORD}; psql -c \"$_command\" --csv")"
+  [ $? -eq 0 ] && { echo "$table_cache_output" > "${table_dir}/$_env_ext.csv"; }
   # psql -c "$_command" --csv --output ./src/tables/localhost.csv;
   echo "$padding $end updating localhost $padding";
 }
