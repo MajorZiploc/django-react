@@ -25,3 +25,6 @@ TODO:
   backend always gives make a 400 bad request
     considering ssh'ing into it and running a debug_shell to look at various settings
       or just make it super unsafe with dev like settings to see if we can find the issue
+    related to cors restrictions
+      currently left it with dev like settings
+        need to restrict it down again
