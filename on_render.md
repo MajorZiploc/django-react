@@ -12,5 +12,11 @@ make a redis service and connect its url via HL_REDIS_URL
   https://docs.render.com/redis
 
 TODO:
-add celery and rabbitmq
 add react site
+add background worker: https://docs.render.com/deploy-celery
+  NOTE: costs $7 minimum for a background worker service
+  add celery
+  use redis url at first
+    switch to rabbitmq if it is actually needed
+general blueprint render.yaml file
+  https://docs.render.com/infrastructure-as-code#generating-a-blueprint-from-existing-services
