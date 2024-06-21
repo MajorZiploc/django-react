@@ -12,13 +12,14 @@ function main {
   local begin="BEGIN";
   local end="END";
   export PGHOST="127.0.0.1";
-  echo "$padding $begin updating localhost $padding";
+  local _env_ext="localhost";
+  echo "$padding $begin updating $_env_ext $padding";
   local table_dir="./src/tables";
   mkdir -p "${table_dir}";
   table_cache_output="$(docker exec "$container_name" sh -c "export PGHOST=${PGHOST}; export PGPORT=${PGPORT}; export PGDATABASE=${PGDATABASE}; export PGUSER=${PGUSER}; export PGPASSWORD=${PGPASSWORD}; psql -c \"$_command\" --csv")"
   [ $? -eq 0 ] && { echo "$table_cache_output" > "${table_dir}/$_env_ext.csv"; }
-  # psql -c "$_command" --csv --output ./src/tables/localhost.csv;
-  echo "$padding $end updating localhost $padding";
+  # psql -c "$_command" --csv --output ./src/tables/$_env_ext.csv;
+  echo "$padding $end updating $_env_ext $padding";
 }
 
 main
