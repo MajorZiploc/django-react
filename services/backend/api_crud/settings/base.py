@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import datetime
+import redis
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -182,3 +183,24 @@ EMAIL_USE_SSL = False
 
 DEV_EMAIL_ALERT_RECEIVER = os.getenv("DEV_EMAIL_ALERT_RECEIVER", None)
 CS_EMAIL_ALERT_RECEIVER = os.getenv("CS_EMAIL_ALERT_RECEIVER", None)
+
+DJANGO_ENV = os.getenv("DJANGO_ENV")
+if DJANGO_ENV == "prod":
+    REDIS_CLIENT = redis.StrictRedis()
+    REDIS_CLIENT = redis.from_url(os.getenv("HL_REDIS_URL"))
+else:
+    import uuid
+    import socket
+    REDIS_HOST = os.getenv("HL_REDIS_HOST", "redis")
+    REDIS_PORT = int(os.getenv("HL_REDIS_PORT", 6379))
+    REDIS_USERNAME = os.getenv("HL_REDIS_USERNAME")
+    REDIS_PASSWORD = os.getenv("HL_REDIS_PASSWORD")
+    REDIS_SSL = os.getenv("HL_REDIS_SSL_ENABLED", "false")
+    REDIS_CLIENT = redis.StrictRedis(
+        host=REDIS_HOST,
+        port=REDIS_PORT,
+        username=REDIS_USERNAME,
+        password=REDIS_PASSWORD,
+        ssl=(REDIS_SSL.lower() == "true"),
+    )
+    REDIS_CLIENT.client_setname(f"{socket.gethostname()}-{uuid.uuid4()}")
