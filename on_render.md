@@ -18,8 +18,6 @@ add background worker: https://docs.render.com/deploy-celery
   add celery
   use redis url at first
     switch to rabbitmq if it is actually needed
-general blueprint render.yaml file
-  https://docs.render.com/infrastructure-as-code#generating-a-blueprint-from-existing-services
 
 TODO:
   backend always gives make a 400 bad request with strict cors settings
@@ -28,3 +26,6 @@ TODO:
         need to restrict it down again
       consider ssh'ing into it and running a debug_shell to look at various settings
         !figure out how to ssh into servers from render
+  move to infra as code with blueprint render.yaml file
+    currently my render.yaml file here isnt used, its using settings from render GUI
+    https://docs.render.com/infrastructure-as-code#generating-a-blueprint-from-existing-services
