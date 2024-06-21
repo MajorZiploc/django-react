@@ -12,7 +12,7 @@ make a redis service and connect its url via HL_REDIS_URL
   https://docs.render.com/redis
 
 TODO:
-add react site
+add react site: https://docs.render.com/deploy-create-react-app
 add background worker: https://docs.render.com/deploy-celery
   NOTE: costs $7 minimum for a background worker service
   add celery
