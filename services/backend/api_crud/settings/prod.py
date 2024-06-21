@@ -20,7 +20,7 @@ CORS_ALLOWED_ORIGINS = [os.environ['FRONTEND_PUBLIC_URL']]
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'postgresql://${os.environ["POSTGRES_USER"]}:${os.environ["POSTGRES_USER"]}@${os.environ["POSTGRES_HOST"]}:${os.environ["POSTGRES_PORT"]}/api_crud_db',
+        default=os.environ["POSTGRES_EXTERNAL_URL"], # f'postgresql://${os.environ["POSTGRES_USER"]}:${os.environ["POSTGRES_USER"]}@${os.environ["POSTGRES_HOST"]}:${os.environ["POSTGRES_PORT"]}/api_crud_db',
         conn_max_age=600
     )
 }
