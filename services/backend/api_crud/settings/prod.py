@@ -1,6 +1,10 @@
 from api_crud.settings.base import *
 import os
 import dj_database_url
+import redis
+
+REDIS_CLIENT = redis.StrictRedis()
+REDIS_CLIENT = redis.from_url(os.getenv("HL_REDIS_URL"))
 
 SECRET_KEY = os.environ['BACKEND_SECRET_KEY']
 
