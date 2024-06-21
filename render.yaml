@@ -9,8 +9,8 @@ services:
     plan: free
     name: api_crud
     runtime: python
-    buildCommand: "./build.sh"
-    startCommand: "cd ./services/backend && python -m gunicorn -b \"0.0.0.0:${BACKEND_PORT}\" api_crud.wsgi:application"
+    buildCommand: "./scripts/build.sh"
+    startCommand: "./scripts/run_server.sh"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
