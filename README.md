@@ -2,6 +2,8 @@
 
 A template for a basic django and react site
 
+Site available here: https://majorziploc-react.onrender.com/
+
 ## Requirements
 
 - docker v20+
