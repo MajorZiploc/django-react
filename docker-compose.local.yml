@@ -71,7 +71,7 @@ services:
       - db
     container_name: django-react-pgadmin
     volumes:
-      - '/tmp/django-react-pgadmin:/var/lib/pgadmin'
+      - '${PGADMIN_LOCAL}:/var/lib/pgadmin'
     environment:
       PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
       PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
