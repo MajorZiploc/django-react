@@ -14,7 +14,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # CORS_ORIGIN_ALLOW_ALL = True
 # ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGIN_REGEXES = [rf'{os.environ["FRONTEND_PUBLIC_URL"]}']
+CORS_ALLOWED_ORIGIN_REGEXES = [r'^https://majorziploc-react.onrender.com$', r'^https://django-react-z6z4.onrender.com/$']
 
 DATABASES = {
     'default': dj_database_url.config(
