@@ -1,6 +1,7 @@
 from api_crud.settings.base import *
 import os
 import dj_database_url
+from corsheaders.defaults import default_headers
 
 DEBUG = False
 
@@ -16,14 +17,22 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGINS = [os.environ['FRONTEND_PUBLIC_URL'], os.environ['BACKEND_PUBLIC_URL']]
 
-# CORS_ALLOW_METHODS = [
-#     'GET',
-#     'POST',
-#     'PUT',
-#     'PATCH',
-#     'DELETE',
-#     'OPTIONS',
-# ]
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'authorization',
+    'x-requested-with',
+    'x-csrftoken',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
 
 DATABASES = {
     'default': dj_database_url.config(
