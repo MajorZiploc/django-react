@@ -1,5 +1,5 @@
 Walk through this:
-  https://docs.render.com/deploy-django#manual-deployment
+  https://docs.render.com/deploy-django
   NOTE:
     env vars on render on the django web_service
       PORT=8000 and make sure BACKEND_PORT is the same value as it
