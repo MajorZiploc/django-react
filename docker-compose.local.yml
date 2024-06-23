@@ -62,3 +62,16 @@ services:
   mq:
     volumes:
       - '/tmp/django-react-mq/data/mq:/var/lib/rabbitmq'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "${PGADMIN_EXTERNAL_PORT}:${PGADMIN_INTERNAL_PORT}"
+    depends_on:
+      - db
+    container_name: django-react-pgadmin
+    volumes:
+      - '/tmp/django-react-pgadmin:/var/lib/pgadmin'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
+      PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
