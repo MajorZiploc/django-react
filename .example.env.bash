@@ -17,3 +17,4 @@ export PGDATABASE="postgres";
 export CYPRESS_BASE_URL="$REACT_APP_FRONTEND_URL";
 export CYPRESS_username="$JUST_UI_TESTS_USERNAME";
 export CYPRESS_password="$JUST_UI_TESTS_PASSWORD";
+export PGADMIN_LOCAL="/tmp/django-react-pgadmin";

@@ -51,7 +51,12 @@ function just_test {
 
 function just_demo {
   just_install;
+  just_pgadmin_ensure_local_dir_permissions;
   just_run;
+}
+
+function just_pgadmin_ensure_local_dir_permissions {
+  sudo chown -R 5050:5050 "${PGADMIN_LOCAL}";
 }
 
 function just_venv_create {
