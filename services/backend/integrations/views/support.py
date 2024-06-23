@@ -116,30 +116,6 @@ def support_save_movie_alpine(request, id):
     movie.save()
     return JsonResponse(data={'message': 'im here', 'title': 'yo dog'})
 
-@require_http_methods(['POST'])
-def support_save_movie_unpoly(request, id):
-    movie = Movie.objects.filter(id=id).first()
-    if not movie:
-        return HttpResponseBadRequest("Movie not found")
-    # print('request.GET')
-    # print(request.GET)
-    # query_param1 = request.GET.get('query_param1', None)
-    # print('query_param1')
-    # print(query_param1)
-    form = MovieForm(request.POST)
-    if form.is_valid():
-        print('form.data')
-        print(form.data)
-        movie.title = form.data['title']
-        movie.genre = form.data['genre']
-        movie.year = form.data['year']
-        movie.save()
-        print('movie.id')
-        print(movie.id)
-        return support_unpoly(request, id)
-        # return render(request, reverse('integrations/support_unpoly.html', kwargs=dict(id=movie.id)))
-    return HttpResponseBadRequest("Bad Request: Some condition not met")
-
 @require_http_methods(['GET'])
 def support_load_genres(request):
     genres = [
@@ -160,16 +136,6 @@ def support_alpine(request, id):
         return HttpResponseBadRequest("Movie not found")
     print(movie.to_json_dict())
     return render(request, 'integrations/support_alpine.html', context=dict(
-        movie=movie,
-        meta_data=[{'snack': 'popcorn'}]
-    ))
-
-def support_unpoly(request, id):
-    movie = Movie.objects.filter(id=id).first()
-    if not movie:
-        return HttpResponseBadRequest("Movie not found")
-    print(movie.to_json_dict())
-    return render(request, 'integrations/support_unpoly.html', context=dict(
         movie=movie,
         meta_data=[{'snack': 'popcorn'}]
     ))
