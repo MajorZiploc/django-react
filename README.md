@@ -11,7 +11,7 @@ Site available here: https://majorziploc-react.onrender.com/
 - mac or linux/wsl
 - internet connection
 - python v3.12 (python3 and pip3) (OPTIONAL)
-- nodejs v18+ (OPTIONAL)
+- nodejs v20+ (OPTIONAL)
 - npm (node package manager) (OPTIONAL)
 
 ### Requirements Mac only
