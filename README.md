@@ -2,13 +2,15 @@
 
 A template for a basic django and react site
 
+Site available here: https://majorziploc-react.onrender.com/
+
 ## Requirements
 
 - docker v20+
 - bash v5 or zsh
 - mac or linux/wsl
 - internet connection
-- python v3.11 (python3 and pip3) (OPTIONAL)
+- python v3.12 (python3 and pip3) (OPTIONAL)
 - nodejs v18+ (OPTIONAL)
 - npm (node package manager) (OPTIONAL)
 

@@ -13,6 +13,10 @@ select
 from django_celery_beat_periodictask
 ;
 
+select
+*
+from auth_user
+;
 
 
 delete from integrations_movie;
