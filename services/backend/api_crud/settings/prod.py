@@ -16,13 +16,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGIN = ['https://majorziploc-react.onrender.com', 'https://django-react-z6z4.onrender.com']
 
-CORS_ALLOW_HEADERS = [
-    'content-type',
-    'authorization',
-    'x-requested-with',
-    'x-csrftoken',
-]
-
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
