@@ -56,6 +56,7 @@ function just_demo {
 }
 
 function just_pgadmin_ensure_local_dir_permissions {
+  mkdir -p "${PGADMIN_LOCAL}";
   sudo chown -R 5050:5050 "${PGADMIN_LOCAL}";
   sudo -k;
 }
