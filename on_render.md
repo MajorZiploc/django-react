@@ -20,6 +20,12 @@ add background worker: https://docs.render.com/deploy-celery
     switch to rabbitmq if it is actually needed
 
 TODO:
+  switch to a different service for free db:
+    https://www.koyeb.com/blog/top-postgresql-database-free-tiers-in-2024
+      https://www.koyeb.com/
+      https://aiven.io/
+      https://aws.amazon.com/rds/postgresql/pricing/
+        THIS: aws rds looks like the best choice here assuming you can cap the amount of data stored in the instance
   recreate the django-react web_service to have the majorziploc_django style url
     rename old service and replicate it. then delete the old web_service
   backend always gives make a 400 bad request with strict cors settings
