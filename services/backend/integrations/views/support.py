@@ -58,10 +58,9 @@ def support_htmx(request):
 
 @require_http_methods(['DELETE'])
 def support_delete_movie_htmx(request, id):
-    # Movie.objects.filter(id=id).delete()
+    Movie.objects.filter(id=id).delete()
     movies = Movie.objects.all()
-    return HttpResponseBadRequest("Bad Request: Some condition not met")
-    # return render(request, 'integrations/support_movies_list_htmx.html', {'movies': movies})
+    return render(request, 'integrations/support_movies_list_htmx.html', {'movies': movies})
 
 @require_http_methods(['POST'])
 def support_save_movie_htmx(request, id):
