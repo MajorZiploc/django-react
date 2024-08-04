@@ -37,3 +37,7 @@ TODO:
   move to infra as code with blueprint render.yaml file
     currently my render.yaml file here isnt used, its using settings from render GUI
     https://docs.render.com/infrastructure-as-code#generating-a-blueprint-from-existing-services
+
+NOTES:
+  paused services
+  deleted redis bcuz no pause option
