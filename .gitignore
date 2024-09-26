@@ -18,3 +18,5 @@ tags
 Session.vim
 dev_tools/rest_queries/*.json
 *.sensitive.*
+
+cscope.out
