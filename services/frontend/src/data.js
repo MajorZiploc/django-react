@@ -98,11 +98,18 @@ export async function retry(apiCall) {
         setRefreshToken(null);
         window.location.href = frontendUrl;
       } else {
-        const errorContent = {
-          status: err?.request?.status,
-          data: err?.request?.data,
-          statusText: err?.request?.statusText,
-        };
+        let errorContent = {
+          status: null,
+          data: null,
+          statusText: null,
+        }
+        if (err?.request) {
+          errorContent = {
+            status: err?.request?.status,
+            data: err?.request?.data,
+            statusText: err?.request?.statusText,
+          };
+        }
         return Promise.reject(errorContent);
       }
     });
