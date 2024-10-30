@@ -105,9 +105,9 @@ export async function retry(apiCall) {
         }
         if (err?.request) {
           errorContent = {
-            status: err?.request?.status,
-            data: err?.request?.data,
-            statusText: err?.request?.statusText,
+            status: err.request.status,
+            data: err.request.data,
+            statusText: err.request.statusText,
           };
         }
         return Promise.reject(errorContent);
